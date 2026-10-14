@@ -1,6 +1,6 @@
 import { MemoryRouter, Route, Routes } from 'react-router';
 
-import { render, screen } from '@testing-library/react';
+import { render, screen, within } from '@testing-library/react';
 
 import Layout from '.';
 
@@ -19,7 +19,11 @@ describe('Layout', () => {
   it('renders the brand link, main navigation and screen content', () => {
     renderLayout('/');
 
-    expect(screen.getByRole('link', { name: 'Thai Learning' })).toHaveAttribute('href', '/');
+    expect(screen.getByRole('link', { name: 'Kai Hto' })).toHaveAttribute('href', '/');
+    expect(within(screen.getByRole('link', { name: 'Kai Hto' })).getByRole('presentation')).toHaveAttribute(
+      'src',
+      '/favicon.svg'
+    );
     expect(screen.getByRole('navigation', { name: 'Main' })).toBeInTheDocument();
     expect(screen.getByRole('main')).toHaveTextContent('Screen content');
     expect(

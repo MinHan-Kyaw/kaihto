@@ -26,7 +26,10 @@ export const generateVowelQuestions = (
   { questionCount = QUESTION_COUNT, optionCount = ANSWER_OPTION_COUNT, random = Math.random } = {}
 ): VowelQuestion[] => {
   const combinable = vowels.filter(isCombinable);
+  // ใ- and ไ- share a sound, so only one vowel per sound can be offered as an option.
+  const bySound = combinable.filter((vowel, index) => combinable.findIndex((other) => other.sound === vowel.sound) === index);
   const pairs = consonants.flatMap((consonant) => combinable.map((vowel) => ({ consonant, vowel })));
+  const soundAsked = new Set<string>();
 
   return randomizeArray(pairs, random)
     .slice(0, questionCount)
@@ -34,19 +37,19 @@ export const generateVowelQuestions = (
       const syllable = combineVowel(consonant.character, vowel);
       const base = { id: syllable, consonant, vowel, syllable, tone: getSyllableTone(consonant, vowel) };
 
-      if (random() < 0.5) {
+      // A sound question shows only the vowel, so each vowel is asked at most once that way.
+      if (random() < 0.5 || soundAsked.has(vowel.id)) {
         return { ...base, kind: 'tone' };
       }
+      soundAsked.add(vowel.id);
       const distractors = randomizeArray(
-        combinable.filter((other) => other !== vowel),
+        bySound.filter((other) => other.sound !== vowel.sound),
         random
-      )
-        .slice(0, optionCount - 1)
-        .map((other) => combineVowel(consonant.character, other));
+      ).slice(0, optionCount - 1);
 
-      return { ...base, kind: 'spell', options: randomizeArray([syllable, ...distractors], random) };
+      return { ...base, kind: 'sound', options: randomizeArray([vowel, ...distractors], random) };
     });
 };
 
 export const getVowelAnswer = (question: VowelQuestion): string =>
-  question.kind === 'spell' ? question.syllable : question.tone;
+  question.kind === 'sound' ? question.vowel.id : question.tone;

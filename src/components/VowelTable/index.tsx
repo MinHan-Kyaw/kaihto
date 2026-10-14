@@ -3,6 +3,7 @@ import { combineVowel, getVowelLabel } from '../../helpers/vowels';
 import type { ConsonantClass, Vowel } from '../../types/learning';
 import AudioButton from '../AudioButton';
 import ClassTable from '../ClassTable';
+import VowelSound from '../VowelSound';
 
 interface VowelTableProps {
   vowels: Vowel[];
@@ -63,13 +64,7 @@ const VowelTable = ({ vowels, consonantClasses, tones, labelledBy, onPlayAudio }
               {getVowelLabel(vowel)}
             </span>{' '}
             <span className="text-sm leading-tight font-bold text-ink-muted">
-              <span className="whitespace-nowrap">
-                ({' '}
-                <span className="font-burmese font-normal text-brand" lang="my">
-                  {vowel.pronunciation}
-                </span>
-              </span>{' '}
-              <span className="whitespace-nowrap">- {vowel.sound} )</span>
+              <VowelSound vowel={vowel} />
             </span>
           </span>
         </th>

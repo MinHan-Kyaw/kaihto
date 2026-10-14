@@ -82,8 +82,8 @@ interface VowelQuestionBase {
   tone: ToneId;
 }
 
-// spell: pick how consonant + vowel is written; tone: pick the tone of the written syllable.
-export type VowelQuestion = (VowelQuestionBase & { kind: 'spell'; options: string[] }) | (VowelQuestionBase & { kind: 'tone' });
+// sound: pick how the written vowel sounds; tone: pick the tone of the written syllable.
+export type VowelQuestion = (VowelQuestionBase & { kind: 'sound'; options: Vowel[] }) | (VowelQuestionBase & { kind: 'tone' });
 
 interface SyllableGuide {
   name: string;

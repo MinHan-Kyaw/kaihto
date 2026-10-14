@@ -78,29 +78,51 @@ describe('generateVowelQuestions', () => {
     expect(first).not.toEqual(second);
   });
 
-  it('mixes spelling and tone questions', () => {
+  it('mixes sound and tone questions', () => {
     const kinds = new Set(
       generateVowelQuestions(consonants, vowels, { random: seededRandom() }).map((question) => question.kind)
     );
 
-    expect(kinds).toEqual(new Set(['spell', 'tone']));
+    expect(kinds).toEqual(new Set(['sound', 'tone']));
   });
 
-  it('offers unique spelling options of the same consonant, including the answer', () => {
+  it('offers three vowels with different sounds, including the answer', () => {
     generateVowelQuestions(consonants, vowels, { questionCount: 30, random: seededRandom() }).forEach((question) => {
-      if (question.kind !== 'spell') {
+      if (question.kind !== 'sound') {
         return;
       }
       expect(question.options).toHaveLength(3);
-      expect(new Set(question.options).size).toBe(3);
-      expect(question.options).toContain(question.syllable);
-      question.options.forEach((option) => expect(option).toContain(question.consonant.character));
+      expect(new Set(question.options.map((option) => option.sound)).size).toBe(3);
+      expect(question.options).toContain(question.vowel);
+      question.options.forEach((option) => expect(isCombinable(option)).toBe(true));
     });
   });
 
-  it('answers with the syllable for spelling and the tone for tone questions', () => {
+  it('asks the sound of each vowel at most once', () => {
+    const asked = generateVowelQuestions(consonants, vowels, { questionCount: 30, random: seededRandom() })
+      .filter((question) => question.kind === 'sound')
+      .map((question) => question.vowel.id);
+
+    expect(new Set(asked).size).toBe(asked.length);
+  });
+
+  describe('given only the extra vowels, where ใ- and ไ- share a sound', () => {
+    it('never offers both as options', () => {
+      const extraVowels = vowels.filter((item) => item.group === 'extra');
+      const optionSounds = Array.from({ length: 20 }, (_, seed) =>
+        generateVowelQuestions(consonants, extraVowels, { random: seededRandom(seed + 1) })
+      )
+        .flat()
+        .flatMap((question) => (question.kind === 'sound' ? [question.options.map((option) => option.sound)] : []));
+
+      expect(optionSounds.length).toBeGreaterThan(0);
+      optionSounds.forEach((sounds) => expect(new Set(sounds).size).toBe(3));
+    });
+  });
+
+  it('answers with the vowel for sound and the tone for tone questions', () => {
     generateVowelQuestions(consonants, vowels, { random: seededRandom() }).forEach((question) => {
-      expect(getVowelAnswer(question)).toBe(question.kind === 'spell' ? question.syllable : question.tone);
+      expect(getVowelAnswer(question)).toBe(question.kind === 'sound' ? question.vowel.id : question.tone);
     });
   });
 });

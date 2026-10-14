@@ -14,10 +14,10 @@ const question: VowelQuestion = {
   tone: 'low',
 };
 
-const renderExplanation = (onPlay = vi.fn()) =>
+const renderExplanation = (onPlay = vi.fn(), shown: VowelQuestion = question) =>
   render(
     <VowelExplanation
-      question={question}
+      question={shown}
       consonantClassName="အလယ်သံဗျည်းအုပ်စု"
       syllableName="Dead syllable"
       toneName="Low Tone"
@@ -41,5 +41,25 @@ describe('VowelExplanation', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Hear กะ' }));
 
     expect(onPlay).toHaveBeenCalledTimes(1);
+  });
+
+  describe('given a sound question', () => {
+    const soundQuestion: VowelQuestion = { ...question, kind: 'sound', options: [question.vowel] };
+
+    it('shows the vowel with its Burmese pronunciation and English sound', () => {
+      renderExplanation(vi.fn(), soundQuestion);
+
+      expect(screen.getByText('-ะ').closest('p')).toHaveTextContent('-ะ = ( အ - a )');
+      expect(screen.getByText('အ')).toHaveAttribute('lang', 'my');
+    });
+
+    it('plays the vowel', async () => {
+      const onPlay = vi.fn();
+      renderExplanation(onPlay, soundQuestion);
+
+      await userEvent.click(screen.getByRole('button', { name: 'Hear -ะ' }));
+
+      expect(onPlay).toHaveBeenCalledTimes(1);
+    });
   });
 });

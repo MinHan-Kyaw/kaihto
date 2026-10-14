@@ -8,7 +8,7 @@ describe('Home', () => {
   it('renders the title and tagline', () => {
     render(<Home />, { wrapper: MemoryRouter });
 
-    expect(screen.getByRole('heading', { level: 1, name: 'Thai Learning' })).toBeInTheDocument();
+    expect(screen.getByRole('heading', { level: 1, name: 'Kai Hto' })).toBeInTheDocument();
     expect(screen.getByText('Learn Thai step by step')).toBeInTheDocument();
   });
 
