@@ -1,6 +1,6 @@
 # Thai Learning
 
-![Thai Learning: Thai consonant tiles and vocabulary pictures](public/og-image.png)
+![Thai Learning: a white elephant logo and an elephant picture labelled ช้าง](public/og-image.png)
 
 A responsive, client-side web app for Burmese-speaking learners studying Thai consonants and their vocabulary.
 

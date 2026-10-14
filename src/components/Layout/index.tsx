@@ -1,5 +1,6 @@
 import { Link, NavLink, Outlet } from 'react-router';
 
+import { assetUrl } from '../../helpers/assetUrl';
 import { classNames } from '../../helpers/classNames';
 
 const NAV_ITEMS = [
@@ -14,12 +15,7 @@ const Layout = () => (
     <header className="sticky top-0 z-10 h-header border-b-2 border-line bg-surface">
       <div className="mx-auto flex max-w-content items-center justify-between gap-2 px-4 py-3">
         <Link to="/" className="inline-flex items-center gap-2 rounded-xl text-xl font-extrabold text-brand no-underline">
-          <span
-            className="inline-grid size-9 place-items-center rounded-xl bg-brand font-thai text-xl leading-none font-medium text-white"
-            aria-hidden="true"
-          >
-            ก
-          </span>
+          <img className="size-9" src={assetUrl('favicon.svg')} alt="" />
           <span className="max-xs:sr-only">Thai Learning</span>
         </Link>
         <nav aria-label="Main">
