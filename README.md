@@ -1,10 +1,10 @@
-# Thai Learning
+# Kai Hto
 
-![Thai Learning: Thai consonant tiles and vocabulary pictures](public/og-image.png)
+![Kai Hto: a white elephant logo and an elephant picture labelled ช้าง](public/og-image.png)
 
 A responsive, client-side web app for Burmese-speaking learners studying Thai consonants and their vocabulary.
 
-**Live site:** https://thai-learning-dxd.pages.dev
+**Live site:** https://kaihto.pages.dev
 
 - **Consonants:** browse the 44 Thai consonants by class (Middle, High, Low); the class tabs stay pinned while you
   scroll. Each card shows the letter, a picture, the Thai word, its Burmese meaning and pronunciation, and plays the Thai

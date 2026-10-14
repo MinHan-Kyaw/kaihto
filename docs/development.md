@@ -76,6 +76,7 @@ The app is a static bundle (`dist/`). `vite.config.ts` reads `BASE_PATH` (defaul
 
 | Setting                | Value                                                 |
 | ---------------------- | ----------------------------------------------------- |
+| Project name           | `kaihto` (gives the `kaihto.pages.dev` address)       |
 | Production branch      | `main` (the live site)                                |
 | Preview deployments    | every other branch and pull request (own preview URL) |
 | Framework preset       | Vite / React (Vite)                                   |
@@ -95,7 +96,7 @@ browsers re-check every picture on every visit.
 
 **Link previews:** `index.html` has Open Graph and Twitter card tags so shared links show a title, description and
 `public/og-image.png` (1200×630). Social apps require absolute URLs, so `og:url`, `og:image` and `twitter:image` point
-to `https://thai-learning-dxd.pages.dev`. Update them when a custom domain is added.
+to `https://kaihto.pages.dev`. Update them when a custom domain is added.
 
 **Other providers** — no code changes required:
 
