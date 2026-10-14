@@ -3,169 +3,197 @@
     "id": "-ะ",
     "group": "short",
     "sound": "a",
-    "pronunciation": "အ"
+    "pronunciation": "အ",
+    "audio": "/audio/vowels/a.m4a"
   },
   {
     "id": "-ิ",
     "group": "short",
     "sound": "i",
-    "pronunciation": "အိ"
+    "pronunciation": "အိ",
+    "audio": "/audio/vowels/i.m4a"
   },
   {
     "id": "-ึ",
     "group": "short",
     "sound": "eu",
-    "pronunciation": "အု"
+    "pronunciation": "အု",
+    "audio": "/audio/vowels/eu.m4a"
   },
   {
     "id": "-ุ",
     "group": "short",
     "sound": "u",
-    "pronunciation": "ဥ"
+    "pronunciation": "ဥ",
+    "audio": "/audio/vowels/u.m4a"
   },
   {
     "id": "เ-ะ",
     "group": "short",
     "sound": "e",
-    "pronunciation": "အေ့"
+    "pronunciation": "အေ့",
+    "audio": "/audio/vowels/e.m4a"
   },
   {
     "id": "แ-ะ",
     "group": "short",
     "sound": "ae",
-    "pronunciation": "အဲ့"
+    "pronunciation": "အဲ့",
+    "audio": "/audio/vowels/ae.m4a"
   },
   {
     "id": "โ-ะ",
     "group": "short",
     "sound": "o",
-    "pronunciation": "အို့"
+    "pronunciation": "အို့",
+    "audio": "/audio/vowels/o.m4a"
   },
   {
     "id": "เ-าะ",
     "group": "short",
     "sound": "aw",
-    "pronunciation": "အော့"
+    "pronunciation": "အော့",
+    "audio": "/audio/vowels/aw.m4a"
   },
   {
     "id": "เ-อะ",
     "group": "short",
     "sound": "oe",
-    "pronunciation": "အွတ်"
+    "pronunciation": "အွတ်",
+    "audio": "/audio/vowels/oe.m4a"
   },
   {
     "id": "เ-ียะ",
     "group": "short",
     "sound": "ia",
-    "pronunciation": "အီရ"
+    "pronunciation": "အီရ",
+    "audio": "/audio/vowels/ia.m4a"
   },
   {
     "id": "เ-ือะ",
     "group": "short",
     "sound": "eua",
-    "pronunciation": "အူရ"
+    "pronunciation": "အူရ",
+    "audio": "/audio/vowels/eua.m4a"
   },
   {
     "id": "-ัวะ",
     "group": "short",
     "sound": "ua",
-    "pronunciation": "အူဝ"
+    "pronunciation": "အူဝ",
+    "audio": "/audio/vowels/ua.m4a"
   },
   {
     "id": "-า",
     "group": "long",
     "sound": "aa",
-    "pronunciation": "အား"
+    "pronunciation": "အား",
+    "audio": "/audio/vowels/aa.m4a"
   },
   {
     "id": "-ี",
     "group": "long",
     "sound": "ii",
-    "pronunciation": "အီး"
+    "pronunciation": "အီး",
+    "audio": "/audio/vowels/ii.m4a"
   },
   {
     "id": "-ือ",
     "group": "long",
     "sound": "euu",
-    "pronunciation": "အူး"
+    "pronunciation": "အူး",
+    "audio": "/audio/vowels/euu.m4a"
   },
   {
     "id": "-ู",
     "group": "long",
     "sound": "uu",
-    "pronunciation": "ဦး"
+    "pronunciation": "ဦး",
+    "audio": "/audio/vowels/uu.m4a"
   },
   {
     "id": "เ-",
     "group": "long",
     "sound": "ee",
-    "pronunciation": "အေး"
+    "pronunciation": "အေး",
+    "audio": "/audio/vowels/ee.m4a"
   },
   {
     "id": "แ-",
     "group": "long",
     "sound": "aae",
-    "pronunciation": "အဲ"
+    "pronunciation": "အဲ",
+    "audio": "/audio/vowels/aae.m4a"
   },
   {
     "id": "โ-",
     "group": "long",
     "sound": "oo",
-    "pronunciation": "အိုး"
+    "pronunciation": "အိုး",
+    "audio": "/audio/vowels/oo.m4a"
   },
   {
     "id": "-อ",
     "group": "long",
     "sound": "aaw",
-    "pronunciation": "အော"
+    "pronunciation": "အော",
+    "audio": "/audio/vowels/aaw.m4a"
   },
   {
     "id": "เ-อ",
     "group": "long",
     "sound": "ooe",
-    "pronunciation": "အူ"
+    "pronunciation": "အူ",
+    "audio": "/audio/vowels/ooe.m4a"
   },
   {
     "id": "เ-ีย",
     "group": "long",
     "sound": "iia",
-    "pronunciation": "အီးရား"
+    "pronunciation": "အီးရား",
+    "audio": "/audio/vowels/iia.m4a"
   },
   {
     "id": "เ-ือ",
     "group": "long",
     "sound": "euua",
-    "pronunciation": "အူးရား"
+    "pronunciation": "အူးရား",
+    "audio": "/audio/vowels/euua.m4a"
   },
   {
     "id": "-ัว",
     "group": "long",
     "sound": "uua",
-    "pronunciation": "အူးဝါး"
+    "pronunciation": "အူးဝါး",
+    "audio": "/audio/vowels/uua.m4a"
   },
   {
     "id": "-ำ",
     "group": "extra",
     "sound": "am",
-    "pronunciation": "အမ်း"
+    "pronunciation": "အမ်း",
+    "audio": "/audio/vowels/am.m4a"
   },
   {
     "id": "ใ-",
     "group": "extra",
     "sound": "ai",
-    "pronunciation": "အိုင်း"
+    "pronunciation": "အိုင်း",
+    "audio": "/audio/vowels/ai-mai-muan.m4a"
   },
   {
     "id": "ไ-",
     "group": "extra",
     "sound": "ai",
-    "pronunciation": "အိုင်း"
+    "pronunciation": "အိုင်း",
+    "audio": "/audio/vowels/ai-mai-malai.m4a"
   },
   {
     "id": "เ-า",
     "group": "extra",
     "sound": "ao",
-    "pronunciation": "အောင်း"
+    "pronunciation": "အောင်း",
+    "audio": "/audio/vowels/ao.m4a"
   },
   {
     "id": "ฤ",

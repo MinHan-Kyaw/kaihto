@@ -1,3 +1,8 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
+import { isCombinable } from '../helpers/vowels';
+
 import { consonantClasses, consonants, vowelGroups, vowels } from '.';
 
 const MYANMAR_SCRIPT = /^[\u1000-\u109F]+$/;
@@ -57,6 +62,19 @@ describe('vowels', () => {
       expect(vowel.pronunciation, vowel.id).not.toMatch(INVISIBLE_CHARACTERS);
       expect(vowel.pronunciation, vowel.id).not.toMatch(VISUAL_ORDER_VOWEL_SIGN_E);
     });
+  });
+
+  it('references audio that exists for every combinable vowel', () => {
+    vowels.filter(isCombinable).forEach((vowel) => {
+      expect(vowel.audio, vowel.id).toMatch(/^\/audio\/vowels\/[a-z-]+\.m4a$/);
+      expect(existsSync(join(process.cwd(), 'public', vowel.audio as string)), vowel.audio).toBe(true);
+    });
+  });
+
+  it('uses a different audio file for every vowel', () => {
+    const audio = vowels.flatMap((vowel) => (vowel.audio ? [vowel.audio] : []));
+
+    expect(new Set(audio).size).toBe(audio.length);
   });
 
   it('states one tone per consonant group for short and long vowels', () => {
