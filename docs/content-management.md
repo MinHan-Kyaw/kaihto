@@ -10,7 +10,7 @@
 | `src/data/vowelGroups.json`      | Short, long, extra and standalone vowel groups: English `name`, `shortName`, `tones` per consonant class         |
 | `src/data/tones.json`            | The five tones: English and Thai name, pitch contour                                                             |
 | `src/data/toneMarks.json`        | The four tone marks and their Thai names                                                                         |
-| `src/data/guide.json`            | Explanations on the tones screen (live/dead syllables, rules), in English                                        |
+| `src/data/guide.json`            | Explanations on the tones screen and in the vowel practice (live/dead syllables, rules), in English              |
 | `public/images/words/*.svg`      | Vocabulary pictures (vector)                                                                                     |
 | `public/audio/words/*.m4a`       | Thai audio                                                                                                       |
 | `public/audio/vowels/*.m4a`      | Thai vowel audio                                                                                                 |
@@ -122,6 +122,11 @@ Converting a recording on macOS: `afconvert -f m4af -d aac -b 64000 recording.wa
   source has no audio. They are Thai text-to-speech of the Thai word, not derived from Burmese. Vowel audio is made the
   same way from the vowel on `อ`: `say -v Kanya "อะ"`.
   Replace them with recordings by a native speaker.
+- **Vowel practice audio** is spoken live by the browser's speech synthesis (`src/services/voice.ts`, `th-TH`), not
+  recorded, because there are about 1,232 consonant + vowel syllables. The trade-off: devices without a Thai voice
+  (often Windows) stay silent, and the voice and its quality differ by device and browser, unlike the committed
+  `.m4a` files, which sound the same everywhere. Record files instead if a syllable set must sound exact; the vowel
+  table already plays recorded files (`public/audio/vowels/`).
 
 ## Content review log
 
