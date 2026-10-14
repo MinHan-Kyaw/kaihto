@@ -48,7 +48,8 @@
 
 1. Get the Thai word, Burmese pronunciation and Burmese meaning **from the project owner**. Do not write Burmese yourself.
 2. Add the word to the right consonant in `src/data/consonants.json`.
-3. Add the image and audio files (see below) and reference them.
+3. Add the image and audio files (see below) and reference them. To replace an existing picture or recording, give the
+   new file a new name: browsers keep the old one for up to a week (`public/_headers`).
 4. Run `npm test` — `src/data/consonants.test.ts` checks IDs, required fields, Burmese script, Unicode order and that
    referenced files exist.
 5. Open a pull request and complete the content checklist in the template.

@@ -24,7 +24,7 @@ flowchart LR
 | ------------- | --------------------------------------------------- | -------------------------------------- |
 | `data/`       | Static content and its typed loader                 | `types/`                               |
 | `helpers/`    | Pure, deterministic-when-seeded logic               | `types/`, `constants/`, other helpers  |
-| `services/`   | Browser side effects (audio)                        | nothing app-specific                   |
+| `services/`   | Browser side effects (audio, picture preloading)    | nothing app-specific                   |
 | `components/` | Rendering and user interaction via props            | `helpers/`, `types/`, other components |
 | `screens/`    | Routing targets: state, data, services, composition | everything                             |
 
@@ -195,6 +195,13 @@ keeps its session in `useState`.
 `src/services/audio.ts` keeps a single `HTMLAudioElement`. `playAudio(src)` stops the current sound before starting the
 next one, so rapid answer changes never overlap. Rejected playback (autoplay policy, missing file) is swallowed so
 learning continues silently. Screens call `stopAudio()` on unmount and when moving to the next question.
+
+## Picture preloading
+
+`src/services/images.ts`: `preloadImages(sources)` fetches the 44 vocabulary pictures (about 45 KB compressed) in the
+background. `main.tsx` calls it once; it waits for the page's `load` event and an idle moment, so the first screen's own
+requests go first. Afterwards consonant tabs, `/all` and the picture quiz show pictures without waiting for the
+network, which matters on slow connections. The pictures are small, so cards load them eagerly (no `loading="lazy"`).
 
 ## Feedback sounds
 
