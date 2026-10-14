@@ -7,7 +7,10 @@
 | `src/data/consonantClasses.json` | The three classes: `id`, English `name`, `shortName`, `burmeseName`, `tone`                                      |
 | `src/data/consonants.json`       | 44 consonants, each with its vocabulary `words`                                                                  |
 | `src/data/vowels.json`           | 32 vowels: `id` (written with `-` for the consonant), `group`, English `sound`, Burmese `pronunciation`, `audio` |
-| `src/data/vowelGroups.json`      | Short, long, extra and standalone vowel groups: English `name`, `shortName`, tone `rules`                        |
+| `src/data/vowelGroups.json`      | Short, long, extra and standalone vowel groups: English `name`, `shortName`, `tones` per consonant class         |
+| `src/data/tones.json`            | The five tones: English and Thai name, pitch contour                                                             |
+| `src/data/toneMarks.json`        | The four tone marks and their Thai names                                                                         |
+| `src/data/guide.json`            | Explanations on the tones screen and in the vowel practice (live/dead syllables, rules), in English              |
 | `public/images/words/*.svg`      | Vocabulary pictures (vector)                                                                                     |
 | `public/audio/words/*.m4a`       | Thai audio                                                                                                       |
 | `public/audio/vowels/*.m4a`      | Thai vowel audio                                                                                                 |
@@ -119,6 +122,11 @@ Converting a recording on macOS: `afconvert -f m4af -d aac -b 64000 recording.wa
   source has no audio. They are Thai text-to-speech of the Thai word, not derived from Burmese. Vowel audio is made the
   same way from the vowel on `อ`: `say -v Kanya "อะ"`.
   Replace them with recordings by a native speaker.
+- **Vowel practice audio** is spoken live by the browser's speech synthesis (`src/services/voice.ts`, `th-TH`), not
+  recorded, because there are about 1,232 consonant + vowel syllables. The trade-off: devices without a Thai voice
+  (often Windows) stay silent, and the voice and its quality differ by device and browser, unlike the committed
+  `.m4a` files, which sound the same everywhere. Record files instead if a syllable set must sound exact; the vowel
+  table already plays recorded files (`public/audio/vowels/`).
 
 ## Content review log
 
@@ -137,6 +145,7 @@ Items for the project owner to confirm.
 | `ฤๅ`, `ฦๅ` spelling                 | The source writes `ฤา` and `ฦา` (with sara aa); stored with lakkhangyao `ๅ`, the standard form. Confirm.                                                                           |
 | Extra vowel tone rules              | The source states tone rules for short and long vowels only, so `-ำ ใ- ไ- เ-า` have none. Provide them if wanted.                                                                  |
 | Burmese vowel group names and notes | Not in the source, so the vowel groups have English names only. Provide Burmese if wanted.                                                                                         |
+| Burmese tones explanations          | Not in the source (pages 66–77 state the tone rules in English only), so `guide.json` and the tones screen are English. Provide Burmese if wanted.                                 |
 | Approximate pictures                | จาน, ฤาษี, มณโฑ, ทหาร and ยักษ์ use the closest Fluent emoji (see [Current picture sources](#current-picture-sources)). Confirm or replace.                                        |
 | Audio                               | Placeholder text-to-speech; see [Sources and licensing](#sources-and-licensing).                                                                                                   |
 

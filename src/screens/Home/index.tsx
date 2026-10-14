@@ -36,8 +36,14 @@ const Home = () => (
       <ButtonLink to="/vowels" variant="secondary" fullWidth>
         Explore Vowels
       </ButtonLink>
-      <ButtonLink to="/practice" fullWidth>
-        Start Practice
+      <ButtonLink to="/tones" variant="secondary" fullWidth>
+        Learn Tones
+      </ButtonLink>
+      <ButtonLink to="/practice/consonants" fullWidth>
+        Practice Consonants
+      </ButtonLink>
+      <ButtonLink to="/practice/vowels" fullWidth>
+        Practice Vowels
       </ButtonLink>
     </div>
     <ul className="mt-2 grid w-full grid-cols-3 gap-3" aria-label="Consonant classes">

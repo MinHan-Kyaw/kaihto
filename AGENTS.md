@@ -35,11 +35,11 @@ Run a single test file: `npx vitest run src/helpers/practice.test.ts`
 ```text
 src/
 ├── components/   Reusable, presentational UI. One folder per component: index.tsx, index.test.tsx
-├── screens/      Page-level composition (Home, Consonants, Vowels, Practice, AllConsonants). Screens own state and wire services.
+├── screens/      Page-level composition (Home, Consonants, Vowels, Tones, PracticeCategories, Practice, VowelPractice, AllConsonants). Screens own state and wire services.
 ├── data/         Learning content JSON + typed loader (index.ts) + data validation test
-├── helpers/      Pure functions (randomizeArray, practice engine, vocabulary, vowels, assetUrl)
+├── helpers/      Pure functions (randomizeArray, practice engine, vocabulary, tones, vowels, assetUrl)
 ├── constants/    Shared constants (practice question/option counts)
-├── services/     Side-effect wrappers (audio playback, feedback sounds, speech recognition)
+├── services/     Side-effect wrappers (audio playback, feedback sounds, speech recognition, Thai speech synthesis)
 ├── types/        Shared TypeScript types for learning data
 └── tests/        Test setup and shared fixtures
 public/
@@ -88,8 +88,8 @@ public/
   from practice.
 - Audio: `public/audio/words/<romanized-slug>.m4a` (AAC). Audio is the **Thai** recitation of the full letter name,
   `<consonant>อ <word>` ("กอ ไก่"), matching the Burmese pronunciation — even though the screen shows only `ไก่`.
-- Vowel ids are the written form with `-` for the consonant (`-ะ`, `เ-ือ`). Vowel audio,
-  `public/audio/vowels/<sound>.m4a`, says the vowel on `อ` (`-ะ` → "อะ").
+- Vowel ids are the written form with `-` for the consonant (`-ะ`, `เ-ือ`); tone rules live in `src/helpers/tones.ts`.
+  Vowel audio, `public/audio/vowels/<sound>.m4a`, says the vowel on `อ` (`-ะ` → "อะ").
 - Full procedure: [docs/content-management.md](docs/content-management.md).
 
 ## Burmese pronunciation — strict rule
@@ -108,7 +108,7 @@ Pronunciation is written manually in Burmese script by the project owner and is 
 - Tests are colocated: `Component/index.test.tsx`, `helpers/foo.test.ts`.
 - Put conditions in a `describe('given …')` block, not in the `it` text.
 - Query by role and accessible name (Testing Library) rather than test IDs or class names.
-- Mock `src/services/audio`, `src/services/sound` and `src/services/speech` in component/screen tests; each service has its own unit test.
+- Mock `src/services/audio`, `src/services/sound`, `src/services/speech` and `src/services/voice` in component/screen tests; each service has its own unit test.
 - New reusable components need tests. Practice logic must stay covered for: correct and incorrect answers, question and
   answer randomization, option uniqueness, progression, completion and score, and for each answer mode (select, class, type,
   speak) including the Advanced toggle and the "Can't speak now" fallback.
