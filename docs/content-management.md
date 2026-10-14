@@ -2,17 +2,18 @@
 
 ## Files
 
-| File                             | Contents                                                                                                |
-| -------------------------------- | ------------------------------------------------------------------------------------------------------- |
-| `src/data/consonantClasses.json` | The three classes: `id`, English `name`, `shortName`, `burmeseName`, `tone`                             |
-| `src/data/consonants.json`       | 44 consonants, each with its vocabulary `words`                                                         |
-| `src/data/vowels.json`           | 32 vowels: `id` (written with `-` for the consonant), `group`, English `sound`, Burmese `pronunciation` |
-| `src/data/vowelGroups.json`      | Short, long, extra and standalone vowel groups: English `name`, `shortName`, tone `rules`               |
-| `src/data/tones.json`            | The five tones: English and Thai name, pitch contour                                                    |
-| `src/data/toneMarks.json`        | The four tone marks and their Thai names                                                                |
-| `src/data/guide.json`            | Explanations on the tones screen (live/dead syllables, rules), in English                               |
-| `public/images/words/*.svg`      | Vocabulary pictures (vector)                                                                            |
-| `public/audio/words/*.m4a`       | Thai audio                                                                                              |
+| File                             | Contents                                                                                                         |
+| -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
+| `src/data/consonantClasses.json` | The three classes: `id`, English `name`, `shortName`, `burmeseName`, `tone`                                      |
+| `src/data/consonants.json`       | 44 consonants, each with its vocabulary `words`                                                                  |
+| `src/data/vowels.json`           | 32 vowels: `id` (written with `-` for the consonant), `group`, English `sound`, Burmese `pronunciation`, `audio` |
+| `src/data/vowelGroups.json`      | Short, long, extra and standalone vowel groups: English `name`, `shortName`, `tones` per consonant class         |
+| `src/data/tones.json`            | The five tones: English and Thai name, pitch contour                                                             |
+| `src/data/toneMarks.json`        | The four tone marks and their Thai names                                                                         |
+| `src/data/guide.json`            | Explanations on the tones screen (live/dead syllables, rules), in English                                        |
+| `public/images/words/*.svg`      | Vocabulary pictures (vector)                                                                                     |
+| `public/audio/words/*.m4a`       | Thai audio                                                                                                       |
+| `public/audio/vowels/*.m4a`      | Thai vowel audio                                                                                                 |
 
 ## Word schema
 
@@ -88,6 +89,12 @@ Fluent Emoji assets come from commit `1ffb34c752ecf5d402f04cfb4b392c77f57c54bc`.
   Burmese pronunciation `ကောကိုင်`. The screen shows only the word `ไก่`.
 - Audio is Thai pronunciation only; it is never produced from the Burmese `pronunciation` text.
 
+Vowels:
+
+- `public/audio/vowels/<sound>.m4a`, e.g. `a.m4a` for `-ะ`; `ใ-` and `ไ-` share the sound `ai`, so they use their
+  names, `ai-mai-muan.m4a` and `ai-mai-malai.m4a`. Standalone vowels have no audio.
+- The recording says the vowel on `อ`: `-ะ` → "อะ". It plays from the button at the start of the vowel's table row.
+
 Converting a recording on macOS: `afconvert -f m4af -d aac -b 64000 recording.wav public/audio/words/kai.m4a`
 
 ## Review checklist
@@ -112,8 +119,9 @@ Converting a recording on macOS: `afconvert -f m4af -d aac -b 64000 recording.wa
   `public/images/words/LICENSE-fluentui-emoji.txt`) plus custom drawings made for this project in the same style.
   Nothing is taken from the PDF's picture chart, whose licence was unclear.
 - **Audio** files are _placeholders_ generated with the macOS Thai voice "Kanya" (`say -v Kanya "กอ ไก่"`), because the
-  source has no audio. They are Thai text-to-speech of the Thai word, not derived from Burmese. Replace them with
-  recordings by a native speaker.
+  source has no audio. They are Thai text-to-speech of the Thai word, not derived from Burmese. Vowel audio is made the
+  same way from the vowel on `อ`: `say -v Kanya "อะ"`.
+  Replace them with recordings by a native speaker.
 
 ## Content review log
 

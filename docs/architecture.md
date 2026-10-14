@@ -165,8 +165,10 @@ vowels have one tone rule per consonant class, from the source. Each consonant c
 
 `src/helpers/vowels.ts`: `combineVowel` replaces the dash with a consonant; `getVowelLabel` shows `◌` instead of the dash
 where a mark sits above or below the consonant (`◌ิ`, `เ◌ีย`), because fonts can't stack a Thai mark on a dash.
-The screen draws combinable groups with `VowelTable` (one row per vowel, a ก / ข / ค column per class) and standalone
-vowels with `VowelCard`.
+The screen draws combinable groups with `VowelTable` (one row per vowel: a button that plays the vowel's `audio`, the row
+number, the Thai vowel beside its Burmese pronunciation and English sound in brackets, `( အ - a )`, then a ก / ข / ค
+column per class) and
+standalone vowels with `VowelCard`.
 
 ## Tones
 
