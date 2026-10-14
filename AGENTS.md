@@ -88,7 +88,8 @@ public/
   from practice.
 - Audio: `public/audio/words/<romanized-slug>.m4a` (AAC). Audio is the **Thai** recitation of the full letter name,
   `<consonant>อ <word>` ("กอ ไก่"), matching the Burmese pronunciation — even though the screen shows only `ไก่`.
-- Vowel ids are the written form with `-` for the consonant (`-ะ`, `เ-ือ`).
+- Vowel ids are the written form with `-` for the consonant (`-ะ`, `เ-ือ`). Vowel audio,
+  `public/audio/vowels/<sound>.m4a`, says the vowel on `อ` (`-ะ` → "อะ").
 - Full procedure: [docs/content-management.md](docs/content-management.md).
 
 ## Burmese pronunciation — strict rule

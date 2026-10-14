@@ -1,11 +1,14 @@
+import { useEffect } from 'react';
 import { useSearchParams } from 'react-router';
 
 import ClassTabs from '../../components/ClassTabs';
 import VowelCard from '../../components/VowelCard';
 import VowelTable from '../../components/VowelTable';
 import { consonantClasses, vowelGroups, vowels } from '../../data';
+import { assetUrl } from '../../helpers/assetUrl';
 import { isCombinable } from '../../helpers/vowels';
-import type { VowelGroupId } from '../../types/learning';
+import { playAudio, stopAudio } from '../../services/audio';
+import type { Vowel, VowelGroupId } from '../../types/learning';
 
 const DEFAULT_GROUP_ID: VowelGroupId = 'short';
 
@@ -15,12 +18,20 @@ const counts = Object.fromEntries(
   vowelGroups.map((group) => [group.id, vowels.filter((vowel) => vowel.group === group.id).length])
 ) as Record<VowelGroupId, number>;
 
+const handlePlayAudio = (vowel: Vowel) => {
+  if (vowel.audio) {
+    void playAudio(assetUrl(vowel.audio));
+  }
+};
+
 const Vowels = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const requestedGroupId = searchParams.get('group');
   const selectedGroupId = isVowelGroupId(requestedGroupId) ? requestedGroupId : DEFAULT_GROUP_ID;
   const group = vowelGroups.find((item) => item.id === selectedGroupId);
   const groupVowels = vowels.filter((vowel) => vowel.group === selectedGroupId);
+
+  useEffect(() => () => stopAudio(), []);
 
   const handleSelectGroup = (groupId: VowelGroupId) => {
     if (groupId === selectedGroupId) {
@@ -56,6 +67,7 @@ const Vowels = () => {
               consonantClasses={consonantClasses}
               tones={group.tones}
               labelledBy="vowel-group-title"
+              onPlayAudio={handlePlayAudio}
             />
           ) : (
             <ul className="grid grid-cols-4 gap-3" role="list" aria-labelledby="vowel-group-title">

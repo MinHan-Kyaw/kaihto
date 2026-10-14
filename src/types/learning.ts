@@ -55,4 +55,5 @@ export interface Vowel {
   group: VowelGroupId;
   sound: string; // English approximation, e.g. "eua"
   pronunciation: string; // Burmese pronunciation from the source, e.g. "အူရ"
+  audio?: string; // Thai recitation of the vowel on อ, e.g. "อะ"
 }

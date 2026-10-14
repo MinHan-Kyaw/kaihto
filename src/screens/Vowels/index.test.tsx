@@ -3,7 +3,11 @@ import { MemoryRouter } from 'react-router';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { playAudio } from '../../services/audio';
+
 import Vowels from '.';
+
+vi.mock('../../services/audio', () => ({ playAudio: vi.fn(), stopAudio: vi.fn() }));
 
 const renderVowels = (route = '/vowels') =>
   render(
@@ -68,9 +72,17 @@ describe('Vowels', () => {
   it('shows each vowel with ก / ข / ค examples', () => {
     renderVowels();
 
-    const cells = within(screen.getByRole('row', { name: /^-ะ/ })).getAllByRole('cell');
+    const cells = within(screen.getByRole('row', { name: /^1 -ะ/ })).getAllByRole('cell');
 
-    expect(cells.map((cell) => cell.textContent)).toEqual(['กะ ka', 'ขะ kha', 'คะ kha']);
+    expect(cells.slice(2).map((cell) => cell.textContent)).toEqual(['กะ ka', 'ขะ kha', 'คะ kha']);
+  });
+
+  it('plays the Thai audio for a vowel', async () => {
+    renderVowels();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Play Thai audio for -ะ' }));
+
+    expect(playAudio).toHaveBeenCalledWith('/audio/vowels/a.m4a');
   });
 
   it('shows the tone each consonant class takes', () => {
