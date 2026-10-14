@@ -20,9 +20,13 @@ When adding a dependency, `npm install <pkg>` picks the newest version that sati
 2. Make the change with tests.
 3. Run `npm run lint && npm run typecheck && npm test && npm run build`.
 4. Open a pull request into `develop` using the template. Merge once CI is green.
-5. To release, open a pull request from `develop` into `main`; merging it deploys the site through Cloudflare Pages.
-6. Optionally open a pull request from `main` back into `develop`. It has no file changes; it only brings the release
-   merge commit onto `develop` so GitHub stops showing `develop` as behind `main`.
+5. To release, open a pull request from `develop` into `main` and merge it with **Create a merge commit**; merging it
+   deploys the site through Cloudflare Pages. Squash or rebase merges would give `main` different commits from
+   `develop` and cause conflicts in later releases.
+6. Don't open a pull request from `main` back into `develop` after a release. Each release adds a merge commit to
+   `main` with no file changes, so GitHub shows `develop` as "behind" `main`; that count is cosmetic and the next
+   release still merges cleanly. Merge `main` back into `develop` only when a change reached `main` without going
+   through `develop` (for example an urgent fix), so `develop` gets it too.
 
 ## Conventions
 
