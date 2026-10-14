@@ -3,6 +3,10 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router';
 
 import App from './App';
+import { consonants } from './data';
+import { assetUrl } from './helpers/assetUrl';
+import { getVocabulary } from './helpers/vocabulary';
+import { preloadImages } from './services/images';
 
 import '@fontsource/nunito/latin-400.css';
 import '@fontsource/nunito/latin-700.css';
@@ -26,3 +30,5 @@ createRoot(rootElement).render(
     </BrowserRouter>
   </StrictMode>
 );
+
+preloadImages(getVocabulary(consonants).flatMap((word) => (word.image ? [assetUrl(word.image)] : [])));

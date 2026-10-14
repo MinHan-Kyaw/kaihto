@@ -87,6 +87,12 @@ Because `dist/` has no `404.html`, Cloudflare Pages serves `index.html` for unkn
 `/practice` load the app. The free `*.pages.dev` address works immediately; a custom domain can be added under the
 project's _Custom domains_ tab.
 
+**Caching:** `public/_headers` sets Cloudflare's `Cache-Control` headers. Build files in `/assets/` have content hashes
+in their names, so browsers keep them for a year. Pictures and audio keep their names when replaced, so browsers keep
+them for a week and then refresh them in the background; a replaced file can take up to a week to reach returning
+visitors unless it gets a new file name. Without the file, Cloudflare serves everything with `max-age=0`, which makes
+browsers re-check every picture on every visit.
+
 **Link previews:** `index.html` has Open Graph and Twitter card tags so shared links show a title, description and
 `public/og-image.png` (1200×630). Social apps require absolute URLs, so `og:url`, `og:image` and `twitter:image` point
 to `https://thai-learning-dxd.pages.dev`. Update them when a custom domain is added.

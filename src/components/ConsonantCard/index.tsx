@@ -75,7 +75,6 @@ const ConsonantCard = ({ consonant, onPlayAudio, size = 'default', showWord = tr
                 src={assetUrl(word.image)}
                 alt={word.meaning}
                 lang="my"
-                loading="lazy"
               />
             ) : (
               <div
