@@ -26,7 +26,7 @@ const Home = () => (
       ))}
     </ul>
     <h1 id="home-title" className="text-[clamp(2.25rem,8vw,3rem)] leading-[1.1] font-extrabold">
-      Thai Learning
+      Kai Hto
     </h1>
     <p className="-mt-3 text-xl text-ink-muted">Learn Thai step by step</p>
     <div className="grid w-full gap-3">

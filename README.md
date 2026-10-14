@@ -1,6 +1,6 @@
-# Thai Learning
+# Kai Hto
 
-![Thai Learning: a white elephant logo and an elephant picture labelled ช้าง](public/og-image.png)
+![Kai Hto: a white elephant logo and an elephant picture labelled ช้าง](public/og-image.png)
 
 A responsive, client-side web app for Burmese-speaking learners studying Thai consonants and their vocabulary.
 

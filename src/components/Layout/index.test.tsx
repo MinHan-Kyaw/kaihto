@@ -19,8 +19,8 @@ describe('Layout', () => {
   it('renders the brand link, main navigation and screen content', () => {
     renderLayout('/');
 
-    expect(screen.getByRole('link', { name: 'Thai Learning' })).toHaveAttribute('href', '/');
-    expect(within(screen.getByRole('link', { name: 'Thai Learning' })).getByRole('presentation')).toHaveAttribute(
+    expect(screen.getByRole('link', { name: 'Kai Hto' })).toHaveAttribute('href', '/');
+    expect(within(screen.getByRole('link', { name: 'Kai Hto' })).getByRole('presentation')).toHaveAttribute(
       'src',
       '/favicon.svg'
     );

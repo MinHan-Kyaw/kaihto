@@ -16,7 +16,7 @@ const Layout = () => (
       <div className="mx-auto flex max-w-content items-center justify-between gap-2 px-4 py-3">
         <Link to="/" className="inline-flex items-center gap-2 rounded-xl text-xl font-extrabold text-brand no-underline">
           <img className="size-9" src={assetUrl('favicon.svg')} alt="" />
-          <span className="max-xs:sr-only">Thai Learning</span>
+          <span className="max-xs:sr-only">Kai Hto</span>
         </Link>
         <nav aria-label="Main">
           <ul className="flex sm:gap-1" role="list">
