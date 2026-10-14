@@ -68,8 +68,10 @@ Open http://localhost:5173.
 | `main`    | Released code; every merge deploys the live site via Cloudflare Pages |
 
 1. Branch from `develop`, make the change, and open a pull request into `develop`. Merge once CI is green.
-2. To release, open a pull request from `develop` into `main` and merge it. Cloudflare deploys within a minute or two.
-3. Optionally merge `main` back into `develop` so the release merge commit exists on both branches.
+2. To release, open a pull request from `develop` into `main` and merge it with **Create a merge commit** (not squash or
+   rebase, which make the branches diverge). Cloudflare deploys within a minute or two.
+3. No pull request back from `main` into `develop` is needed. GitHub shows `develop` as "behind" `main` by the release
+   merge commits, but they contain no file changes. Merge `main` back only when a fix was merged straight into `main`.
 
 Direct pushes, force-pushes and deleting `develop` or `main` are blocked; both change only through pull requests.
 Details: [docs/development.md](docs/development.md#workflow).

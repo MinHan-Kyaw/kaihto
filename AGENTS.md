@@ -39,7 +39,7 @@ src/
 ├── data/         Learning content JSON + typed loader (index.ts) + data validation test
 ├── helpers/      Pure functions (randomizeArray, practice engine, vocabulary, tones, vowels, assetUrl)
 ├── constants/    Shared constants (practice question/option counts)
-├── services/     Side-effect wrappers (audio playback, feedback sounds, speech recognition, Thai speech synthesis)
+├── services/     Side-effect wrappers (audio playback, feedback sounds, speech recognition, Thai speech synthesis, picture preloading)
 ├── types/        Shared TypeScript types for learning data
 └── tests/        Test setup and shared fixtures
 public/

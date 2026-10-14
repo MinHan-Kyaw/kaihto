@@ -20,9 +20,13 @@ When adding a dependency, `npm install <pkg>` picks the newest version that sati
 2. Make the change with tests.
 3. Run `npm run lint && npm run typecheck && npm test && npm run build`.
 4. Open a pull request into `develop` using the template. Merge once CI is green.
-5. To release, open a pull request from `develop` into `main`; merging it deploys the site through Cloudflare Pages.
-6. Optionally open a pull request from `main` back into `develop`. It has no file changes; it only brings the release
-   merge commit onto `develop` so GitHub stops showing `develop` as behind `main`.
+5. To release, open a pull request from `develop` into `main` and merge it with **Create a merge commit**; merging it
+   deploys the site through Cloudflare Pages. Squash or rebase merges would give `main` different commits from
+   `develop` and cause conflicts in later releases.
+6. Don't open a pull request from `main` back into `develop` after a release. Each release adds a merge commit to
+   `main` with no file changes, so GitHub shows `develop` as "behind" `main`; that count is cosmetic and the next
+   release still merges cleanly. Merge `main` back into `develop` only when a change reached `main` without going
+   through `develop` (for example an urgent fix), so `develop` gets it too.
 
 ## Conventions
 
@@ -82,6 +86,12 @@ The app is a static bundle (`dist/`). `vite.config.ts` reads `BASE_PATH` (defaul
 Because `dist/` has no `404.html`, Cloudflare Pages serves `index.html` for unknown paths, so deep links such as
 `/practice` load the app. The free `*.pages.dev` address works immediately; a custom domain can be added under the
 project's _Custom domains_ tab.
+
+**Caching:** `public/_headers` sets Cloudflare's `Cache-Control` headers. Build files in `/assets/` have content hashes
+in their names, so browsers keep them for a year. Pictures and audio keep their names when replaced, so browsers keep
+them for a week and then refresh them in the background; a replaced file can take up to a week to reach returning
+visitors unless it gets a new file name. Without the file, Cloudflare serves everything with `max-age=0`, which makes
+browsers re-check every picture on every visit.
 
 **Link previews:** `index.html` has Open Graph and Twitter card tags so shared links show a title, description and
 `public/og-image.png` (1200×630). Social apps require absolute URLs, so `og:url`, `og:image` and `twitter:image` point
