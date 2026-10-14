@@ -40,7 +40,7 @@ flowchart LR
 | `/tones`                                       | The five tones and the tone rules table (class × live/dead syllable and tone marks)                                                                                           |
 | `/practice`                                    | Practice categories: Consonants or Vowels                                                                                                                                     |
 | `/practice/consonants`                         | Picture quiz                                                                                                                                                                  |
-| `/practice/vowels`                             | Consonant + vowel quiz over the ticked vowel groups (short / long / extra), asking how it is written or which tone it has                                                     |
+| `/practice/vowels`                             | Consonant + vowel quiz over the ticked vowel groups (short / long / extra), asking the sound of a vowel or the tone of a syllable                                             |
 | `/all`                                         | All 44 consonants as compact cards (letter, picture, Burmese meaning; no Thai word or audio) on one full-width page without the header; not linked, reached by typing the URL |
 | `*`                                            | Redirects to `/`                                                                                                                                                              |
 
@@ -185,8 +185,10 @@ Data: `tones.json` (5 tones with English and Thai name and a 1–5 pitch contour
 ## Vowel practice
 
 `generateVowelQuestions(consonants, vowels, { questionCount, optionCount, random })` in `src/helpers/vowels.ts` shuffles
-every consonant × combinable vowel pair, takes `questionCount` distinct ones and makes each either a `spell` question (3
-spellings of the same consonant with different vowels) or a `tone` question (the five tones). The learner ticks which
+every consonant × combinable vowel pair, takes `questionCount` distinct ones and makes each either a `sound` question or a
+`tone` question (the five tones). A `sound` question shows only the vowel (`โ-`) and offers 3 vowels' sounds as
+`( အိုး - oo )` (`VowelSound`, the same format as the vowel table); options never share a sound (`ใ-` and `ไ-` are both
+"ai"), and each vowel is asked this way at most once per round. After answering, the vowel's recorded audio plays. The learner ticks which
 vowel groups to practise (short / long / extra, at least one); changing them restarts with new questions. The screen
 keeps its session in `useState`.
 
@@ -213,7 +215,7 @@ suspended it. Missing Web Audio or any playback error is swallowed.
 ## Thai speech synthesis
 
 `src/services/voice.ts` speaks Thai with the browser's `speechSynthesis` (`th-TH`, a Thai voice when installed), for vowel
-practice syllables that have no recorded audio. Choosing a spelling option speaks it; a tone question's syllable is spoken
+practice syllables that have no recorded audio. A tone question's syllable is spoken
 only after it is answered (hearing it first would give the tone away), and a speaker button replays it. A missing API,
 missing Thai voice or any error is silent. Pronunciation quality depends on the device's voice.
 

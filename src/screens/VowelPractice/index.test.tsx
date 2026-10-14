@@ -5,15 +5,17 @@ import userEvent from '@testing-library/user-event';
 
 import { consonants, vowels } from '../../data';
 import { generateVowelQuestions } from '../../helpers/vowels';
+import { playAudio } from '../../services/audio';
 import { playFeedbackSound } from '../../services/sound';
 import { speakThai } from '../../services/voice';
 import type { Consonant, Vowel, VowelQuestion } from '../../types/learning';
 
 import VowelPractice from '.';
 
+vi.mock('../../services/audio', () => ({ playAudio: vi.fn(), stopAudio: vi.fn() }));
 vi.mock('../../services/sound', () => ({ FEEDBACK_SOUND_DURATION_MS: 0, playFeedbackSound: vi.fn() }));
 vi.mock('../../services/voice', () => ({ speakThai: vi.fn(), stopSpeaking: vi.fn() }));
-// A spelling question (ก + -ะ) followed by a tone question (ขา).
+// A sound question (-ะ) followed by a tone question (ขา).
 vi.mock('../../helpers/vowels', async (importOriginal) => {
   const helpers = await importOriginal<typeof import('../../helpers/vowels')>();
   const consonant = (character: string) => consonants.find((item) => item.character === character) as Consonant;
@@ -21,12 +23,12 @@ vi.mock('../../helpers/vowels', async (importOriginal) => {
   const questions: VowelQuestion[] = [
     {
       id: 'กะ',
-      kind: 'spell',
+      kind: 'sound',
       consonant: consonant('ก'),
       vowel: vowel('-ะ'),
       syllable: 'กะ',
       tone: 'low',
-      options: ['กา', 'กะ', 'กิ'],
+      options: [vowel('-า'), vowel('-ะ'), vowel('-ิ')],
     },
     { id: 'ขา', kind: 'tone', consonant: consonant('ข'), vowel: vowel('-า'), syllable: 'ขา', tone: 'rising' },
   ];
@@ -41,6 +43,8 @@ const renderVowelPractice = () =>
     </MemoryRouter>
   );
 
+const SHORT_A = /- a \)/;
+
 const answer = async (name: string | RegExp) => {
   await userEvent.click(screen.getByRole('button', { name }));
   await userEvent.click(screen.getByRole('button', { name: 'Next' }));
@@ -53,37 +57,48 @@ describe('VowelPractice', () => {
     expect(screen.getByRole('link', { name: 'Back to Practice' })).toHaveAttribute('href', '/practice');
   });
 
-  describe('given a spelling question', () => {
-    it('shows the consonant and vowel and waits for a choice', () => {
+  describe('given a sound question', () => {
+    it('shows only the vowel and offers three sounds', () => {
       renderVowelPractice();
 
-      expect(screen.getByRole('heading', { name: 'How is this written?' })).toBeInTheDocument();
-      expect(screen.getByText('-ะ').closest('[lang]')).toHaveAttribute('lang', 'th');
-      expect(screen.getByText('a')).toBeInTheDocument();
-      expect(screen.getByText('အ')).toHaveAttribute('lang', 'my');
-      expect(within(screen.getByRole('list', { name: 'Answer options' })).getAllByRole('button')).toHaveLength(3);
+      expect(screen.getByRole('heading', { name: 'What sound is this?' })).toBeInTheDocument();
+      expect(screen.getByText('-ะ')).toHaveAttribute('lang', 'th');
+      expect(screen.queryByText('กะ')).not.toBeInTheDocument();
+      expect(
+        within(screen.getByRole('list', { name: 'Answer options' }))
+          .getAllByRole('button')
+          .map((button) => button.textContent?.trim())
+      ).toEqual(['( အား - aa )', '( အ - a )', '( အိ - i )']);
       expect(screen.getByRole('button', { name: 'Next' })).toBeDisabled();
     });
 
-    it('marks a correct spelling and explains the tone', async () => {
+    it('marks a correct sound and shows the vowel with its sound', async () => {
       renderVowelPractice();
 
-      await answer('กะ');
+      await answer(SHORT_A);
 
       expect(screen.getByRole('status')).toHaveTextContent('Correct.');
-      expect(within(screen.getByRole('list', { name: 'Answer options' })).getByRole('button', { name: /กะ/ })).toHaveAttribute(
+      expect(within(screen.getByRole('list', { name: 'Answer options' })).getByRole('button', { name: SHORT_A })).toHaveAttribute(
         'data-status',
         'correct'
       );
-      expect(screen.getByText('Low Tone').closest('p')).toHaveTextContent('ก အလယ်သံဗျည်းအုပ်စု + -ะ Dead syllable → กะ Low Tone');
+      expect(screen.getByRole('button', { name: 'Hear -ะ' }).closest('p')).toHaveTextContent('-ะ = ( အ - a )');
       expect(playFeedbackSound).toHaveBeenCalledWith('correct');
+    });
+
+    it('reveals the correct sound when answered wrongly', async () => {
+      renderVowelPractice();
+
+      await answer(/- aa \)/);
+
+      expect(screen.getByRole('status')).toHaveTextContent('Incorrect. The answer is ( အ - a ).');
     });
   });
 
   describe('given a tone question answered wrongly', () => {
     it('reveals the correct tone', async () => {
       renderVowelPractice();
-      await answer('กะ');
+      await answer(SHORT_A);
       await userEvent.click(screen.getByRole('button', { name: 'Continue' }));
 
       expect(screen.getByRole('heading', { name: 'Which tone is this?' })).toHaveFocus();
@@ -100,7 +115,7 @@ describe('VowelPractice', () => {
   describe('given every question is answered', () => {
     it('shows the score, links to the vowels and can start again', async () => {
       renderVowelPractice();
-      await answer('กะ');
+      await answer(SHORT_A);
       await userEvent.click(screen.getByRole('button', { name: 'Continue' }));
       await answer(/Mid Tone/);
       await userEvent.click(screen.getByRole('button', { name: 'See results' }));
@@ -110,7 +125,7 @@ describe('VowelPractice', () => {
 
       await userEvent.click(screen.getByRole('button', { name: 'Practice again' }));
 
-      expect(screen.getByRole('heading', { name: 'How is this written?' })).toBeInTheDocument();
+      expect(screen.getByRole('heading', { name: 'What sound is this?' })).toBeInTheDocument();
       expect(screen.getByRole('progressbar')).toHaveAttribute('aria-valuenow', '0');
     });
   });
@@ -131,7 +146,7 @@ describe('VowelPractice', () => {
 
     it('restarts with only the ticked groups', async () => {
       renderVowelPractice();
-      await answer('กะ');
+      await answer(SHORT_A);
 
       await userEvent.click(screen.getByRole('checkbox', { name: /Long vowels/ }));
       await userEvent.click(screen.getByRole('checkbox', { name: /Extra vowels/ }));
@@ -143,17 +158,20 @@ describe('VowelPractice', () => {
   });
 
   describe('given pronunciation', () => {
-    it('speaks a spelling option when it is chosen', async () => {
+    it('plays the recorded vowel only after a sound question is answered', async () => {
       renderVowelPractice();
 
-      await userEvent.click(screen.getByRole('button', { name: 'กิ' }));
+      await userEvent.click(screen.getByRole('button', { name: SHORT_A }));
+      expect(playAudio).not.toHaveBeenCalled();
 
-      expect(speakThai).toHaveBeenCalledWith('กิ');
+      await userEvent.click(screen.getByRole('button', { name: 'Next' }));
+      await waitFor(() => expect(playAudio).toHaveBeenCalledWith('/audio/vowels/a.m4a'));
+      expect(speakThai).not.toHaveBeenCalled();
     });
 
     it('speaks a tone question only after it is answered', async () => {
       renderVowelPractice();
-      await answer('กะ');
+      await answer(SHORT_A);
       await userEvent.click(screen.getByRole('button', { name: 'Continue' }));
       vi.mocked(speakThai).mockClear();
 
@@ -164,14 +182,27 @@ describe('VowelPractice', () => {
       await waitFor(() => expect(speakThai).toHaveBeenCalledWith('ขา'));
     });
 
-    it('replays the syllable after answering', async () => {
+    it('replays the vowel after a sound question', async () => {
       renderVowelPractice();
-      await answer('กะ');
+      await answer(SHORT_A);
+      await waitFor(() => expect(playAudio).toHaveBeenCalled());
+      vi.mocked(playAudio).mockClear();
+
+      await userEvent.click(screen.getByRole('button', { name: 'Hear -ะ' }));
+
+      expect(playAudio).toHaveBeenCalledWith('/audio/vowels/a.m4a');
+    });
+
+    it('replays the syllable after a tone question', async () => {
+      renderVowelPractice();
+      await answer(SHORT_A);
+      await userEvent.click(screen.getByRole('button', { name: 'Continue' }));
+      await answer(/Mid Tone/);
       vi.mocked(speakThai).mockClear();
 
-      await userEvent.click(screen.getByRole('button', { name: 'Hear กะ' }));
+      await userEvent.click(screen.getByRole('button', { name: 'Hear ขา' }));
 
-      expect(speakThai).toHaveBeenCalledWith('กะ');
+      expect(speakThai).toHaveBeenCalledWith('ขา');
     });
   });
 });

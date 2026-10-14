@@ -10,11 +10,14 @@ import type { AnswerResult } from '../../components/ResultIcon';
 import ToneContour from '../../components/ToneContour';
 import VowelExplanation from '../../components/VowelExplanation';
 import VowelQuestion from '../../components/VowelQuestion';
+import VowelSound from '../../components/VowelSound';
 import { consonantClasses, consonants, guide, toneById, tones, vowelGroups, vowels } from '../../data';
-import { generateVowelQuestions, getSyllable, getVowelAnswer, isCombinable } from '../../helpers/vowels';
+import { assetUrl } from '../../helpers/assetUrl';
+import { combineVowel, generateVowelQuestions, getSyllable, getVowelAnswer, isCombinable } from '../../helpers/vowels';
+import { playAudio, stopAudio } from '../../services/audio';
 import { FEEDBACK_SOUND_DURATION_MS, playFeedbackSound } from '../../services/sound';
 import { speakThai, stopSpeaking } from '../../services/voice';
-import type { VowelGroupId } from '../../types/learning';
+import type { Vowel, VowelGroupId, VowelQuestion as VowelQuestionType } from '../../types/learning';
 
 type GroupSelection = Partial<Record<VowelGroupId, boolean>>;
 
@@ -26,6 +29,24 @@ const buildQuestions = (groups: GroupSelection) =>
     consonants,
     vowels.filter((vowel) => groups[vowel.group])
   );
+
+// The vowel on อ ("โอ"): the recorded clip when there is one, otherwise the browser's Thai voice.
+const playVowel = (vowel: Vowel) => {
+  if (vowel.audio) {
+    void playAudio(assetUrl(vowel.audio));
+  } else {
+    speakThai(combineVowel('อ', vowel));
+  }
+};
+
+// Heard only after answering: hearing it first would give the answer away.
+const playQuestion = (question: VowelQuestionType) => {
+  if (question.kind === 'sound') {
+    playVowel(question.vowel);
+  } else {
+    speakThai(question.syllable);
+  }
+};
 
 const getOptionResult = (option: string, answer: string, selected: string | null, answered: boolean): AnswerResult | null => {
   if (!answered) {
@@ -51,6 +72,7 @@ const VowelPractice = () => {
     () => () => {
       window.clearTimeout(speakTimer.current);
       stopSpeaking();
+      stopAudio();
     },
     []
   );
@@ -58,6 +80,7 @@ const VowelPractice = () => {
   const silence = () => {
     window.clearTimeout(speakTimer.current);
     stopSpeaking();
+    stopAudio();
   };
 
   const restart = (nextGroups = groups) => {
@@ -106,11 +129,7 @@ const VowelPractice = () => {
     }
     playFeedbackSound(isCorrect ? 'correct' : 'incorrect');
     setAnswered(true);
-    if (question.kind === 'tone') {
-      // Heard only after answering: the spoken syllable would give the tone away.
-      const { syllable } = question;
-      speakTimer.current = window.setTimeout(() => speakThai(syllable), FEEDBACK_SOUND_DURATION_MS);
-    }
+    speakTimer.current = window.setTimeout(() => playQuestion(question), FEEDBACK_SOUND_DURATION_MS);
     if (isCorrect) {
       setScore(score + 1);
     }
@@ -120,12 +139,7 @@ const VowelPractice = () => {
     selected: option === selected,
     result: getOptionResult(option, answer, selected, answered),
     disabled: answered,
-    onSelect: () => {
-      setSelected(option);
-      if (question.kind === 'spell') {
-        speakThai(option);
-      }
-    },
+    onSelect: () => setSelected(option),
   });
 
   return (
@@ -150,13 +164,13 @@ const VowelPractice = () => {
       </div>
 
       <VowelQuestion question={question}>
-        {question.kind === 'spell' ? (
+        {question.kind === 'sound' ? (
           <ul className="grid w-full gap-3 md:grid-cols-3" aria-label="Answer options" role="list">
             {question.options.map((option) => (
-              <li key={option}>
-                <AnswerOption {...optionProps(option)}>
-                  <span className="font-thai text-[1.625rem] leading-[1.3] font-medium" lang="th">
-                    {option}
+              <li key={option.id}>
+                <AnswerOption {...optionProps(option.id)} compact>
+                  <span className="text-lg font-bold whitespace-nowrap text-ink-muted">
+                    <VowelSound vowel={option} />
                   </span>
                 </AnswerOption>
               </li>
@@ -181,14 +195,14 @@ const VowelPractice = () => {
             consonantClassName={consonantClass?.burmeseName ?? ''}
             syllableName={guide.syllables[getSyllable(question.vowel)].name}
             toneName={tone.name}
-            onPlay={() => speakThai(question.syllable)}
+            onPlay={() => playQuestion(question)}
           />
         )}
       </VowelQuestion>
 
       <PracticeFeedback
         result={result}
-        correctAnswer={question.kind === 'spell' ? <span lang="th">{question.syllable}</span> : tone.name}
+        correctAnswer={question.kind === 'sound' ? <VowelSound vowel={question.vowel} /> : tone.name}
         actionLabel={!answered ? 'Next' : isLastQuestion ? 'See results' : 'Continue'}
         actionDisabled={!answered && selected === null}
         onAction={handleAction}
