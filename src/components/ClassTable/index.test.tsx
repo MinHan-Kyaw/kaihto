@@ -27,12 +27,25 @@ const consonantClasses: ConsonantClass[] = [
   },
 ];
 
-const renderTable = () =>
+const renderTable = ({ tones, withNumber = false }: { tones?: string[]; withNumber?: boolean } = {}) =>
   render(
     <>
       <h2 id="title">Short vowels</h2>
-      <ClassTable consonantClasses={consonantClasses} firstColumnLabel="Vowel" labelledBy="title">
+      <ClassTable
+        consonantClasses={consonantClasses}
+        firstColumnLabel="Vowel"
+        labelledBy="title"
+        tones={tones}
+        leadingHeaders={
+          withNumber && (
+            <th scope="col" rowSpan={tones ? 2 : 1}>
+              No.
+            </th>
+          )
+        }
+      >
         <tr>
+          {withNumber && <td>1</td>}
           <th scope="row">-ะ</th>
           <td>กะ</td>
           <td>ขะ</td>
@@ -65,5 +78,36 @@ describe('ClassTable', () => {
         .getAllByRole('cell')
         .map((cell) => cell.textContent)
     ).toEqual(['กะ', 'ขะ']);
+  });
+
+  describe('given leading headers', () => {
+    it('heads those columns before the first column', () => {
+      renderTable({ withNumber: true });
+
+      expect(screen.getAllByRole('columnheader').map((header) => header.textContent)).toEqual([
+        'No.',
+        'Vowel',
+        'Middle ก',
+        'High ข',
+      ]);
+    });
+  });
+
+  describe('given tones', () => {
+    it('shows the tone under each class', () => {
+      renderTable({ tones: ['Low', 'High'] });
+
+      const cells = within(screen.getByRole('row', { name: /^Tone/ })).getAllByRole('cell');
+
+      expect(cells.map((cell) => cell.textContent)).toEqual(['Low', 'High']);
+    });
+  });
+
+  describe('given no tones', () => {
+    it('leaves out the tone row', () => {
+      renderTable();
+
+      expect(screen.queryByRole('row', { name: /^Tone/ })).not.toBeInTheDocument();
+    });
   });
 });

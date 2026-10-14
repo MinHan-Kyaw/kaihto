@@ -1,5 +1,8 @@
+import { existsSync } from 'node:fs';
+import { join } from 'node:path';
+
 import { getUnmarkedTone } from '../helpers/tones';
-import { getSyllable } from '../helpers/vowels';
+import { getSyllable, isCombinable } from '../helpers/vowels';
 import type { Vowel } from '../types/learning';
 
 import { consonantClasses, consonants, guide, toneMarks, tones, vowelGroups, vowels } from '.';
@@ -90,22 +93,33 @@ describe('vowels', () => {
     });
   });
 
-  it('states one tone rule per consonant group for short and long vowels that matches the tone rules', () => {
+  it('references audio that exists for every combinable vowel', () => {
+    vowels.filter(isCombinable).forEach((vowel) => {
+      expect(vowel.audio, vowel.id).toMatch(/^\/audio\/vowels\/[a-z-]+\.m4a$/);
+      expect(existsSync(join(process.cwd(), 'public', vowel.audio as string)), vowel.audio).toBe(true);
+    });
+  });
+
+  it('uses a different audio file for every vowel', () => {
+    const audio = vowels.flatMap((vowel) => (vowel.audio ? [vowel.audio] : []));
+
+    expect(new Set(audio).size).toBe(audio.length);
+  });
+
+  it('states one tone per consonant group for short and long vowels that matches the tone rules', () => {
     vowelGroups
-      .filter((group) => group.rules)
+      .filter((group) => group.tones)
       .forEach((group) => {
         const vowel = vowels.find((item) => item.group === group.id) as Vowel;
 
-        expect(group.rules).toHaveLength(consonantClasses.length);
+        expect(group.tones).toHaveLength(consonantClasses.length);
         consonantClasses.forEach((consonantClass, index) => {
           const tone = tones.find((item) => item.id === getUnmarkedTone(consonantClass.id, getSyllable(vowel)));
-          const rule = group.rules?.[index] ?? '';
 
-          expect(rule).toMatch(new RegExp(`^Gp ${consonantClass.group} \\+ `));
-          expect(rule.toLowerCase()).toContain(tone?.name.toLowerCase());
+          expect(`${group.tones?.[index]} Tone`, `${group.id} ${consonantClass.id}`).toBe(tone?.name);
         });
       });
-    expect(vowelGroups.filter((group) => group.rules).map((group) => group.id)).toEqual(['short', 'long']);
+    expect(vowelGroups.filter((group) => group.tones).map((group) => group.id)).toEqual(['short', 'long']);
   });
 
   it('gives every group a name and short name', () => {

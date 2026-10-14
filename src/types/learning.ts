@@ -63,7 +63,7 @@ export interface VowelGroup {
   id: VowelGroupId;
   name: string;
   shortName: string;
-  rules?: string[]; // one per consonant class, in group order, as the source states it; none where the source has none
+  tones?: string[]; // tone each consonant class takes, in group order, as the source states it; none where the source has none
 }
 
 export interface Vowel {
@@ -71,6 +71,7 @@ export interface Vowel {
   group: VowelGroupId;
   sound: string; // English approximation, e.g. "eua"
   pronunciation: string; // Burmese pronunciation from the source, e.g. "အူရ"
+  audio?: string; // Thai recitation of the vowel on อ, e.g. "อะ"
 }
 
 interface VowelQuestionBase {

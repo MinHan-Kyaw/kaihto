@@ -3,7 +3,11 @@ import { MemoryRouter } from 'react-router';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { playAudio } from '../../services/audio';
+
 import Vowels from '.';
+
+vi.mock('../../services/audio', () => ({ playAudio: vi.fn(), stopAudio: vi.fn() }));
 
 const renderVowels = (route = '/vowels') =>
   render(
@@ -12,7 +16,10 @@ const renderVowels = (route = '/vowels') =>
     </MemoryRouter>
   );
 
-const rowCount = () => within(screen.getByRole('table')).getAllByRole('row').length - 1;
+const rowCount = () => {
+  const [, body] = within(screen.getByRole('table')).getAllByRole('rowgroup');
+  return within(body as HTMLElement).getAllByRole('row').length;
+};
 
 describe('Vowels', () => {
   it('hides the page heading visually', () => {
@@ -65,30 +72,39 @@ describe('Vowels', () => {
   it('shows each vowel with ก / ข / ค examples', () => {
     renderVowels();
 
-    const cells = within(screen.getByRole('row', { name: /^-ะ/ })).getAllByRole('cell');
+    const cells = within(screen.getByRole('row', { name: /^1 -ะ/ })).getAllByRole('cell');
 
-    expect(cells.map((cell) => cell.textContent)).toEqual(['กะ ka', 'ขะ kha', 'คะ kha']);
+    expect(cells.slice(2).map((cell) => cell.textContent)).toEqual(['กะ ka', 'ขะ kha', 'คะ kha']);
   });
 
-  it('lists the tone rule for each consonant group', () => {
+  it('plays the Thai audio for a vowel', async () => {
     renderVowels();
 
-    const rules = within(screen.getByRole('list', { name: 'Short vowels tone rules' })).getAllByRole('listitem');
+    await userEvent.click(screen.getByRole('button', { name: 'Play Thai audio for -ะ' }));
 
-    expect(rules.map((rule) => rule.textContent)).toEqual([
-      'Gp 1 + Short Vowel - Low Tone',
-      'Gp 2 + Short Vowel - Low Tone',
-      'Gp 3 + Short Vowel - High Tone',
-    ]);
+    expect(playAudio).toHaveBeenCalledWith('/audio/vowels/a.m4a');
+  });
+
+  it('shows the tone each consonant class takes', () => {
+    renderVowels();
+
+    const cells = within(screen.getByRole('row', { name: /^Tone/ })).getAllByRole('cell');
+
+    expect(cells.map((cell) => cell.textContent)).toEqual(['Low', 'Low', 'High']);
+  });
+
+  it('hides the group heading visually', () => {
+    renderVowels();
+
+    expect(screen.getByRole('heading', { name: 'Short vowels' })).toHaveClass('sr-only');
   });
 
   describe('given the standalone vowels', () => {
-    it('lists them as cards without examples or tone rules', () => {
+    it('lists them as cards without examples or tones', () => {
       renderVowels('/vowels?group=standalone');
 
       expect(within(screen.getByRole('list', { name: 'Standalone vowels' })).getAllByRole('article')).toHaveLength(4);
       expect(screen.queryByRole('table')).not.toBeInTheDocument();
-      expect(screen.queryByRole('list', { name: 'Standalone vowels tone rules' })).not.toBeInTheDocument();
     });
   });
 });
