@@ -6,14 +6,16 @@ import VowelQuestion from '.';
 
 const consonant: Consonant = { id: 'ก', character: 'ก', class: 'middle', words: [] };
 
-const spellQuestion: VowelQuestionType = {
+const soundVowel = { id: '-ิ', group: 'short', sound: 'i', pronunciation: 'အိ' } as const;
+
+const soundQuestion: VowelQuestionType = {
   id: 'กิ',
-  kind: 'spell',
+  kind: 'sound',
   consonant,
-  vowel: { id: '-ิ', group: 'short', sound: 'i', pronunciation: 'အိ' },
+  vowel: soundVowel,
   syllable: 'กิ',
   tone: 'low',
-  options: ['กิ', 'กี', 'กะ'],
+  options: [soundVowel, { id: '-ะ', group: 'short', sound: 'a', pronunciation: 'အ' }],
 };
 
 const toneQuestion: VowelQuestionType = {
@@ -26,20 +28,18 @@ const toneQuestion: VowelQuestionType = {
 };
 
 describe('VowelQuestion', () => {
-  describe('given a spelling question', () => {
-    it('shows the consonant and the vowel with its sound and Burmese pronunciation', () => {
+  describe('given a sound question', () => {
+    it('shows only the vowel, without its consonant, sound or pronunciation', () => {
       render(
-        <VowelQuestion question={spellQuestion}>
+        <VowelQuestion question={soundQuestion}>
           <p>Answer area</p>
         </VowelQuestion>
       );
 
-      expect(screen.getByRole('heading', { name: 'How is this written?' })).toBeInTheDocument();
-      expect(screen.getByText('ก').closest('[lang]')).toHaveAttribute('lang', 'th');
-      expect(screen.getByText('◌ิ').closest('[lang]')).toHaveAttribute('lang', 'th');
-      expect(screen.getByText('i')).toBeInTheDocument();
-      expect(screen.getByText('အိ')).toHaveAttribute('lang', 'my');
+      expect(screen.getByRole('heading', { name: 'What sound is this?' })).toBeInTheDocument();
+      expect(screen.getByText('◌ิ')).toHaveAttribute('lang', 'th');
       expect(screen.queryByText('กิ')).not.toBeInTheDocument();
+      expect(screen.queryByText(/อิ|\bi\b/)).not.toBeInTheDocument();
       expect(screen.getByText('Answer area')).toBeInTheDocument();
     });
   });
@@ -60,12 +60,12 @@ describe('VowelQuestion', () => {
   describe('given the question changes', () => {
     it('moves focus to the prompt for keyboard and screen reader users', () => {
       const { rerender } = render(
-        <VowelQuestion question={spellQuestion}>
+        <VowelQuestion question={soundQuestion}>
           <p>Answer area</p>
         </VowelQuestion>
       );
 
-      expect(screen.getByRole('heading', { name: 'How is this written?' })).not.toHaveFocus();
+      expect(screen.getByRole('heading', { name: 'What sound is this?' })).not.toHaveFocus();
 
       rerender(
         <VowelQuestion question={toneQuestion}>

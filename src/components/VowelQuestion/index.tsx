@@ -9,7 +9,7 @@ interface VowelQuestionProps {
 }
 
 const PROMPTS: Record<VowelQuestionType['kind'], string> = {
-  spell: 'How is this written?',
+  sound: 'What sound is this?',
   tone: 'Which tone is this?',
 };
 
@@ -30,32 +30,12 @@ const VowelQuestion = ({ question, children }: VowelQuestionProps) => {
       <h2 id="vowel-question-prompt" className="rounded-xl text-center text-2xl font-extrabold" ref={headingRef} tabIndex={-1}>
         {PROMPTS[question.kind]}
       </h2>
-      {question.kind === 'spell' ? (
-        <p className="flex items-center gap-3 font-thai text-[2.5rem] leading-[1.4] font-medium" lang="th">
-          <span className="grid min-h-20 min-w-20 place-items-center rounded-2xl border-2 border-line px-3 shadow-edge">
-            {question.consonant.character}
-          </span>
-          +
-          <span className="flex min-h-20 min-w-20 flex-col items-center justify-center rounded-2xl border-2 border-line px-3 shadow-edge">
-            {getVowelLabel(question.vowel)}
-            <span className="flex gap-2 pb-1 font-sans text-sm leading-tight text-ink-muted">
-              <span className="font-bold" lang="en">
-                {question.vowel.sound}
-              </span>{' '}
-              <span className="font-burmese" lang="my">
-                {question.vowel.pronunciation}
-              </span>
-            </span>
-          </span>
-        </p>
-      ) : (
-        <p
-          className="grid min-h-28 min-w-28 place-items-center rounded-3xl border-2 border-line px-4 font-thai text-[3.5rem] leading-[1.4] font-medium shadow-edge"
-          lang="th"
-        >
-          {question.syllable}
-        </p>
-      )}
+      <p
+        className="grid min-h-28 min-w-28 place-items-center rounded-3xl border-2 border-line px-4 font-thai text-[3.5rem] leading-[1.4] font-medium shadow-edge"
+        lang="th"
+      >
+        {question.kind === 'sound' ? getVowelLabel(question.vowel) : question.syllable}
+      </p>
       {children}
     </section>
   );

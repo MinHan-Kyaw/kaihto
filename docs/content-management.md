@@ -123,8 +123,9 @@ Converting a recording on macOS: `afconvert -f m4af -d aac -b 64000 recording.wa
   source has no audio. They are Thai text-to-speech of the Thai word, not derived from Burmese. Vowel audio is made the
   same way from the vowel on `อ`: `say -v Kanya "อะ"`.
   Replace them with recordings by a native speaker.
-- **Vowel practice audio** is spoken live by the browser's speech synthesis (`src/services/voice.ts`, `th-TH`), not
-  recorded, because there are about 1,232 consonant + vowel syllables. The trade-off: devices without a Thai voice
+- **Vowel practice audio:** sound questions play the recorded vowel files (`public/audio/vowels/`). Tone questions'
+  syllables are spoken live by the browser's speech synthesis (`src/services/voice.ts`, `th-TH`), not recorded, because
+  there are about 1,232 consonant + vowel syllables. The trade-off: devices without a Thai voice
   (often Windows) stay silent, and the voice and its quality differ by device and browser, unlike the committed
   `.m4a` files, which sound the same everywhere. Record files instead if a syllable set must sound exact; the vowel
   table already plays recorded files (`public/audio/vowels/`).
