@@ -10,6 +10,7 @@ interface ConsonantCardProps {
   onPlayAudio?: (word: Word) => void;
   size?: CardSize;
   showWord?: boolean;
+  showPicture?: boolean;
 }
 
 const SIZE_CLASS_NAMES: Record<
@@ -39,18 +40,18 @@ const SIZE_CLASS_NAMES: Record<
   },
   compact: {
     card: 'gap-0.5 rounded-2xl px-1.5 py-1.5',
-    letter: 'text-[2rem]',
+    letter: 'text-[2.5rem]',
     picture: 'mb-1 w-14 rounded-xl',
     placeholder: 'p-1 text-[0.625rem]',
     word: 'text-lg',
-    meaning: 'text-sm',
-    pronunciation: 'text-xs',
+    meaning: 'text-base',
+    pronunciation: 'text-sm',
     burmese: 'leading-[1.5]',
     audio: 'mt-1',
   },
 };
 
-const ConsonantCard = ({ consonant, onPlayAudio, size = 'default', showWord = true }: ConsonantCardProps) => {
+const ConsonantCard = ({ consonant, onPlayAudio, size = 'default', showWord = true, showPicture = true }: ConsonantCardProps) => {
   const headingId = `consonant-${consonant.id}`;
   const sizeClassNames = SIZE_CLASS_NAMES[size];
 
@@ -69,24 +70,25 @@ const ConsonantCard = ({ consonant, onPlayAudio, size = 'default', showWord = tr
       <ul className="flex w-full flex-col gap-4" role="list">
         {consonant.words.map((word) => (
           <li key={word.id} className="flex flex-col items-center">
-            {word.image ? (
-              <img
-                className={classNames('aspect-square object-contain', sizeClassNames.picture)}
-                src={assetUrl(word.image)}
-                alt={word.meaning}
-                lang="my"
-              />
-            ) : (
-              <div
-                className={classNames(
-                  'grid aspect-square place-items-center border-2 border-dashed border-line-strong text-ink-muted',
-                  sizeClassNames.picture,
-                  sizeClassNames.placeholder
-                )}
-              >
-                Picture coming soon
-              </div>
-            )}
+            {showPicture &&
+              (word.image ? (
+                <img
+                  className={classNames('aspect-square object-contain', sizeClassNames.picture)}
+                  src={assetUrl(word.image)}
+                  alt={word.meaning}
+                  lang="my"
+                />
+              ) : (
+                <div
+                  className={classNames(
+                    'grid aspect-square place-items-center border-2 border-dashed border-line-strong text-ink-muted',
+                    sizeClassNames.picture,
+                    sizeClassNames.placeholder
+                  )}
+                >
+                  Picture coming soon
+                </div>
+              ))}
             {showWord && (
               <p className={classNames('font-thai font-medium', sizeClassNames.word)} lang="th">
                 {word.thai}
