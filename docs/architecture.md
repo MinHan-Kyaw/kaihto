@@ -41,7 +41,7 @@ flowchart LR
 | `/practice`                                    | Practice categories: Consonants or Vowels                                                                                                                                                                                                                      |
 | `/practice/consonants`                         | Picture quiz                                                                                                                                                                                                                                                   |
 | `/practice/vowels`                             | Consonant + vowel quiz over the ticked vowel groups (short / long / extra), asking the sound of a vowel or the tone of a syllable                                                                                                                              |
-| `/all`                                         | All 44 consonants as compact cards (letter, picture, Burmese meaning; no Thai word or audio) on one full-width page without the header; not linked, reached by typing the URL                                                                                  |
+| `/all`                                         | All 44 consonants as compact cards in Middle / High / Low class columns side by side (letter, Burmese meaning; no picture, Thai word or audio) on one full-width page without the header; not linked, reached by typing the URL                                |
 | `/all-vowels`                                  | The 28 short, long and extra vowels as cards in three side-by-side group columns (vowel, English sound, Burmese pronunciation; no class examples, standalone vowels or audio) on one full-width page without the header; not linked, reached by typing the URL |
 | `*`                                            | Redirects to `/`                                                                                                                                                                                                                                               |
 
@@ -203,7 +203,7 @@ learning continues silently. Screens call `stopAudio()` on unmount and when movi
 
 `src/services/images.ts`: `preloadImages(sources)` fetches the 44 vocabulary pictures (about 45 KB compressed) in the
 background. `main.tsx` calls it once; it waits for the page's `load` event and an idle moment, so the first screen's own
-requests go first. Afterwards consonant tabs, `/all` and the picture quiz show pictures without waiting for the
+requests go first. Afterwards consonant tabs and the picture quiz show pictures without waiting for the
 network, which matters on slow connections. The pictures are small, so cards load them eagerly (no `loading="lazy"`).
 
 ## Feedback sounds

@@ -22,7 +22,10 @@ describe('AllVowels', () => {
           vowels.filter((vowel) => vowel.group === group.id).map((vowel) => `vowel-${vowel.id}`)
         );
       });
-    expect(screen.getAllByRole('article')).toHaveLength(28);
+    const cards = screen.getAllByRole('article');
+
+    expect(cards).toHaveLength(28);
+    cards.forEach((card) => expect(card).toHaveAttribute('data-size', 'large'));
     expect(screen.queryByRole('article', { name: 'ฤ' })).not.toBeInTheDocument();
   });
 

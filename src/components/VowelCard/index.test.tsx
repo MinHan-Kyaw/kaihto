@@ -18,4 +18,21 @@ describe('VowelCard', () => {
 
     expect(screen.getByRole('heading', { name: '◌ิ' })).toBeInTheDocument();
   });
+
+  it('uses the default size', () => {
+    render(<VowelCard vowel={{ id: 'ฤ', group: 'standalone', sound: 'reu', pronunciation: 'ရူ' }} />);
+
+    expect(screen.getByRole('article')).toHaveAttribute('data-size', 'default');
+  });
+
+  describe('given the large size', () => {
+    it('shows the same content', () => {
+      render(<VowelCard vowel={{ id: 'ฤ', group: 'standalone', sound: 'reu', pronunciation: 'ရူ' }} size="large" />);
+
+      const card = screen.getByRole('article', { name: 'ฤ' });
+
+      expect(card).toHaveAttribute('data-size', 'large');
+      expect(card).toHaveTextContent('ฤ reu ရူ');
+    });
+  });
 });

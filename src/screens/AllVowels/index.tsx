@@ -21,7 +21,7 @@ const AllVowels = () => (
           >
             {group.vowels.map((vowel) => (
               <li key={vowel.id}>
-                <VowelCard vowel={vowel} />
+                <VowelCard vowel={vowel} size="large" />
               </li>
             ))}
           </ul>

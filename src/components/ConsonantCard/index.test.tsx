@@ -76,6 +76,16 @@ describe('ConsonantCard', () => {
     });
   });
 
+  describe('given the picture is hidden', () => {
+    it('shows neither the picture nor the placeholder', () => {
+      render(<ConsonantCard consonant={buildConsonant()} showPicture={false} />);
+
+      expect(screen.getByRole('article', { name: 'ก' })).toHaveTextContent('ကြက် (ကောကိုင်)');
+      expect(screen.queryByRole('img')).not.toBeInTheDocument();
+      expect(screen.queryByText('Picture coming soon')).not.toBeInTheDocument();
+    });
+  });
+
   describe('given no audio handler', () => {
     it('does not render the audio button', () => {
       render(<ConsonantCard consonant={buildConsonant()} />);
