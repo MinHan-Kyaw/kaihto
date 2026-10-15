@@ -1,18 +1,28 @@
 import { render, screen, within } from '@testing-library/react';
 
-import { vowels } from '../../data';
+import { vowelGroups, vowels } from '../../data';
 
 import AllVowels from '.';
 
 describe('AllVowels', () => {
-  it('shows the short, long and extra vowels as cards in data order, without the standalone vowels', () => {
+  it('shows the short, long and extra vowels in their own groups, without the standalone vowels', () => {
     render(<AllVowels />);
 
-    const cards = within(screen.getByRole('list', { name: 'All Thai vowels' })).getAllByRole('article');
-    const combinable = vowels.filter((vowel) => vowel.group !== 'standalone');
+    expect(screen.getAllByRole('heading', { level: 2 }).map((heading) => heading.textContent)).toEqual([
+      'Short vowels',
+      'Long vowels',
+      'Extra vowels',
+    ]);
+    vowelGroups
+      .filter((group) => group.id !== 'standalone')
+      .forEach((group) => {
+        const cards = within(screen.getByRole('list', { name: group.name })).getAllByRole('article');
 
-    expect(cards).toHaveLength(28);
-    expect(cards.map((card) => card.getAttribute('aria-labelledby'))).toEqual(combinable.map((vowel) => `vowel-${vowel.id}`));
+        expect(cards.map((card) => card.getAttribute('aria-labelledby'))).toEqual(
+          vowels.filter((vowel) => vowel.group === group.id).map((vowel) => `vowel-${vowel.id}`)
+        );
+      });
+    expect(screen.getAllByRole('article')).toHaveLength(28);
     expect(screen.queryByRole('article', { name: 'ฤ' })).not.toBeInTheDocument();
   });
 
