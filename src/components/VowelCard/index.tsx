@@ -1,3 +1,4 @@
+import { getVowelLabel } from '../../helpers/vowels';
 import type { Vowel } from '../../types/learning';
 
 interface VowelCardProps {
@@ -10,7 +11,7 @@ const VowelCard = ({ vowel }: VowelCardProps) => (
     aria-labelledby={`vowel-${vowel.id}`}
   >
     <h3 id={`vowel-${vowel.id}`} className="font-thai text-3xl font-medium" lang="th">
-      {vowel.id}
+      {getVowelLabel(vowel)}
     </h3>{' '}
     <span className="text-sm font-bold text-ink-muted">{vowel.sound}</span>{' '}
     <span className="font-burmese text-sm text-brand" lang="my">

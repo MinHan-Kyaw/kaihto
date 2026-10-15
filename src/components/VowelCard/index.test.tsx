@@ -12,4 +12,10 @@ describe('VowelCard', () => {
     expect(screen.getByRole('heading', { name: 'ฤ' })).toHaveAttribute('lang', 'th');
     expect(screen.getByText('ရူ')).toHaveAttribute('lang', 'my');
   });
+
+  it('shows a vowel mark that sits on the consonant on a dotted circle', () => {
+    render(<VowelCard vowel={{ id: '-ิ', group: 'short', sound: 'i', pronunciation: 'အိ' }} />);
+
+    expect(screen.getByRole('heading', { name: '◌ิ' })).toBeInTheDocument();
+  });
 });

@@ -17,7 +17,7 @@ flowchart LR
   Loader --> Screens
   Helpers["src/helpers<br/>(pure functions)"] --> Screens
   Services["src/services<br/>audio.ts · sound.ts · speech.ts · voice.ts"] --> Screens
-  Screens["src/screens<br/>Home · Consonants · Vowels · Tones · PracticeCategories · Practice · VowelPractice · AllConsonants"] --> Components["src/components<br/>(presentational)"]
+  Screens["src/screens<br/>Home · Consonants · Vowels · Tones · PracticeCategories · Practice · VowelPractice · AllConsonants · AllVowels"] --> Components["src/components<br/>(presentational)"]
 ```
 
 | Layer         | Responsibility                                      | May import                             |
@@ -32,17 +32,18 @@ flowchart LR
 
 `BrowserRouter` with `basename = import.meta.env.BASE_URL`, so the app works at a domain root or a sub-path.
 
-| Path                                           | Screen                                                                                                                                                                        |
-| ---------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                                            | Home                                                                                                                                                                          |
-| `/consonants?class=middle\|high\|low`          | Consonant browser (class kept in the URL so it can be linked)                                                                                                                 |
-| `/vowels?group=short\|long\|extra\|standalone` | The 32 vowels in group tabs (group kept in the URL), with the short and long vowel tone rules and a middle / high / low class example per vowel                               |
-| `/tones`                                       | The five tones and the tone rules table (class × live/dead syllable and tone marks)                                                                                           |
-| `/practice`                                    | Practice categories: Consonants or Vowels                                                                                                                                     |
-| `/practice/consonants`                         | Picture quiz                                                                                                                                                                  |
-| `/practice/vowels`                             | Consonant + vowel quiz over the ticked vowel groups (short / long / extra), asking the sound of a vowel or the tone of a syllable                                             |
-| `/all`                                         | All 44 consonants as compact cards (letter, picture, Burmese meaning; no Thai word or audio) on one full-width page without the header; not linked, reached by typing the URL |
-| `*`                                            | Redirects to `/`                                                                                                                                                              |
+| Path                                           | Screen                                                                                                                                                                                                                     |
+| ---------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                                            | Home                                                                                                                                                                                                                       |
+| `/consonants?class=middle\|high\|low`          | Consonant browser (class kept in the URL so it can be linked)                                                                                                                                                              |
+| `/vowels?group=short\|long\|extra\|standalone` | The 32 vowels in group tabs (group kept in the URL), with the short and long vowel tone rules and a middle / high / low class example per vowel                                                                            |
+| `/tones`                                       | The five tones and the tone rules table (class × live/dead syllable and tone marks)                                                                                                                                        |
+| `/practice`                                    | Practice categories: Consonants or Vowels                                                                                                                                                                                  |
+| `/practice/consonants`                         | Picture quiz                                                                                                                                                                                                               |
+| `/practice/vowels`                             | Consonant + vowel quiz over the ticked vowel groups (short / long / extra), asking the sound of a vowel or the tone of a syllable                                                                                          |
+| `/all`                                         | All 44 consonants as compact cards (letter, picture, Burmese meaning; no Thai word or audio) on one full-width page without the header; not linked, reached by typing the URL                                              |
+| `/all-vowels`                                  | The 28 short, long and extra vowels as cards (vowel, English sound, Burmese pronunciation; no class examples, standalone vowels or audio) on one full-width page without the header; not linked, reached by typing the URL |
+| `*`                                            | Redirects to `/`                                                                                                                                                                                                           |
 
 Static hosts must serve `index.html` for unknown paths. Cloudflare Pages does this automatically because the build has no
 `404.html`.

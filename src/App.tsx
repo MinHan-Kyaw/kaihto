@@ -2,6 +2,7 @@ import { Navigate, Route, Routes } from 'react-router';
 
 import Layout from './components/Layout';
 import AllConsonants from './screens/AllConsonants';
+import AllVowels from './screens/AllVowels';
 import Consonants from './screens/Consonants';
 import Home from './screens/Home';
 import Practice from './screens/Practice';
@@ -13,6 +14,7 @@ import Vowels from './screens/Vowels';
 const App = () => (
   <Routes>
     <Route path="all" element={<AllConsonants />} />
+    <Route path="all-vowels" element={<AllVowels />} />
     <Route element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="consonants" element={<Consonants />} />
