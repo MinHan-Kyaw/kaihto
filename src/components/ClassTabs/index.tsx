@@ -17,11 +17,11 @@ const ClassTabs = <T extends string>({ items, counts, selectedId, label, countLa
       const isSelected = item.id === selectedId;
 
       return (
-        <li key={item.id} className="min-w-0 flex-1">
+        <li key={item.id} className="min-w-0 flex-auto">
           <button
             type="button"
             className={classNames(
-              'flex min-h-14 w-full cursor-pointer flex-wrap items-center justify-center gap-x-1 rounded-xl border-2 px-0.5 py-2 font-bold xs:gap-x-2 xs:px-2',
+              'flex min-h-14 w-full cursor-pointer flex-wrap items-center justify-center gap-x-1 rounded-xl border-2 px-0.5 py-2 font-bold max-xs:text-sm xs:gap-x-2 xs:px-2',
               isSelected
                 ? 'border-brand-border bg-surface text-brand shadow-edge-brand-soft'
                 : 'border-transparent bg-transparent text-ink-muted hover:text-brand'
