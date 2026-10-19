@@ -45,7 +45,7 @@ const SIZE_CLASS_NAMES: Record<
     placeholder: 'p-1 text-[0.625rem]',
     word: 'text-lg',
     meaning: 'text-base',
-    pronunciation: 'text-sm',
+    pronunciation: 'block text-sm',
     burmese: 'leading-[1.5]',
     audio: 'mt-1',
   },
