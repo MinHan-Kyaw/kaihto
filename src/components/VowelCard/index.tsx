@@ -7,6 +7,9 @@ type CardSize = 'default' | 'large';
 interface VowelCardProps {
   vowel: Vowel;
   size?: CardSize;
+  showVowel?: boolean;
+  showSound?: boolean;
+  showPronunciation?: boolean;
 }
 
 const SIZE_CLASS_NAMES: Record<CardSize, { card: string; vowel: string; text: string }> = {
@@ -14,7 +17,7 @@ const SIZE_CLASS_NAMES: Record<CardSize, { card: string; vowel: string; text: st
   large: { card: 'px-1 py-1', vowel: 'text-5xl leading-[1.5] whitespace-nowrap lg:text-6xl', text: 'text-sm' },
 };
 
-const VowelCard = ({ vowel, size = 'default' }: VowelCardProps) => {
+const VowelCard = ({ vowel, size = 'default', showVowel = true, showSound = true, showPronunciation = true }: VowelCardProps) => {
   const sizeClassNames = SIZE_CLASS_NAMES[size];
 
   return (
@@ -26,13 +29,19 @@ const VowelCard = ({ vowel, size = 'default' }: VowelCardProps) => {
       aria-labelledby={`vowel-${vowel.id}`}
       data-size={size}
     >
-      <h3 id={`vowel-${vowel.id}`} className={classNames('font-thai font-medium', sizeClassNames.vowel)} lang="th">
+      <h3
+        id={`vowel-${vowel.id}`}
+        className={classNames('font-thai font-medium', sizeClassNames.vowel, !showVowel && 'sr-only')}
+        lang="th"
+      >
         {getVowelLabel(vowel)}
       </h3>{' '}
-      <span className={classNames('font-bold text-ink-muted', sizeClassNames.text)}>{vowel.sound}</span>{' '}
-      <span className={classNames('font-burmese text-brand', sizeClassNames.text)} lang="my">
-        {vowel.pronunciation}
-      </span>
+      {showSound && <span className={classNames('font-bold text-ink-muted', sizeClassNames.text)}>{vowel.sound}</span>}{' '}
+      {showPronunciation && (
+        <span className={classNames('font-burmese text-brand', sizeClassNames.text)} lang="my">
+          {vowel.pronunciation}
+        </span>
+      )}
     </article>
   );
 };

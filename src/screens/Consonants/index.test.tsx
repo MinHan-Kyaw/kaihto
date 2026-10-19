@@ -126,6 +126,20 @@ describe('Consonants', () => {
       expect(screen.getByRole('heading', { level: 2, name: 'Middle Class' })).toBeInTheDocument();
       expect(getCards()).toHaveLength(9);
     });
+
+    it('hides the parts that are unticked, keeping at least one', async () => {
+      renderConsonants('/consonants/all');
+
+      await userEvent.click(screen.getByRole('checkbox', { name: 'Thai' }));
+      await userEvent.click(screen.getByRole('checkbox', { name: 'Burmese' }));
+
+      const card = screen.getByRole('article', { name: 'ก' });
+
+      expect(screen.getByRole('heading', { name: 'ก' })).toHaveClass('sr-only');
+      expect(card).toHaveTextContent('(ကောကိုင်)');
+      expect(card).not.toHaveTextContent('ကြက်');
+      expect(screen.getByRole('checkbox', { name: 'Pronunciation' })).toBeDisabled();
+    });
   });
 
   it('shows all classes with the All tab', async () => {

@@ -86,6 +86,33 @@ describe('ConsonantCard', () => {
     });
   });
 
+  describe('given the letter is hidden', () => {
+    it('keeps the letter for screen readers only', () => {
+      render(<ConsonantCard consonant={buildConsonant()} showLetter={false} />);
+
+      expect(screen.getByRole('article', { name: 'ก' })).toHaveTextContent('ကြက် (ကောကိုင်)');
+      expect(screen.getByRole('heading', { name: 'ก' })).toHaveClass('sr-only');
+    });
+  });
+
+  describe('given the meaning is hidden', () => {
+    it('shows the pronunciation without the meaning', () => {
+      render(<ConsonantCard consonant={buildConsonant()} showMeaning={false} />);
+
+      expect(screen.getByText('(ကောကိုင်)')).toBeInTheDocument();
+      expect(screen.queryByText('ကြက်')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('given the pronunciation is hidden', () => {
+    it('shows the meaning without the pronunciation', () => {
+      render(<ConsonantCard consonant={buildConsonant()} showPronunciation={false} />);
+
+      expect(screen.getByText('ကြက်')).toBeInTheDocument();
+      expect(screen.queryByText('(ကောကိုင်)')).not.toBeInTheDocument();
+    });
+  });
+
   describe('given no audio handler', () => {
     it('does not render the audio button', () => {
       render(<ConsonantCard consonant={buildConsonant()} />);

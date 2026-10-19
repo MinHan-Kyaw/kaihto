@@ -1,6 +1,7 @@
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 
+import CheckboxChips from '../../components/CheckboxChips';
 import ClassTabs from '../../components/ClassTabs';
 import ConsonantCard from '../../components/ConsonantCard';
 import { consonantClasses, consonants } from '../../data';
@@ -27,6 +28,14 @@ const tabs: { id: ConsonantTabId; label: string }[] = [
 
 const tabCounts: Record<ConsonantTabId, number> = { ...counts, all: consonants.length };
 
+const CARD_PARTS = [
+  { id: 'thai', label: 'Thai' },
+  { id: 'burmese', label: 'Burmese' },
+  { id: 'pronunciation', label: 'Pronunciation' },
+] as const;
+
+type CardPart = (typeof CARD_PARTS)[number]['id'];
+
 const classes = consonantClasses.map((consonantClass) => ({
   ...consonantClass,
   consonants: getConsonantsByClass(consonants, consonantClass.id),
@@ -50,8 +59,13 @@ const Consonants = ({ showAll = false }: ConsonantsProps) => {
   const selectedClass = consonantClasses.find((consonantClass) => consonantClass.id === selectedClassId);
   const selectedTabId: ConsonantTabId = showAll ? 'all' : selectedClassId;
   const visibleConsonants = getConsonantsByClass(consonants, selectedClassId);
+  const [shownParts, setShownParts] = useState<Record<CardPart, boolean>>({ thai: true, burmese: true, pronunciation: true });
 
   useEffect(() => () => stopAudio(), []);
+
+  const handleShownPartChange = (part: CardPart, checked: boolean) => {
+    setShownParts((current) => ({ ...current, [part]: checked }));
+  };
 
   const handleSelectTab = (tabId: ConsonantTabId) => {
     if (tabId === selectedTabId) {
@@ -77,27 +91,44 @@ const Consonants = ({ showAll = false }: ConsonantsProps) => {
       </div>
 
       {showAll ? (
-        // The low class has more letters than the middle and high classes together, so it gets a double-width column.
-        <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_1fr_2fr]">
-          {classes.map((consonantClass) => (
-            <section key={consonantClass.id} aria-labelledby={`consonant-class-${consonantClass.id}`}>
-              <h2 id={`consonant-class-${consonantClass.id}`} className="mb-2 text-center text-lg font-bold">
-                {consonantClass.name}
-              </h2>
-              <ul
-                className="grid grid-cols-[repeat(auto-fill,minmax(5.5rem,1fr))] gap-1.5"
-                aria-labelledby={`consonant-class-${consonantClass.id}`}
-                role="list"
-              >
-                {consonantClass.consonants.map((consonant) => (
-                  <li key={consonant.id}>
-                    <ConsonantCard consonant={consonant} size="compact" showWord={false} showPicture={false} />
-                  </li>
-                ))}
-              </ul>
-            </section>
-          ))}
-        </div>
+        <>
+          <div className="mt-4">
+            <CheckboxChips
+              legend="Show on the cards"
+              options={CARD_PARTS.map(({ id, label }) => ({ id, label, checked: shownParts[id] }))}
+              onChange={handleShownPartChange}
+            />
+          </div>
+          {/* The low class has more letters than the middle and high classes together, so it gets a double-width column. */}
+          <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_1fr_2fr]">
+            {classes.map((consonantClass) => (
+              <section key={consonantClass.id} aria-labelledby={`consonant-class-${consonantClass.id}`}>
+                <h2 id={`consonant-class-${consonantClass.id}`} className="mb-2 text-center text-lg font-bold">
+                  {consonantClass.name}
+                </h2>
+                <ul
+                  className="grid grid-cols-[repeat(auto-fill,minmax(5.5rem,1fr))] gap-1.5"
+                  aria-labelledby={`consonant-class-${consonantClass.id}`}
+                  role="list"
+                >
+                  {consonantClass.consonants.map((consonant) => (
+                    <li key={consonant.id}>
+                      <ConsonantCard
+                        consonant={consonant}
+                        size="compact"
+                        showWord={false}
+                        showPicture={false}
+                        showLetter={shownParts.thai}
+                        showMeaning={shownParts.burmese}
+                        showPronunciation={shownParts.pronunciation}
+                      />
+                    </li>
+                  ))}
+                </ul>
+              </section>
+            ))}
+          </div>
+        </>
       ) : (
         selectedClass && (
           <section className="mt-4" aria-labelledby="consonant-class-title">

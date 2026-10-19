@@ -35,4 +35,27 @@ describe('VowelCard', () => {
       expect(card).toHaveTextContent('ฤ reu ရူ');
     });
   });
+
+  describe('given the vowel is hidden', () => {
+    it('keeps the vowel for screen readers only', () => {
+      render(<VowelCard vowel={{ id: 'ฤ', group: 'standalone', sound: 'reu', pronunciation: 'ရူ' }} showVowel={false} />);
+
+      expect(screen.getByRole('article', { name: 'ฤ' })).toHaveTextContent('reu ရူ');
+      expect(screen.getByRole('heading', { name: 'ฤ' })).toHaveClass('sr-only');
+    });
+  });
+
+  describe('given the sound and pronunciation are hidden', () => {
+    it('shows only the vowel', () => {
+      render(
+        <VowelCard
+          vowel={{ id: 'ฤ', group: 'standalone', sound: 'reu', pronunciation: 'ရူ' }}
+          showSound={false}
+          showPronunciation={false}
+        />
+      );
+
+      expect(screen.getByRole('article', { name: 'ฤ' })).toHaveTextContent(/^ฤ\s*$/);
+    });
+  });
 });

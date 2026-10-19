@@ -156,6 +156,16 @@ describe('Vowels', () => {
       expect(screen.getByRole('heading', { name: 'Short vowels' })).toBeInTheDocument();
       expect(rowCount()).toBe(12);
     });
+
+    it('hides the parts that are unticked, keeping at least one', async () => {
+      renderVowels('/vowels/all');
+
+      await userEvent.click(screen.getByRole('checkbox', { name: 'Sound' }));
+      await userEvent.click(screen.getByRole('checkbox', { name: 'Burmese' }));
+
+      expect(screen.getByRole('article', { name: '◌ิ' })).toHaveTextContent(/^◌ิ\s*$/);
+      expect(screen.getByRole('checkbox', { name: 'Thai' })).toBeDisabled();
+    });
   });
 
   it('shows all groups with the All tab', async () => {
