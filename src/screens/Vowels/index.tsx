@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 
 import ClassTabs from '../../components/ClassTabs';
-import Toggle from '../../components/Toggle';
 import VowelCard from '../../components/VowelCard';
 import VowelTable from '../../components/VowelTable';
 import { consonantClasses, vowelGroups, vowels } from '../../data';
@@ -23,7 +22,17 @@ const overviewGroups = vowelGroups
   .filter((group) => group.id !== 'standalone')
   .map((group) => ({ ...group, vowels: vowels.filter((vowel) => vowel.group === group.id) }));
 
-const overviewCount = overviewGroups.reduce((total, group) => total + group.vowels.length, 0);
+type VowelTabId = VowelGroupId | 'all';
+
+const tabs: { id: VowelTabId; label: string }[] = [
+  ...vowelGroups.map((group) => ({ id: group.id, label: group.shortName })),
+  { id: 'all', label: 'All' },
+];
+
+const tabCounts: Record<VowelTabId, number> = {
+  ...counts,
+  all: overviewGroups.reduce((total, overviewGroup) => total + overviewGroup.vowels.length, 0),
+};
 
 const handlePlayAudio = (vowel: Vowel) => {
   if (vowel.audio) {
@@ -32,29 +41,25 @@ const handlePlayAudio = (vowel: Vowel) => {
 };
 
 interface VowelsProps {
-  showOverview?: boolean;
+  showAll?: boolean;
 }
 
-const Vowels = ({ showOverview = false }: VowelsProps) => {
+const Vowels = ({ showAll = false }: VowelsProps) => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const requestedGroupId = searchParams.get('group');
   const selectedGroupId = isVowelGroupId(requestedGroupId) ? requestedGroupId : DEFAULT_GROUP_ID;
   const group = vowelGroups.find((item) => item.id === selectedGroupId);
+  const selectedTabId: VowelTabId = showAll ? 'all' : selectedGroupId;
   const groupVowels = vowels.filter((vowel) => vowel.group === selectedGroupId);
 
   useEffect(() => () => stopAudio(), []);
 
-  const handleSelectGroup = (groupId: VowelGroupId) => {
-    if (groupId === selectedGroupId) {
+  const handleSelectTab = (tabId: VowelTabId) => {
+    if (tabId === selectedTabId) {
       return;
     }
-    setSearchParams({ group: groupId }, { replace: true });
-    window.scrollTo({ top: 0 });
-  };
-
-  const handleShowOverviewChange = (checked: boolean) => {
-    void navigate(checked ? '/vowels/overview' : '/vowels', { replace: true });
+    void navigate(tabId === 'all' ? '/vowels/all' : `/vowels?group=${tabId}`, { replace: true });
     window.scrollTo({ top: 0 });
   };
 
@@ -62,32 +67,18 @@ const Vowels = ({ showOverview = false }: VowelsProps) => {
     <>
       <h1 className="sr-only">Thai Vowels</h1>
 
-      <div className="sticky top-header z-5 -mx-4 -mt-2 flex items-center gap-2 bg-surface px-4 py-2">
-        <div className="min-w-0 flex-1">
-          {showOverview ? (
-            <p className="flex min-h-16 items-center px-2 font-bold text-ink-muted">
-              All {overviewCount} short, long and extra vowels
-            </p>
-          ) : (
-            <ClassTabs
-              items={vowelGroups.map((item) => ({ id: item.id, label: item.shortName }))}
-              counts={counts}
-              selectedId={selectedGroupId}
-              label="Vowel group"
-              countLabel="vowels"
-              onSelect={handleSelectGroup}
-            />
-          )}
-        </div>
-        <Toggle
-          label="Overview"
-          description="Show every vowel group on one page"
-          checked={showOverview}
-          onChange={handleShowOverviewChange}
+      <div className="sticky top-header z-5 -mx-4 -mt-2 bg-surface px-4 py-2">
+        <ClassTabs
+          items={tabs}
+          counts={tabCounts}
+          selectedId={selectedTabId}
+          label="Vowel group"
+          countLabel="vowels"
+          onSelect={handleSelectTab}
         />
       </div>
 
-      {showOverview ? (
+      {showAll ? (
         <div className="mt-4 grid gap-4 sm:grid-cols-3">
           {overviewGroups.map((overviewGroup) => (
             <section key={overviewGroup.id} aria-labelledby={`vowel-group-${overviewGroup.id}`}>

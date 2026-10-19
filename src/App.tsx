@@ -11,13 +11,13 @@ import Vowels from './screens/Vowels';
 
 const App = () => (
   <Routes>
-    <Route path="all" element={<Navigate to="/consonants/overview" replace />} />
+    <Route path="all" element={<Navigate to="/consonants/all" replace />} />
     <Route element={<Layout />}>
       <Route index element={<Home />} />
       <Route path="consonants" element={<Consonants />} />
-      <Route path="consonants/overview" element={<Consonants showOverview />} />
+      <Route path="consonants/all" element={<Consonants showAll />} />
       <Route path="vowels" element={<Vowels />} />
-      <Route path="vowels/overview" element={<Vowels showOverview />} />
+      <Route path="vowels/all" element={<Vowels showAll />} />
       <Route path="tones" element={<Tones />} />
       <Route path="practice" element={<PracticeCategories />} />
       <Route path="practice/consonants" element={<Practice />} />

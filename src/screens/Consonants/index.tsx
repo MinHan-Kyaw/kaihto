@@ -3,7 +3,6 @@ import { useNavigate, useSearchParams } from 'react-router';
 
 import ClassTabs from '../../components/ClassTabs';
 import ConsonantCard from '../../components/ConsonantCard';
-import Toggle from '../../components/Toggle';
 import { consonantClasses, consonants } from '../../data';
 import { assetUrl } from '../../helpers/assetUrl';
 import { getConsonantsByClass } from '../../helpers/vocabulary';
@@ -19,6 +18,15 @@ const counts = Object.fromEntries(
   consonantClasses.map((consonantClass) => [consonantClass.id, getConsonantsByClass(consonants, consonantClass.id).length])
 ) as Record<ConsonantClassId, number>;
 
+type ConsonantTabId = ConsonantClassId | 'all';
+
+const tabs: { id: ConsonantTabId; label: string }[] = [
+  ...consonantClasses.map((consonantClass) => ({ id: consonantClass.id, label: consonantClass.shortName })),
+  { id: 'all', label: 'All' },
+];
+
+const tabCounts: Record<ConsonantTabId, number> = { ...counts, all: consonants.length };
+
 const classes = consonantClasses.map((consonantClass) => ({
   ...consonantClass,
   consonants: getConsonantsByClass(consonants, consonantClass.id),
@@ -31,29 +39,25 @@ const handlePlayAudio = (word: Word) => {
 };
 
 interface ConsonantsProps {
-  showOverview?: boolean;
+  showAll?: boolean;
 }
 
-const Consonants = ({ showOverview = false }: ConsonantsProps) => {
+const Consonants = ({ showAll = false }: ConsonantsProps) => {
   const navigate = useNavigate();
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [searchParams] = useSearchParams();
   const requestedClassId = searchParams.get('class');
   const selectedClassId = isConsonantClassId(requestedClassId) ? requestedClassId : DEFAULT_CLASS_ID;
   const selectedClass = consonantClasses.find((consonantClass) => consonantClass.id === selectedClassId);
+  const selectedTabId: ConsonantTabId = showAll ? 'all' : selectedClassId;
   const visibleConsonants = getConsonantsByClass(consonants, selectedClassId);
 
   useEffect(() => () => stopAudio(), []);
 
-  const handleSelectClass = (classId: ConsonantClassId) => {
-    if (classId === selectedClassId) {
+  const handleSelectTab = (tabId: ConsonantTabId) => {
+    if (tabId === selectedTabId) {
       return;
     }
-    setSearchParams({ class: classId }, { replace: true });
-    window.scrollTo({ top: 0 });
-  };
-
-  const handleShowOverviewChange = (checked: boolean) => {
-    void navigate(checked ? '/consonants/overview' : '/consonants', { replace: true });
+    void navigate(tabId === 'all' ? '/consonants/all' : `/consonants?class=${tabId}`, { replace: true });
     window.scrollTo({ top: 0 });
   };
 
@@ -61,30 +65,18 @@ const Consonants = ({ showOverview = false }: ConsonantsProps) => {
     <>
       <h1 className="sr-only">Thai Consonants</h1>
 
-      <div className="sticky top-header z-5 -mx-4 -mt-2 flex items-center gap-2 bg-surface px-4 py-2">
-        <div className="min-w-0 flex-1">
-          {showOverview ? (
-            <p className="flex min-h-16 items-center px-2 font-bold text-ink-muted">All {consonants.length} consonants</p>
-          ) : (
-            <ClassTabs
-              items={consonantClasses.map((consonantClass) => ({ id: consonantClass.id, label: consonantClass.shortName }))}
-              counts={counts}
-              selectedId={selectedClassId}
-              label="Consonant class"
-              countLabel="letters"
-              onSelect={handleSelectClass}
-            />
-          )}
-        </div>
-        <Toggle
-          label="Overview"
-          description="Show every class on one page"
-          checked={showOverview}
-          onChange={handleShowOverviewChange}
+      <div className="sticky top-header z-5 -mx-4 -mt-2 bg-surface px-4 py-2">
+        <ClassTabs
+          items={tabs}
+          counts={tabCounts}
+          selectedId={selectedTabId}
+          label="Consonant class"
+          countLabel="letters"
+          onSelect={handleSelectTab}
         />
       </div>
 
-      {showOverview ? (
+      {showAll ? (
         // The low class has more letters than the middle and high classes together, so it gets a double-width column.
         <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_1fr_2fr]">
           {classes.map((consonantClass) => (

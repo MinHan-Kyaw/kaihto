@@ -15,7 +15,7 @@ const renderConsonants = (route = '/consonants') =>
     <MemoryRouter initialEntries={[route]}>
       <Routes>
         <Route path="consonants" element={<Consonants />} />
-        <Route path="consonants/overview" element={<Consonants showOverview />} />
+        <Route path="consonants/all" element={<Consonants showAll />} />
       </Routes>
     </MemoryRouter>
   );
@@ -84,7 +84,7 @@ describe('Consonants', () => {
 
   describe('given all classes are shown', () => {
     it('shows all 44 consonants as compact cards grouped by class', () => {
-      renderConsonants('/consonants/overview');
+      renderConsonants('/consonants/all');
 
       expect(screen.getAllByRole('heading', { level: 2 }).map((heading) => heading.textContent)).toEqual([
         'Middle Class',
@@ -102,11 +102,11 @@ describe('Consonants', () => {
 
       expect(cards).toHaveLength(44);
       cards.forEach((card) => expect(card).toHaveAttribute('data-size', 'compact'));
-      expect(screen.queryByRole('list', { name: 'Consonant class' })).not.toBeInTheDocument();
+      expect(screen.getByRole('button', { name: /^All/ })).toHaveAttribute('aria-pressed', 'true');
     });
 
     it('shows the letter and Burmese meaning without the picture, Thai word or audio buttons', () => {
-      renderConsonants('/consonants/overview');
+      renderConsonants('/consonants/all');
 
       const card = screen.getByRole('article', { name: 'ก' });
 
@@ -117,27 +117,23 @@ describe('Consonants', () => {
       expect(screen.queryByRole('button', { name: /Play Thai audio/ })).not.toBeInTheDocument();
     });
 
-    it('goes back to the class tabs when the toggle is turned off', async () => {
+    it('goes back to a class when its tab is chosen', async () => {
       vi.stubGlobal('scrollTo', vi.fn());
-      renderConsonants('/consonants/overview');
+      renderConsonants('/consonants/all');
 
-      expect(screen.getByRole('switch', { name: 'Overview' })).toHaveAttribute('aria-checked', 'true');
-
-      await userEvent.click(screen.getByRole('switch', { name: 'Overview' }));
+      await userEvent.click(screen.getByRole('button', { name: /^Middle/ }));
 
       expect(screen.getByRole('heading', { level: 2, name: 'Middle Class' })).toBeInTheDocument();
       expect(getCards()).toHaveLength(9);
     });
   });
 
-  it('shows all classes when the toggle is turned on', async () => {
+  it('shows all classes with the All tab', async () => {
     const scrollTo = vi.fn();
     vi.stubGlobal('scrollTo', scrollTo);
     renderConsonants();
 
-    expect(screen.getByRole('switch', { name: 'Overview' })).toHaveAttribute('aria-checked', 'false');
-
-    await userEvent.click(screen.getByRole('switch', { name: 'Overview' }));
+    await userEvent.click(screen.getByRole('button', { name: /^All/ }));
 
     expect(screen.getAllByRole('article')).toHaveLength(44);
     expect(scrollTo).toHaveBeenCalledWith({ top: 0 });
