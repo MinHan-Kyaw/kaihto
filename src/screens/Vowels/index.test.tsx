@@ -160,6 +160,7 @@ describe('Vowels', () => {
     it('hides the parts that are unticked, keeping at least one', async () => {
       renderVowels('/vowels/all');
 
+      await userEvent.click(screen.getByRole('button', { name: 'Card options' }));
       await userEvent.click(screen.getByRole('checkbox', { name: 'Sound' }));
       await userEvent.click(screen.getByRole('checkbox', { name: 'Burmese' }));
 

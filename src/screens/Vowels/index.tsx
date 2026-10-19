@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 
-import CheckboxChips from '../../components/CheckboxChips';
+import CardPartsMenu from '../../components/CardPartsMenu';
 import ClassTabs from '../../components/ClassTabs';
 import VowelCard from '../../components/VowelCard';
 import VowelTable from '../../components/VowelTable';
@@ -93,15 +93,15 @@ const Vowels = ({ showAll = false }: VowelsProps) => {
       </div>
 
       {showAll ? (
-        <>
-          <div className="mt-4">
-            <CheckboxChips
-              legend="Show on the cards"
+        <div className="relative mt-4">
+          {/* Top right of the columns: the end of the last heading on wide screens, of the first one when they stack. */}
+          <div className="absolute -top-2 right-0">
+            <CardPartsMenu
               options={CARD_PARTS.map(({ id, label }) => ({ id, label, checked: shownParts[id] }))}
               onChange={handleShownPartChange}
             />
           </div>
-          <div className="mt-4 grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-3">
             {overviewGroups.map((overviewGroup) => (
               <section key={overviewGroup.id} aria-labelledby={`vowel-group-${overviewGroup.id}`}>
                 <h2 id={`vowel-group-${overviewGroup.id}`} className="mb-2 text-center text-lg font-bold">
@@ -127,7 +127,7 @@ const Vowels = ({ showAll = false }: VowelsProps) => {
               </section>
             ))}
           </div>
-        </>
+        </div>
       ) : (
         group && (
           <section className="mt-4" aria-labelledby="vowel-group-title">

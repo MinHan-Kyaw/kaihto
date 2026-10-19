@@ -130,6 +130,7 @@ describe('Consonants', () => {
     it('hides the parts that are unticked, keeping at least one', async () => {
       renderConsonants('/consonants/all');
 
+      await userEvent.click(screen.getByRole('button', { name: 'Card options' }));
       await userEvent.click(screen.getByRole('checkbox', { name: 'Thai' }));
       await userEvent.click(screen.getByRole('checkbox', { name: 'Burmese' }));
 

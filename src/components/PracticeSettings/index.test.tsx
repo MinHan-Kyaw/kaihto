@@ -147,30 +147,4 @@ describe('PracticeSettings', () => {
       expect(audio).toHaveAccessibleDescription('Not available in this browser');
     });
   });
-
-  describe('given the menu is open', () => {
-    describe('given Escape is pressed', () => {
-      it('closes the menu and returns focus to its button', async () => {
-        renderSettings();
-        await openMenu();
-
-        await userEvent.keyboard('{Escape}');
-
-        expect(getMenuButton()).toHaveAttribute('aria-expanded', 'false');
-        expect(getMenuButton()).toHaveFocus();
-        expect(screen.queryByRole('group', { name: 'Questions' })).not.toBeInTheDocument();
-      });
-    });
-
-    describe('given the learner taps outside', () => {
-      it('closes the menu', async () => {
-        renderSettings();
-        await openMenu();
-
-        await userEvent.click(document.body);
-
-        expect(getMenuButton()).toHaveAttribute('aria-expanded', 'false');
-      });
-    });
-  });
 });

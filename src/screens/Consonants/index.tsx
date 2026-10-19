@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router';
 
-import CheckboxChips from '../../components/CheckboxChips';
+import CardPartsMenu from '../../components/CardPartsMenu';
 import ClassTabs from '../../components/ClassTabs';
 import ConsonantCard from '../../components/ConsonantCard';
 import { consonantClasses, consonants } from '../../data';
@@ -91,16 +91,16 @@ const Consonants = ({ showAll = false }: ConsonantsProps) => {
       </div>
 
       {showAll ? (
-        <>
-          <div className="mt-4">
-            <CheckboxChips
-              legend="Show on the cards"
+        <div className="relative mt-4">
+          {/* Top right of the columns: the end of the last heading on wide screens, of the first one when they stack. */}
+          <div className="absolute -top-2 right-0">
+            <CardPartsMenu
               options={CARD_PARTS.map(({ id, label }) => ({ id, label, checked: shownParts[id] }))}
               onChange={handleShownPartChange}
             />
           </div>
           {/* The low class has more letters than the middle and high classes together, so it gets a double-width column. */}
-          <div className="mt-4 grid gap-4 sm:grid-cols-[1fr_1fr_2fr]">
+          <div className="grid gap-4 sm:grid-cols-[1fr_1fr_2fr]">
             {classes.map((consonantClass) => (
               <section key={consonantClass.id} aria-labelledby={`consonant-class-${consonantClass.id}`}>
                 <h2 id={`consonant-class-${consonantClass.id}`} className="mb-2 text-center text-lg font-bold">
@@ -128,7 +128,7 @@ const Consonants = ({ showAll = false }: ConsonantsProps) => {
               </section>
             ))}
           </div>
-        </>
+        </div>
       ) : (
         selectedClass && (
           <section className="mt-4" aria-labelledby="consonant-class-title">
