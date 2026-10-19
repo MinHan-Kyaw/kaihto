@@ -85,7 +85,7 @@ const Consonants = ({ showAll = false }: ConsonantsProps) => {
                 {consonantClass.name}
               </h2>
               <ul
-                className="grid grid-cols-[repeat(auto-fill,minmax(6.75rem,1fr))] gap-2"
+                className="grid grid-cols-[repeat(auto-fill,minmax(5.5rem,1fr))] gap-1.5"
                 aria-labelledby={`consonant-class-${consonantClass.id}`}
                 role="list"
               >

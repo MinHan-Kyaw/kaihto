@@ -9,9 +9,9 @@ interface VowelCardProps {
   size?: CardSize;
 }
 
-const SIZE_CLASS_NAMES: Record<CardSize, { vowel: string; text: string }> = {
-  default: { vowel: 'text-3xl', text: 'text-sm' },
-  large: { vowel: 'text-5xl', text: 'text-lg' },
+const SIZE_CLASS_NAMES: Record<CardSize, { card: string; vowel: string; text: string }> = {
+  default: { card: 'min-h-18 py-2', vowel: 'text-3xl', text: 'text-sm' },
+  large: { card: 'px-1 py-1', vowel: 'text-5xl leading-[1.5] whitespace-nowrap lg:text-6xl', text: 'text-sm' },
 };
 
 const VowelCard = ({ vowel, size = 'default' }: VowelCardProps) => {
@@ -19,7 +19,10 @@ const VowelCard = ({ vowel, size = 'default' }: VowelCardProps) => {
 
   return (
     <article
-      className="flex h-full min-h-18 flex-col items-center justify-center rounded-2xl border-2 border-line py-2 shadow-edge"
+      className={classNames(
+        'flex h-full flex-col items-center justify-center rounded-2xl border-2 border-line shadow-edge',
+        sizeClassNames.card
+      )}
       aria-labelledby={`vowel-${vowel.id}`}
       data-size={size}
     >
