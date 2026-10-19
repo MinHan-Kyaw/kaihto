@@ -1,22 +1,49 @@
+import { classNames } from '../../helpers/classNames';
+import { getVowelLabel } from '../../helpers/vowels';
 import type { Vowel } from '../../types/learning';
+
+type CardSize = 'default' | 'large';
 
 interface VowelCardProps {
   vowel: Vowel;
+  size?: CardSize;
+  showVowel?: boolean;
+  showSound?: boolean;
+  showPronunciation?: boolean;
 }
 
-const VowelCard = ({ vowel }: VowelCardProps) => (
-  <article
-    className="flex h-full min-h-18 flex-col items-center justify-center rounded-2xl border-2 border-line py-2 shadow-edge"
-    aria-labelledby={`vowel-${vowel.id}`}
-  >
-    <h3 id={`vowel-${vowel.id}`} className="font-thai text-3xl font-medium" lang="th">
-      {vowel.id}
-    </h3>{' '}
-    <span className="text-sm font-bold text-ink-muted">{vowel.sound}</span>{' '}
-    <span className="font-burmese text-sm text-brand" lang="my">
-      {vowel.pronunciation}
-    </span>
-  </article>
-);
+const SIZE_CLASS_NAMES: Record<CardSize, { card: string; vowel: string; text: string }> = {
+  default: { card: 'min-h-18 py-2', vowel: 'text-3xl', text: 'text-sm' },
+  large: { card: 'px-1 py-1', vowel: 'text-5xl leading-[1.5] whitespace-nowrap lg:text-6xl', text: 'text-sm' },
+};
+
+const VowelCard = ({ vowel, size = 'default', showVowel = true, showSound = true, showPronunciation = true }: VowelCardProps) => {
+  const sizeClassNames = SIZE_CLASS_NAMES[size];
+
+  return (
+    <article
+      className={classNames(
+        'flex h-full flex-col items-center justify-center rounded-2xl border-2 border-line shadow-edge',
+        sizeClassNames.card
+      )}
+      aria-labelledby={`vowel-${vowel.id}`}
+      data-size={size}
+    >
+      <h3
+        id={`vowel-${vowel.id}`}
+        className={classNames('font-thai font-medium', sizeClassNames.vowel, !showVowel && 'sr-only')}
+        lang="th"
+      >
+        {getVowelLabel(vowel)}
+      </h3>{' '}
+      {showSound && <span className={classNames('font-bold text-ink-muted', sizeClassNames.text)}>{vowel.sound}</span>}{' '}
+      {showPronunciation && (
+        <span className={classNames('font-burmese text-brand', sizeClassNames.text)} lang="my">
+          {vowel.pronunciation}
+        </span>
+      )}
+    </article>
+  );
+};
 
 export default VowelCard;
