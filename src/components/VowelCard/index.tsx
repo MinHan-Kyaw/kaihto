@@ -15,7 +15,7 @@ interface VowelCardProps {
 
 const SIZE_CLASS_NAMES: Record<CardSize, { card: string; vowel: string; text: string }> = {
   default: { card: 'min-h-18 py-2', vowel: 'text-3xl', text: 'text-sm' },
-  large: { card: 'px-1 py-1', vowel: 'text-5xl leading-[1.5] whitespace-nowrap lg:text-6xl', text: 'text-sm' },
+  large: { card: 'px-1 py-1', vowel: 'text-[2.75rem] leading-[1.5] whitespace-nowrap sm:text-5xl lg:text-6xl', text: 'text-sm' },
 };
 
 const VowelCard = ({ vowel, size = 'default', showVowel = true, showSound = true, showPronunciation = true }: VowelCardProps) => {
