@@ -457,9 +457,14 @@ describe('Practice', () => {
 
       expect(answer).toBeDefined();
       expect(screen.getByRole('heading', { name: 'ဒါ ဘယ်စကားလုံးလဲ။' })).toBeInTheDocument();
+      // Each option shows its word's Burmese pronunciation (ฝ and ฟ keep the owner's Latin "Faw Far" / "Faw Fan").
       within(screen.getByRole('list', { name: 'အဖြေများ' }))
         .getAllByRole('button')
-        .forEach((button) => expect(button).toHaveTextContent(/[\u1000-\u109F]/));
+        .forEach((button) => {
+          const option = vocabulary.find((item) => button.textContent?.startsWith(getLetterWithWord(item)));
+
+          expect(button).toHaveTextContent(option?.pronunciation ?? 'unknown option');
+        });
       expect(screen.getByRole('button', { name: 'ရှေ့သို့' })).toBeDisabled();
     });
   });
