@@ -264,7 +264,7 @@ Tailwind CSS 4 utilities in the markup, with the design tokens (colours, fonts, 
 width) defined in the `@theme` block of `src/index.css`. The default Tailwind palette is disabled so only semantic tokens
 exist. Visual direction: white background, green primary
 actions with a pressed "shadow" edge, light-green supporting surfaces, rounded cards and buttons, large Thai glyphs.
-Fonts are bundled with `@fontsource` (Nunito for UI, IBM Plex Sans Thai Looped, Noto Sans Myanmar), so rendering does not
+Fonts are bundled with `@fontsource` (Nunito for UI, Niramit for Thai with IBM Plex Sans Thai Looped for the dotted circle ◌ that Niramit lacks, Noto Sans Myanmar), so rendering does not
 depend on the learner's installed fonts.
 
 ## Extending
