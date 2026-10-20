@@ -14,6 +14,10 @@ import '@fontsource/nunito/latin-700.css';
 import '@fontsource/nunito/latin-800.css';
 import '@fontsource/noto-sans-thai-looped/thai-400.css';
 import '@fontsource/noto-sans-thai-looped/thai-500.css';
+// The Thai subset has no Latin glyphs, so the dash in "-ะ" and the brackets in "ก (ไก่)" would fall back to Nunito;
+// the font's own Latin subset keeps Thai text in one typeface. Its unicode-range means it loads only when used.
+import '@fontsource/noto-sans-thai-looped/latin-400.css';
+import '@fontsource/noto-sans-thai-looped/latin-500.css';
 import '@fontsource/noto-sans-myanmar/myanmar-400.css';
 import '@fontsource/noto-sans-myanmar/myanmar-700.css';
 import './index.css';
