@@ -62,7 +62,12 @@ describe('PracticeSummary', () => {
     it('links there instead', () => {
       render(
         <MemoryRouter>
-          <PracticeSummary score={5} total={10} onRestart={vi.fn()} explore={{ to: '/vowels', label: 'Explore vowels' }} />
+          <PracticeSummary
+            score={5}
+            total={10}
+            onRestart={vi.fn()}
+            explore={{ to: '/vowels', label: 'practice.summary.exploreVowels' }}
+          />
         </MemoryRouter>
       );
 

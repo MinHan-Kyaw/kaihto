@@ -6,6 +6,7 @@ import App from './App';
 import { consonants } from './data';
 import { assetUrl } from './helpers/assetUrl';
 import { getVocabulary } from './helpers/vocabulary';
+import { getLanguageFromPath, getRouterBasename, LanguageContext } from './i18n';
 import { preloadImages } from './services/images';
 
 import '@fontsource/nunito/latin-400.css';
@@ -23,11 +24,17 @@ if (!rootElement) {
   throw new Error('Root element #root not found');
 }
 
+// English pages live under /en; the header switch reloads the page in the other language.
+const lang = getLanguageFromPath(window.location.pathname, import.meta.env.BASE_URL);
+document.documentElement.lang = lang;
+
 createRoot(rootElement).render(
   <StrictMode>
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <App />
-    </BrowserRouter>
+    <LanguageContext value={lang}>
+      <BrowserRouter basename={getRouterBasename(lang, import.meta.env.BASE_URL)}>
+        <App />
+      </BrowserRouter>
+    </LanguageContext>
   </StrictMode>
 );
 

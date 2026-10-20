@@ -3,7 +3,7 @@
 ## Principles
 
 1. Client-side only until persistence is actually required.
-2. Learning content is data (`src/data/*.json`), never component code.
+2. Learning content is data (`src/data/*.json`) and UI text is translations (`src/i18n/*.yml`), never component code.
 3. Burmese pronunciation is curated content and is never generated.
 4. Thai audio is a separate asset from Burmese pronunciation.
 5. Components present; screens compose; helpers compute; services perform side effects.
@@ -15,36 +15,43 @@
 flowchart LR
   JSON["src/data/*.json"] --> Loader["src/data/index.ts<br/>(typed exports)"]
   Loader --> Screens
+  YAML["src/i18n/en.yml · mm.yml"] --> I18n["src/i18n/index.ts<br/>(t, LanguageContext)"]
+  I18n --> Screens
+  I18n --> Components
   Helpers["src/helpers<br/>(pure functions)"] --> Screens
   Services["src/services<br/>audio.ts · sound.ts · speech.ts · voice.ts"] --> Screens
   Screens["src/screens<br/>Home · Consonants · Vowels · Tones · PracticeCategories · Practice · VowelPractice"] --> Components["src/components<br/>(presentational)"]
 ```
 
-| Layer         | Responsibility                                      | May import                             |
-| ------------- | --------------------------------------------------- | -------------------------------------- |
-| `data/`       | Static content and its typed loader                 | `types/`                               |
-| `helpers/`    | Pure, deterministic-when-seeded logic               | `types/`, `constants/`, other helpers  |
-| `services/`   | Browser side effects (audio, picture preloading)    | nothing app-specific                   |
-| `components/` | Rendering and user interaction via props            | `helpers/`, `types/`, other components |
-| `screens/`    | Routing targets: state, data, services, composition | everything                             |
+| Layer         | Responsibility                                       | May import                                      |
+| ------------- | ---------------------------------------------------- | ----------------------------------------------- |
+| `data/`       | Static content and its typed loader                  | `types/`                                        |
+| `helpers/`    | Pure, deterministic-when-seeded logic                | `types/`, `constants/`, other helpers           |
+| `services/`   | Browser side effects (audio, picture preloading)     | nothing app-specific                            |
+| `i18n/`       | UI text in English and Burmese, the language context | the `.yml` files                                |
+| `components/` | Rendering and user interaction via props             | `helpers/`, `types/`, `i18n/`, other components |
+| `screens/`    | Routing targets: state, data, services, composition  | everything                                      |
 
 ## Routing
 
-`BrowserRouter` with `basename = import.meta.env.BASE_URL`, so the app works at a domain root or a sub-path.
+`BrowserRouter` with `basename = import.meta.env.BASE_URL`, so the app works at a domain root or a sub-path. English
+pages live under `/en` (`/en/consonants/all`); Burmese, the default, has no prefix. `main.tsx` reads the language from
+the path once and adds `en` to the basename, so every route below works in both languages and links stay in the
+language they start in. The paths below are relative to that basename.
 
-| Path                                           | Screen                                                                                                                                                                                                                                                                                                                                   |
-| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `/`                                            | Home                                                                                                                                                                                                                                                                                                                                     |
-| `/consonants?class=middle\|high\|low`          | Consonant browser (class kept in the URL so it can be linked)                                                                                                                                                                                                                                                                            |
-| `/vowels?group=short\|long\|extra\|standalone` | The 32 vowels in group tabs (group kept in the URL), with the short and long vowel tone rules and a middle / high / low class example per vowel                                                                                                                                                                                          |
-| `/tones`                                       | The five tones and the tone rules table (class × live/dead syllable and tone marks)                                                                                                                                                                                                                                                      |
-| `/practice`                                    | Practice categories: Consonants or Vowels                                                                                                                                                                                                                                                                                                |
-| `/practice/consonants`                         | Picture quiz                                                                                                                                                                                                                                                                                                                             |
-| `/practice/vowels`                             | Consonant + vowel quiz over the ticked vowel groups (short / long / extra), asking the sound of a vowel or the tone of a syllable                                                                                                                                                                                                        |
-| `/consonants/all`                              | The All tab on the consonant page: all 44 consonants as compact cards in Middle / High / Low class columns side by side (letter, Burmese meaning above the pronunciation; no picture, Thai word or audio); a three-dot Card options menu (top right of the columns) hides the Thai, Burmese or Pronunciation, at least one stays ticked  |
-| `/vowels/all`                                  | The All tab on the vowel page: the 28 short, long and extra vowels as large cards in three side-by-side group columns (vowel, English sound, Burmese pronunciation; no class examples, standalone vowels or audio); a three-dot Card options menu (top right of the columns) hides the Thai, Sound or Burmese, at least one stays ticked |
-| `/all`                                         | Redirects to `/consonants/all` (the earlier address of the consonant overview)                                                                                                                                                                                                                                                           |
-| `*`                                            | Redirects to `/`                                                                                                                                                                                                                                                                                                                         |
+| Path                                           | Screen                                                                                                                                                                                                                                                                                                                                                                |
+| ---------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `/`                                            | Home                                                                                                                                                                                                                                                                                                                                                                  |
+| `/consonants?class=middle\|high\|low`          | Consonant browser (class kept in the URL so it can be linked)                                                                                                                                                                                                                                                                                                         |
+| `/vowels?group=short\|long\|extra\|standalone` | The 32 vowels in group tabs (group kept in the URL), with the short and long vowel tone rules and a middle / high / low class example per vowel                                                                                                                                                                                                                       |
+| `/tones`                                       | The five tones and the tone rules table (class × live/dead syllable and tone marks)                                                                                                                                                                                                                                                                                   |
+| `/practice`                                    | Practice categories: Consonants or Vowels                                                                                                                                                                                                                                                                                                                             |
+| `/practice/consonants`                         | Picture quiz                                                                                                                                                                                                                                                                                                                                                          |
+| `/practice/vowels`                             | Consonant + vowel quiz over the ticked vowel groups (short / long / extra), asking the sound of a vowel or the tone of a syllable                                                                                                                                                                                                                                     |
+| `/consonants/all`                              | The All tab on the consonant page: all 44 consonants as compact cards in Middle / High / Low class columns side by side (letter, meaning above the pronunciation; no picture, Thai word or audio); a three-dot Card options menu (top right of the columns) hides the Thai, meaning or pronunciation, at least one stays ticked                                       |
+| `/vowels/all`                                  | The All tab on the vowel page: the 28 short, long and extra vowels as large cards in three side-by-side group columns (vowel, English sound, Burmese pronunciation; no class examples, standalone vowels or audio); a three-dot Card options menu (top right of the columns) hides the Thai, sound or Burmese pronunciation (Burmese only), at least one stays ticked |
+| `/all`                                         | Redirects to `/consonants/all` (the earlier address of the consonant overview)                                                                                                                                                                                                                                                                                        |
+| `*`                                            | Redirects to `/`                                                                                                                                                                                                                                                                                                                                                      |
 
 Static hosts must serve `index.html` for unknown paths. Cloudflare Pages does this automatically because the build has no
 `404.html`.
@@ -59,10 +66,7 @@ type ConsonantClassId = 'middle' | 'high' | 'low';
 interface ConsonantClass {
   id: ConsonantClassId;
   group: number; // 1 middle, 2 high, 3 low — the numbers asked in group questions
-  name: string; // "Middle Class" — headings, badges
-  shortName: string; // "Middle" — class tabs
-  burmeseName: string;
-  tone: string;
+  tone: ToneId; // the class's live-syllable tone; names are in src/i18n (classes.<id>.name, .shortName)
 }
 
 interface Word {
@@ -70,6 +74,8 @@ interface Word {
   thai: string; // "ไก่"
   pronunciation: string; // Burmese pronunciation as given in the source, e.g. "ကောကိုင်"
   meaning: string; // Burmese meaning, e.g. "ကြက်"
+  meaningEn: string; // English meaning, e.g. "chicken"
+  pronunciationEn: string; // romanized letter name, e.g. "gor gai"
   image?: string; // "/images/words/kai.svg"
   audio?: string; // "/audio/words/kai.m4a"
 }
@@ -170,14 +176,16 @@ vowels have one tone rule per consonant class, from the source. Each consonant c
 `src/helpers/vowels.ts`: `combineVowel` replaces the dash with a consonant; `getVowelLabel` shows `◌` instead of the dash
 where a mark sits above or below the consonant (`◌ิ`, `เ◌ีย`), because fonts can't stack a Thai mark on a dash.
 The screen draws combinable groups with `VowelTable` (one row per vowel: a button that plays the vowel's `audio`, the row
-number, the Thai vowel beside its Burmese pronunciation and English sound in brackets, `( အ - a )`, then a ก / ข / ค
+number, the Thai vowel beside its Burmese pronunciation and English sound in brackets, `( အ - a )` — in English just
+`( a )` — then a ก / ข / ค
 column per class) and
 standalone vowels with `VowelCard`.
 
 ## Tones
 
-Data: `tones.json` (5 tones with English and Thai name and a 1–5 pitch contour), `toneMarks.json` (่ ้ ๊ ๋) and
-`guide.json` (the explanations on the tones screen: live/dead syllables, rules; English until the owner supplies Burmese).
+Data: `tones.json` (5 tones with their Thai name and a 1–5 pitch contour), `toneMarks.json` (่ ้ ๊ ๋) and
+`guide.json` (the Thai names of live and dead syllables). The tone names and the explanations on the tones screen are UI
+text in `src/i18n` (`tones.*`, `syllables.*`, `tonesPage.*`).
 
 - `src/helpers/tones.ts`: `getUnmarkedTone(class, 'live' | 'dead')` and `getMarkedTone(class, mark)` hold the tone rules.
   Only open syllables (no final consonant) are modelled.
@@ -229,6 +237,26 @@ missing Thai voice or any error is silent. Pronunciation quality depends on the 
 Like audio, a single recognizer is active at a time; `stopListening()` aborts it. The Practice screen ignores results
 that arrive after the question changed. Recognition runs on the browser vendor's service, so it needs a connection;
 Firefox has no support, and there `speak` is never offered.
+
+## Languages
+
+The app reads English or Burmese; Burmese is the default.
+
+- **UI text** lives in `src/i18n/en.yml` and `src/i18n/mm.yml`, the same nested keys in both. A small Vite plugin in
+  `vite.config.ts` turns the `.yml` files into JSON at build time (the `yaml` package is a dev dependency only).
+  Components and screens call `const { lang, t } = useTranslation()` and `t('cards.options')`, with placeholders in
+  braces: `t('audio.play', { word })`. `t()` throws on a missing key in development and tests; `src/i18n/index.test.ts`
+  checks that both files have the same keys and placeholders. Names of classes, tones, vowel groups and syllables are
+  UI text, keyed by their data id (`classes.middle.name`).
+- **Learning content** stays in `src/data`. In English, word cards and practice show `meaningEn` and `pronunciationEn`
+  instead of the Burmese `meaning` and `pronunciation` (`getMeaning` / `getPronunciation` in `src/helpers/language.ts`),
+  and vowels show only their English `sound` (the Burmese pronunciation and its Card options entry are left out).
+- **`lang` and fonts:** `<html lang>` is `my` or `en`, so UI text needs no `lang` of its own. Content that may be either
+  language takes `lang` and the Myanmar font from `getContentText(lang)`; Thai text keeps `lang="th"`.
+- **Switch:** the header links to the same page in the other language (`EN` / `မြန်မာ`). It is a plain link, so
+  switching reloads the app; that resets practice, as refreshing already does.
+- **Tests:** without a `LanguageContext` provider, components read English, so most tests need no wrapper; wrap with
+  `inBurmese()` from `src/tests/fixtures.tsx` to test Burmese.
 
 ## Styling
 

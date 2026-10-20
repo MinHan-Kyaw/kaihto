@@ -1,0 +1,191 @@
+# Burmese UI text. Every key here must also be in en.yml (src/i18n/index.test.ts checks).
+# Placeholders in braces, e.g. {word}, are filled in by t('key', { word }).
+# Written by Claude at the owner's request, pending the owner's review (see docs/content-management.md).
+# This file is UI text only: Burmese pronunciation and word meanings stay in src/data and come from the owner.
+
+app:
+  name: Kai Hto
+  tagline: ထိုင်းစာကို တစ်ဆင့်ချင်း လေ့လာပါ
+
+nav:
+  label: ပင်မ
+  consonants: ဗျည်း
+  vowels: သရ
+  tones: အသံ
+  practice: လေ့ကျင့်ရန်
+
+language:
+  other: EN
+  switch: အင်္ဂလိပ်လို ဖတ်ရန်
+
+common:
+  backTo: '{page} သို့ ပြန်ရန်'
+  all: အားလုံး
+  next: ရှေ့သို့
+  seeResults: ရလဒ်ကြည့်ရန်
+  continue: ဆက်သွားရန်
+  correct: မှန်သည်
+  incorrect: မှားသည်
+  correctAnswer: 'အဖြေမှန်:'
+  answerOptions: အဖြေများ
+
+home:
+  exploreConsonants: ဗျည်းများ လေ့လာရန်
+  exploreVowels: သရများ လေ့လာရန်
+  learnTones: အသံများ လေ့လာရန်
+  practiceConsonants: ဗျည်း လေ့ကျင့်ရန်
+  practiceVowels: သရ လေ့ကျင့်ရန်
+  classes: ဗျည်းအုပ်စုများ
+
+classes:
+  middle:
+    name: အလယ်သံဗျည်းအုပ်စု
+    shortName: အလယ်သံ
+  high:
+    name: အမြင့်သံဗျည်းအုပ်စု
+    shortName: အမြင့်သံ
+  low:
+    name: အနိမ့်သံဗျည်းအုပ်စု
+    shortName: အနိမ့်သံ
+
+tones:
+  mid:
+    name: အလယ်အသံ
+    shortName: အလယ်
+  low:
+    name: အနိမ့်အသံ
+    shortName: အနိမ့်
+  falling:
+    name: အကျအသံ
+    shortName: အကျ
+  high:
+    name: အမြင့်အသံ
+    shortName: အမြင့်
+  rising:
+    name: အတက်အသံ
+    shortName: အတက်
+
+vowelGroups:
+  short:
+    name: သရတိုများ
+    shortName: တို
+  long:
+    name: သရရှည်များ
+    shortName: ရှည်
+  extra:
+    name: ထပ်ဆောင်းသရများ
+    shortName: ထပ်ဆောင်း
+  standalone:
+    name: သီးသန့်သရများ
+    shortName: သီးသန့်
+
+syllables:
+  live:
+    name: အရှင်ဝဏ္ဏ
+    detail: သရရှည်၊ အသံအမှတ် မပါ
+  dead:
+    name: အသေဝဏ္ဏ
+    detail: သရတို၊ အသံအမှတ် မပါ
+
+consonants:
+  title: ထိုင်းဗျည်းများ
+  tabs: ဗျည်းအုပ်စု
+  count: လုံး
+
+vowels:
+  title: ထိုင်းသရများ
+  tabs: သရအုပ်စု
+  count: လုံး
+
+cards:
+  options: ကတ် ရွေးချယ်စရာ
+  show: ကတ်ပေါ်တွင် ပြရန်
+  thai: ထိုင်း
+  meaning: အဓိပ္ပာယ်
+  pronunciation: အသံထွက်
+  sound: အင်္ဂလိပ်အသံ
+  pictureSoon: ပုံ မကြာမီ ထည့်ပါမည်
+
+audio:
+  play: '{word} ကို ထိုင်းလို နားထောင်ရန်'
+  hear: '{text} ကို နားထောင်ရန်'
+  listen: နားထောင်ရန်
+
+vowelTable:
+  vowel: သရ
+  number: စဉ်
+  numberTitle: နံပါတ်
+  tone: အသံ
+
+tonesPage:
+  title: ထိုင်းအသံများ
+  intro: ထိုင်းဘာသာတွင် အသံ ငါးမျိုးရှိသည်။ ဝဏ္ဏတစ်ခု၏ အသံကို ၎င်း၏ ဗျည်းအုပ်စု၊ အရှင် သို့မဟုတ် အသေ ဖြစ်ခြင်းနှင့် အသံအမှတ်တို့က ဆုံးဖြတ်သည်။
+  five: အသံ ငါးမျိုး
+  rules: အသံ စည်းမျဉ်းများ
+  rulesNote: အဆုံးသတ်ဗျည်း မပါလျှင် သရရှည်ဖြင့် ဆုံးသော ဝဏ္ဏသည် အရှင်ဖြစ်ပြီး သရတိုဖြင့် ဆုံးသော ဝဏ္ဏသည် အသေ ဖြစ်သည်။
+  syllable: ဝဏ္ဏ
+  markDetail: အသံအမှတ်
+  notUsed: မသုံးပါ
+  exploreVowels: သရများ လေ့လာရန်
+
+practice:
+  title: လေ့ကျင့်ရန်
+  progress: လေ့ကျင့်မှု အခြေအနေ
+  notEnough: လေ့ကျင့်ရန် ဝေါဟာရ မလုံလောက်သေးပါ။
+  categories:
+    consonants: ဗျည်း
+    consonantsDetail: '{count} လုံး · ပုံဖြင့် မေးခွန်း'
+    vowels: သရ
+    vowelsDetail: '{count} လုံး · စာလုံးပေါင်းနှင့် အသံ'
+  advanced: အဆင့်မြင့်
+  advancedDescription: အသံ၊ စာရိုက်နှင့် အုပ်စု မေးခွန်းများ ရောထည့်ရန်
+  types:
+    speak: အသံ
+    type: စာရိုက်
+    class: အုပ်စု
+  classAnswer: အုပ်စု {group}၊ {name}
+  prompts:
+    select: ဒါ ဘယ်စကားလုံးလဲ။
+    class: ဒီစာလုံး ဘယ်အုပ်စုထဲမှာလဲ။
+    type: ထိုင်းစာလုံးကို ရိုက်ပါ
+    speak: ဒီစကားလုံးကို ပြောပါ
+  groups: အုပ်စုများ
+  yourAnswer: ထိုင်းလို သင့်အဖြေ
+  youSaid: 'သင်ပြောခဲ့သည်:'
+  speech:
+    start: အဖြေကို ပြောပါ
+    stop: နားထောင်ခြင်း ရပ်ရန်
+    listening: နားထောင်နေသည်…
+    noSpeech: မကြားလိုက်ပါ။ မိုက်ခရိုဖုန်းကို နှိပ်ပြီး ထပ်ကြိုးစားပါ။
+    blocked: မိုက်ခရိုဖုန်း သုံးခွင့် ပိတ်ထားသည်။ ဘရောက်ဆာ ဆက်တင်တွင် ခွင့်ပြုပါ၊ သို့မဟုတ် ယခု ပြောခြင်းကို ကျော်ပါ။
+    failed: အသံ မှတ်သားခြင်း ယခု အလုပ်မလုပ်ပါ။ ထပ်ကြိုးစားပါ၊ သို့မဟုတ် ယခု ပြောခြင်းကို ကျော်ပါ။
+    skip: ယခု မပြောနိုင်ပါ
+  feedback:
+    correct: မှန်ပါသည်။
+    incorrect: မှားပါသည်။ အဖြေမှန်မှာ {answer} ဖြစ်သည်။
+  settings:
+    label: လေ့ကျင့်မှု ဆက်တင်
+    questions: မေးခွန်း
+    fewer: မေးခွန်း လျှော့ရန်
+    more: မေးခွန်း တိုးရန်
+    types: မေးခွန်း အမျိုးအစား
+    unavailable: ဤဘရောက်ဆာတွင် မရနိုင်ပါ
+  summary:
+    complete: လေ့ကျင့်မှု ပြီးပါပြီ!
+    score: သင့်ရမှတ်
+    perfect: အမှတ်ပြည့်! အဖြေအားလုံး မှန်ပါသည်။
+    great: အရမ်းကောင်းပါတယ်! တဖြည်းဖြည်း ကျွမ်းကျင်လာပါပြီ။
+    nice: ကြိုးစားမှု ကောင်းပါတယ်! နည်းနည်း ထပ်လေ့ကျင့်ရင် ပိုကောင်းလာပါမယ်။
+    keepGoing: ဆက်ကြိုးစားပါ! လေ့ကျင့်လေ တိုးတက်လေပါ။
+    again: ထပ် လေ့ကျင့်ရန်
+    chooseAnother: အခြား လေ့ကျင့်မှု ရွေးရန်
+    exploreConsonants: ဗျည်းများ လေ့လာရန်
+    exploreVowels: သရများ လေ့လာရန်
+
+vowelPractice:
+  title: သရ လေ့ကျင့်ရန်
+  groups: လေ့ကျင့်မည့် သရများ
+  prompts:
+    sound: ဒါ ဘာအသံလဲ။
+    tone: ဒါ ဘယ်အသံအမျိုးအစားလဲ။
+  tones: အသံများ

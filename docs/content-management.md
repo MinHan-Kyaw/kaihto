@@ -2,18 +2,19 @@
 
 ## Files
 
-| File                             | Contents                                                                                                         |
-| -------------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `src/data/consonantClasses.json` | The three classes: `id`, English `name`, `shortName`, `burmeseName`, `tone`                                      |
-| `src/data/consonants.json`       | 44 consonants, each with its vocabulary `words`                                                                  |
-| `src/data/vowels.json`           | 32 vowels: `id` (written with `-` for the consonant), `group`, English `sound`, Burmese `pronunciation`, `audio` |
-| `src/data/vowelGroups.json`      | Short, long, extra and standalone vowel groups: English `name`, `shortName`, `tones` per consonant class         |
-| `src/data/tones.json`            | The five tones: English and Thai name, pitch contour                                                             |
-| `src/data/toneMarks.json`        | The four tone marks and their Thai names                                                                         |
-| `src/data/guide.json`            | Explanations on the tones screen and in the vowel practice (live/dead syllables, rules), in English              |
-| `public/images/words/*.svg`      | Vocabulary pictures (vector)                                                                                     |
-| `public/audio/words/*.m4a`       | Thai audio                                                                                                       |
-| `public/audio/vowels/*.m4a`      | Thai vowel audio                                                                                                 |
+| File                                 | Contents                                                                                                                     |
+| ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| `src/data/consonantClasses.json`     | The three classes: `id`, `group`, live-syllable `tone` (a tone id), example consonant and sound                              |
+| `src/data/consonants.json`           | 44 consonants, each with its vocabulary `words`                                                                              |
+| `src/data/vowels.json`               | 32 vowels: `id` (written with `-` for the consonant), `group`, English `sound`, Burmese `pronunciation`, `audio`             |
+| `src/data/vowelGroups.json`          | Short, long, extra and standalone vowel groups: `id` and `tones` (tone ids) per consonant class                              |
+| `src/data/tones.json`                | The five tones: Thai name, pitch contour                                                                                     |
+| `src/data/toneMarks.json`            | The four tone marks and their Thai names                                                                                     |
+| `src/data/guide.json`                | Thai names of live and dead syllables                                                                                        |
+| `src/i18n/en.yml`, `src/i18n/mm.yml` | UI text in English and Burmese, including the names of classes, tones, vowel groups and syllables and the tones explanations |
+| `public/images/words/*.svg`          | Vocabulary pictures (vector)                                                                                                 |
+| `public/audio/words/*.m4a`           | Thai audio                                                                                                                   |
+| `public/audio/vowels/*.m4a`          | Thai vowel audio                                                                                                             |
 
 ## Word schema
 
@@ -28,6 +29,8 @@
       "thai": "ไก่",
       "pronunciation": "ကောကိုင်",
       "meaning": "ကြက်",
+      "meaningEn": "chicken",
+      "pronunciationEn": "gor gai",
       "image": "/images/words/kai.svg",
       "audio": "/audio/words/kai.m4a"
     }
@@ -35,18 +38,21 @@
 }
 ```
 
-| Field           | Required | Rule                                                                                                                                                                               |
-| --------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `id`            | yes      | `<consonant>-<thai>`; never change once published                                                                                                                                  |
-| `thai`          | yes      | Thai script only                                                                                                                                                                   |
-| `pronunciation` | yes      | Burmese script, provided by the project owner, stored exactly as the source gives it (e.g. `ကောကိုင်`). Cards show it under the letter and word; practice shows it under `ก (ไก่)` |
-| `meaning`       | yes      | Burmese meaning, provided by the project owner                                                                                                                                     |
-| `image`         | no       | SVG path. Missing → placeholder on the consonant page, excluded from practice                                                                                                      |
-| `audio`         | no       | Missing → no speaker button, silent selection in practice                                                                                                                          |
+| Field             | Required | Rule                                                                                                                                                                               |
+| ----------------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `id`              | yes      | `<consonant>-<thai>`; never change once published                                                                                                                                  |
+| `thai`            | yes      | Thai script only                                                                                                                                                                   |
+| `pronunciation`   | yes      | Burmese script, provided by the project owner, stored exactly as the source gives it (e.g. `ကောကိုင်`). Cards show it under the letter and word; practice shows it under `ก (ไก่)` |
+| `meaning`         | yes      | Burmese meaning, provided by the project owner                                                                                                                                     |
+| `meaningEn`       | yes      | English meaning, shown when the page is in English                                                                                                                                 |
+| `pronunciationEn` | yes      | The letter name romanized for English readers (`gor gai`): `or` for the letter, `kh ch th ph` aspirated, `g j d dt b bp` unaspirated, syllables joined with `-`                    |
+| `image`           | no       | SVG path. Missing → placeholder on the consonant page, excluded from practice                                                                                                      |
+| `audio`           | no       | Missing → no speaker button, silent selection in practice                                                                                                                          |
 
 ## Adding or changing content
 
 1. Get the Thai word, Burmese pronunciation and Burmese meaning **from the project owner**. Do not write Burmese yourself.
+   Add the English meaning and romanized letter name (`meaningEn`, `pronunciationEn`) for English readers.
 2. Add the word to the right consonant in `src/data/consonants.json`.
 3. Add the image and audio files (see below) and reference them. To replace an existing picture or recording, give the
    new file a new name: browsers keep the old one for up to a week (`public/_headers`).
@@ -136,20 +142,20 @@ Items for the project owner to confirm.
 
 ### Open
 
-| Item                                | Detail                                                                                                                                                                             |
-| ----------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `ฝ-ฝา`, `ฟ-ฟัน` pronunciation       | The source writes these in Latin script (`Faw Far`, `Faw Fan`); Burmese script has no /f/. Stored as-is and listed in `PENDING_BURMESE_PRONUNCIATION`. Provide Burmese if desired. |
-| `ษ-ฤาษี` meaning                    | Source text reads `ရသေ့င်္` (trailing kinzi with no following consonant, which renders as a broken glyph). Stored as `ရသေ့`.                                                       |
-| `ฮ-นกฮูก` pronunciation             | Source splits it over two lines (`ဟော` / `နို(က်)ဟု(က်)`); stored joined as `ဟောနို(က်)ဟု(က်)`.                                                                                    |
-| `ญ-หญิง` pronunciation              | Source gives two variants `ယောယင်/ယောဖူးယင်`; stored as written.                                                                                                                   |
-| Vowel English sounds                | Drafted by Claude at the owner's request (2026-10-01); not in the source. To be reviewed by the owner.                                                                             |
-| `ใ-`, `ไ-` pronunciation            | The source gives both as `အိုင်း` and tells them apart only by name (`ai mai muam` / `ai mai malai`). Stored as given.                                                             |
-| `ฤๅ`, `ฦๅ` spelling                 | The source writes `ฤา` and `ฦา` (with sara aa); stored with lakkhangyao `ๅ`, the standard form. Confirm.                                                                           |
-| Extra vowel tone rules              | The source states tone rules for short and long vowels only, so `-ำ ใ- ไ- เ-า` have none. Provide them if wanted.                                                                  |
-| Burmese vowel group names and notes | Not in the source, so the vowel groups have English names only. Provide Burmese if wanted.                                                                                         |
-| Burmese tones explanations          | Not in the source (pages 66–77 state the tone rules in English only), so `guide.json` and the tones screen are English. Provide Burmese if wanted.                                 |
-| Approximate pictures                | จาน, ฤาษี, มณโฑ, ทหาร and ยักษ์ use the closest Fluent emoji (see [Current picture sources](#current-picture-sources)). Confirm or replace.                                        |
-| Audio                               | Placeholder text-to-speech; see [Sources and licensing](#sources-and-licensing).                                                                                                   |
+| Item                              | Detail                                                                                                                                                                                                                                                                                                                                                       |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `ฝ-ฝา`, `ฟ-ฟัน` pronunciation     | The source writes these in Latin script (`Faw Far`, `Faw Fan`); Burmese script has no /f/. Stored as-is and listed in `PENDING_BURMESE_PRONUNCIATION`. Provide Burmese if desired.                                                                                                                                                                           |
+| `ษ-ฤาษี` meaning                  | Source text reads `ရသေ့င်္` (trailing kinzi with no following consonant, which renders as a broken glyph). Stored as `ရသေ့`.                                                                                                                                                                                                                                 |
+| `ฮ-นกฮูก` pronunciation           | Source splits it over two lines (`ဟော` / `နို(က်)ဟု(က်)`); stored joined as `ဟောနို(က်)ဟု(က်)`.                                                                                                                                                                                                                                                              |
+| `ญ-หญิง` pronunciation            | Source gives two variants `ယောယင်/ယောဖူးယင်`; stored as written.                                                                                                                                                                                                                                                                                             |
+| Vowel English sounds              | Drafted by Claude at the owner's request (2026-10-01); not in the source. To be reviewed by the owner.                                                                                                                                                                                                                                                       |
+| `ใ-`, `ไ-` pronunciation          | The source gives both as `အိုင်း` and tells them apart only by name (`ai mai muam` / `ai mai malai`). Stored as given.                                                                                                                                                                                                                                       |
+| `ฤๅ`, `ฦๅ` spelling               | The source writes `ฤา` and `ฦา` (with sara aa); stored with lakkhangyao `ๅ`, the standard form. Confirm.                                                                                                                                                                                                                                                     |
+| Extra vowel tone rules            | The source states tone rules for short and long vowels only, so `-ำ ใ- ไ- เ-า` have none. Provide them if wanted.                                                                                                                                                                                                                                            |
+| Approximate pictures              | จาน, ฤาษี, มณโฑ, ทหาร and ยักษ์ use the closest Fluent emoji (see [Current picture sources](#current-picture-sources)). Confirm or replace.                                                                                                                                                                                                                  |
+| Burmese UI text                   | All of `src/i18n/mm.yml` (navigation, prompts, buttons, Card options, the names of tones, vowel groups and live/dead syllables, and the tones explanations) was written by Claude at the owner's request (2026-10-20); not in the source. The class names are the owner's existing `burmeseName` values, moved there unchanged. To be reviewed by the owner. |
+| English meanings and letter names | `meaningEn` and `pronunciationEn` for all 44 words were written by Claude at the owner's request (2026-10-20). To be reviewed by the owner.                                                                                                                                                                                                                  |
+| Audio                             | Placeholder text-to-speech; see [Sources and licensing](#sources-and-licensing).                                                                                                                                                                                                                                                                             |
 
 ### Mechanical Unicode fixes applied (no change in rendering)
 

@@ -2,6 +2,8 @@ import { MemoryRouter } from 'react-router';
 
 import { render, screen, within } from '@testing-library/react';
 
+import { inBurmese } from '../../tests/fixtures';
+
 import Tones from '.';
 
 const renderTones = () => render(<Tones />, { wrapper: MemoryRouter });
@@ -45,5 +47,17 @@ describe('Tones', () => {
     expect(getCell(/ไม้เอก/, 2)).toHaveTextContent('ค่า Falling Tone');
     expect(getCell(/ไม้ตรี/, 0)).toHaveTextContent('ก๊า High Tone');
     expect(getCell(/ไม้ตรี/, 1)).toHaveTextContent('Not used');
+  });
+
+  describe('given the page is in Burmese', () => {
+    it('names the tones and explains the rules in Burmese, keeping the Thai terms', () => {
+      render(inBurmese(<Tones />), { wrapper: MemoryRouter });
+
+      expect(screen.getByRole('heading', { level: 1, name: 'ထိုင်းအသံများ' })).toBeInTheDocument();
+      expect(within(screen.getByRole('list', { name: 'အသံ ငါးမျိုး' })).getAllByRole('listitem')[0]).toHaveTextContent(
+        'အလယ်အသံ เสียงสามัญ'
+      );
+      expect(screen.getByRole('rowheader', { name: /^အရှင်ဝဏ္ဏ คำเป็น/ })).toBeInTheDocument();
+    });
   });
 });

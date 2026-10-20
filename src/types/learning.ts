@@ -1,12 +1,10 @@
 export type ConsonantClassId = 'middle' | 'high' | 'low';
 
+// Names live in the translation files (src/i18n), keyed by id: classes.<id>.name and classes.<id>.shortName.
 export interface ConsonantClass {
   id: ConsonantClassId;
   group: number;
-  name: string;
-  shortName: string;
-  burmeseName: string;
-  tone: string;
+  tone: ToneId; // the tone the class takes on a live syllable with no tone mark
   exampleConsonant: string;
   exampleSound: string; // English initial sound of exampleConsonant, e.g. "kh"
 }
@@ -14,8 +12,10 @@ export interface ConsonantClass {
 export interface Word {
   id: string;
   thai: string;
-  pronunciation: string;
-  meaning: string;
+  pronunciation: string; // Burmese, from the owner
+  meaning: string; // Burmese, from the owner
+  meaningEn: string;
+  pronunciationEn: string; // romanized letter name, e.g. "gor gai"
   image?: string;
   audio?: string;
 }
@@ -45,9 +45,9 @@ export type SyllableType = 'live' | 'dead';
 
 export type ToneId = 'mid' | 'low' | 'falling' | 'high' | 'rising';
 
+// Names live in the translation files: tones.<id>.name and tones.<id>.shortName.
 export interface Tone {
   id: ToneId;
-  name: string;
   thaiName: string;
   pitch: [number, number]; // start and end pitch, 1 (lowest) to 5 (highest)
 }
@@ -59,11 +59,10 @@ export interface ToneMark {
 
 export type VowelGroupId = 'short' | 'long' | 'extra' | 'standalone';
 
+// Names live in the translation files: vowelGroups.<id>.name and vowelGroups.<id>.shortName.
 export interface VowelGroup {
   id: VowelGroupId;
-  name: string;
-  shortName: string;
-  tones?: string[]; // tone each consonant class takes, in group order, as the source states it; none where the source has none
+  tones?: ToneId[]; // tone each consonant class takes, in class order, as the source states it; none where the source has none
 }
 
 export interface Vowel {
@@ -85,14 +84,7 @@ interface VowelQuestionBase {
 // sound: pick how the written vowel sounds; tone: pick the tone of the written syllable.
 export type VowelQuestion = (VowelQuestionBase & { kind: 'sound'; options: Vowel[] }) | (VowelQuestionBase & { kind: 'tone' });
 
-interface SyllableGuide {
-  name: string;
-  thaiName: string;
-  detail: string;
-}
-
-// Explanations shown on the tones screen and in the vowel practice; English until the owner supplies Burmese.
+// The Thai names of live and dead syllables; their English and Burmese names and explanations are in src/i18n.
 export interface Guide {
-  syllables: Record<SyllableType, SyllableGuide>;
-  tones: { intro: string; rulesNote: string; markDetail: string; notUsed: string };
+  syllables: Record<SyllableType, { thaiName: string }>;
 }

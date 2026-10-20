@@ -3,6 +3,7 @@ import { join } from 'node:path';
 
 import { getUnmarkedTone } from '../helpers/tones';
 import { getSyllable, isCombinable } from '../helpers/vowels';
+import { messages } from '../i18n';
 import type { Vowel } from '../types/learning';
 
 import { consonantClasses, consonants, guide, toneMarks, tones, vowelGroups, vowels } from '.';
@@ -22,7 +23,8 @@ describe('tones', () => {
 
   it('gives every tone a name, Thai name and pitch from 1 to 5', () => {
     tones.forEach((tone) => {
-      expect(tone.name).not.toBe('');
+      expect(messages.en[`tones.${tone.id}.name`]).toBeDefined();
+      expect(messages.en[`tones.${tone.id}.shortName`]).toBeDefined();
       expect(tone.thaiName).toMatch(THAI_TEXT);
       tone.pitch.forEach((level) => expect(level).toBeGreaterThanOrEqual(1));
       tone.pitch.forEach((level) => expect(level).toBeLessThanOrEqual(5));
@@ -36,9 +38,7 @@ describe('tones', () => {
 
   it('matches each class tone to its live-syllable tone', () => {
     consonantClasses.forEach((consonantClass) => {
-      const tone = tones.find((item) => item.id === getUnmarkedTone(consonantClass.id, 'live'));
-
-      expect(consonantClass.tone).toBe(tone?.name);
+      expect(consonantClass.tone).toBe(getUnmarkedTone(consonantClass.id, 'live'));
     });
   });
 
@@ -114,29 +114,27 @@ describe('vowels', () => {
 
         expect(group.tones).toHaveLength(consonantClasses.length);
         consonantClasses.forEach((consonantClass, index) => {
-          const tone = tones.find((item) => item.id === getUnmarkedTone(consonantClass.id, getSyllable(vowel)));
-
-          expect(`${group.tones?.[index]} Tone`, `${group.id} ${consonantClass.id}`).toBe(tone?.name);
+          expect(group.tones?.[index], `${group.id} ${consonantClass.id}`).toBe(
+            getUnmarkedTone(consonantClass.id, getSyllable(vowel))
+          );
         });
       });
     expect(vowelGroups.filter((group) => group.tones).map((group) => group.id)).toEqual(['short', 'long']);
   });
 
-  it('gives every group a name and short name', () => {
+  it('names every group in the translations', () => {
     vowelGroups.forEach((group) => {
-      expect(group.name).not.toBe('');
-      expect(group.shortName).not.toBe('');
+      expect(messages.en[`vowelGroups.${group.id}.name`]).toBeDefined();
+      expect(messages.en[`vowelGroups.${group.id}.shortName`]).toBeDefined();
     });
   });
 });
 
 describe('guide', () => {
-  const texts = [...Object.values(guide.syllables).flatMap(({ name, detail }) => [name, detail]), ...Object.values(guide.tones)];
-
-  it('fills every explanation without invisible characters', () => {
-    texts.forEach((text) => {
-      expect(text).not.toBe('');
-      expect(text).not.toMatch(INVISIBLE_CHARACTERS);
+  it('names and explains live and dead syllables in the translations', () => {
+    Object.keys(guide.syllables).forEach((syllable) => {
+      expect(messages.en[`syllables.${syllable}.name`]).toBeDefined();
+      expect(messages.en[`syllables.${syllable}.detail`]).toBeDefined();
     });
   });
 

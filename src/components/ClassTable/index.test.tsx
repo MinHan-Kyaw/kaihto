@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 
-import type { ConsonantClass } from '../../types/learning';
+import type { ConsonantClass, ToneId } from '../../types/learning';
 
 import ClassTable from '.';
 
@@ -8,26 +8,20 @@ const consonantClasses: ConsonantClass[] = [
   {
     id: 'middle',
     group: 1,
-    name: 'Middle Class',
-    shortName: 'Middle',
-    burmeseName: 'အလယ်သံဗျည်းအုပ်စု',
-    tone: 'Mid Tone',
+    tone: 'mid',
     exampleConsonant: 'ก',
     exampleSound: 'k',
   },
   {
     id: 'high',
     group: 2,
-    name: 'High Class',
-    shortName: 'High',
-    burmeseName: 'အမြင့်သံဗျည်းအုပ်စု',
-    tone: 'Rising Tone',
+    tone: 'rising',
     exampleConsonant: 'ข',
     exampleSound: 'kh',
   },
 ];
 
-const renderTable = ({ tones, withNumber = false }: { tones?: string[]; withNumber?: boolean } = {}) =>
+const renderTable = ({ tones, withNumber = false }: { tones?: ToneId[]; withNumber?: boolean } = {}) =>
   render(
     <>
       <h2 id="title">Short vowels</h2>
@@ -95,7 +89,7 @@ describe('ClassTable', () => {
 
   describe('given tones', () => {
     it('shows the tone under each class', () => {
-      renderTable({ tones: ['Low', 'High'] });
+      renderTable({ tones: ['low', 'high'] });
 
       const cells = within(screen.getByRole('row', { name: /^Tone/ })).getAllByRole('cell');
 

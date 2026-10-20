@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { buildQuestion } from '../../tests/fixtures';
+import { buildQuestion, inBurmese } from '../../tests/fixtures';
 
 import AnswerOptions from '.';
 
@@ -10,7 +10,18 @@ describe('AnswerOptions', () => {
     render(<AnswerOptions question={buildQuestion()} selectedAnswerId={null} answered={false} onSelectAnswer={vi.fn()} />);
 
     expect(screen.getAllByRole('button')).toHaveLength(3);
-    expect(screen.getByRole('button', { name: /ก \(ไก่\)/ })).toHaveTextContent('ကောကိုင်');
+    expect(screen.getByRole('button', { name: /ก \(ไก่\)/ })).toHaveTextContent('gor gai');
+  });
+
+  describe('given the page is in Burmese', () => {
+    it('shows the Burmese pronunciation', () => {
+      render(
+        inBurmese(<AnswerOptions question={buildQuestion()} selectedAnswerId={null} answered={false} onSelectAnswer={vi.fn()} />)
+      );
+
+      expect(screen.getByText('ကောကိုင်')).toHaveAttribute('lang', 'my');
+      expect(screen.getByText('ကောကိုင်')).toHaveClass('font-burmese');
+    });
   });
 
   it('calls onSelectAnswer with the chosen option', async () => {

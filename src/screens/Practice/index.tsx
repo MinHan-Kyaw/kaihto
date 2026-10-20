@@ -28,6 +28,7 @@ import {
 } from '../../helpers/practice';
 import { pickTranscript } from '../../helpers/thaiAnswer';
 import { getLetterWithWord, getVocabulary } from '../../helpers/vocabulary';
+import { useTranslation } from '../../i18n';
 import { playAudio, stopAudio } from '../../services/audio';
 import { FEEDBACK_SOUND_DURATION_MS, playFeedbackSound } from '../../services/sound';
 import { isSpeechRecognitionSupported, listen, stopListening } from '../../services/speech';
@@ -46,13 +47,10 @@ const playWordAudio = (word: VocabularyItem) => {
 
 type EnabledModes = Partial<Record<AnswerMode, boolean>>;
 
-const QUESTION_TYPES: { mode: AnswerMode; label: string }[] = [
-  { mode: 'speak', label: 'Audio' },
-  { mode: 'type', label: 'Type' },
-  { mode: 'class', label: 'Group' },
-];
+const QUESTION_TYPES: AnswerMode[] = ['speak', 'type', 'class'];
 
 const Practice = () => {
+  const { t } = useTranslation();
   const [advanced, setAdvanced] = useState(false);
   const [enabledModes, setEnabledModes] = useState<EnabledModes>({ speak: true, type: true, class: true });
   const [questionCount, setQuestionCount] = useState(QUESTION_COUNT);
@@ -110,11 +108,7 @@ const Practice = () => {
   };
 
   if (state.questions.length === 0) {
-    return (
-      <p className="mx-auto my-8 max-w-md text-center text-ink-muted">
-        There is not enough vocabulary to start a practice session yet.
-      </p>
-    );
+    return <p className="mx-auto my-8 max-w-md text-center text-ink-muted">{t('practice.notEnough')}</p>;
   }
 
   if (isPracticeComplete(state) || !question) {
@@ -123,12 +117,12 @@ const Practice = () => {
 
   const isLastQuestion = state.currentQuestionIndex === state.questions.length - 1;
   const result: AnswerResult | null = state.answered ? (isAnswerCorrect(question, state) ? 'correct' : 'incorrect') : null;
-  const actionLabel = !state.answered ? 'Next' : isLastQuestion ? 'See results' : 'Continue';
+  const actionLabel = t(!state.answered ? 'common.next' : isLastQuestion ? 'common.seeResults' : 'common.continue');
 
   const correctClass = consonantClasses.find((consonantClass) => consonantClass.id === question.answer.consonantClass);
   const correctAnswer =
     question.mode === 'class' && correctClass ? (
-      `group ${correctClass.group}, ${correctClass.shortName}`
+      t('practice.classAnswer', { group: correctClass.group, name: t(`classes.${correctClass.id}.shortName`) })
     ) : (
       <span lang="th">{getLetterWithWord(question.answer)}</span>
     );
@@ -195,17 +189,17 @@ const Practice = () => {
 
   return (
     <div className="mx-auto flex max-w-[42rem] flex-col">
-      <h1 className="sr-only">Practice</h1>
-      <BackLink to="/practice">Practice</BackLink>
+      <h1 className="sr-only">{t('practice.title')}</h1>
+      <BackLink to="/practice">{t('practice.title')}</BackLink>
       <div className="mb-4 flex items-center gap-3">
         <ProgressBar
           current={state.currentQuestionIndex + (state.answered ? 1 : 0)}
           total={state.questions.length}
-          label="Practice progress"
+          label={t('practice.progress')}
         />
         <Toggle
-          label="Advanced"
-          description="Mix in audio, typing and group questions"
+          label={t('practice.advanced')}
+          description={t('practice.advancedDescription')}
           checked={advanced}
           onChange={handleAdvancedChange}
         />
@@ -218,9 +212,9 @@ const Practice = () => {
           onQuestionCountChange={handleQuestionCountChange}
           questionTypes={
             advanced
-              ? QUESTION_TYPES.map(({ mode, label }) => ({
+              ? QUESTION_TYPES.map((mode) => ({
                   mode,
-                  label,
+                  label: t(`practice.types.${mode}`),
                   checked: Boolean(enabledModes[mode]),
                   unavailable: mode === 'speak' && !speechSupported,
                 }))

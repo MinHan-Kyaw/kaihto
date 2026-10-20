@@ -9,6 +9,7 @@ import { getVocabulary, getLetterWithWord } from '../../helpers/vocabulary';
 import { playAudio } from '../../services/audio';
 import { playFeedbackSound } from '../../services/sound';
 import { isSpeechRecognitionSupported, listen } from '../../services/speech';
+import { inBurmese } from '../../tests/fixtures';
 import type { AnswerMode } from '../../types/learning';
 
 import Practice from '.';
@@ -51,7 +52,7 @@ const getOptionButtons = () => within(screen.getByRole('list', { name: 'Answer o
 
 const getCorrectAnswer = () => {
   const meaning = screen.getByRole('img').getAttribute('alt');
-  const answer = vocabulary.find((item) => item.meaning === meaning);
+  const answer = vocabulary.find((item) => item.meaningEn === meaning);
 
   if (!answer) {
     throw new Error(`No vocabulary item found for picture "${meaning}"`);
@@ -438,6 +439,28 @@ describe('Practice', () => {
         );
         expect(screen.getByRole('button', { name: new RegExp(correctGroup) })).toHaveAttribute('data-status', 'correct');
       });
+    });
+  });
+
+  describe('given the page is in Burmese', () => {
+    it('asks in Burmese with the Burmese meaning and pronunciations', () => {
+      render(
+        inBurmese(
+          <MemoryRouter>
+            <Practice />
+          </MemoryRouter>
+        )
+      );
+
+      const meaning = screen.getByRole('img').getAttribute('alt');
+      const answer = vocabulary.find((item) => item.meaning === meaning);
+
+      expect(answer).toBeDefined();
+      expect(screen.getByRole('heading', { name: 'ဒါ ဘယ်စကားလုံးလဲ။' })).toBeInTheDocument();
+      within(screen.getByRole('list', { name: 'အဖြေများ' }))
+        .getAllByRole('button')
+        .forEach((button) => expect(button).toHaveTextContent(/[\u1000-\u109F]/));
+      expect(screen.getByRole('button', { name: 'ရှေ့သို့' })).toBeDisabled();
     });
   });
 });
