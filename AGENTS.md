@@ -79,11 +79,11 @@ public/
 - Every text node in Thai gets `lang="th"`. `<html lang>` is set to the page language (`my` or `en`), so UI text needs no
   `lang`. Learning content that switches language takes `lang` and the Myanmar font from `getContentText(lang)`
   (`src/helpers/language.ts`); Burmese content that is always Burmese gets `lang="my"` and `font-burmese`.
-- Thai text uses `font-thai` (Niramit, a looped font chosen because its letters, including ฃ and ฅ, match the macOS
+- Thai text uses `font-thai` (Sarabun, a looped font chosen because its letters, including ฃ and ฅ, match the macOS
   Thonburi style) at `font-normal`/`font-medium`. Heavier weights fill in the loops that learners rely on to tell letters
-  apart (e.g. ด/ค). Its Latin subset is loaded too, so dashes and brackets inside Thai text match. Niramit has no dotted circle (◌), so
-  vowel labels like `◌ิ` fall back to IBM Plex Sans Thai Looped, the next font in `--font-thai`. Burmese uses
-  `font-burmese`.
+  apart (e.g. ด/ค). Its Latin subset is loaded too, so dashes and brackets inside Thai text match. Sarabun has no dotted
+  circle (◌), so vowel labels like `◌ิ` fall back to IBM Plex Sans Thai Looped, the next font in `--font-thai`. Burmese
+  uses `font-burmese`.
 
 ## Learning content rules
 

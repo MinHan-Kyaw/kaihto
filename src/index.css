@@ -19,8 +19,8 @@
   --color-error-dark: #922b21;
   --color-error-light: #fdecea;
 
-  --font-sans: 'Nunito', 'Niramit', 'Noto Sans Myanmar', system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-thai: 'Niramit', 'IBM Plex Sans Thai Looped', 'Nunito', system-ui, sans-serif;
+  --font-sans: 'Nunito', 'Sarabun', 'Noto Sans Myanmar', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-thai: 'Sarabun', 'IBM Plex Sans Thai Looped', 'Nunito', system-ui, sans-serif;
   --font-burmese: 'Noto Sans Myanmar', 'Myanmar Text', 'Padauk', system-ui, sans-serif;
 
   --breakpoint-xs: 30rem;
