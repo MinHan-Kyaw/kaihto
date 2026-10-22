@@ -1,10 +1,14 @@
 import { MemoryRouter } from 'react-router';
 
 import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
+import { playAudio } from '../../services/audio';
 import { inBurmese } from '../../tests/fixtures';
 
 import Tones from '.';
+
+vi.mock('../../services/audio', () => ({ playAudio: vi.fn(), stopAudio: vi.fn() }));
 
 const renderTones = () => render(<Tones />, { wrapper: MemoryRouter });
 
@@ -24,6 +28,14 @@ describe('Tones', () => {
       'High Tone เสียงตรี',
       'Rising Tone เสียงจัตวา',
     ]);
+  });
+
+  it('plays each tone', async () => {
+    renderTones();
+
+    await userEvent.click(screen.getByRole('button', { name: 'Hear Rising Tone' }));
+
+    expect(playAudio).toHaveBeenCalledWith('/audio/tones/rising.m4a');
   });
 
   it('shows the tone each group takes on a short and a long vowel', () => {

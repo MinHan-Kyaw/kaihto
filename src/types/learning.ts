@@ -49,7 +49,9 @@ export type ToneId = 'mid' | 'low' | 'falling' | 'high' | 'rising';
 export interface Tone {
   id: ToneId;
   thaiName: string;
+  example: string; // a syllable said in this tone, from the kha set: คา ข่า ข้า ค้า ขา
   pitch: [number, number]; // start and end pitch, 1 (lowest) to 5 (highest)
+  audio: string; // the example said in Thai, e.g. "/audio/tones/mid.m4a"
 }
 
 export interface ToneMark {

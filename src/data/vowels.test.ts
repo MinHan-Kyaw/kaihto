@@ -21,6 +21,14 @@ describe('tones', () => {
     expect(tones.map((tone) => tone.id)).toEqual(['mid', 'low', 'falling', 'high', 'rising']);
   });
 
+  it('gives every tone an example syllable with audio that exists', () => {
+    tones.forEach((tone) => {
+      expect(tone.example).toMatch(THAI_TEXT);
+      expect(tone.audio).toBe(`/audio/tones/${tone.id}.m4a`);
+      expect(existsSync(join(process.cwd(), 'public', tone.audio)), tone.audio).toBe(true);
+    });
+  });
+
   it('gives every tone a name, Thai name and pitch from 1 to 5', () => {
     tones.forEach((tone) => {
       expect(messages.en[`tones.${tone.id}.name`]).toBeDefined();

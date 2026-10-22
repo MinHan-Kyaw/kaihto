@@ -8,7 +8,7 @@
 | `src/data/consonants.json`           | 44 consonants, each with its vocabulary `words`                                                                              |
 | `src/data/vowels.json`               | 32 vowels: `id` (written with `-` for the consonant), `group`, English `sound`, Burmese `pronunciation`, `audio`             |
 | `src/data/vowelGroups.json`          | Short, long, extra and standalone vowel groups: `id` and `tones` (tone ids) per consonant class                              |
-| `src/data/tones.json`                | The five tones: Thai name, pitch contour                                                                                     |
+| `src/data/tones.json`                | The five tones: Thai name, an example syllable (คา ข่า ข้า ค้า ขา), pitch contour, `audio`                                   |
 | `src/data/toneMarks.json`            | The four tone marks and their Thai names                                                                                     |
 | `src/data/guide.json`                | Thai names of live and dead syllables                                                                                        |
 | `src/i18n/en.yml`, `src/i18n/mm.yml` | UI text in English and Burmese, including the names of classes, tones, vowel groups and syllables and the tones explanations |
@@ -101,6 +101,12 @@ Vowels:
 - `public/audio/vowels/<sound>.m4a`, e.g. `a.m4a` for `-ะ`; `ใ-` and `ไ-` share the sound `ai`, so they use their
   names, `ai-mai-muan.m4a` and `ai-mai-malai.m4a`. Standalone vowels have no audio.
 - The recording says the vowel on `อ`: `-ะ` → "อะ". It plays from the button at the start of the vowel's table row.
+
+Tones:
+
+- `public/audio/tones/<tone id>.m4a`, e.g. `mid.m4a`: the tone's `example` syllable from the kha set, คา (mid), ข่า (low),
+  ข้า (falling), ค้า (high), ขา (rising), played from the tone cards on the tones screen. Placeholder text-to-speech made
+  the same way: `say -v Kanya "คา"`.
 
 Converting a recording on macOS: `afconvert -f m4af -d aac -b 64000 recording.wav public/audio/words/kai.m4a`
 

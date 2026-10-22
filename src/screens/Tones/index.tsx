@@ -1,12 +1,15 @@
-import type { ReactNode } from 'react';
+import { useEffect, type ReactNode } from 'react';
 
+import AudioButton from '../../components/AudioButton';
 import ButtonLink from '../../components/Button/ButtonLink';
 import ClassTable from '../../components/ClassTable';
 import ToneContour from '../../components/ToneContour';
 import { consonantClasses, guide, toneMarks, tones, vowelGroups, vowels } from '../../data';
+import { assetUrl } from '../../helpers/assetUrl';
 import { getMarkedTone } from '../../helpers/tones';
 import { getSyllable } from '../../helpers/vowels';
 import { useTranslation } from '../../i18n';
+import { playAudio, stopAudio } from '../../services/audio';
 import type { ConsonantClassId, ToneId, Vowel, VowelGroupId } from '../../types/learning';
 
 interface ToneRow {
@@ -66,6 +69,8 @@ const ToneTable = ({ rows, firstColumnLabel, labelledBy }: { rows: ToneRow[]; fi
 const Tones = () => {
   const { t } = useTranslation();
 
+  useEffect(() => () => stopAudio(), []);
+
   const vowelRows = VOWEL_LENGTHS.map((groupId): ToneRow => {
     const group = vowelGroups.find((item) => item.id === groupId);
     const vowel = vowels.find((item) => item.group === groupId) as Vowel;
@@ -103,16 +108,24 @@ const Tones = () => {
           {t('tonesPage.title')}
         </h1>
         <p className="mt-1 text-ink-muted">{t('tonesPage.intro')}</p>
-        <ul className="mt-4 grid gap-3 sm:grid-cols-2" role="list" aria-label={t('tonesPage.five')}>
+        {/* A compact row per tone on phones and tablets; all five side by side, stacked, on wide screens. */}
+        <ul className="mt-4 grid gap-2 xs:grid-cols-2 lg:grid-cols-5" role="list" aria-label={t('tonesPage.five')}>
           {tones.map((tone) => (
-            <li key={tone.id} className="flex items-center gap-4 rounded-2xl border-2 border-line px-4 py-3 shadow-edge">
+            <li
+              key={tone.id}
+              className="flex items-center gap-3 rounded-2xl border-2 border-line px-3 py-2 shadow-edge lg:flex-col lg:gap-1 lg:py-3 lg:text-center"
+            >
               <ToneContour pitch={tone.pitch} />
-              <span className="flex flex-col">
-                <span className="text-lg font-extrabold">{t(`tones.${tone.id}.name`)}</span>{' '}
-                <span className="font-thai text-ink-muted" lang="th">
+              <span className="flex min-w-0 flex-1 flex-col lg:flex-none">
+                <span className="font-extrabold">{t(`tones.${tone.id}.name`)}</span>{' '}
+                <span className="font-thai text-sm text-ink-muted" lang="th">
                   {tone.thaiName}
                 </span>
               </span>
+              <AudioButton
+                label={t('audio.hear', { text: t(`tones.${tone.id}.name`) })}
+                onPlay={() => void playAudio(assetUrl(tone.audio))}
+              />
             </li>
           ))}
         </ul>

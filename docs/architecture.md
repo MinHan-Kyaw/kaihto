@@ -188,7 +188,8 @@ Data: `tones.json` (5 tones with their Thai name and a 1–5 pitch contour), `to
 `guide.json` (the Thai names of live and dead syllables). The tone names and the explanations on the tones screen are UI
 text in `src/i18n` (`tones.*`, `syllables.*`, `tonesPage.*`).
 
-The tones screen shows the five tones, then a "Short and long vowels" table built from `vowelGroups.json`'s `tones` (the
+The tones screen shows the five tones as compact cards, each with a button that plays its `example` syllable
+(`public/audio/tones/<id>.m4a`), then a "Short and long vowels" table built from `vowelGroups.json`'s `tones` (the
 same source rule the Vowels page shows: short vowels give low / low / high for groups 1–3, long vowels mid / rising /
 mid), with each row's live/dead syllable term underneath, and a "Tone marks" table from `getMarkedTone`. Both use
 `ClassTable` with `showGroups`, which labels each class column with its group number.

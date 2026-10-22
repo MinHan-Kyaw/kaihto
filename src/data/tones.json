@@ -2,26 +2,36 @@
   {
     "id": "mid",
     "thaiName": "เสียงสามัญ",
-    "pitch": [3, 3]
+    "example": "คา",
+    "pitch": [3, 3],
+    "audio": "/audio/tones/mid.m4a"
   },
   {
     "id": "low",
     "thaiName": "เสียงเอก",
-    "pitch": [2, 1]
+    "example": "ข่า",
+    "pitch": [2, 1],
+    "audio": "/audio/tones/low.m4a"
   },
   {
     "id": "falling",
     "thaiName": "เสียงโท",
-    "pitch": [4, 1]
+    "example": "ข้า",
+    "pitch": [4, 1],
+    "audio": "/audio/tones/falling.m4a"
   },
   {
     "id": "high",
     "thaiName": "เสียงตรี",
-    "pitch": [4, 5]
+    "example": "ค้า",
+    "pitch": [4, 5],
+    "audio": "/audio/tones/high.m4a"
   },
   {
     "id": "rising",
     "thaiName": "เสียงจัตวา",
-    "pitch": [1, 4]
+    "example": "ขา",
+    "pitch": [1, 4],
+    "audio": "/audio/tones/rising.m4a"
   }
 ]
