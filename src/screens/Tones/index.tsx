@@ -2,11 +2,10 @@ import type { ReactNode } from 'react';
 
 import ButtonLink from '../../components/Button/ButtonLink';
 import ClassTable from '../../components/ClassTable';
-import Syllable from '../../components/Syllable';
 import ToneContour from '../../components/ToneContour';
-import { consonantClasses, guide, toneById, toneMarks, tones, vowelGroups, vowels } from '../../data';
+import { consonantClasses, guide, toneMarks, tones, vowelGroups, vowels } from '../../data';
 import { getMarkedTone } from '../../helpers/tones';
-import { combineVowel, getSyllable } from '../../helpers/vowels';
+import { getSyllable } from '../../helpers/vowels';
 import { useTranslation } from '../../i18n';
 import type { ConsonantClassId, ToneId, Vowel, VowelGroupId } from '../../types/learning';
 
@@ -14,11 +13,8 @@ interface ToneRow {
   id: string;
   label: ReactNode;
   detail?: ReactNode;
-  spell: (consonant: string) => string;
   getTone: (consonantClass: ConsonantClassId, index: number) => ToneId | undefined;
 }
-
-const longVowel = vowels.find((vowel) => vowel.group === 'long') as Vowel;
 
 // Short and long vowels, with the tone each consonant group takes as the source states it (the Vowels page shows the same).
 const VOWEL_LENGTHS: VowelGroupId[] = ['short', 'long'];
@@ -50,7 +46,9 @@ const ToneTable = ({ rows, firstColumnLabel, labelledBy }: { rows: ToneRow[]; fi
             return (
               <td key={consonantClass.id} className="px-1 py-2 xs:px-2">
                 {toneId ? (
-                  <Syllable text={row.spell(consonantClass.exampleConsonant)} tone={toneById[toneId]} />
+                  <span className="font-bold" data-tone={toneId}>
+                    {t(`tones.${toneId}.name`)}
+                  </span>
                 ) : (
                   <span className="text-ink-muted">
                     — <span className="sr-only">{t('tonesPage.notUsed')}</span>
@@ -84,7 +82,6 @@ const Tones = () => {
           </span>
         </>
       ),
-      spell: (consonant) => combineVowel(consonant, vowel),
       getTone: (_, index) => group?.tones?.[index],
     };
   });
@@ -96,7 +93,6 @@ const Tones = () => {
         อ{mark} {thaiName}
       </span>
     ),
-    spell: (consonant) => combineVowel(`${consonant}${mark}`, longVowel),
     getTone: (consonantClass) => getMarkedTone(consonantClass, mark),
   }));
 

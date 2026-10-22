@@ -38,14 +38,14 @@ describe('Tones', () => {
         .map((header) => header.textContent)
     ).toEqual(['Group 1 Middle ก', 'Group 2 High ข', 'Group 3 Low ค']);
     expect([0, 1, 2].map((column) => getCell(/^Short vowels/, column).textContent)).toEqual([
-      'กะ Low Tone',
-      'ขะ Low Tone',
-      'คะ High Tone',
+      'Low Tone',
+      'Low Tone',
+      'High Tone',
     ]);
     expect([0, 1, 2].map((column) => getCell(/^Long vowels/, column).textContent)).toEqual([
-      'กา Mid Tone',
-      'ขา Rising Tone',
-      'คา Mid Tone',
+      'Mid Tone',
+      'Rising Tone',
+      'Mid Tone',
     ]);
     expect(screen.getByRole('rowheader', { name: /^Short vowels/ })).toHaveTextContent('Short vowels Dead syllable คำตาย');
     expect(screen.getByRole('rowheader', { name: /^Long vowels/ })).toHaveTextContent('Long vowels Live syllable คำเป็น');
@@ -56,8 +56,8 @@ describe('Tones', () => {
 
     expect(within(screen.getByRole('table', { name: 'Tone marks' })).getAllByRole('row')).toHaveLength(5);
 
-    expect(getCell(/ไม้เอก/, 2)).toHaveTextContent('ค่า Falling Tone');
-    expect(getCell(/ไม้ตรี/, 0)).toHaveTextContent('ก๊า High Tone');
+    expect(getCell(/ไม้เอก/, 2)).toHaveTextContent(/^Falling Tone$/);
+    expect(getCell(/ไม้ตรี/, 0)).toHaveTextContent(/^High Tone$/);
     expect(getCell(/ไม้ตรี/, 1)).toHaveTextContent('Not used');
   });
 
