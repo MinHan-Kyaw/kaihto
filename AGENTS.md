@@ -88,7 +88,7 @@ public/
 ## Learning content rules
 
 - Learning content lives in `src/data/*.json`. **Never hardcode learning content in components.**
-- Languages: Burmese is the default; English pages live under `/en`. In English, words show `meaningEn` and
+- Languages: English is the default; Burmese pages live under `/my`. In English, words show `meaningEn` and
   `pronunciationEn` (a romanized letter name, `gor gai`) instead of the Burmese `meaning` and `pronunciation`, and vowels
   show only their English `sound`. Every word needs both English fields (`src/data/consonants.test.ts` checks).
 - Consonant IDs are the character (`"ก"`); word IDs are `"<consonant>-<word>"` (`"ก-ไก่"`). IDs are stable: they are

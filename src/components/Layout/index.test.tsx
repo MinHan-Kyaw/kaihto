@@ -42,7 +42,7 @@ describe('Layout', () => {
 
       const languageLink = screen.getByRole('link', { name: 'Read in Burmese' });
 
-      expect(languageLink).toHaveAttribute('href', '/consonants?class=high');
+      expect(languageLink).toHaveAttribute('href', '/my/consonants?class=high');
       expect(languageLink).toHaveTextContent('မြန်မာ');
       expect(within(languageLink).getByText('မြန်မာ')).toHaveAttribute('lang', 'my');
     });
@@ -57,7 +57,7 @@ describe('Layout', () => {
           .getAllByRole('link')
           .map((link) => link.textContent)
       ).toEqual(['ဗျည်း', 'သရ', 'အသံ', 'လေ့ကျင့်ရန်']);
-      expect(screen.getByRole('link', { name: 'အင်္ဂလိပ်လို ဖတ်ရန်' })).toHaveAttribute('href', '/en/consonants/all');
+      expect(screen.getByRole('link', { name: 'အင်္ဂလိပ်လို ဖတ်ရန်' })).toHaveAttribute('href', '/consonants/all');
     });
   });
 

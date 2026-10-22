@@ -35,8 +35,9 @@ flowchart LR
 ## Routing
 
 `BrowserRouter` with `basename = import.meta.env.BASE_URL`, so the app works at a domain root or a sub-path. English
-pages live under `/en` (`/en/consonants/all`); Burmese, the default, has no prefix. `main.tsx` reads the language from
-the path once and adds `en` to the basename, so every route below works in both languages and links stay in the
+pages have no prefix (`/consonants/all`), since English is the default; Burmese pages live under `/my`
+(`/my/consonants/all`). `main.tsx` reads the language from
+the path once and adds `my` to the basename for Burmese, so every route below works in both languages and links stay in the
 language they start in. The paths below are relative to that basename.
 
 | Path                                           | Screen                                                                                                                                                                                                                                                                                                                                                                |
@@ -240,7 +241,7 @@ Firefox has no support, and there `speak` is never offered.
 
 ## Languages
 
-The app reads English or Burmese; Burmese is the default.
+The app reads English or Burmese; English is the default, and the learner can switch at any time.
 
 - **UI text** lives in `src/i18n/en.yml` and `src/i18n/mm.yml`, the same nested keys in both. A small Vite plugin in
   `vite.config.ts` turns the `.yml` files into JSON at build time (the `yaml` package is a dev dependency only).

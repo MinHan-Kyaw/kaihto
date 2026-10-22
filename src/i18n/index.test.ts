@@ -36,25 +36,25 @@ describe('translate', () => {
 });
 
 describe('language paths', () => {
-  it('reads English from the /en prefix and Burmese otherwise', () => {
-    expect(getLanguageFromPath('/en', '/')).toBe('en');
-    expect(getLanguageFromPath('/en/consonants/all', '/')).toBe('en');
-    expect(getLanguageFromPath('/consonants', '/')).toBe('my');
-    expect(getLanguageFromPath('/', '/')).toBe('my');
-    expect(getLanguageFromPath('/english', '/')).toBe('my');
+  it('reads Burmese from the /my prefix and English otherwise', () => {
+    expect(getLanguageFromPath('/my', '/')).toBe('my');
+    expect(getLanguageFromPath('/my/consonants/all', '/')).toBe('my');
+    expect(getLanguageFromPath('/consonants', '/')).toBe('en');
+    expect(getLanguageFromPath('/', '/')).toBe('en');
+    expect(getLanguageFromPath('/myanmar', '/')).toBe('en');
   });
 
   describe('given the app is served from a sub-path', () => {
     it('reads the prefix after the base', () => {
-      expect(getLanguageFromPath('/kaihto/en/vowels', '/kaihto/')).toBe('en');
-      expect(getLanguageFromPath('/kaihto/vowels', '/kaihto/')).toBe('my');
-      expect(getRouterBasename('en', '/kaihto/')).toBe('/kaihto/en');
+      expect(getLanguageFromPath('/kaihto/my/vowels', '/kaihto/')).toBe('my');
+      expect(getLanguageFromPath('/kaihto/vowels', '/kaihto/')).toBe('en');
+      expect(getRouterBasename('my', '/kaihto/')).toBe('/kaihto/my');
     });
   });
 
   it('builds the same page in the other language', () => {
-    expect(getPathInLanguage('/consonants?class=high', 'en', '/')).toBe('/en/consonants?class=high');
-    expect(getPathInLanguage('/consonants?class=high', 'my', '/')).toBe('/consonants?class=high');
-    expect(getPathInLanguage('/', 'en', '/')).toBe('/en/');
+    expect(getPathInLanguage('/consonants?class=high', 'my', '/')).toBe('/my/consonants?class=high');
+    expect(getPathInLanguage('/consonants?class=high', 'en', '/')).toBe('/consonants?class=high');
+    expect(getPathInLanguage('/', 'my', '/')).toBe('/my/');
   });
 });

@@ -6,9 +6,9 @@ import mm from './mm.yml';
 // "my" is the ISO 639-1 code for Burmese, used for the HTML lang attribute; the file keeps the owner's name, mm.yml.
 export type Language = 'en' | 'my';
 
-export const DEFAULT_LANGUAGE: Language = 'my';
+export const DEFAULT_LANGUAGE: Language = 'en';
 
-const ENGLISH_PATH_SEGMENT = 'en';
+const BURMESE_PATH_SEGMENT = 'my';
 
 type Messages = Record<string, string>;
 
@@ -47,13 +47,13 @@ export const useTranslation = () => {
   return { lang, t };
 };
 
-// English pages live under /en; Burmese, the default, has no prefix. `base` is Vite's BASE_URL and ends with "/".
+// Burmese pages live under /my; English, the default, has no prefix. `base` is Vite's BASE_URL and ends with "/".
 export const getLanguageFromPath = (pathname: string, base: string): Language => {
   const path = pathname.startsWith(base) ? pathname.slice(base.length) : pathname.replace(/^\//, '');
-  return path === ENGLISH_PATH_SEGMENT || path.startsWith(`${ENGLISH_PATH_SEGMENT}/`) ? 'en' : DEFAULT_LANGUAGE;
+  return path === BURMESE_PATH_SEGMENT || path.startsWith(`${BURMESE_PATH_SEGMENT}/`) ? 'my' : DEFAULT_LANGUAGE;
 };
 
-export const getRouterBasename = (lang: Language, base: string) => (lang === 'en' ? `${base}${ENGLISH_PATH_SEGMENT}` : base);
+export const getRouterBasename = (lang: Language, base: string) => (lang === 'my' ? `${base}${BURMESE_PATH_SEGMENT}` : base);
 
 // `path` is the router location (pathname + search), relative to the current language's basename.
 export const getPathInLanguage = (path: string, lang: Language, base: string) =>

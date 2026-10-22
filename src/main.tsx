@@ -32,7 +32,8 @@ if (!rootElement) {
   throw new Error('Root element #root not found');
 }
 
-// English pages live under /en; the header switch reloads the page in the other language.
+// Burmese pages live under /my, English (the default) has no prefix; the header switch reloads the page in the other
+// language.
 const lang = getLanguageFromPath(window.location.pathname, import.meta.env.BASE_URL);
 document.documentElement.lang = lang;
 
