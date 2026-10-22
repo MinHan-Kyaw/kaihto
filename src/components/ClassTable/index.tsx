@@ -10,10 +10,19 @@ interface ClassTableProps {
   labelledBy: string;
   leadingHeaders?: ReactNode; // header cells before the first column; give them rowSpan={2} when tones are shown
   tones?: ToneId[]; // tone each class takes, shown under its header
+  showGroups?: boolean; // label each class column with its group number, as practice asks ("Group 1")
   children: ReactNode;
 }
 
-const ClassTable = ({ consonantClasses, firstColumnLabel, labelledBy, leadingHeaders, tones, children }: ClassTableProps) => {
+const ClassTable = ({
+  consonantClasses,
+  firstColumnLabel,
+  labelledBy,
+  leadingHeaders,
+  tones,
+  showGroups = false,
+  children,
+}: ClassTableProps) => {
   const { t } = useTranslation();
 
   return (
@@ -27,6 +36,12 @@ const ClassTable = ({ consonantClasses, firstColumnLabel, labelledBy, leadingHea
             </th>
             {consonantClasses.map((consonantClass) => (
               <th key={consonantClass.id} scope="col" className="px-0.5 py-2 font-bold xs:px-2 xs:whitespace-nowrap">
+                {showGroups && (
+                  <span className="block text-xs font-extrabold text-ink-muted">
+                    {t('classes.group', { group: consonantClass.group })}
+                  </span>
+                )}
+                {showGroups && ' '}
                 {t(`classes.${consonantClass.id}.shortName`)}{' '}
                 <span className="font-thai font-medium text-brand" lang="th">
                   {consonantClass.exampleConsonant}

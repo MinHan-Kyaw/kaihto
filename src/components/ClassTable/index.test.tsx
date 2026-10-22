@@ -97,6 +97,29 @@ describe('ClassTable', () => {
     });
   });
 
+  describe('given group numbers are shown', () => {
+    it('labels each class column with its group', () => {
+      render(
+        <>
+          <h2 id="title">Tone marks</h2>
+          <ClassTable consonantClasses={consonantClasses} firstColumnLabel="Mark" labelledBy="title" showGroups>
+            <tr>
+              <th scope="row">อ่</th>
+              <td>ก่า</td>
+              <td>ข่า</td>
+            </tr>
+          </ClassTable>
+        </>
+      );
+
+      expect(screen.getAllByRole('columnheader').map((header) => header.textContent)).toEqual([
+        'Mark',
+        'Group 1 Middle ก',
+        'Group 2 High ข',
+      ]);
+    });
+  });
+
   describe('given no tones', () => {
     it('leaves out the tone row', () => {
       renderTable();
