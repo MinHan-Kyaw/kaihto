@@ -1,5 +1,6 @@
 import { classNames } from '../../helpers/classNames';
 import { getLetterWithWord } from '../../helpers/vocabulary';
+import { useTranslation } from '../../i18n';
 import type { VocabularyItem } from '../../types/learning';
 import ResultIcon, { type AnswerResult } from '../ResultIcon';
 
@@ -15,15 +16,18 @@ interface SpokenAnswerProps {
   onSkip: () => void;
 }
 
+// Translation keys of the message under the microphone for each status; idle has none.
 const STATUS_MESSAGES: Partial<Record<SpeechStatus, string>> = {
-  listening: 'Listening…',
-  'no-speech': "We didn't catch that. Tap the microphone and try again.",
-  blocked: 'Microphone access is blocked. Allow it in your browser settings, or skip speaking for now.',
-  failed: 'Speech recognition is not working right now. Try again, or skip speaking for now.',
+  listening: 'practice.speech.listening',
+  'no-speech': 'practice.speech.noSpeech',
+  blocked: 'practice.speech.blocked',
+  failed: 'practice.speech.failed',
 };
 
 const SpokenAnswer = ({ transcript, status, answered, result, correctAnswer, onListen, onSkip }: SpokenAnswerProps) => {
+  const { t } = useTranslation();
   const listening = status === 'listening';
+  const statusMessage = STATUS_MESSAGES[status];
 
   return (
     <div className="flex w-full flex-col items-center gap-3">
@@ -35,7 +39,7 @@ const SpokenAnswer = ({ transcript, status, answered, result, correctAnswer, onL
             ? 'animate-pulse border-transparent bg-selected shadow-edge-selected'
             : 'border-transparent bg-brand shadow-edge-brand-dark hover:bg-brand-dark'
         )}
-        aria-label={listening ? 'Stop listening' : 'Speak your answer'}
+        aria-label={t(listening ? 'practice.speech.stop' : 'practice.speech.start')}
         aria-pressed={listening}
         disabled={answered}
         data-status={status}
@@ -53,11 +57,11 @@ const SpokenAnswer = ({ transcript, status, answered, result, correctAnswer, onL
         </svg>
       </button>
       <p className="min-h-6 text-center text-ink-muted" aria-live="polite">
-        {!answered && STATUS_MESSAGES[status]}
+        {!answered && statusMessage && t(statusMessage)}
       </p>
       {transcript && (
         <p className="flex items-baseline gap-2 text-ink-muted">
-          You said:{' '}
+          {t('practice.youSaid')}{' '}
           <span className="font-thai text-xl font-medium text-ink" lang="th">
             {transcript}
           </span>
@@ -66,7 +70,7 @@ const SpokenAnswer = ({ transcript, status, answered, result, correctAnswer, onL
       )}
       {result === 'incorrect' && (
         <p className="flex items-baseline gap-2 text-ink-muted">
-          Correct answer:{' '}
+          {t('common.correctAnswer')}{' '}
           <span className="font-thai text-xl font-medium text-ink" lang="th">
             {getLetterWithWord(correctAnswer)}
           </span>
@@ -78,7 +82,7 @@ const SpokenAnswer = ({ transcript, status, answered, result, correctAnswer, onL
           className="min-h-11 cursor-pointer rounded-xl px-3 font-bold text-brand underline-offset-4 hover:underline"
           onClick={onSkip}
         >
-          Can&apos;t speak now
+          {t('practice.speech.skip')}
         </button>
       )}
     </div>

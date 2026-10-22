@@ -2,12 +2,15 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
 import { getVocabulary } from '../helpers/vocabulary';
+import { messages } from '../i18n';
 
 import { consonantClasses, consonants } from '.';
 
 const THAI_TEXT = /^[\u0E00-\u0E7F ]+$/;
 const MYANMAR_SCRIPT = /[\u1000-\u109F]/;
 const INVISIBLE_CHARACTERS = /[\u200B-\u200D\uFEFF]/;
+const ENGLISH_MEANING = /^[A-Za-z][A-Za-z ()'-]*$/;
+const ROMANIZED_LETTER_NAME = /^[a-z]+ [a-z]+(-[a-z]+)*$/;
 const VISUAL_ORDER_VOWEL_SIGN_E = /(^|[^\u1000-\u109F])\u1031/;
 
 // The source PDF gives these pronunciations in Latin script; the project owner still needs to supply Burmese.
@@ -25,12 +28,10 @@ describe('consonant classes', () => {
     expect(consonantClasses.map((consonantClass) => consonantClass.group)).toEqual([1, 2, 3]);
   });
 
-  it('gives every class a name, short name, Burmese name and tone', () => {
-    consonantClasses.forEach((consonantClass) => {
-      expect(consonantClass.name).not.toBe('');
-      expect(consonantClass.name).toContain(consonantClass.shortName);
-      expect(consonantClass.burmeseName).toMatch(MYANMAR_SCRIPT);
-      expect(consonantClass.tone).not.toBe('');
+  it('names every class in the translations, the Burmese name in Burmese script', () => {
+    consonantClasses.forEach(({ id }) => {
+      expect(messages.en[`classes.${id}.name`]).toContain(messages.en[`classes.${id}.shortName`]);
+      expect(messages.my[`classes.${id}.name`]).toMatch(MYANMAR_SCRIPT);
     });
   });
 });
@@ -78,6 +79,13 @@ describe('vocabulary', () => {
     vocabulary.forEach((word) => {
       expect(word.pronunciation.trim()).not.toBe('');
       expect(word.meaning.trim()).not.toBe('');
+    });
+  });
+
+  it('gives every word an English meaning and a romanized letter name', () => {
+    vocabulary.forEach((word) => {
+      expect(word.meaningEn, word.id).toMatch(ENGLISH_MEANING);
+      expect(word.pronunciationEn, word.id).toMatch(ROMANIZED_LETTER_NAME);
     });
   });
 

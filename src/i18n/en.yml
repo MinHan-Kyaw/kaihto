@@ -1,0 +1,191 @@
+# English UI text. Every key here must also be in mm.yml (src/i18n/index.test.ts checks).
+# Placeholders in braces, e.g. {word}, are filled in by t('key', { word }).
+
+app:
+  name: Kai Hto
+  tagline: Learn Thai step by step
+
+nav:
+  label: Main
+  consonants: Consonants
+  vowels: Vowels
+  tones: Tones
+  practice: Practice
+
+language:
+  other: မြန်မာ
+  switch: Read in Burmese
+
+common:
+  backTo: Back to {page}
+  all: All
+  next: Next
+  seeResults: See results
+  continue: Continue
+  correct: Correct
+  incorrect: Incorrect
+  correctAnswer: 'Correct answer:'
+  answerOptions: Answer options
+
+home:
+  exploreConsonants: Explore Consonants
+  exploreVowels: Explore Vowels
+  learnTones: Learn Tones
+  practiceConsonants: Practice Consonants
+  practiceVowels: Practice Vowels
+  classes: Consonant classes
+
+classes:
+  group: Group {group}
+  middle:
+    name: Middle Class
+    shortName: Middle
+  high:
+    name: High Class
+    shortName: High
+  low:
+    name: Low Class
+    shortName: Low
+
+tones:
+  mid:
+    name: Mid Tone
+    shortName: Mid
+  low:
+    name: Low Tone
+    shortName: Low
+  falling:
+    name: Falling Tone
+    shortName: Falling
+  high:
+    name: High Tone
+    shortName: High
+  rising:
+    name: Rising Tone
+    shortName: Rising
+
+vowelGroups:
+  short:
+    name: Short vowels
+    shortName: Short
+  long:
+    name: Long vowels
+    shortName: Long
+  extra:
+    name: Extra vowels
+    shortName: Extra
+  standalone:
+    name: Standalone vowels
+    shortName: Standalone
+
+syllables:
+  live:
+    name: Live syllable
+    detail: Long vowel, no tone mark
+  dead:
+    name: Dead syllable
+    detail: Short vowel, no tone mark
+
+consonants:
+  title: Thai Consonants
+  tabs: Consonant class
+  count: letters
+
+vowels:
+  title: Thai Vowels
+  tabs: Vowel group
+  count: vowels
+
+cards:
+  options: Card options
+  show: Show on the cards
+  thai: Thai
+  meaning: Meaning
+  pronunciation: Pronunciation
+  sound: Sound
+  pictureSoon: Picture coming soon
+
+audio:
+  play: Play Thai audio for {word}
+  hear: Hear {text}
+  listen: Listen
+
+vowelTable:
+  vowel: Vowel
+  number: No.
+  numberTitle: Number
+  tone: Tone
+
+tonesPage:
+  title: Thai Tones
+  intro: Thai has five tones. A syllable's tone comes from its consonant class, whether it is live or dead, and its tone mark.
+  five: The five tones
+  vowelTones: Short and long vowels
+  vowelTonesNote: With no tone mark and no final consonant, the tone comes from the vowel's length and the consonant's group. A short vowel makes a dead syllable, a long vowel a live one.
+  marks: Tone marks
+  marksNote: A tone mark sets the tone of a syllable; the tone it gives depends on the consonant's group.
+  markDetail: Tone mark
+  notUsed: Not used
+  exploreVowels: Explore Vowels
+
+practice:
+  title: Practice
+  progress: Practice progress
+  notEnough: There is not enough vocabulary to start a practice session yet.
+  categories:
+    consonants: Consonants
+    consonantsDetail: '{count} letters · picture quiz'
+    vowels: Vowels
+    vowelsDetail: '{count} vowels · spelling and tones'
+  advanced: Advanced
+  advancedDescription: Mix in audio, typing and group questions
+  types:
+    speak: Audio
+    type: Type
+    class: Group
+  classAnswer: group {group}, {name}
+  prompts:
+    select: Which word is this?
+    class: Which group is this letter in?
+    type: Type the Thai letter
+    speak: Say this word
+  groups: Groups
+  yourAnswer: Your answer in Thai
+  youSaid: 'You said:'
+  speech:
+    start: Speak your answer
+    stop: Stop listening
+    listening: Listening…
+    noSpeech: We didn't catch that. Tap the microphone and try again.
+    blocked: Microphone access is blocked. Allow it in your browser settings, or skip speaking for now.
+    failed: Speech recognition is not working right now. Try again, or skip speaking for now.
+    skip: Can't speak now
+  feedback:
+    correct: Correct.
+    incorrect: Incorrect. The answer is {answer}.
+  settings:
+    label: Practice settings
+    questions: Questions
+    fewer: Fewer questions
+    more: More questions
+    types: Question types
+    unavailable: Not available in this browser
+  summary:
+    complete: Practice complete!
+    score: Your score
+    perfect: Perfect score! Every answer was right.
+    great: Great work! You are getting the hang of it.
+    nice: Nice effort! A little more practice will help.
+    keepGoing: Keep going! Practice makes progress.
+    again: Practice again
+    chooseAnother: Choose another practice
+    exploreConsonants: Explore consonants
+    exploreVowels: Explore vowels
+
+vowelPractice:
+  title: Vowel practice
+  groups: Vowels to practise
+  prompts:
+    sound: What sound is this?
+    tone: Which tone is this?
+  tones: Tones

@@ -1,3 +1,4 @@
+import { useTranslation } from '../../i18n';
 import DotsMenu from '../DotsMenu';
 
 interface CardPartsMenuProps<T extends string> {
@@ -7,12 +8,13 @@ interface CardPartsMenuProps<T extends string> {
 
 // Chooses which parts the cards show. At least one stays checked: the last checked option can't be unticked.
 const CardPartsMenu = <T extends string>({ options, onChange }: CardPartsMenuProps<T>) => {
+  const { t } = useTranslation();
   const checkedCount = options.filter((option) => option.checked).length;
 
   return (
-    <DotsMenu label="Card options">
+    <DotsMenu label={t('cards.options')}>
       <fieldset>
-        <legend className="px-2 pt-1 text-sm font-bold text-ink-muted">Show on the cards</legend>
+        <legend className="px-2 pt-1 text-sm font-bold text-ink-muted">{t('cards.show')}</legend>
         {options.map(({ id, label, checked }) => (
           <label
             key={id}

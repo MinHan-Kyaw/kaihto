@@ -1,20 +1,10 @@
 {
   "syllables": {
     "live": {
-      "name": "Live syllable",
-      "thaiName": "คำเป็น",
-      "detail": "Long vowel, no tone mark"
+      "thaiName": "คำเป็น"
     },
     "dead": {
-      "name": "Dead syllable",
-      "thaiName": "คำตาย",
-      "detail": "Short vowel, no tone mark"
+      "thaiName": "คำตาย"
     }
-  },
-  "tones": {
-    "intro": "Thai has five tones. A syllable's tone comes from its consonant class, whether it is live or dead, and its tone mark.",
-    "rulesNote": "With no final consonant, a syllable that ends in a long vowel is live and one that ends in a short vowel is dead.",
-    "markDetail": "Tone mark",
-    "notUsed": "Not used"
   }
 }

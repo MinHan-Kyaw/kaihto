@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
+import { inBurmese } from '../../tests/fixtures';
 import type { Consonant } from '../../types/learning';
 
 import ConsonantCard from '.';
@@ -15,6 +16,8 @@ const buildConsonant = (overrides: Partial<Consonant['words'][number]> = {}): Co
       thai: 'ไก่',
       pronunciation: 'ကောကိုင်',
       meaning: 'ကြက်',
+      meaningEn: 'chicken',
+      pronunciationEn: 'gor gai',
       image: '/images/words/kai.svg',
       audio: '/audio/words/kai.m4a',
       ...overrides,
@@ -23,13 +26,27 @@ const buildConsonant = (overrides: Partial<Consonant['words'][number]> = {}): Co
 });
 
 describe('ConsonantCard', () => {
-  it('renders the consonant, word, image and Burmese pronunciation', () => {
+  it('renders the consonant, word, image, meaning and pronunciation', () => {
     render(<ConsonantCard consonant={buildConsonant()} onPlayAudio={vi.fn()} />);
 
     expect(screen.getByRole('article', { name: 'ก' })).toBeInTheDocument();
     expect(screen.getByText('ไก่')).toBeInTheDocument();
-    expect(screen.getByText('ကြက်').closest('p')).toHaveTextContent('ကြက် (ကောကိုင်)');
-    expect(screen.getByRole('img', { name: 'ကြက်' })).toHaveAttribute('src', '/images/words/kai.svg');
+    expect(screen.getByText('chicken').closest('p')).toHaveTextContent('chicken (gor gai)');
+    expect(screen.getByRole('img', { name: 'chicken' })).toHaveAttribute('src', '/images/words/kai.svg');
+  });
+
+  describe('given the page is in Burmese', () => {
+    it('shows the Burmese meaning and pronunciation in the Myanmar font', () => {
+      render(inBurmese(<ConsonantCard consonant={buildConsonant()} onPlayAudio={vi.fn()} />));
+
+      const content = screen.getByText('ကြက်').closest('p');
+
+      expect(content).toHaveTextContent('ကြက် (ကောကိုင်)');
+      expect(content).toHaveAttribute('lang', 'my');
+      expect(content).toHaveClass('font-burmese');
+      expect(screen.getByRole('img', { name: 'ကြက်' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'ไก่ ကို ထိုင်းလို နားထောင်ရန်' })).toBeInTheDocument();
+    });
   });
 
   it('plays the word audio when the audio button is pressed', async () => {
@@ -54,7 +71,7 @@ describe('ConsonantCard', () => {
 
       expect(screen.getByRole('article', { name: 'ก' })).toHaveAttribute('data-size', 'compact');
       expect(screen.getByText('ไก่')).toBeInTheDocument();
-      expect(screen.getByRole('img', { name: 'ကြက်' })).toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'chicken' })).toBeInTheDocument();
     });
   });
 
@@ -68,10 +85,10 @@ describe('ConsonantCard', () => {
   });
 
   describe('given the word is hidden', () => {
-    it('shows the letter, picture and Burmese meaning only', () => {
+    it('shows the letter, picture, meaning and pronunciation only', () => {
       render(<ConsonantCard consonant={buildConsonant()} showWord={false} />);
 
-      expect(screen.getByRole('article', { name: 'ก' })).toHaveTextContent('ကြက် (ကောကိုင်)');
+      expect(screen.getByRole('article', { name: 'ก' })).toHaveTextContent('chicken (gor gai)');
       expect(screen.queryByText('ไก่')).not.toBeInTheDocument();
     });
   });
@@ -80,7 +97,7 @@ describe('ConsonantCard', () => {
     it('shows neither the picture nor the placeholder', () => {
       render(<ConsonantCard consonant={buildConsonant()} showPicture={false} />);
 
-      expect(screen.getByRole('article', { name: 'ก' })).toHaveTextContent('ကြက် (ကောကိုင်)');
+      expect(screen.getByRole('article', { name: 'ก' })).toHaveTextContent('chicken (gor gai)');
       expect(screen.queryByRole('img')).not.toBeInTheDocument();
       expect(screen.queryByText('Picture coming soon')).not.toBeInTheDocument();
     });
@@ -90,7 +107,7 @@ describe('ConsonantCard', () => {
     it('keeps the letter for screen readers only', () => {
       render(<ConsonantCard consonant={buildConsonant()} showLetter={false} />);
 
-      expect(screen.getByRole('article', { name: 'ก' })).toHaveTextContent('ကြက် (ကောကိုင်)');
+      expect(screen.getByRole('article', { name: 'ก' })).toHaveTextContent('chicken (gor gai)');
       expect(screen.getByRole('heading', { name: 'ก' })).toHaveClass('sr-only');
     });
   });
@@ -99,8 +116,8 @@ describe('ConsonantCard', () => {
     it('shows the pronunciation without the meaning', () => {
       render(<ConsonantCard consonant={buildConsonant()} showMeaning={false} />);
 
-      expect(screen.getByText('(ကောကိုင်)')).toBeInTheDocument();
-      expect(screen.queryByText('ကြက်')).not.toBeInTheDocument();
+      expect(screen.getByText('(gor gai)')).toBeInTheDocument();
+      expect(screen.queryByText('chicken')).not.toBeInTheDocument();
     });
   });
 
@@ -108,8 +125,8 @@ describe('ConsonantCard', () => {
     it('shows the meaning without the pronunciation', () => {
       render(<ConsonantCard consonant={buildConsonant()} showPronunciation={false} />);
 
-      expect(screen.getByText('ကြက်')).toBeInTheDocument();
-      expect(screen.queryByText('(ကောကိုင်)')).not.toBeInTheDocument();
+      expect(screen.getByText('chicken')).toBeInTheDocument();
+      expect(screen.queryByText('(gor gai)')).not.toBeInTheDocument();
     });
   });
 

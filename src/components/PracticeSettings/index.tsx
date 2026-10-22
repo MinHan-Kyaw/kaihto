@@ -1,5 +1,6 @@
 import { Fragment, useId, useState } from 'react';
 
+import { useTranslation } from '../../i18n';
 import type { AnswerMode } from '../../types/learning';
 import DotsMenu from '../DotsMenu';
 
@@ -27,6 +28,7 @@ const STEPPER_BUTTON_CLASS_NAME =
   'relative grid size-8 shrink-0 cursor-pointer place-items-center rounded-full border-2 border-line-strong text-base leading-none font-extrabold text-brand after:absolute after:-inset-1.5 hover:bg-brand-light disabled:cursor-not-allowed disabled:text-ink-muted disabled:opacity-50 disabled:hover:bg-transparent';
 
 const QuestionCountStepper = ({ value, min, max, onChange }: QuestionCount & { onChange: (count: number) => void }) => {
+  const { t } = useTranslation();
   const labelId = useId();
   const [draft, setDraft] = useState<string | null>(null);
 
@@ -52,13 +54,13 @@ const QuestionCountStepper = ({ value, min, max, onChange }: QuestionCount & { o
   return (
     <div className="flex items-center justify-between gap-2 px-2">
       <span id={labelId} className="text-sm font-bold text-ink">
-        Questions
+        {t('practice.settings.questions')}
       </span>
       <div className="flex min-h-11 items-center gap-2" role="group" aria-labelledby={labelId}>
         <button
           type="button"
           className={STEPPER_BUTTON_CLASS_NAME}
-          aria-label="Fewer questions"
+          aria-label={t('practice.settings.fewer')}
           disabled={value <= min}
           onClick={() => change(value - 1)}
         >
@@ -83,7 +85,7 @@ const QuestionCountStepper = ({ value, min, max, onChange }: QuestionCount & { o
         <button
           type="button"
           className={STEPPER_BUTTON_CLASS_NAME}
-          aria-label="More questions"
+          aria-label={t('practice.settings.more')}
           disabled={value >= max}
           onClick={() => change(value + 1)}
         >
@@ -101,11 +103,12 @@ const QuestionTypeCheckboxes = ({
   options: QuestionTypeOption[];
   onChange: (mode: AnswerMode, checked: boolean) => void;
 }) => {
+  const { t } = useTranslation();
   const idPrefix = useId();
 
   return (
     <fieldset className="mt-1 border-t-2 border-line pt-1">
-      <legend className="sr-only">Question types</legend>
+      <legend className="sr-only">{t('practice.settings.types')}</legend>
       {options.map(({ mode, label, checked, unavailable = false }) => (
         <Fragment key={mode}>
           <label className="flex min-h-11 cursor-pointer items-center gap-2 rounded-xl px-2 text-sm font-bold text-ink has-disabled:cursor-not-allowed has-disabled:opacity-50">
@@ -121,7 +124,7 @@ const QuestionTypeCheckboxes = ({
           </label>
           {unavailable && (
             <span id={`${idPrefix}-${mode}-unavailable`} className="sr-only">
-              Not available in this browser
+              {t('practice.settings.unavailable')}
             </span>
           )}
         </Fragment>
@@ -135,11 +138,15 @@ const PracticeSettings = ({
   onQuestionCountChange,
   questionTypes,
   onQuestionTypeChange,
-}: PracticeSettingsProps) => (
-  <DotsMenu label="Practice settings">
-    <QuestionCountStepper {...questionCount} onChange={onQuestionCountChange} />
-    {questionTypes && <QuestionTypeCheckboxes options={questionTypes} onChange={onQuestionTypeChange} />}
-  </DotsMenu>
-);
+}: PracticeSettingsProps) => {
+  const { t } = useTranslation();
+
+  return (
+    <DotsMenu label={t('practice.settings.label')}>
+      <QuestionCountStepper {...questionCount} onChange={onQuestionCountChange} />
+      {questionTypes && <QuestionTypeCheckboxes options={questionTypes} onChange={onQuestionTypeChange} />}
+    </DotsMenu>
+  );
+};
 
 export default PracticeSettings;

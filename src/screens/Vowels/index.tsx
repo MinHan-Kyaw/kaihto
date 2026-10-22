@@ -8,6 +8,7 @@ import VowelTable from '../../components/VowelTable';
 import { consonantClasses, vowelGroups, vowels } from '../../data';
 import { assetUrl } from '../../helpers/assetUrl';
 import { isCombinable } from '../../helpers/vowels';
+import { useTranslation } from '../../i18n';
 import { playAudio, stopAudio } from '../../services/audio';
 import type { Vowel, VowelGroupId } from '../../types/learning';
 
@@ -25,9 +26,10 @@ const overviewGroups = vowelGroups
 
 type VowelTabId = VowelGroupId | 'all';
 
+// Labels are translation keys.
 const tabs: { id: VowelTabId; label: string }[] = [
-  ...vowelGroups.map((group) => ({ id: group.id, label: group.shortName })),
-  { id: 'all', label: 'All' },
+  ...vowelGroups.map((group) => ({ id: group.id, label: `vowelGroups.${group.id}.shortName` })),
+  { id: 'all', label: 'common.all' },
 ];
 
 const tabCounts: Record<VowelTabId, number> = {
@@ -35,10 +37,11 @@ const tabCounts: Record<VowelTabId, number> = {
   all: overviewGroups.reduce((total, overviewGroup) => total + overviewGroup.vowels.length, 0),
 };
 
+// The pronunciation is Burmese script, so it is only offered in Burmese.
 const CARD_PARTS = [
-  { id: 'thai', label: 'Thai' },
-  { id: 'sound', label: 'Sound' },
-  { id: 'burmese', label: 'Burmese' },
+  { id: 'thai', label: 'cards.thai', burmeseOnly: false },
+  { id: 'sound', label: 'cards.sound', burmeseOnly: false },
+  { id: 'pronunciation', label: 'cards.pronunciation', burmeseOnly: true },
 ] as const;
 
 type CardPart = (typeof CARD_PARTS)[number]['id'];
@@ -54,6 +57,7 @@ interface VowelsProps {
 }
 
 const Vowels = ({ showAll = false }: VowelsProps) => {
+  const { lang, t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
   const requestedGroupId = searchParams.get('group');
@@ -61,7 +65,7 @@ const Vowels = ({ showAll = false }: VowelsProps) => {
   const group = vowelGroups.find((item) => item.id === selectedGroupId);
   const selectedTabId: VowelTabId = showAll ? 'all' : selectedGroupId;
   const groupVowels = vowels.filter((vowel) => vowel.group === selectedGroupId);
-  const [shownParts, setShownParts] = useState<Record<CardPart, boolean>>({ thai: true, sound: true, burmese: true });
+  const [shownParts, setShownParts] = useState<Record<CardPart, boolean>>({ thai: true, sound: true, pronunciation: true });
 
   useEffect(() => () => stopAudio(), []);
 
@@ -79,15 +83,15 @@ const Vowels = ({ showAll = false }: VowelsProps) => {
 
   return (
     <>
-      <h1 className="sr-only">Thai Vowels</h1>
+      <h1 className="sr-only">{t('vowels.title')}</h1>
 
       <div className="sticky top-header z-5 -mx-4 -mt-2 bg-surface px-4 py-2">
         <ClassTabs
-          items={tabs}
+          items={tabs.map(({ id, label }) => ({ id, label: t(label) }))}
           counts={tabCounts}
           selectedId={selectedTabId}
-          label="Vowel group"
-          countLabel="vowels"
+          label={t('vowels.tabs')}
+          countLabel={t('vowels.count')}
           onSelect={handleSelectTab}
         />
       </div>
@@ -97,7 +101,11 @@ const Vowels = ({ showAll = false }: VowelsProps) => {
           {/* Top right of the columns: the end of the last heading on wide screens, of the first one when they stack. */}
           <div className="absolute -top-2 right-0">
             <CardPartsMenu
-              options={CARD_PARTS.map(({ id, label }) => ({ id, label, checked: shownParts[id] }))}
+              options={CARD_PARTS.filter(({ burmeseOnly }) => !burmeseOnly || lang === 'my').map(({ id, label }) => ({
+                id,
+                label: t(label),
+                checked: shownParts[id],
+              }))}
               onChange={handleShownPartChange}
             />
           </div>
@@ -105,7 +113,7 @@ const Vowels = ({ showAll = false }: VowelsProps) => {
             {overviewGroups.map((overviewGroup) => (
               <section key={overviewGroup.id} aria-labelledby={`vowel-group-${overviewGroup.id}`}>
                 <h2 id={`vowel-group-${overviewGroup.id}`} className="mb-2 text-center text-lg font-bold">
-                  {overviewGroup.name}
+                  {t(`vowelGroups.${overviewGroup.id}.name`)}
                 </h2>
                 <ul
                   className="grid grid-cols-[repeat(auto-fill,minmax(6.75rem,1fr))] gap-2"
@@ -119,7 +127,7 @@ const Vowels = ({ showAll = false }: VowelsProps) => {
                         size="large"
                         showVowel={shownParts.thai}
                         showSound={shownParts.sound}
-                        showPronunciation={shownParts.burmese}
+                        showPronunciation={shownParts.pronunciation}
                       />
                     </li>
                   ))}
@@ -132,7 +140,7 @@ const Vowels = ({ showAll = false }: VowelsProps) => {
         group && (
           <section className="mt-4" aria-labelledby="vowel-group-title">
             <h2 id="vowel-group-title" className="sr-only">
-              {group.name}
+              {t(`vowelGroups.${group.id}.name`)}
             </h2>
             {groupVowels.every(isCombinable) ? (
               <VowelTable

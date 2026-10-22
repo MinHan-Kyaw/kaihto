@@ -37,7 +37,8 @@ src/
 ├── components/   Reusable, presentational UI. One folder per component: index.tsx, index.test.tsx
 ├── screens/      Page-level composition (Home, Consonants, Vowels, Tones, PracticeCategories, Practice, VowelPractice). Screens own state and wire services.
 ├── data/         Learning content JSON + typed loader (index.ts) + data validation test
-├── helpers/      Pure functions (randomizeArray, practice engine, vocabulary, tones, vowels, assetUrl)
+├── helpers/      Pure functions (randomizeArray, practice engine, vocabulary, tones, vowels, language, assetUrl)
+├── i18n/         UI text: en.yml, mm.yml (Burmese), t() and the language context
 ├── constants/    Shared constants (practice question/option counts)
 ├── services/     Side-effect wrappers (audio playback, feedback sounds, speech recognition, Thai speech synthesis, picture preloading)
 ├── types/        Shared TypeScript types for learning data
@@ -65,18 +66,31 @@ public/
   `classNames` helper and map states to class strings (see `AnswerOption`), and expose state for tests with `data-*`
   attributes rather than asserting on utility classes.
 - Use `sr-only` for screen-reader-only text.
+- **Never hard-code UI text.** Every label, prompt, heading and `aria-label` comes from `t('key')`
+  (`const { lang, t } = useTranslation()` from `src/i18n`). Add the key to **both** `src/i18n/en.yml` and
+  `src/i18n/mm.yml`; a test fails if they differ. Names of classes, tones, vowel groups and syllables are keyed by data
+  id (`classes.middle.name`). Do not put learning content (meanings, pronunciations) in the yml files.
 
 ## Component conventions
 
 - Components are presentational: they receive data and callbacks via props and never import `src/data` or services.
+  They may read the language with `useTranslation()`.
 - Screens compose components, read data from `src/data`, hold state, and call services.
-- Every text node in Thai gets `lang="th"`; every Burmese text node gets `lang="my"`.
-- Thai text uses `font-thai` (Noto Sans Thai **Looped**) at `font-normal`/`font-medium`. Heavier weights fill in the loops that
-  learners rely on to tell letters apart (e.g. ด/ค). Burmese uses `font-burmese`.
+- Every text node in Thai gets `lang="th"`. `<html lang>` is set to the page language (`my` or `en`), so UI text needs no
+  `lang`. Learning content that switches language takes `lang` and the Myanmar font from `getContentText(lang)`
+  (`src/helpers/language.ts`); Burmese content that is always Burmese gets `lang="my"` and `font-burmese`.
+- Thai text uses `font-thai` (Sarabun, a looped font chosen because its letters, including ฃ and ฅ, match the macOS
+  Thonburi style) at `font-normal`/`font-medium`. Heavier weights fill in the loops that learners rely on to tell letters
+  apart (e.g. ด/ค). Its Latin subset is loaded too, so dashes and brackets inside Thai text match. Sarabun has no dotted
+  circle (◌), so vowel labels like `◌ิ` fall back to IBM Plex Sans Thai Looped, the next font in `--font-thai`. Burmese
+  uses `font-burmese`.
 
 ## Learning content rules
 
 - Learning content lives in `src/data/*.json`. **Never hardcode learning content in components.**
+- Languages: English is the default; Burmese pages live under `/my`. In English, words show `meaningEn` and
+  `pronunciationEn` (a romanized letter name, `gor gai`) instead of the Burmese `meaning` and `pronunciation`, and vowels
+  show only their English `sound`. Every word needs both English fields (`src/data/consonants.test.ts` checks).
 - Consonant IDs are the character (`"ก"`); word IDs are `"<consonant>-<word>"` (`"ก-ไก่"`). IDs are stable: they are
   React keys and practice-engine references. Don't rename them.
 - Consonant cards show the letter (`ก`) and the word (`ไก่`) on separate rows; practice answers and feedback show the letter
@@ -109,6 +123,8 @@ Pronunciation is written manually in Burmese script by the project owner and is 
 - Put conditions in a `describe('given …')` block, not in the `it` text.
 - Query by role and accessible name (Testing Library) rather than test IDs or class names.
 - Mock `src/services/audio`, `src/services/sound`, `src/services/speech` and `src/services/voice` in component/screen tests; each service has its own unit test.
+- Tests render in English unless wrapped in `inBurmese()` (`src/tests/fixtures.tsx`). Give each component that shows
+  learning content a Burmese test too.
 - New reusable components need tests. Practice logic must stay covered for: correct and incorrect answers, question and
   answer randomization, option uniqueness, progression, completion and score, and for each answer mode (select, class, type,
   speak) including the Advanced toggle and the "Can't speak now" fallback.

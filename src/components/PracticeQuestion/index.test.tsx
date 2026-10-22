@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react';
 
-import { buildQuestion } from '../../tests/fixtures';
+import { buildQuestion, inBurmese } from '../../tests/fixtures';
 
 import PracticeQuestion from '.';
 
@@ -12,13 +12,13 @@ describe('PracticeQuestion', () => {
       </PracticeQuestion>
     );
 
-    expect(screen.getByRole('img', { name: 'ကြက်' })).toBeInTheDocument();
+    expect(screen.getByRole('img', { name: 'chicken' })).toBeInTheDocument();
     expect(screen.getByRole('heading', { name: 'Which word is this?' })).toBeInTheDocument();
     expect(screen.getByText('Answer area')).toBeInTheDocument();
   });
 
   describe('given a typing question', () => {
-    it('asks for the Thai letter and hints the Burmese pronunciation without showing the Thai', () => {
+    it('asks for the Thai letter and hints the pronunciation without showing the Thai', () => {
       render(
         <PracticeQuestion question={buildQuestion(0, 'type')}>
           <p>Answer area</p>
@@ -26,7 +26,7 @@ describe('PracticeQuestion', () => {
       );
 
       expect(screen.getByRole('heading', { name: 'Type the Thai letter' })).toBeInTheDocument();
-      expect(screen.getByText('ကောကိုင်')).toHaveAttribute('lang', 'my');
+      expect(screen.getByText('gor gai')).toHaveAttribute('lang', 'en');
       expect(screen.queryByText(/ไก่/)).not.toBeInTheDocument();
     });
   });
@@ -40,9 +40,9 @@ describe('PracticeQuestion', () => {
       );
 
       expect(screen.getByRole('heading', { name: 'Which group is this letter in?' })).toBeInTheDocument();
-      expect(screen.getByRole('img', { name: 'ကြက်' })).toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'chicken' })).toBeInTheDocument();
       expect(screen.getByText('ก (ไก่)')).toHaveAttribute('lang', 'th');
-      expect(screen.getByText('ကောကိုင်')).toHaveAttribute('lang', 'my');
+      expect(screen.getByText('gor gai')).toHaveAttribute('lang', 'en');
     });
   });
 
@@ -55,10 +55,26 @@ describe('PracticeQuestion', () => {
       );
 
       expect(screen.getByRole('heading', { name: 'Say this word' })).toBeInTheDocument();
-      expect(screen.getByRole('img', { name: 'ကြက်' })).toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'chicken' })).toBeInTheDocument();
       expect(screen.queryByText(/ไก่/)).not.toBeInTheDocument();
-      expect(screen.queryByText('ကောကိုင်')).not.toBeInTheDocument();
+      expect(screen.queryByText('gor gai')).not.toBeInTheDocument();
       expect(screen.queryByRole('button')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('given the page is in Burmese', () => {
+    it('asks in Burmese and gives the Burmese meaning and pronunciation', () => {
+      render(
+        inBurmese(
+          <PracticeQuestion question={buildQuestion(0, 'type')}>
+            <p>Answer area</p>
+          </PracticeQuestion>
+        )
+      );
+
+      expect(screen.getByRole('heading', { name: 'ထိုင်းစာလုံးကို ရိုက်ပါ' })).toBeInTheDocument();
+      expect(screen.getByRole('img', { name: 'ကြက်' })).toHaveAttribute('lang', 'my');
+      expect(screen.getByText('ကောကိုင်')).toHaveAttribute('lang', 'my');
     });
   });
 
