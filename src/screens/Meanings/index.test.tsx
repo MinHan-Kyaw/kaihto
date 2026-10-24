@@ -69,7 +69,7 @@ describe('Meanings', () => {
       expect(screen.queryByRole('button', { name: /Play Thai audio/ })).not.toBeInTheDocument();
     });
 
-    it('shows the tone of each syllable above the Thai word', () => {
+    it('shows the tone of each syllable', () => {
       renderMeanings('/meanings/text');
 
       expect(screen.getByRole('article', { name: 'ภูเขา' })).toHaveTextContent('Tone Mid Rising');

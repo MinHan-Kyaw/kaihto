@@ -10,7 +10,7 @@ interface ToneContourProps {
 
 const SIZE_CLASS_NAMES: Record<ContourSize, string> = {
   default: 'h-8 w-12',
-  small: 'h-4 w-6',
+  small: 'h-5 w-7.5',
 };
 
 const PITCH_LEVELS = [1, 2, 3, 4, 5];

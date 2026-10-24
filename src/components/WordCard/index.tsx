@@ -24,7 +24,7 @@ interface WordCardProps {
   showPicture?: boolean;
   showThai?: boolean;
   showMeaning?: boolean;
-  tones?: { syllable: string; tone: Tone }[]; // one per syllable, shown above the Thai word
+  tones?: { syllable: string; tone: Tone }[]; // one per syllable, shown as pitch curves in the top right corner
 }
 
 const SIZE_CLASS_NAMES: Record<CardSize, { card: string; picture: string; thai: string; meaning: string }> = {
@@ -59,8 +59,9 @@ const WordCard = ({
   return (
     <article
       className={classNames(
-        '@container flex h-full flex-col items-center border-2 border-line bg-surface text-center shadow-edge',
-        sizeClassNames.card
+        '@container relative flex h-full flex-col items-center border-2 border-line bg-surface text-center shadow-edge',
+        sizeClassNames.card,
+        tones && 'pt-7'
       )}
       aria-labelledby={headingId}
       data-size={size}
@@ -82,14 +83,13 @@ const WordCard = ({
         {word.thai}
       </h2>
       {tones && (
-        <p className="-order-1 flex flex-wrap justify-center gap-x-2 text-xs font-bold text-ink-muted">
+        // Only the pitch curves show, in the top right corner; the tone names are for screen readers.
+        <p className="absolute top-1 right-1.5 flex gap-1">
           <span className="sr-only">{t('cards.tone')}</span>
           {tones.map(({ syllable, tone }) => (
-            // The leading space keeps the names apart for screen readers; flex layout ignores it.
-            <span key={syllable} className="inline-flex items-center gap-0.5">
-              {' '}
+            <span key={syllable}>
               <ToneContour pitch={tone.pitch} size="small" />
-              {t(`tones.${tone.id}.shortName`)}
+              <span className="sr-only"> {t(`tones.${tone.id}.shortName`)}</span>
             </span>
           ))}
         </p>

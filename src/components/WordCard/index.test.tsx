@@ -65,10 +65,12 @@ describe('WordCard', () => {
   });
 
   describe('given the tones of its syllables', () => {
-    it('shows each tone with its pitch above the Thai word', () => {
+    it('shows each tone as its pitch curve, naming it for screen readers', () => {
       render(<WordCard word={word} tones={[{ syllable: 'หู', tone: risingTone }]} />);
 
       const tones = screen.getByText('Rising').closest('p');
+
+      expect(screen.getByText('Rising')).toHaveClass('sr-only');
 
       expect(tones).toHaveTextContent('Tone Rising');
       expect(tones?.querySelector('svg')).toHaveAttribute('data-pitch', '14');
