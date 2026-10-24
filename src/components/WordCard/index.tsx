@@ -3,6 +3,7 @@ import type { CSSProperties } from 'react';
 import { assetUrl } from '../../helpers/assetUrl';
 import { classNames } from '../../helpers/classNames';
 import { getContentText, getMeaning } from '../../helpers/language';
+import { getThaiInkHeight } from '../../helpers/thaiInk';
 import { useTranslation } from '../../i18n';
 import type { MeaningWord, Tone } from '../../types/learning';
 import AudioButton from '../AudioButton';
@@ -16,6 +17,13 @@ const THAI_MARKS = /[\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]/g;
 // A Thai word can't wrap, so on compact cards a long one shrinks to fit: each letter takes about 0.55em, so a word of n
 // letters fits at 100cqi / (0.55n), about 180cqi / n, of the card's width.
 const getThaiFit = (thai: string) => ({ '--thai-fit': `${(180 / thai.replace(THAI_MARKS, '').length).toFixed(1)}cqi` });
+
+// With leading-[1.3], Sarabun's baseline sits 1.07em below the top of the line.
+const THAI_BASELINE = 1.07;
+
+// Lifts the word so its ink, not its line box, starts at the top of the content: the empty space Thai keeps for marks
+// above would otherwise leave a wider gap under the tone curves than the 4px above them.
+const getThaiLift = (thai: string) => ({ marginTop: `-${(THAI_BASELINE - getThaiInkHeight(thai)).toFixed(2)}em` });
 
 interface WordCardProps {
   word: MeaningWord;
@@ -35,7 +43,7 @@ const SIZE_CLASS_NAMES: Record<CardSize, { card: string; picture: string; thai: 
     meaning: 'text-[1.0625rem]',
   },
   compact: {
-    card: 'justify-center rounded-xl px-1 py-2',
+    card: 'rounded-xl px-1 py-2',
     picture: 'w-12',
     thai: 'text-[min(2.25rem,var(--thai-fit))]',
     meaning: 'text-sm',
@@ -61,7 +69,8 @@ const WordCard = ({
       className={classNames(
         '@container relative flex h-full flex-col items-center border-2 border-line bg-surface text-center shadow-edge',
         sizeClassNames.card,
-        tones && 'pt-7'
+        // The tone curves fill the top 4px + 20px; the content starts 4px below them, and other cards stay centred.
+        tones ? 'pt-7' : size === 'compact' && 'justify-center'
       )}
       aria-labelledby={headingId}
       data-size={size}
@@ -77,7 +86,7 @@ const WordCard = ({
       <h2
         id={headingId}
         className={classNames('font-thai leading-[1.3] font-medium text-ink', sizeClassNames.thai, !showThai && 'sr-only')}
-        style={getThaiFit(word.thai) as CSSProperties}
+        style={{ ...getThaiFit(word.thai), ...(tones && getThaiLift(word.thai)) } as CSSProperties}
         lang="th"
       >
         {word.thai}

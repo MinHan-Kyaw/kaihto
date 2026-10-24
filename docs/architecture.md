@@ -209,7 +209,9 @@ grandfather) add the English meaning (`กา-kettle`). The screen draws each wo
 picture, Thai word, meaning and audio button; the Text tab uses the compact size without picture or audio, with the Thai shrinking
 to fit long words (a word can't wrap). The Text tab shows each syllable's tone in the card's top right corner: the words are open syllables
 with no tone marks, so `findSyllable` (`src/helpers/vowels.ts`) finds each syllable's consonant and vowel and
-`getSyllableTone` gives its tone, drawn with a small `ToneContour`. `syllables` is stored because some words split more
+`getSyllableTone` gives its tone, drawn with a small `ToneContour`. Thai keeps empty space above letters for marks, so the word is lifted by what its
+tallest character leaves empty (`getThaiInkHeight` in `src/helpers/thaiInk.ts`, measured for Sarabun): its top sits 4px
+below the curves, the same as the curves below the card's edge. `syllables` is stored because some words split more
 than one way (`เลอะเทอะ` is `เลอะ|เทอะ`, not `เล|อะ|เทอะ`). The words are not part of any practice yet.
 
 ## Vowel practice
