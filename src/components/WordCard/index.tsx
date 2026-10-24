@@ -1,3 +1,5 @@
+import type { CSSProperties } from 'react';
+
 import { assetUrl } from '../../helpers/assetUrl';
 import { classNames } from '../../helpers/classNames';
 import { getContentText, getMeaning } from '../../helpers/language';
@@ -6,6 +8,13 @@ import type { MeaningWord } from '../../types/learning';
 import AudioButton from '../AudioButton';
 
 type CardSize = 'default' | 'compact';
+
+// Marks above and below a consonant take no width of their own.
+const THAI_MARKS = /[\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]/g;
+
+// A Thai word can't wrap, so on compact cards a long one shrinks to fit: each letter takes about 0.55em, so a word of n
+// letters fits at 100cqi / (0.55n), about 180cqi / n, of the card's width.
+const getThaiFit = (thai: string) => ({ '--thai-fit': `${(180 / thai.replace(THAI_MARKS, '').length).toFixed(1)}cqi` });
 
 interface WordCardProps {
   word: MeaningWord;
@@ -26,7 +35,7 @@ const SIZE_CLASS_NAMES: Record<CardSize, { card: string; picture: string; thai: 
   compact: {
     card: 'justify-center rounded-xl px-1 py-2',
     picture: 'w-12',
-    thai: 'text-2xl',
+    thai: 'text-[min(2.25rem,var(--thai-fit))]',
     meaning: 'text-sm',
   },
 };
@@ -47,7 +56,7 @@ const WordCard = ({
   return (
     <article
       className={classNames(
-        'flex h-full flex-col items-center border-2 border-line bg-surface text-center shadow-edge',
+        '@container flex h-full flex-col items-center border-2 border-line bg-surface text-center shadow-edge',
         sizeClassNames.card
       )}
       aria-labelledby={headingId}
@@ -64,6 +73,7 @@ const WordCard = ({
       <h2
         id={headingId}
         className={classNames('font-thai leading-[1.3] font-medium text-ink', sizeClassNames.thai, !showThai && 'sr-only')}
+        style={getThaiFit(word.thai) as CSSProperties}
         lang="th"
       >
         {word.thai}

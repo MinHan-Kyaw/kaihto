@@ -80,7 +80,7 @@ const Meanings = ({ showText = false }: MeaningsProps) => {
               onChange={handleShownPartChange}
             />
           </div>
-          <ul className="grid grid-cols-[repeat(auto-fill,minmax(6.5rem,1fr))] gap-2" role="list">
+          <ul className="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-2" role="list">
             {meanings.map((word) => (
               <li key={word.id}>
                 <WordCard
