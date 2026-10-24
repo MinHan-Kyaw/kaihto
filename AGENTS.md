@@ -37,7 +37,7 @@ src/
 ├── components/   Reusable, presentational UI. One folder per component: index.tsx, index.test.tsx
 ├── screens/      Page-level composition (Home, Consonants, Vowels, Tones, Meanings, PracticeCategories, Practice, VowelPractice). Screens own state and wire services.
 ├── data/         Learning content JSON + typed loader (index.ts) + data validation test
-├── helpers/      Pure functions (randomizeArray, practice engine, vocabulary, tones, vowels, language, assetUrl)
+├── helpers/      Pure functions (randomizeArray, practice engine, vocabulary, tones, vowels, language, thaiInk, assetUrl)
 ├── i18n/         UI text: en.yml, mm.yml (Burmese), t() and the language context
 ├── constants/    Shared constants (practice question/option counts)
 ├── services/     Side-effect wrappers (audio playback, feedback sounds, speech recognition, Thai speech synthesis, picture preloading)

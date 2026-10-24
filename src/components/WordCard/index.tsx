@@ -14,8 +14,8 @@ type CardSize = 'default' | 'compact';
 // Marks above and below a consonant take no width of their own.
 const THAI_MARKS = /[\u0E31\u0E34-\u0E3A\u0E47-\u0E4E]/g;
 
-// A Thai word can't wrap, so on compact cards a long one shrinks to fit: each letter takes about 0.55em, so a word of n
-// letters fits at 100cqi / (0.55n), about 180cqi / n, of the card's width.
+// A Thai word can't wrap, so a long one shrinks to fit the card: each letter takes about 0.55em, so a word of n letters
+// fits at 100cqi / (0.55n), about 180cqi / n, of the card's width.
 const getThaiFit = (thai: string) => ({ '--thai-fit': `${(180 / thai.replace(THAI_MARKS, '').length).toFixed(1)}cqi` });
 
 // With leading-[1.3], Sarabun's baseline sits 1.07em below the top of the line.
@@ -39,7 +39,7 @@ const SIZE_CLASS_NAMES: Record<CardSize, { card: string; picture: string; thai: 
   default: {
     card: 'gap-1 rounded-3xl px-3 py-4',
     picture: 'mb-1 w-20',
-    thai: 'text-[2rem]',
+    thai: 'text-[min(2rem,var(--thai-fit))]',
     meaning: 'text-[1.0625rem]',
   },
   compact: {
