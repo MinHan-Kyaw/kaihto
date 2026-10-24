@@ -1,0 +1,24 @@
+<svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+<path d="M16 30V18" stroke="#44911B" stroke-width="1.6" stroke-linecap="round"/>
+<path d="M16 24C12.5 24 9.5 21.5 9 18.5C12.5 18.5 15.5 21 16 24Z" fill="#00D26A"/>
+<path d="M16 27C19.5 27 22.5 24.5 23 21.5C19.5 21.5 16.5 24 16 27Z" fill="#00D26A"/>
+<path d="M16 18L10 12M16 18L22 12" stroke="#44911B" stroke-width="1.2" stroke-linecap="round"/>
+<ellipse cx="16" cy="5.8" rx="2.31" ry="4.2" transform="rotate(0 16 10)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<ellipse cx="16" cy="5.8" rx="2.31" ry="4.2" transform="rotate(72 16 10)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<ellipse cx="16" cy="5.8" rx="2.31" ry="4.2" transform="rotate(144 16 10)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<ellipse cx="16" cy="5.8" rx="2.31" ry="4.2" transform="rotate(216 16 10)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<ellipse cx="16" cy="5.8" rx="2.31" ry="4.2" transform="rotate(288 16 10)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<circle cx="16" cy="10" r="1.60" fill="#FFB02E"/>
+<ellipse cx="8.5" cy="10.5" rx="1.65" ry="3" transform="rotate(0 8.5 13.5)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<ellipse cx="8.5" cy="10.5" rx="1.65" ry="3" transform="rotate(72 8.5 13.5)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<ellipse cx="8.5" cy="10.5" rx="1.65" ry="3" transform="rotate(144 8.5 13.5)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<ellipse cx="8.5" cy="10.5" rx="1.65" ry="3" transform="rotate(216 8.5 13.5)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<ellipse cx="8.5" cy="10.5" rx="1.65" ry="3" transform="rotate(288 8.5 13.5)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<circle cx="8.5" cy="13.5" r="1.14" fill="#FFB02E"/>
+<ellipse cx="23.5" cy="10.5" rx="1.65" ry="3" transform="rotate(0 23.5 13.5)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<ellipse cx="23.5" cy="10.5" rx="1.65" ry="3" transform="rotate(72 23.5 13.5)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<ellipse cx="23.5" cy="10.5" rx="1.65" ry="3" transform="rotate(144 23.5 13.5)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<ellipse cx="23.5" cy="10.5" rx="1.65" ry="3" transform="rotate(216 23.5 13.5)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<ellipse cx="23.5" cy="10.5" rx="1.65" ry="3" transform="rotate(288 23.5 13.5)" fill="white" stroke="#E1D8EC" stroke-width="0.6"/>
+<circle cx="23.5" cy="13.5" r="1.14" fill="#FFB02E"/>
+</svg>

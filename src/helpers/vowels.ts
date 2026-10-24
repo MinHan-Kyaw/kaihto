@@ -20,6 +20,21 @@ export const getSyllable = (vowel: Vowel): SyllableType => (vowel.group === 'sho
 export const getSyllableTone = (consonant: Pick<Consonant, 'class'>, vowel: Vowel): ToneId =>
   getUnmarkedTone(consonant.class, getSyllable(vowel));
 
+// The consonant and vowel that spell an open syllable with no tone mark, e.g. "เขา" → ข + เ-า; undefined for any other.
+export const findSyllable = (
+  syllable: string,
+  consonants: readonly Consonant[],
+  vowels: readonly Vowel[]
+): { consonant: Consonant; vowel: Vowel } | undefined =>
+  vowels
+    .filter(isCombinable)
+    .flatMap((vowel) =>
+      consonants
+        .filter((consonant) => combineVowel(consonant.character, vowel) === syllable)
+        .map((consonant) => ({ consonant, vowel }))
+    )
+    .at(0);
+
 export const generateVowelQuestions = (
   consonants: readonly Consonant[],
   vowels: readonly Vowel[],

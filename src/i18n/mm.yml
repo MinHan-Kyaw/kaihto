@@ -12,6 +12,7 @@ nav:
   consonants: ဗျည်း
   vowels: သရ
   tones: အသံ
+  meanings: အဓိပ္ပာယ်
   practice: လေ့ကျင့်ရန်
 
 language:
@@ -33,6 +34,7 @@ home:
   exploreConsonants: ဗျည်းများ လေ့လာရန်
   exploreVowels: သရများ လေ့လာရန်
   learnTones: အသံများ လေ့လာရန်
+  learnMeanings: အဓိပ္ပာယ်များ လေ့လာရန်
   practiceConsonants: ဗျည်း လေ့ကျင့်ရန်
   practiceVowels: သရ လေ့ကျင့်ရန်
   classes: ဗျည်းအုပ်စုများ
@@ -98,11 +100,19 @@ vowels:
   tabs: သရအုပ်စု
   count: လုံး
 
+meanings:
+  title: ထိုင်းစကားလုံးနှင့် အဓိပ္ပာယ်များ
+  tabs: ပြသပုံ
+  count: လုံး
+  pictures: ပုံများ
+  text: စာသား
+
 cards:
   options: ကတ် ရွေးချယ်စရာ
   show: ကတ်ပေါ်တွင် ပြရန်
   thai: ထိုင်း
   meaning: အဓိပ္ပာယ်
+  tone: အသံ
   pronunciation: အသံထွက်
   sound: အင်္ဂလိပ်အသံ
   pictureSoon: ပုံ မကြာမီ ထည့်ပါမည်

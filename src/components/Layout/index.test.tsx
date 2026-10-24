@@ -33,7 +33,7 @@ describe('Layout', () => {
       within(screen.getByRole('list'))
         .getAllByRole('link')
         .map((link) => link.textContent)
-    ).toEqual(['Consonants', 'Vowels', 'Tones', 'Practice']);
+    ).toEqual(['Consonants', 'Vowels', 'Tones', 'Meanings', 'Practice']);
   });
 
   describe('given the page is in English', () => {
@@ -56,7 +56,7 @@ describe('Layout', () => {
         within(screen.getByRole('list'))
           .getAllByRole('link')
           .map((link) => link.textContent)
-      ).toEqual(['ဗျည်း', 'သရ', 'အသံ', 'လေ့ကျင့်ရန်']);
+      ).toEqual(['ဗျည်း', 'သရ', 'အသံ', 'အဓိပ္ပာယ်', 'လေ့ကျင့်ရန်']);
       expect(screen.getByRole('link', { name: 'အင်္ဂလိပ်လို ဖတ်ရန်' })).toHaveAttribute('href', '/consonants/all');
     });
   });

@@ -27,6 +27,18 @@ export interface Consonant {
   words: Word[];
 }
 
+// A word from the source's vocabulary chapter, shown on the meanings screen. Homographs get the English meaning in their
+// id, e.g. "กา-kettle" and "กา-crow".
+export interface MeaningWord {
+  id: string; // the Thai word, e.g. "หู"
+  thai: string;
+  syllables: string[]; // the word split into open syllables, e.g. ["ภู", "เขา"]; each one's tone follows from its spelling
+  meaning: string; // Burmese, from the source
+  meaningEn: string;
+  image: string;
+  audio: string; // the Thai word said aloud
+}
+
 export interface VocabularyItem extends Word {
   consonant: string;
   consonantClass: ConsonantClassId;
