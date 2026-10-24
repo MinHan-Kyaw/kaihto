@@ -1,7 +1,8 @@
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import type { ConsonantClass, Vowel } from '../../types/learning';
+import { inBurmese } from '../../tests/fixtures';
+import type { ConsonantClass, ToneId, Vowel } from '../../types/learning';
 
 import VowelTable from '.';
 
@@ -9,20 +10,14 @@ const consonantClasses: ConsonantClass[] = [
   {
     id: 'middle',
     group: 1,
-    name: 'Middle Class',
-    shortName: 'Middle',
-    burmeseName: 'အလယ်သံဗျည်းအုပ်စု',
-    tone: 'Mid tone',
+    tone: 'mid',
     exampleConsonant: 'ก',
     exampleSound: 'k',
   },
   {
     id: 'high',
     group: 2,
-    name: 'High Class',
-    shortName: 'High',
-    burmeseName: 'အမြင့်သံဗျည်းအုပ်စု',
-    tone: 'Rising tone',
+    tone: 'rising',
     exampleConsonant: 'ข',
     exampleSound: 'kh',
   },
@@ -33,7 +28,7 @@ const vowels: Vowel[] = [
   { id: '-ิ', group: 'short', sound: 'i', pronunciation: 'အိ' },
 ];
 
-const renderTable = ({ tones, onPlayAudio }: { tones?: string[]; onPlayAudio?: (vowel: Vowel) => void } = {}) =>
+const renderTable = ({ tones, onPlayAudio }: { tones?: ToneId[]; onPlayAudio?: (vowel: Vowel) => void } = {}) =>
   render(
     <>
       <h2 id="title">Short vowels</h2>
@@ -71,14 +66,37 @@ describe('VowelTable', () => {
     expect(within(getVowelRow('◌ิ')).getAllByRole('cell')[0]).toHaveTextContent('2');
   });
 
-  it('shows the Thai vowel next to its English sound and Burmese pronunciation', () => {
+  it('shows the Thai vowel next to its English sound', () => {
     renderTable();
 
     const rowHeader = screen.getByRole('rowheader', { name: /^-ะ / });
 
-    expect(rowHeader).toHaveTextContent('-ะ ( အ - a )');
+    expect(rowHeader).toHaveTextContent('-ะ ( a )');
     expect(within(rowHeader).getByText('-ะ')).toHaveAttribute('lang', 'th');
-    expect(within(rowHeader).getByText('အ')).toHaveAttribute('lang', 'my');
+  });
+
+  describe('given the page is in Burmese', () => {
+    it('adds the Burmese pronunciation and heads the columns in Burmese', () => {
+      render(
+        inBurmese(
+          <>
+            <h2 id="title">Short vowels</h2>
+            <VowelTable vowels={vowels} consonantClasses={consonantClasses} labelledBy="title" />
+          </>
+        )
+      );
+
+      const rowHeader = screen.getByRole('rowheader', { name: /^-ะ / });
+
+      expect(rowHeader).toHaveTextContent('-ะ ( အ - a )');
+      expect(within(rowHeader).getByText('အ')).toHaveAttribute('lang', 'my');
+      expect(screen.getAllByRole('columnheader').map((header) => header.textContent)).toEqual([
+        'စဉ်',
+        'သရ',
+        'အလယ်သံ ก',
+        'အမြင့်သံ ข',
+      ]);
+    });
   });
 
   it('combines the vowel with each class example and its romanization', () => {
@@ -124,7 +142,7 @@ describe('VowelTable', () => {
 
   describe('given tones', () => {
     it('shows the tone under each class', () => {
-      renderTable({ tones: ['Low', 'High'] });
+      renderTable({ tones: ['low', 'high'] });
 
       const cells = within(screen.getByRole('row', { name: /^Tone/ })).getAllByRole('cell');
 

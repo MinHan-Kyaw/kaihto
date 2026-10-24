@@ -7,13 +7,17 @@ const consonants: Consonant[] = [
     id: 'ก',
     character: 'ก',
     class: 'middle',
-    words: [{ id: 'ก-ไก่', thai: 'ไก่', pronunciation: 'ကောကိုင်', meaning: 'ကြက်' }],
+    words: [
+      { id: 'ก-ไก่', thai: 'ไก่', pronunciation: 'ကောကိုင်', meaning: 'ကြက်', meaningEn: 'chicken', pronunciationEn: 'gor gai' },
+    ],
   },
   {
     id: 'ข',
     character: 'ข',
     class: 'high',
-    words: [{ id: 'ข-ไข่', thai: 'ไข่', pronunciation: 'ခေါခိုင်', meaning: 'ဥ' }],
+    words: [
+      { id: 'ข-ไข่', thai: 'ไข่', pronunciation: 'ခေါခိုင်', meaning: 'ဥ', meaningEn: 'egg', pronunciationEn: 'khor khai' },
+    ],
   },
 ];
 
@@ -26,8 +30,26 @@ describe('getConsonantsByClass', () => {
 describe('getVocabulary', () => {
   it('flattens words and keeps a reference to their consonant and its class', () => {
     expect(getVocabulary(consonants)).toEqual([
-      { id: 'ก-ไก่', thai: 'ไก่', pronunciation: 'ကောကိုင်', meaning: 'ကြက်', consonant: 'ก', consonantClass: 'middle' },
-      { id: 'ข-ไข่', thai: 'ไข่', pronunciation: 'ခေါခိုင်', meaning: 'ဥ', consonant: 'ข', consonantClass: 'high' },
+      {
+        id: 'ก-ไก่',
+        thai: 'ไก่',
+        pronunciation: 'ကောကိုင်',
+        meaning: 'ကြက်',
+        meaningEn: 'chicken',
+        pronunciationEn: 'gor gai',
+        consonant: 'ก',
+        consonantClass: 'middle',
+      },
+      {
+        id: 'ข-ไข่',
+        thai: 'ไข่',
+        pronunciation: 'ခေါခိုင်',
+        meaning: 'ဥ',
+        meaningEn: 'egg',
+        pronunciationEn: 'khor khai',
+        consonant: 'ข',
+        consonantClass: 'high',
+      },
     ]);
   });
 });

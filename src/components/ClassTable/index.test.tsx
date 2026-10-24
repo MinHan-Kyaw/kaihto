@@ -1,6 +1,6 @@
 import { render, screen, within } from '@testing-library/react';
 
-import type { ConsonantClass } from '../../types/learning';
+import type { ConsonantClass, ToneId } from '../../types/learning';
 
 import ClassTable from '.';
 
@@ -8,26 +8,20 @@ const consonantClasses: ConsonantClass[] = [
   {
     id: 'middle',
     group: 1,
-    name: 'Middle Class',
-    shortName: 'Middle',
-    burmeseName: 'အလယ်သံဗျည်းအုပ်စု',
-    tone: 'Mid Tone',
+    tone: 'mid',
     exampleConsonant: 'ก',
     exampleSound: 'k',
   },
   {
     id: 'high',
     group: 2,
-    name: 'High Class',
-    shortName: 'High',
-    burmeseName: 'အမြင့်သံဗျည်းအုပ်စု',
-    tone: 'Rising Tone',
+    tone: 'rising',
     exampleConsonant: 'ข',
     exampleSound: 'kh',
   },
 ];
 
-const renderTable = ({ tones, withNumber = false }: { tones?: string[]; withNumber?: boolean } = {}) =>
+const renderTable = ({ tones, withNumber = false }: { tones?: ToneId[]; withNumber?: boolean } = {}) =>
   render(
     <>
       <h2 id="title">Short vowels</h2>
@@ -95,11 +89,34 @@ describe('ClassTable', () => {
 
   describe('given tones', () => {
     it('shows the tone under each class', () => {
-      renderTable({ tones: ['Low', 'High'] });
+      renderTable({ tones: ['low', 'high'] });
 
       const cells = within(screen.getByRole('row', { name: /^Tone/ })).getAllByRole('cell');
 
       expect(cells.map((cell) => cell.textContent)).toEqual(['Low', 'High']);
+    });
+  });
+
+  describe('given group numbers are shown', () => {
+    it('labels each class column with its group', () => {
+      render(
+        <>
+          <h2 id="title">Tone marks</h2>
+          <ClassTable consonantClasses={consonantClasses} firstColumnLabel="Mark" labelledBy="title" showGroups>
+            <tr>
+              <th scope="row">อ่</th>
+              <td>ก่า</td>
+              <td>ข่า</td>
+            </tr>
+          </ClassTable>
+        </>
+      );
+
+      expect(screen.getAllByRole('columnheader').map((header) => header.textContent)).toEqual([
+        'Mark',
+        'Group 1 Middle ก',
+        'Group 2 High ข',
+      ]);
     });
   });
 

@@ -1,6 +1,7 @@
 import { useEffect, useRef, type ReactNode } from 'react';
 
 import { getVowelLabel } from '../../helpers/vowels';
+import { useTranslation } from '../../i18n';
 import type { VowelQuestion as VowelQuestionType } from '../../types/learning';
 
 interface VowelQuestionProps {
@@ -8,12 +9,8 @@ interface VowelQuestionProps {
   children: ReactNode;
 }
 
-const PROMPTS: Record<VowelQuestionType['kind'], string> = {
-  sound: 'What sound is this?',
-  tone: 'Which tone is this?',
-};
-
 const VowelQuestion = ({ question, children }: VowelQuestionProps) => {
+  const { t } = useTranslation();
   const headingRef = useRef<HTMLHeadingElement>(null);
   const isFirstQuestion = useRef(true);
 
@@ -28,7 +25,7 @@ const VowelQuestion = ({ question, children }: VowelQuestionProps) => {
   return (
     <section className="flex flex-col items-center gap-4" aria-labelledby="vowel-question-prompt">
       <h2 id="vowel-question-prompt" className="rounded-xl text-center text-2xl font-extrabold" ref={headingRef} tabIndex={-1}>
-        {PROMPTS[question.kind]}
+        {t(`vowelPractice.prompts.${question.kind}`)}
       </h2>
       <p
         className="grid min-h-28 min-w-28 place-items-center rounded-3xl border-2 border-line px-4 font-thai text-[3.5rem] leading-[1.4] font-medium shadow-edge"

@@ -11,9 +11,10 @@ import ToneContour from '../../components/ToneContour';
 import VowelExplanation from '../../components/VowelExplanation';
 import VowelQuestion from '../../components/VowelQuestion';
 import VowelSound from '../../components/VowelSound';
-import { consonantClasses, consonants, guide, toneById, tones, vowelGroups, vowels } from '../../data';
+import { consonants, tones, vowelGroups, vowels } from '../../data';
 import { assetUrl } from '../../helpers/assetUrl';
 import { combineVowel, generateVowelQuestions, getSyllable, getVowelAnswer, isCombinable } from '../../helpers/vowels';
+import { useTranslation } from '../../i18n';
 import { playAudio, stopAudio } from '../../services/audio';
 import { FEEDBACK_SOUND_DURATION_MS, playFeedbackSound } from '../../services/sound';
 import { speakThai, stopSpeaking } from '../../services/voice';
@@ -59,6 +60,7 @@ const getOptionResult = (option: string, answer: string, selected: string | null
 };
 
 const VowelPractice = () => {
+  const { t } = useTranslation();
   const [groups, setGroups] = useState(ALL_GROUPS);
   const [questions, setQuestions] = useState(() => buildQuestions(ALL_GROUPS));
   const [index, setIndex] = useState(0);
@@ -104,7 +106,7 @@ const VowelPractice = () => {
         score={score}
         total={questions.length}
         onRestart={() => restart()}
-        explore={{ to: '/vowels', label: 'Explore vowels' }}
+        explore={{ to: '/vowels', label: 'practice.summary.exploreVowels' }}
       />
     );
   }
@@ -113,8 +115,7 @@ const VowelPractice = () => {
   const isCorrect = selected === answer;
   const result: AnswerResult | null = answered ? (isCorrect ? 'correct' : 'incorrect') : null;
   const isLastQuestion = index === questions.length - 1;
-  const consonantClass = consonantClasses.find((item) => item.id === question.consonant.class);
-  const tone = toneById[question.tone];
+  const toneName = t(`tones.${question.tone}.name`);
 
   const handleAction = () => {
     if (answered) {
@@ -144,28 +145,29 @@ const VowelPractice = () => {
 
   return (
     <div className="mx-auto flex max-w-[42rem] flex-col">
-      <h1 className="sr-only">Vowel practice</h1>
-      <BackLink to="/practice">Practice</BackLink>
+      <h1 className="sr-only">{t('vowelPractice.title')}</h1>
+      <BackLink to="/practice">{t('practice.title')}</BackLink>
       <CheckboxChips
-        legend="Vowels to practise"
+        legend={t('vowelPractice.groups')}
         options={practiceGroups.map((group) => ({
           id: group.id,
           checked: Boolean(groups[group.id]),
           label: (
             <>
-              {group.name} <span className="text-sm">{vowels.filter((vowel) => vowel.group === group.id).length}</span>
+              {t(`vowelGroups.${group.id}.name`)}{' '}
+              <span className="text-sm">{vowels.filter((vowel) => vowel.group === group.id).length}</span>
             </>
           ),
         }))}
         onChange={handleGroupChange}
       />
       <div className="mt-3 mb-4 flex items-center gap-3">
-        <ProgressBar current={index + (answered ? 1 : 0)} total={questions.length} label="Practice progress" />
+        <ProgressBar current={index + (answered ? 1 : 0)} total={questions.length} label={t('practice.progress')} />
       </div>
 
       <VowelQuestion question={question}>
         {question.kind === 'sound' ? (
-          <ul className="grid w-full gap-3 md:grid-cols-3" aria-label="Answer options" role="list">
+          <ul className="grid w-full gap-3 md:grid-cols-3" aria-label={t('common.answerOptions')} role="list">
             {question.options.map((option) => (
               <li key={option.id}>
                 <AnswerOption {...optionProps(option.id)} compact>
@@ -177,12 +179,12 @@ const VowelPractice = () => {
             ))}
           </ul>
         ) : (
-          <ul className="grid w-full grid-cols-2 gap-3 sm:grid-cols-3" aria-label="Tones" role="list">
+          <ul className="grid w-full grid-cols-2 gap-3 sm:grid-cols-3" aria-label={t('vowelPractice.tones')} role="list">
             {tones.map((item) => (
               <li key={item.id}>
                 <AnswerOption {...optionProps(item.id)} compact>
                   <ToneContour pitch={item.pitch} />
-                  <span className="font-bold">{item.name}</span>
+                  <span className="font-bold">{t(`tones.${item.id}.name`)}</span>
                 </AnswerOption>
               </li>
             ))}
@@ -192,9 +194,9 @@ const VowelPractice = () => {
         {answered && (
           <VowelExplanation
             question={question}
-            consonantClassName={consonantClass?.burmeseName ?? ''}
-            syllableName={guide.syllables[getSyllable(question.vowel)].name}
-            toneName={tone.name}
+            consonantClassName={t(`classes.${question.consonant.class}.name`)}
+            syllableName={t(`syllables.${getSyllable(question.vowel)}.name`)}
+            toneName={toneName}
             onPlay={() => playQuestion(question)}
           />
         )}
@@ -202,8 +204,8 @@ const VowelPractice = () => {
 
       <PracticeFeedback
         result={result}
-        correctAnswer={question.kind === 'sound' ? <VowelSound vowel={question.vowel} /> : tone.name}
-        actionLabel={!answered ? 'Next' : isLastQuestion ? 'See results' : 'Continue'}
+        correctAnswer={question.kind === 'sound' ? <VowelSound vowel={question.vowel} /> : toneName}
+        actionLabel={t(!answered ? 'common.next' : isLastQuestion ? 'common.seeResults' : 'common.continue')}
         actionDisabled={!answered && selected === null}
         onAction={handleAction}
       />

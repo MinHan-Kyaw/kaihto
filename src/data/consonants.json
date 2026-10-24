@@ -9,6 +9,8 @@
         "thai": "ไก่",
         "pronunciation": "ကောကိုင်",
         "meaning": "ကြက်",
+        "meaningEn": "chicken",
+        "pronunciationEn": "gor gai",
         "image": "/images/words/kai.svg",
         "audio": "/audio/words/kai.m4a"
       }
@@ -24,6 +26,8 @@
         "thai": "จาน",
         "pronunciation": "ကျောကျန်း",
         "meaning": "ပန်းကန်ပြား",
+        "meaningEn": "plate",
+        "pronunciationEn": "jor jaan",
         "image": "/images/words/chan.svg",
         "audio": "/audio/words/chan.m4a"
       }
@@ -39,6 +43,8 @@
         "thai": "เด็ก",
         "pronunciation": "ဒေါဒေ့",
         "meaning": "ကလေး",
+        "meaningEn": "child",
+        "pronunciationEn": "dor dek",
         "image": "/images/words/dek.svg",
         "audio": "/audio/words/dek.m4a"
       }
@@ -54,6 +60,8 @@
         "thai": "เต่า",
         "pronunciation": "သောသောင်",
         "meaning": "လိပ်",
+        "meaningEn": "turtle",
+        "pronunciationEn": "dtor dtao",
         "image": "/images/words/tao.svg",
         "audio": "/audio/words/tao.m4a"
       }
@@ -69,6 +77,8 @@
         "thai": "ใบไม้",
         "pronunciation": "ဘောဘိုင်မိုင်း",
         "meaning": "သစ်ရွက်",
+        "meaningEn": "leaf",
+        "pronunciationEn": "bor bai-mai",
         "image": "/images/words/baimai.svg",
         "audio": "/audio/words/baimai.m4a"
       }
@@ -84,6 +94,8 @@
         "thai": "ปลา",
         "pronunciation": "ပေါပလား",
         "meaning": "ငါး",
+        "meaningEn": "fish",
+        "pronunciationEn": "bpor bplaa",
         "image": "/images/words/pla.svg",
         "audio": "/audio/words/pla.m4a"
       }
@@ -99,6 +111,8 @@
         "thai": "อ่าง",
         "pronunciation": "အောအန်",
         "meaning": "ဇလုံ /ဘေစင်",
+        "meaningEn": "basin",
+        "pronunciationEn": "or aang",
         "image": "/images/words/ang.svg",
         "audio": "/audio/words/ang.m4a"
       }
@@ -114,6 +128,8 @@
         "thai": "ชฎา",
         "pronunciation": "ဒေါချဒါး",
         "meaning": "ထိုင်းခေါင်းဆောင်း",
+        "meaningEn": "Thai headdress",
+        "pronunciationEn": "dor cha-daa",
         "image": "/images/words/chada.svg",
         "audio": "/audio/words/chada.m4a"
       }
@@ -129,6 +145,8 @@
         "thai": "ปฏัก",
         "pronunciation": "သောပါသက်",
         "meaning": "ချွန်း / လှံတံ",
+        "meaningEn": "goad",
+        "pronunciationEn": "dtor bpa-dtak",
         "image": "/images/words/patak.svg",
         "audio": "/audio/words/patak.m4a"
       }
@@ -144,6 +162,8 @@
         "thai": "ไข่",
         "pronunciation": "ခေါခိုင်",
         "meaning": "ဥ",
+        "meaningEn": "egg",
+        "pronunciationEn": "khor khai",
         "image": "/images/words/khai.svg",
         "audio": "/audio/words/khai.m4a"
       }
@@ -159,6 +179,8 @@
         "thai": "ขวด",
         "pronunciation": "ခေါခုဝပ်",
         "meaning": "ပုလင်း",
+        "meaningEn": "bottle",
+        "pronunciationEn": "khor khuat",
         "image": "/images/words/khuat.svg",
         "audio": "/audio/words/khuat.m4a"
       }
@@ -174,6 +196,8 @@
         "thai": "ฉิ่ง",
         "pronunciation": "ချောချင်",
         "meaning": "ထိုင်းတူရိယာ",
+        "meaningEn": "small cymbals",
+        "pronunciationEn": "chor ching",
         "image": "/images/words/ching.svg",
         "audio": "/audio/words/ching.m4a"
       }
@@ -189,6 +213,8 @@
         "thai": "ถุง",
         "pronunciation": "ထောထွန်",
         "meaning": "အိတ်",
+        "meaningEn": "bag",
+        "pronunciationEn": "thor thung",
         "image": "/images/words/thung.svg",
         "audio": "/audio/words/thung.m4a"
       }
@@ -204,6 +230,8 @@
         "thai": "ฐาน",
         "pronunciation": "ထောထန်း",
         "meaning": "အောက်ခံပုလ္လင်",
+        "meaningEn": "pedestal",
+        "pronunciationEn": "thor thaan",
         "image": "/images/words/than.svg",
         "audio": "/audio/words/than.m4a"
       }
@@ -219,6 +247,8 @@
         "thai": "ผึ้ง",
         "pronunciation": "ဖောဖွန့်",
         "meaning": "ပျား",
+        "meaningEn": "bee",
+        "pronunciationEn": "phor phueng",
         "image": "/images/words/phueng.svg",
         "audio": "/audio/words/phueng.m4a"
       }
@@ -234,6 +264,8 @@
         "thai": "ฝา",
         "pronunciation": "Faw Far",
         "meaning": "အဖုံး",
+        "meaningEn": "lid",
+        "pronunciationEn": "for faa",
         "image": "/images/words/fa.svg",
         "audio": "/audio/words/fa.m4a"
       }
@@ -249,6 +281,8 @@
         "thai": "เสือ",
         "pronunciation": "ဆောဆူးရ",
         "meaning": "ကျား",
+        "meaningEn": "tiger",
+        "pronunciationEn": "sor suea",
         "image": "/images/words/suea.svg",
         "audio": "/audio/words/suea.m4a"
       }
@@ -264,6 +298,8 @@
         "thai": "ศาลา",
         "pronunciation": "ဆောဆာလား",
         "meaning": "ဇရပ်",
+        "meaningEn": "pavilion",
+        "pronunciationEn": "sor saa-laa",
         "image": "/images/words/sala.svg",
         "audio": "/audio/words/sala.m4a"
       }
@@ -279,6 +315,8 @@
         "thai": "ฤาษี",
         "pronunciation": "ဆောရူဆီး",
         "meaning": "ရသေ့",
+        "meaningEn": "hermit",
+        "pronunciationEn": "sor rue-sii",
         "image": "/images/words/ruesi.svg",
         "audio": "/audio/words/ruesi.m4a"
       }
@@ -294,6 +332,8 @@
         "thai": "หีบ",
         "pronunciation": "ဟောဟစ်",
         "meaning": "ရတနာသေတ္တာ",
+        "meaningEn": "chest",
+        "pronunciationEn": "hor hiip",
         "image": "/images/words/hip.svg",
         "audio": "/audio/words/hip.m4a"
       }
@@ -309,6 +349,8 @@
         "thai": "ควาย",
         "pronunciation": "ခေါခွိုင်း",
         "meaning": "ကျွဲ",
+        "meaningEn": "buffalo",
+        "pronunciationEn": "khor khwaai",
         "image": "/images/words/khwai.svg",
         "audio": "/audio/words/khwai.m4a"
       }
@@ -324,6 +366,8 @@
         "thai": "คน",
         "pronunciation": "ခေါခွန်",
         "meaning": "လူ",
+        "meaningEn": "person",
+        "pronunciationEn": "khor khon",
         "image": "/images/words/khon.svg",
         "audio": "/audio/words/khon.m4a"
       }
@@ -339,6 +383,8 @@
         "thai": "ระฆัง",
         "pronunciation": "ခေါရခန်",
         "meaning": "ခေါင်းလောင်း",
+        "meaningEn": "bell",
+        "pronunciationEn": "khor ra-khang",
         "image": "/images/words/rakhang.svg",
         "audio": "/audio/words/rakhang.m4a"
       }
@@ -354,6 +400,8 @@
         "thai": "งู",
         "pronunciation": "ငေါငူး",
         "meaning": "မြွေ",
+        "meaningEn": "snake",
+        "pronunciationEn": "ngor nguu",
         "image": "/images/words/ngu.svg",
         "audio": "/audio/words/ngu.m4a"
       }
@@ -369,6 +417,8 @@
         "thai": "ช้าง",
         "pronunciation": "ချောချန်း",
         "meaning": "ဆင်",
+        "meaningEn": "elephant",
+        "pronunciationEn": "chor chaang",
         "image": "/images/words/chang.svg",
         "audio": "/audio/words/chang.m4a"
       }
@@ -384,6 +434,8 @@
         "thai": "โซ่",
         "pronunciation": "ဆောဆို့",
         "meaning": "ချိန်းကြိုး",
+        "meaningEn": "chain",
+        "pronunciationEn": "sor soo",
         "image": "/images/words/so.svg",
         "audio": "/audio/words/so.m4a"
       }
@@ -399,6 +451,8 @@
         "thai": "เฌอ",
         "pronunciation": "ချောချေး",
         "meaning": "သစ်ပင်",
+        "meaningEn": "tree",
+        "pronunciationEn": "chor cher",
         "image": "/images/words/choe.svg",
         "audio": "/audio/words/choe.m4a"
       }
@@ -414,6 +468,8 @@
         "thai": "หญิง",
         "pronunciation": "ယောယင်/ယောဖူးယင်",
         "meaning": "အမျိုးသမီး",
+        "meaningEn": "woman",
+        "pronunciationEn": "yor ying",
         "image": "/images/words/ying.svg",
         "audio": "/audio/words/ying.m4a"
       }
@@ -429,6 +485,8 @@
         "thai": "มณโฑ",
         "pronunciation": "ထောမွန်ထိုး",
         "meaning": "ရာမရနမင်းသမီး",
+        "meaningEn": "Queen Montho",
+        "pronunciationEn": "thor mon-thoo",
         "image": "/images/words/montho.svg",
         "audio": "/audio/words/montho.m4a"
       }
@@ -444,6 +502,8 @@
         "thai": "ผู้เฒ่า",
         "pronunciation": "ထောဖူ့ထောင်း",
         "meaning": "လူကြီး",
+        "meaningEn": "old man",
+        "pronunciationEn": "thor phuu-thao",
         "image": "/images/words/phuthao.svg",
         "audio": "/audio/words/phuthao.m4a"
       }
@@ -459,6 +519,8 @@
         "thai": "เณร",
         "pronunciation": "နောနင်း",
         "meaning": "ကိုရင်",
+        "meaningEn": "novice monk",
+        "pronunciationEn": "nor neen",
         "image": "/images/words/nen.svg",
         "audio": "/audio/words/nen.m4a"
       }
@@ -474,6 +536,8 @@
         "thai": "ทหาร",
         "pronunciation": "ထောထဟန်",
         "meaning": "စစ်သား",
+        "meaningEn": "soldier",
+        "pronunciationEn": "thor tha-haan",
         "image": "/images/words/thahan.svg",
         "audio": "/audio/words/thahan.m4a"
       }
@@ -489,6 +553,8 @@
         "thai": "ธง",
         "pronunciation": "ထောထုံး",
         "meaning": "အလံ",
+        "meaningEn": "flag",
+        "pronunciationEn": "thor thong",
         "image": "/images/words/thong.svg",
         "audio": "/audio/words/thong.m4a"
       }
@@ -504,6 +570,8 @@
         "thai": "หนู",
         "pronunciation": "နောနူ",
         "meaning": "ကြွက်",
+        "meaningEn": "mouse",
+        "pronunciationEn": "nor nuu",
         "image": "/images/words/nu.svg",
         "audio": "/audio/words/nu.m4a"
       }
@@ -519,6 +587,8 @@
         "thai": "พาน",
         "pronunciation": "ဖောဖန်း",
         "meaning": "ဆွမ်းအုပ်/လင်ဗန်း",
+        "meaningEn": "offering tray",
+        "pronunciationEn": "phor phaan",
         "image": "/images/words/phan.svg",
         "audio": "/audio/words/phan.m4a"
       }
@@ -534,6 +604,8 @@
         "thai": "ฟัน",
         "pronunciation": "Faw Fan",
         "meaning": "သွား",
+        "meaningEn": "tooth",
+        "pronunciationEn": "for fan",
         "image": "/images/words/fan.svg",
         "audio": "/audio/words/fan.m4a"
       }
@@ -549,6 +621,8 @@
         "thai": "สำเภา",
         "pronunciation": "ဖောဆန်ဖောင်း",
         "meaning": "တရုတ်လှေ",
+        "meaningEn": "junk (sailing ship)",
+        "pronunciationEn": "phor sam-phao",
         "image": "/images/words/samphao.svg",
         "audio": "/audio/words/samphao.m4a"
       }
@@ -564,6 +638,8 @@
         "thai": "ม้า",
         "pronunciation": "မောမား",
         "meaning": "မြင်း",
+        "meaningEn": "horse",
+        "pronunciationEn": "mor maa",
         "image": "/images/words/ma.svg",
         "audio": "/audio/words/ma.m4a"
       }
@@ -579,6 +655,8 @@
         "thai": "ยักษ์",
         "pronunciation": "ယောယက်",
         "meaning": "ဘီလူး",
+        "meaningEn": "giant",
+        "pronunciationEn": "yor yak",
         "image": "/images/words/yak.svg",
         "audio": "/audio/words/yak.m4a"
       }
@@ -594,6 +672,8 @@
         "thai": "เรือ",
         "pronunciation": "ရောရူရ",
         "meaning": "လှေ",
+        "meaningEn": "boat",
+        "pronunciationEn": "ror ruea",
         "image": "/images/words/ruea.svg",
         "audio": "/audio/words/ruea.m4a"
       }
@@ -609,6 +689,8 @@
         "thai": "ลิง",
         "pronunciation": "လောလင်း",
         "meaning": "မျောက်",
+        "meaningEn": "monkey",
+        "pronunciationEn": "lor ling",
         "image": "/images/words/ling.svg",
         "audio": "/audio/words/ling.m4a"
       }
@@ -624,6 +706,8 @@
         "thai": "แหวน",
         "pronunciation": "ဝေါဝယ်(န်)",
         "meaning": "လက်စွပ်",
+        "meaningEn": "ring",
+        "pronunciationEn": "wor waen",
         "image": "/images/words/waen.svg",
         "audio": "/audio/words/waen.m4a"
       }
@@ -639,6 +723,8 @@
         "thai": "จุฬา",
         "pronunciation": "လောကျုလား",
         "meaning": "စွန်",
+        "meaningEn": "kite",
+        "pronunciationEn": "lor ju-laa",
         "image": "/images/words/chula.svg",
         "audio": "/audio/words/chula.m4a"
       }
@@ -654,6 +740,8 @@
         "thai": "นกฮูก",
         "pronunciation": "ဟောနို(က်)ဟု(က်)",
         "meaning": "ဇီးကွက်",
+        "meaningEn": "owl",
+        "pronunciationEn": "hor nok-huuk",
         "image": "/images/words/nokhuk.svg",
         "audio": "/audio/words/nokhuk.m4a"
       }
