@@ -43,6 +43,9 @@ const Home = () => {
         <ButtonLink to="/tones" variant="secondary" fullWidth>
           {t('home.learnTones')}
         </ButtonLink>
+        <ButtonLink to="/meanings" variant="secondary" fullWidth>
+          {t('home.learnMeanings')}
+        </ButtonLink>
         <ButtonLink to="/practice/consonants" fullWidth>
           {t('home.practiceConsonants')}
         </ButtonLink>

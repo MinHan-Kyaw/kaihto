@@ -1,7 +1,15 @@
 import { consonants, vowels } from '../data';
 import type { Vowel } from '../types/learning';
 
-import { combineVowel, generateVowelQuestions, getSyllableTone, getVowelAnswer, getVowelLabel, isCombinable } from './vowels';
+import {
+  combineVowel,
+  findSyllable,
+  generateVowelQuestions,
+  getSyllableTone,
+  getVowelAnswer,
+  getVowelLabel,
+  isCombinable,
+} from './vowels';
 
 const vowel = (id: string): Vowel => vowels.find((item) => item.id === id) as Vowel;
 const seededRandom =
@@ -56,6 +64,23 @@ describe('getSyllableTone', () => {
     expect(getSyllableTone({ class: 'low' }, vowel('-ะ'))).toBe('high');
     expect(getSyllableTone({ class: 'high' }, vowel('-า'))).toBe('rising');
     expect(getSyllableTone({ class: 'high' }, vowel('ไ-'))).toBe('rising');
+  });
+});
+
+describe('findSyllable', () => {
+  it('finds the consonant and vowel that spell a syllable', () => {
+    const spelling = findSyllable('เขา', consonants, vowels);
+
+    expect(spelling?.consonant.character).toBe('ข');
+    expect(spelling?.vowel.id).toBe('เ-า');
+    expect(findSyllable('ทำ', consonants, vowels)?.vowel.id).toBe('-ำ');
+  });
+
+  describe('given text that is not one open syllable', () => {
+    it('finds nothing', () => {
+      expect(findSyllable('ไก่', consonants, vowels)).toBeUndefined();
+      expect(findSyllable('ภูเขา', consonants, vowels)).toBeUndefined();
+    });
   });
 });
 

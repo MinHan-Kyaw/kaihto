@@ -35,17 +35,17 @@ Run a single test file: `npx vitest run src/helpers/practice.test.ts`
 ```text
 src/
 ├── components/   Reusable, presentational UI. One folder per component: index.tsx, index.test.tsx
-├── screens/      Page-level composition (Home, Consonants, Vowels, Tones, PracticeCategories, Practice, VowelPractice). Screens own state and wire services.
+├── screens/      Page-level composition (Home, Consonants, Vowels, Tones, Meanings, PracticeCategories, Practice, VowelPractice). Screens own state and wire services.
 ├── data/         Learning content JSON + typed loader (index.ts) + data validation test
-├── helpers/      Pure functions (randomizeArray, practice engine, vocabulary, tones, vowels, language, assetUrl)
+├── helpers/      Pure functions (randomizeArray, practice engine, vocabulary, tones, vowels, language, thaiInk, assetUrl)
 ├── i18n/         UI text: en.yml, mm.yml (Burmese), t() and the language context
 ├── constants/    Shared constants (practice question/option counts)
 ├── services/     Side-effect wrappers (audio playback, feedback sounds, speech recognition, Thai speech synthesis, picture preloading)
 ├── types/        Shared TypeScript types for learning data
 └── tests/        Test setup and shared fixtures
 public/
-├── images/words/ Vocabulary pictures (.svg, Fluent Emoji flat style)
-└── audio/words/  Thai audio (.m4a)
+├── images/words/ Vocabulary pictures (.svg, Fluent Emoji flat style); images/meanings/ for the Meanings page
+└── audio/words/  Thai audio (.m4a); audio/meanings/ for the Meanings page
 ```
 
 ## Coding conventions
@@ -102,6 +102,8 @@ public/
   from practice.
 - Audio: `public/audio/words/<romanized-slug>.m4a` (AAC). Audio is the **Thai** recitation of the full letter name,
   `<consonant>อ <word>` ("กอ ไก่"), matching the Burmese pronunciation — even though the screen shows only `ไก่`.
+- Meanings words (`src/data/meanings.json`, the source's chapter 3) have the Thai word as id; words spelt alike add the
+  English meaning (`กา-kettle`, `กา-crow`). Their audio says just the word, `public/audio/meanings/<slug>.m4a`.
 - Vowel ids are the written form with `-` for the consonant (`-ะ`, `เ-ือ`); tone rules live in `src/helpers/tones.ts`.
   Vowel audio, `public/audio/vowels/<sound>.m4a`, says the vowel on `อ` (`-ะ` → "อะ").
 - Full procedure: [docs/content-management.md](docs/content-management.md).

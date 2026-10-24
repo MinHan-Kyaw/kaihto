@@ -9,6 +9,9 @@ A responsive, client-side web app for Burmese-speaking learners studying Thai co
 - **Consonants:** browse the 44 Thai consonants by class (Middle, High, Low); the class tabs stay pinned while you
   scroll. Each card shows the letter, a picture, the Thai word, its Burmese meaning and pronunciation, and plays the Thai
   letter name (e.g. "กอ ไก่").
+- **Meanings:** the 60 words of the source book's chapter 3, each with a picture, the Thai word, its meaning and its
+  Thai audio; the Text tab shows the Thai word, its meaning and each syllable's tone as a small pitch curve, any of which
+  can be hidden for self-testing.
 - **Practice:** a picture quiz. Pick the matching answer, shown as letter and word (`ก (ไก่)`) with its Burmese
   pronunciation, hear it, then press Next: a chime and ✓ for a correct answer, a low tone and ✗ for a wrong one.
   - **Number of questions:** 10 by default; set 5–30 in the ⋮ menu with − / + or by typing a number.
