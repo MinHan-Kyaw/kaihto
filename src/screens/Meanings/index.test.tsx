@@ -58,7 +58,7 @@ describe('Meanings', () => {
   });
 
   describe('given the text tab', () => {
-    it('shows only the Thai word and meaning on compact cards', () => {
+    it('shows only the tone, Thai word and meaning on compact cards', () => {
       renderMeanings('/meanings/text');
 
       const cards = screen.getAllByRole('article');
@@ -69,11 +69,29 @@ describe('Meanings', () => {
       expect(screen.queryByRole('button', { name: /Play Thai audio/ })).not.toBeInTheDocument();
     });
 
+    it('shows the tone of each syllable above the Thai word', () => {
+      renderMeanings('/meanings/text');
+
+      expect(screen.getByRole('article', { name: 'ภูเขา' })).toHaveTextContent('Tone Mid Rising');
+      expect(screen.getByRole('article', { name: 'มะลิ' })).toHaveTextContent('Tone High High');
+      expect(screen.getByRole('article', { name: 'ใจ' })).toHaveTextContent('Tone Mid');
+    });
+
+    it('hides the tones when Tone is unticked', async () => {
+      renderMeanings('/meanings/text');
+
+      await userEvent.click(screen.getByRole('button', { name: 'Card options' }));
+      await userEvent.click(screen.getByRole('checkbox', { name: 'Tone' }));
+
+      expect(screen.getByRole('article', { name: 'ภูเขา' })).not.toHaveTextContent('Rising');
+    });
+
     it('hides the parts that are unticked, keeping at least one', async () => {
       renderMeanings('/meanings/text');
 
       await userEvent.click(screen.getByRole('button', { name: 'Card options' }));
       await userEvent.click(screen.getByRole('checkbox', { name: 'Meaning' }));
+      await userEvent.click(screen.getByRole('checkbox', { name: 'Tone' }));
 
       expect(screen.getByRole('article', { name: 'มือ' })).not.toHaveTextContent('hand');
       expect(screen.getByRole('checkbox', { name: 'Thai' })).toBeDisabled();
@@ -94,6 +112,7 @@ describe('Meanings', () => {
       render(inBurmese(meaningsAt('/meanings/text')));
 
       expect(screen.getByRole('button', { name: /^စာသား/ })).toHaveAttribute('aria-pressed', 'true');
+      expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('အသံ အလယ်');
       expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('လက်');
     });
   });

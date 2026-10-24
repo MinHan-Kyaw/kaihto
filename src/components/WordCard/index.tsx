@@ -4,8 +4,9 @@ import { assetUrl } from '../../helpers/assetUrl';
 import { classNames } from '../../helpers/classNames';
 import { getContentText, getMeaning } from '../../helpers/language';
 import { useTranslation } from '../../i18n';
-import type { MeaningWord } from '../../types/learning';
+import type { MeaningWord, Tone } from '../../types/learning';
 import AudioButton from '../AudioButton';
+import ToneContour from '../ToneContour';
 
 type CardSize = 'default' | 'compact';
 
@@ -23,6 +24,7 @@ interface WordCardProps {
   showPicture?: boolean;
   showThai?: boolean;
   showMeaning?: boolean;
+  tones?: { syllable: string; tone: Tone }[]; // one per syllable, shown above the Thai word
 }
 
 const SIZE_CLASS_NAMES: Record<CardSize, { card: string; picture: string; thai: string; meaning: string }> = {
@@ -47,6 +49,7 @@ const WordCard = ({
   showPicture = true,
   showThai = true,
   showMeaning = true,
+  tones,
 }: WordCardProps) => {
   const { lang, t } = useTranslation();
   const content = getContentText(lang);
@@ -78,6 +81,19 @@ const WordCard = ({
       >
         {word.thai}
       </h2>
+      {tones && (
+        <p className="-order-1 flex flex-wrap justify-center gap-x-2 text-xs font-bold text-ink-muted">
+          <span className="sr-only">{t('cards.tone')}</span>
+          {tones.map(({ syllable, tone }) => (
+            // The leading space keeps the names apart for screen readers; flex layout ignores it.
+            <span key={syllable} className="inline-flex items-center gap-0.5">
+              {' '}
+              <ToneContour pitch={tone.pitch} size="small" />
+              {t(`tones.${tone.id}.shortName`)}
+            </span>
+          ))}
+        </p>
+      )}
       {showMeaning && (
         <p className={classNames('leading-[1.6] font-bold text-brand', content.font, sizeClassNames.meaning)} lang={content.lang}>
           {getMeaning(word, lang)}

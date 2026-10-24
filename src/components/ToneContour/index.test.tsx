@@ -10,5 +10,16 @@ describe('ToneContour', () => {
     expect(svg).toHaveAttribute('aria-hidden', 'true');
     expect(svg).toHaveAttribute('data-pitch', '14');
     expect(svg?.querySelector('path')).toHaveAttribute('d', 'M4 28 C20 28 28 10 44 10');
+    expect(svg).toHaveAttribute('data-size', 'default');
+  });
+
+  describe('given the small size', () => {
+    it('draws the same pitch', () => {
+      const { container } = render(<ToneContour pitch={[1, 4]} size="small" />);
+      const svg = container.querySelector('svg');
+
+      expect(svg).toHaveAttribute('data-size', 'small');
+      expect(svg).toHaveAttribute('data-pitch', '14');
+    });
   });
 });

@@ -2,18 +2,21 @@ import { render, screen } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { inBurmese } from '../../tests/fixtures';
-import type { MeaningWord } from '../../types/learning';
+import type { MeaningWord, Tone } from '../../types/learning';
 
 import WordCard from '.';
 
 const word: MeaningWord = {
   id: 'หู',
   thai: 'หู',
+  syllables: ['หู'],
   meaning: 'နားရွက်',
   meaningEn: 'ear',
   image: '/images/meanings/hu.svg',
   audio: '/audio/meanings/hu.m4a',
 };
+
+const risingTone: Tone = { id: 'rising', thaiName: 'เสียงจัตวา', example: 'ขา', pitch: [1, 4], audio: '/audio/tones/rising.m4a' };
 
 describe('WordCard', () => {
   it('renders the picture, Thai word and meaning', () => {
@@ -58,6 +61,25 @@ describe('WordCard', () => {
 
       expect(screen.getByRole('heading', { name: 'หู' })).toHaveClass('sr-only');
       expect(screen.queryByText('ear')).not.toBeInTheDocument();
+    });
+  });
+
+  describe('given the tones of its syllables', () => {
+    it('shows each tone with its pitch above the Thai word', () => {
+      render(<WordCard word={word} tones={[{ syllable: 'หู', tone: risingTone }]} />);
+
+      const tones = screen.getByText('Rising').closest('p');
+
+      expect(tones).toHaveTextContent('Tone Rising');
+      expect(tones?.querySelector('svg')).toHaveAttribute('data-pitch', '14');
+    });
+  });
+
+  describe('given no tones', () => {
+    it('shows no tone', () => {
+      render(<WordCard word={word} />);
+
+      expect(screen.queryByText('Tone')).not.toBeInTheDocument();
     });
   });
 

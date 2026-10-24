@@ -2,6 +2,7 @@
   {
     "id": "กา-kettle",
     "thai": "กา",
+    "syllables": ["กา"],
     "meaning": "ရေနွေးအိုး",
     "meaningEn": "kettle",
     "image": "/images/meanings/ka-kettle.svg",
@@ -10,6 +11,7 @@
   {
     "id": "กา-crow",
     "thai": "กา",
+    "syllables": ["กา"],
     "meaning": "ကျီးကန်း",
     "meaningEn": "crow",
     "image": "/images/meanings/ka-crow.svg",
@@ -18,6 +20,7 @@
   {
     "id": "หู",
     "thai": "หู",
+    "syllables": ["หู"],
     "meaning": "နားရွက်",
     "meaningEn": "ear",
     "image": "/images/meanings/hu.svg",
@@ -26,6 +29,7 @@
   {
     "id": "นา",
     "thai": "นา",
+    "syllables": ["นา"],
     "meaning": "လယ်",
     "meaningEn": "rice field",
     "image": "/images/meanings/na.svg",
@@ -34,6 +38,7 @@
   {
     "id": "ตา-eye",
     "thai": "ตา",
+    "syllables": ["ตา"],
     "meaning": "မျက်စိ",
     "meaningEn": "eye",
     "image": "/images/meanings/ta-eye.svg",
@@ -42,6 +47,7 @@
   {
     "id": "ตา-grandfather",
     "thai": "ตา",
+    "syllables": ["ตา"],
     "meaning": "အဘိုး",
     "meaningEn": "grandfather",
     "image": "/images/meanings/ta-grandfather.svg",
@@ -50,6 +56,7 @@
   {
     "id": "สี",
     "thai": "สี",
+    "syllables": ["สี"],
     "meaning": "အရောင်",
     "meaningEn": "colour",
     "image": "/images/meanings/si.svg",
@@ -58,6 +65,7 @@
   {
     "id": "มือ",
     "thai": "มือ",
+    "syllables": ["มือ"],
     "meaning": "လက်",
     "meaningEn": "hand",
     "image": "/images/meanings/mue.svg",
@@ -66,6 +74,7 @@
   {
     "id": "ไป",
     "thai": "ไป",
+    "syllables": ["ไป"],
     "meaning": "သွားသည်",
     "meaningEn": "go",
     "image": "/images/meanings/pai.svg",
@@ -74,6 +83,7 @@
   {
     "id": "แห",
     "thai": "แห",
+    "syllables": ["แห"],
     "meaning": "ပိုက်ကွန်",
     "meaningEn": "cast net",
     "image": "/images/meanings/hae.svg",
@@ -82,6 +92,7 @@
   {
     "id": "มา",
     "thai": "มา",
+    "syllables": ["มา"],
     "meaning": "လာသည်",
     "meaningEn": "come",
     "image": "/images/meanings/ma.svg",
@@ -90,6 +101,7 @@
   {
     "id": "ภูเขา",
     "thai": "ภูเขา",
+    "syllables": ["ภู", "เขา"],
     "meaning": "တောင်တန်း",
     "meaningEn": "mountain",
     "image": "/images/meanings/phukhao.svg",
@@ -98,6 +110,7 @@
   {
     "id": "แกะ",
     "thai": "แกะ",
+    "syllables": ["แกะ"],
     "meaning": "သိုး",
     "meaningEn": "sheep",
     "image": "/images/meanings/kae.svg",
@@ -106,6 +119,7 @@
   {
     "id": "ขา",
     "thai": "ขา",
+    "syllables": ["ขา"],
     "meaning": "ခြေထောက်",
     "meaningEn": "leg",
     "image": "/images/meanings/kha.svg",
@@ -114,6 +128,7 @@
   {
     "id": "แพะ",
     "thai": "แพะ",
+    "syllables": ["แพะ"],
     "meaning": "ဆိတ်",
     "meaningEn": "goat",
     "image": "/images/meanings/phae.svg",
@@ -122,6 +137,7 @@
   {
     "id": "กะทิ",
     "thai": "กะทิ",
+    "syllables": ["กะ", "ทิ"],
     "meaning": "အုန်းနို့",
     "meaningEn": "coconut milk",
     "image": "/images/meanings/kathi.svg",
@@ -130,6 +146,7 @@
   {
     "id": "เตะ",
     "thai": "เตะ",
+    "syllables": ["เตะ"],
     "meaning": "ကန်သည်",
     "meaningEn": "kick",
     "image": "/images/meanings/te.svg",
@@ -138,6 +155,7 @@
   {
     "id": "ฝา",
     "thai": "ฝา",
+    "syllables": ["ฝา"],
     "meaning": "အဖုံး",
     "meaningEn": "lid",
     "image": "/images/words/fa.svg",
@@ -146,6 +164,7 @@
   {
     "id": "และ",
     "thai": "และ",
+    "syllables": ["และ"],
     "meaning": "နှင့်",
     "meaningEn": "and",
     "image": "/images/meanings/lae.svg",
@@ -154,6 +173,7 @@
   {
     "id": "เยอะแยะ",
     "thai": "เยอะแยะ",
+    "syllables": ["เยอะ", "แยะ"],
     "meaning": "ပေါများသည်",
     "meaningEn": "a lot",
     "image": "/images/meanings/yoeyae.svg",
@@ -162,6 +182,7 @@
   {
     "id": "โต",
     "thai": "โต",
+    "syllables": ["โต"],
     "meaning": "ကြီးသည်",
     "meaningEn": "grow up",
     "image": "/images/meanings/to.svg",
@@ -170,6 +191,7 @@
   {
     "id": "เสือ",
     "thai": "เสือ",
+    "syllables": ["เสือ"],
     "meaning": "ကျား",
     "meaningEn": "tiger",
     "image": "/images/words/suea.svg",
@@ -178,6 +200,7 @@
   {
     "id": "ทำ",
     "thai": "ทำ",
+    "syllables": ["ทำ"],
     "meaning": "လုပ်သည်",
     "meaningEn": "do",
     "image": "/images/meanings/tham.svg",
@@ -186,6 +209,7 @@
   {
     "id": "อะไร",
     "thai": "อะไร",
+    "syllables": ["อะ", "ไร"],
     "meaning": "ဘာလဲ",
     "meaningEn": "what",
     "image": "/images/meanings/arai.svg",
@@ -194,6 +218,7 @@
   {
     "id": "ดู",
     "thai": "ดู",
+    "syllables": ["ดู"],
     "meaning": "ကြည့်သည်",
     "meaningEn": "look",
     "image": "/images/meanings/du.svg",
@@ -202,6 +227,7 @@
   {
     "id": "หัว",
     "thai": "หัว",
+    "syllables": ["หัว"],
     "meaning": "ခေါင်း",
     "meaningEn": "head",
     "image": "/images/meanings/hua.svg",
@@ -210,6 +236,7 @@
   {
     "id": "รอ",
     "thai": "รอ",
+    "syllables": ["รอ"],
     "meaning": "စောင့်သည်",
     "meaningEn": "wait",
     "image": "/images/meanings/ro.svg",
@@ -218,6 +245,7 @@
   {
     "id": "หัวเราะ",
     "thai": "หัวเราะ",
+    "syllables": ["หัว", "เราะ"],
     "meaning": "ရယ်သည်",
     "meaningEn": "laugh",
     "image": "/images/meanings/huaro.svg",
@@ -226,6 +254,7 @@
   {
     "id": "ดี",
     "thai": "ดี",
+    "syllables": ["ดี"],
     "meaning": "ကောင်းသည်",
     "meaningEn": "good",
     "image": "/images/meanings/di.svg",
@@ -234,6 +263,7 @@
   {
     "id": "ผุ",
     "thai": "ผุ",
+    "syllables": ["ผุ"],
     "meaning": "ဆွေးမြေ့သည်",
     "meaningEn": "rotten",
     "image": "/images/meanings/phu.svg",
@@ -242,6 +272,7 @@
   {
     "id": "ยา",
     "thai": "ยา",
+    "syllables": ["ยา"],
     "meaning": "ဆေး",
     "meaningEn": "medicine",
     "image": "/images/meanings/ya.svg",
@@ -250,6 +281,7 @@
   {
     "id": "มือถือ",
     "thai": "มือถือ",
+    "syllables": ["มือ", "ถือ"],
     "meaning": "လက်ကိုင်ဖုန်း",
     "meaningEn": "mobile phone",
     "image": "/images/meanings/muethue.svg",
@@ -258,6 +290,7 @@
   {
     "id": "ใจ",
     "thai": "ใจ",
+    "syllables": ["ใจ"],
     "meaning": "စိတ်",
     "meaningEn": "heart",
     "image": "/images/meanings/chai.svg",
@@ -266,6 +299,7 @@
   {
     "id": "หา",
     "thai": "หา",
+    "syllables": ["หา"],
     "meaning": "ရှာသည်",
     "meaningEn": "look for",
     "image": "/images/meanings/ha.svg",
@@ -274,6 +308,7 @@
   {
     "id": "นะ",
     "thai": "นะ",
+    "syllables": ["นะ"],
     "meaning": "နော်",
     "meaningEn": "softening particle",
     "image": "/images/meanings/na-particle.svg",
@@ -282,6 +317,7 @@
   {
     "id": "ดีใจ",
     "thai": "ดีใจ",
+    "syllables": ["ดี", "ใจ"],
     "meaning": "ဝမ်းသာသည်",
     "meaningEn": "glad",
     "image": "/images/meanings/dichai.svg",
@@ -290,6 +326,7 @@
   {
     "id": "ไอ",
     "thai": "ไอ",
+    "syllables": ["ไอ"],
     "meaning": "ချောင်းဆိုးသည်",
     "meaningEn": "cough",
     "image": "/images/meanings/ai.svg",
@@ -298,6 +335,7 @@
   {
     "id": "ผี",
     "thai": "ผี",
+    "syllables": ["ผี"],
     "meaning": "သရဲ",
     "meaningEn": "ghost",
     "image": "/images/meanings/phi.svg",
@@ -306,6 +344,7 @@
   {
     "id": "มี",
     "thai": "มี",
+    "syllables": ["มี"],
     "meaning": "ရှိသည်",
     "meaningEn": "have",
     "image": "/images/meanings/mi.svg",
@@ -314,6 +353,7 @@
   {
     "id": "ยาไอ",
     "thai": "ยาไอ",
+    "syllables": ["ยา", "ไอ"],
     "meaning": "ချောင်းဆိုးပျောက်ဆေး",
     "meaningEn": "cough medicine",
     "image": "/images/meanings/yaai.svg",
@@ -322,6 +362,7 @@
   {
     "id": "ปู",
     "thai": "ปู",
+    "syllables": ["ปู"],
     "meaning": "ဂဏန်း",
     "meaningEn": "crab",
     "image": "/images/meanings/pu.svg",
@@ -330,6 +371,7 @@
   {
     "id": "ถู",
     "thai": "ถู",
+    "syllables": ["ถู"],
     "meaning": "ပွတ်တိုက်သည်",
     "meaningEn": "rub",
     "image": "/images/meanings/thu.svg",
@@ -338,6 +380,7 @@
   {
     "id": "รู",
     "thai": "รู",
+    "syllables": ["รู"],
     "meaning": "တွင်း/အပေါက်",
     "meaningEn": "hole",
     "image": "/images/meanings/ru.svg",
@@ -346,6 +389,7 @@
   {
     "id": "มะลิ",
     "thai": "มะลิ",
+    "syllables": ["มะ", "ลิ"],
     "meaning": "စံပယ်ပန်း",
     "meaningEn": "jasmine",
     "image": "/images/meanings/mali.svg",
@@ -354,6 +398,7 @@
   {
     "id": "ปี",
     "thai": "ปี",
+    "syllables": ["ปี"],
     "meaning": "နှစ်",
     "meaningEn": "year",
     "image": "/images/meanings/pi.svg",
@@ -362,6 +407,7 @@
   {
     "id": "ไถ",
     "thai": "ไถ",
+    "syllables": ["ไถ"],
     "meaning": "ထွန်သည်",
     "meaningEn": "plough",
     "image": "/images/meanings/thai.svg",
@@ -370,6 +416,7 @@
   {
     "id": "พา",
     "thai": "พา",
+    "syllables": ["พา"],
     "meaning": "ခေါ်သည်",
     "meaningEn": "take along",
     "image": "/images/meanings/pha-take.svg",
@@ -378,6 +425,7 @@
   {
     "id": "ไถนา",
     "thai": "ไถนา",
+    "syllables": ["ไถ", "นา"],
     "meaning": "လယ်ထွန်သည်",
     "meaningEn": "plough the field",
     "image": "/images/meanings/thaina.svg",
@@ -386,6 +434,7 @@
   {
     "id": "จะ",
     "thai": "จะ",
+    "syllables": ["จะ"],
     "meaning": "မယ်/လိမ့်မည်",
     "meaningEn": "will",
     "image": "/images/meanings/cha.svg",
@@ -394,6 +443,7 @@
   {
     "id": "ขอ",
     "thai": "ขอ",
+    "syllables": ["ขอ"],
     "meaning": "တောင်းသည်",
     "meaningEn": "ask for",
     "image": "/images/meanings/kho.svg",
@@ -402,6 +452,7 @@
   {
     "id": "ใน",
     "thai": "ใน",
+    "syllables": ["ใน"],
     "meaning": "အထဲမှာ",
     "meaningEn": "in",
     "image": "/images/meanings/nai.svg",
@@ -410,6 +461,7 @@
   {
     "id": "โมโห",
     "thai": "โมโห",
+    "syllables": ["โม", "โห"],
     "meaning": "စိတ်ဆိုးသည်",
     "meaningEn": "angry",
     "image": "/images/meanings/moho.svg",
@@ -418,6 +470,7 @@
   {
     "id": "เอา",
     "thai": "เอา",
+    "syllables": ["เอา"],
     "meaning": "ယူသည်",
     "meaningEn": "take",
     "image": "/images/meanings/ao.svg",
@@ -426,6 +479,7 @@
   {
     "id": "ผา",
     "thai": "ผา",
+    "syllables": ["ผา"],
     "meaning": "ကမ်းပါး/နံရံ",
     "meaningEn": "cliff",
     "image": "/images/meanings/pha-cliff.svg",
@@ -434,6 +488,7 @@
   {
     "id": "ไว",
     "thai": "ไว",
+    "syllables": ["ไว"],
     "meaning": "မြန်သည်",
     "meaningEn": "fast",
     "image": "/images/meanings/wai.svg",
@@ -442,6 +497,7 @@
   {
     "id": "พอใจ",
     "thai": "พอใจ",
+    "syllables": ["พอ", "ใจ"],
     "meaning": "ကျေနပ်သည်",
     "meaningEn": "satisfied",
     "image": "/images/meanings/phochai.svg",
@@ -450,6 +506,7 @@
   {
     "id": "อา",
     "thai": "อา",
+    "syllables": ["อา"],
     "meaning": "ဦးလေး/ဒေါ်လေး",
     "meaningEn": "uncle or aunt",
     "image": "/images/meanings/a.svg",
@@ -458,6 +515,7 @@
   {
     "id": "หอ",
     "thai": "หอ",
+    "syllables": ["หอ"],
     "meaning": "စင်/အဆောင်",
     "meaningEn": "tower",
     "image": "/images/meanings/ho.svg",
@@ -466,6 +524,7 @@
   {
     "id": "พอ",
     "thai": "พอ",
+    "syllables": ["พอ"],
     "meaning": "လုံလောက်သည်",
     "meaningEn": "enough",
     "image": "/images/meanings/pho.svg",
@@ -474,6 +533,7 @@
   {
     "id": "เลอะเทอะ",
     "thai": "เลอะเทอะ",
+    "syllables": ["เลอะ", "เทอะ"],
     "meaning": "ညစ်ပတ်သည်",
     "meaningEn": "messy",
     "image": "/images/meanings/loethoe.svg",

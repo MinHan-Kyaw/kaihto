@@ -32,6 +32,7 @@ export interface Consonant {
 export interface MeaningWord {
   id: string; // the Thai word, e.g. "หู"
   thai: string;
+  syllables: string[]; // the word split into open syllables, e.g. ["ภู", "เขา"]; each one's tone follows from its spelling
   meaning: string; // Burmese, from the source
   meaningEn: string;
   image: string;

@@ -1,7 +1,9 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { meanings } from '.';
+import { findSyllable } from '../helpers/vowels';
+
+import { consonants, meanings, vowels } from '.';
 
 const THAI_TEXT = /^[\u0E00-\u0E7F]+$/;
 const MYANMAR_SCRIPT = /^[\u1000-\u109F/]+$/;
@@ -29,6 +31,13 @@ describe('meanings', () => {
     meanings.forEach((word) => {
       expect(word.thai, word.id).toMatch(THAI_TEXT);
       expect(word.thai, word.id).not.toContain('\u0E4D\u0E32');
+    });
+  });
+
+  it('splits every word into open syllables, each spelt by one consonant and vowel, so its tone follows from the rules', () => {
+    meanings.forEach((word) => {
+      expect(word.syllables.join(''), word.id).toBe(word.thai);
+      word.syllables.forEach((syllable) => expect(findSyllable(syllable, consonants, vowels), syllable).toBeDefined());
     });
   });
 

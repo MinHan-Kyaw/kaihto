@@ -71,6 +71,7 @@ A word without Burmese pronunciation is incomplete; do not merge it with a place
 {
   "id": "กา-crow",
   "thai": "กา",
+  "syllables": ["กา"],
   "meaning": "ကျီးကန်း",
   "meaningEn": "crow",
   "image": "/images/meanings/ka-crow.svg",
@@ -79,10 +80,12 @@ A word without Burmese pronunciation is incomplete; do not merge it with a place
 ```
 
 - `id` is the Thai word; words spelt alike add the English meaning (`กา-kettle`, `กา-crow`). Never change it once published.
+- `syllables` splits the word into open syllables (`["ภู", "เขา"]`). Each must be one consonant + one vowel from
+  `vowels.json`, with no tone mark or final consonant, so its tone follows from the rules; the Text tab shows it.
 - `meaning` is the Burmese meaning exactly as the source gives it; a `/` separates the source's alternatives (`တွင်း/အပေါက်`).
 - `image` and `audio` are required. The picture is `public/images/meanings/<romanized-slug>.svg` (or an existing
   `public/images/words/` picture of the same thing, as ฝา and เสือ use); the audio says only the word, so words spelt
-  alike share it. `src/data/meanings.test.ts` checks the fields, Unicode and files.
+  alike share it. `src/data/meanings.test.ts` checks the fields, syllables, Unicode and files.
 
 ## Images
 

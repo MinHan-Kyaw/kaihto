@@ -4,8 +4,9 @@ import { useNavigate } from 'react-router';
 import CardPartsMenu from '../../components/CardPartsMenu';
 import ClassTabs from '../../components/ClassTabs';
 import WordCard from '../../components/WordCard';
-import { meanings } from '../../data';
+import { consonants, meanings, toneById, vowels } from '../../data';
 import { assetUrl } from '../../helpers/assetUrl';
+import { findSyllable, getSyllableTone } from '../../helpers/vowels';
 import { useTranslation } from '../../i18n';
 import { playAudio, stopAudio } from '../../services/audio';
 import type { MeaningWord } from '../../types/learning';
@@ -24,10 +25,21 @@ const tabCounts: Record<MeaningsTabId, number> = { pictures: meanings.length, te
 
 const CARD_PARTS = [
   { id: 'thai', label: 'cards.thai' },
+  { id: 'tone', label: 'cards.tone' },
   { id: 'meaning', label: 'cards.meaning' },
 ] as const;
 
 type CardPart = (typeof CARD_PARTS)[number]['id'];
+
+// Each syllable's tone, from its consonant's class and its vowel's length (the words have no tone marks).
+const getWordTones = (word: MeaningWord) =>
+  word.syllables.flatMap((syllable) => {
+    const spelling = findSyllable(syllable, consonants, vowels);
+
+    return spelling ? [{ syllable, tone: toneById[getSyllableTone(spelling.consonant, spelling.vowel)] }] : [];
+  });
+
+const wordTones = new Map(meanings.map((word) => [word.id, getWordTones(word)]));
 
 const handlePlayAudio = (word: MeaningWord) => {
   void playAudio(assetUrl(word.audio));
@@ -41,7 +53,7 @@ const Meanings = ({ showText = false }: MeaningsProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const selectedTabId: MeaningsTabId = showText ? 'text' : 'pictures';
-  const [shownParts, setShownParts] = useState<Record<CardPart, boolean>>({ thai: true, meaning: true });
+  const [shownParts, setShownParts] = useState<Record<CardPart, boolean>>({ thai: true, tone: true, meaning: true });
 
   useEffect(() => () => stopAudio(), []);
 
@@ -89,6 +101,7 @@ const Meanings = ({ showText = false }: MeaningsProps) => {
                   showPicture={false}
                   showThai={shownParts.thai}
                   showMeaning={shownParts.meaning}
+                  tones={shownParts.tone ? wordTones.get(word.id) : undefined}
                 />
               </li>
             ))}
