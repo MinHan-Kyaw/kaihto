@@ -4,7 +4,9 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { vowelGroups, vowels } from '../../data';
+import { messages } from '../../i18n';
 import { playAudio } from '../../services/audio';
+import { inBurmese } from '../../tests/fixtures';
 
 import Vowels from '.';
 
@@ -125,7 +127,9 @@ describe('Vowels', () => {
       vowelGroups
         .filter((group) => group.id !== 'standalone')
         .forEach((group) => {
-          const cards = within(screen.getByRole('list', { name: group.name })).getAllByRole('article');
+          const cards = within(screen.getByRole('list', { name: messages.en[`vowelGroups.${group.id}.name`] })).getAllByRole(
+            'article'
+          );
 
           expect(cards.map((card) => card.getAttribute('aria-labelledby'))).toEqual(
             vowels.filter((vowel) => vowel.group === group.id).map((vowel) => `vowel-${vowel.id}`)
@@ -139,10 +143,10 @@ describe('Vowels', () => {
       expect(screen.getByRole('button', { name: /^All/ })).toHaveAttribute('aria-pressed', 'true');
     });
 
-    it('shows the vowel with its sound and Burmese pronunciation, without class examples or audio buttons', () => {
+    it('shows the vowel with its sound, without class examples or audio buttons', () => {
       renderVowels('/vowels/all');
 
-      expect(screen.getByRole('article', { name: '◌ิ' })).toHaveTextContent('◌ิ i အိ');
+      expect(screen.getByRole('article', { name: '◌ิ' })).toHaveTextContent(/^◌ิ i$/);
       expect(screen.queryByRole('table')).not.toBeInTheDocument();
       expect(screen.queryByRole('button', { name: /Play Thai audio/ })).not.toBeInTheDocument();
     });
@@ -162,10 +166,35 @@ describe('Vowels', () => {
 
       await userEvent.click(screen.getByRole('button', { name: 'Card options' }));
       await userEvent.click(screen.getByRole('checkbox', { name: 'Sound' }));
-      await userEvent.click(screen.getByRole('checkbox', { name: 'Burmese' }));
 
       expect(screen.getByRole('article', { name: '◌ิ' })).toHaveTextContent(/^◌ิ\s*$/);
       expect(screen.getByRole('checkbox', { name: 'Thai' })).toBeDisabled();
+      expect(screen.queryByRole('checkbox', { name: 'Pronunciation' })).not.toBeInTheDocument();
+    });
+  });
+
+  describe('given the page is in Burmese', () => {
+    it('adds the Burmese pronunciation to the cards and to the card options', async () => {
+      render(
+        inBurmese(
+          <MemoryRouter initialEntries={['/vowels/all']}>
+            <Routes>
+              <Route path="vowels/all" element={<Vowels showAll />} />
+            </Routes>
+          </MemoryRouter>
+        )
+      );
+
+      expect(screen.getByRole('heading', { level: 2, name: 'သရတိုများ' })).toBeInTheDocument();
+      expect(screen.getByRole('article', { name: '◌ิ' })).toHaveTextContent('◌ิ i အိ');
+
+      await userEvent.click(screen.getByRole('button', { name: 'ကတ် ရွေးချယ်စရာ' }));
+
+      expect(screen.getAllByRole('checkbox').map((checkbox) => checkbox.closest('label')?.textContent)).toEqual([
+        'ထိုင်း',
+        'အင်္ဂလိပ်အသံ',
+        'အသံထွက်',
+      ]);
     });
   });
 

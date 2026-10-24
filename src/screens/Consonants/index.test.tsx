@@ -4,7 +4,9 @@ import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
 import { consonantClasses, consonants } from '../../data';
+import { messages } from '../../i18n';
 import { playAudio } from '../../services/audio';
+import { inBurmese } from '../../tests/fixtures';
 
 import Consonants from '.';
 
@@ -29,7 +31,7 @@ describe('Consonants', () => {
     expect(screen.getByRole('heading', { level: 2, name: 'Middle Class' })).toBeInTheDocument();
     expect(getCards()).toHaveLength(9);
     expect(screen.getByRole('article', { name: 'ก' })).toHaveTextContent('ไก่');
-    expect(screen.getByRole('article', { name: 'ก' })).toHaveTextContent('ကောကိုင်');
+    expect(screen.getByRole('article', { name: 'ก' })).toHaveTextContent('chicken (gor gai)');
   });
 
   it('switches to the chosen class and scrolls back to its first letter', async () => {
@@ -92,7 +94,9 @@ describe('Consonants', () => {
         'Low Class',
       ]);
       consonantClasses.forEach((consonantClass) => {
-        const cards = within(screen.getByRole('list', { name: consonantClass.name })).getAllByRole('article');
+        const cards = within(screen.getByRole('list', { name: messages.en[`classes.${consonantClass.id}.name`] })).getAllByRole(
+          'article'
+        );
 
         expect(cards.map((card) => card.getAttribute('aria-labelledby'))).toEqual(
           consonants.filter((consonant) => consonant.class === consonantClass.id).map((consonant) => `consonant-${consonant.id}`)
@@ -105,12 +109,12 @@ describe('Consonants', () => {
       expect(screen.getByRole('button', { name: /^All/ })).toHaveAttribute('aria-pressed', 'true');
     });
 
-    it('shows the letter and Burmese meaning without the picture, Thai word or audio buttons', () => {
+    it('shows the letter, meaning and pronunciation without the picture, Thai word or audio buttons', () => {
       renderConsonants('/consonants/all');
 
       const card = screen.getByRole('article', { name: 'ก' });
 
-      expect(card).toHaveTextContent('ကြက် (ကောကိုင်)');
+      expect(card).toHaveTextContent('chicken (gor gai)');
       expect(within(card).queryByText('ไก่')).not.toBeInTheDocument();
       expect(screen.queryByRole('img')).not.toBeInTheDocument();
       expect(screen.queryByText('Picture coming soon')).not.toBeInTheDocument();
@@ -132,14 +136,40 @@ describe('Consonants', () => {
 
       await userEvent.click(screen.getByRole('button', { name: 'Card options' }));
       await userEvent.click(screen.getByRole('checkbox', { name: 'Thai' }));
-      await userEvent.click(screen.getByRole('checkbox', { name: 'Burmese' }));
+      await userEvent.click(screen.getByRole('checkbox', { name: 'Meaning' }));
 
       const card = screen.getByRole('article', { name: 'ก' });
 
       expect(screen.getByRole('heading', { name: 'ก' })).toHaveClass('sr-only');
-      expect(card).toHaveTextContent('(ကောကိုင်)');
-      expect(card).not.toHaveTextContent('ကြက်');
+      expect(card).toHaveTextContent('(gor gai)');
+      expect(card).not.toHaveTextContent('chicken');
       expect(screen.getByRole('checkbox', { name: 'Pronunciation' })).toBeDisabled();
+    });
+  });
+
+  describe('given the page is in Burmese', () => {
+    it('shows the tabs, headings and cards in Burmese', async () => {
+      render(
+        inBurmese(
+          <MemoryRouter initialEntries={['/consonants/all']}>
+            <Routes>
+              <Route path="consonants/all" element={<Consonants showAll />} />
+            </Routes>
+          </MemoryRouter>
+        )
+      );
+
+      expect(screen.getByRole('button', { name: /^အားလုံး/ })).toHaveAttribute('aria-pressed', 'true');
+      expect(screen.getByRole('heading', { level: 2, name: 'အလယ်သံဗျည်းအုပ်စု' })).toBeInTheDocument();
+      expect(screen.getByRole('article', { name: 'ก' })).toHaveTextContent('ကြက် (ကောကိုင်)');
+
+      await userEvent.click(screen.getByRole('button', { name: 'ကတ် ရွေးချယ်စရာ' }));
+
+      expect(screen.getAllByRole('checkbox').map((checkbox) => checkbox.closest('label')?.textContent)).toEqual([
+        'ထိုင်း',
+        'အဓိပ္ပာယ်',
+        'အသံထွက်',
+      ]);
     });
   });
 

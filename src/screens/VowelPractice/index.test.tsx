@@ -8,6 +8,7 @@ import { generateVowelQuestions } from '../../helpers/vowels';
 import { playAudio } from '../../services/audio';
 import { playFeedbackSound } from '../../services/sound';
 import { speakThai } from '../../services/voice';
+import { inBurmese } from '../../tests/fixtures';
 import type { Consonant, Vowel, VowelQuestion } from '../../types/learning';
 
 import VowelPractice from '.';
@@ -43,7 +44,7 @@ const renderVowelPractice = () =>
     </MemoryRouter>
   );
 
-const SHORT_A = /- a \)/;
+const SHORT_A = /\( a \)/;
 
 const answer = async (name: string | RegExp) => {
   await userEvent.click(screen.getByRole('button', { name }));
@@ -68,7 +69,7 @@ describe('VowelPractice', () => {
         within(screen.getByRole('list', { name: 'Answer options' }))
           .getAllByRole('button')
           .map((button) => button.textContent?.trim())
-      ).toEqual(['( အား - aa )', '( အ - a )', '( အိ - i )']);
+      ).toEqual(['( aa )', '( a )', '( i )']);
       expect(screen.getByRole('button', { name: 'Next' })).toBeDisabled();
     });
 
@@ -82,16 +83,16 @@ describe('VowelPractice', () => {
         'data-status',
         'correct'
       );
-      expect(screen.getByRole('button', { name: 'Hear -ะ' }).closest('p')).toHaveTextContent('-ะ = ( အ - a )');
+      expect(screen.getByRole('button', { name: 'Hear -ะ' }).closest('p')).toHaveTextContent('-ะ = ( a )');
       expect(playFeedbackSound).toHaveBeenCalledWith('correct');
     });
 
     it('reveals the correct sound when answered wrongly', async () => {
       renderVowelPractice();
 
-      await answer(/- aa \)/);
+      await answer(/\( aa \)/);
 
-      expect(screen.getByRole('status')).toHaveTextContent('Incorrect. The answer is ( အ - a ).');
+      expect(screen.getByRole('status')).toHaveTextContent('Incorrect. The answer is ( a ).');
     });
   });
 
@@ -203,6 +204,30 @@ describe('VowelPractice', () => {
       await userEvent.click(screen.getByRole('button', { name: 'Hear ขา' }));
 
       expect(speakThai).toHaveBeenCalledWith('ขา');
+    });
+  });
+
+  describe('given the page is in Burmese', () => {
+    it('offers the sounds with their Burmese pronunciation and explains the answer in Burmese', async () => {
+      render(
+        inBurmese(
+          <MemoryRouter>
+            <VowelPractice />
+          </MemoryRouter>
+        )
+      );
+
+      expect(screen.getByRole('heading', { name: 'ဒါ ဘာအသံလဲ။' })).toBeInTheDocument();
+      expect(
+        within(screen.getByRole('list', { name: 'အဖြေများ' }))
+          .getAllByRole('button')
+          .map((button) => button.textContent?.trim())
+      ).toEqual(['( အား - aa )', '( အ - a )', '( အိ - i )']);
+
+      await userEvent.click(screen.getByRole('button', { name: /- aa \)/ }));
+      await userEvent.click(screen.getByRole('button', { name: 'ရှေ့သို့' }));
+
+      expect(screen.getByRole('status')).toHaveTextContent('မှားပါသည်။ အဖြေမှန်မှာ ( အ - a ) ဖြစ်သည်။');
     });
   });
 });

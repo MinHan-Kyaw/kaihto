@@ -6,13 +6,22 @@ import App from './App';
 import { consonants } from './data';
 import { assetUrl } from './helpers/assetUrl';
 import { getVocabulary } from './helpers/vocabulary';
+import { getLanguageFromPath, getRouterBasename, LanguageContext } from './i18n';
 import { preloadImages } from './services/images';
 
 import '@fontsource/nunito/latin-400.css';
 import '@fontsource/nunito/latin-700.css';
 import '@fontsource/nunito/latin-800.css';
-import '@fontsource/noto-sans-thai-looped/thai-400.css';
-import '@fontsource/noto-sans-thai-looped/thai-500.css';
+import '@fontsource/sarabun/thai-400.css';
+import '@fontsource/sarabun/thai-500.css';
+// The Thai subset has no Latin glyphs, so the dash in "-ะ" and the brackets in "ก (ไก่)" would fall back to Nunito;
+// the font's own Latin subset keeps Thai text in one typeface. Its unicode-range means it loads only when used.
+import '@fontsource/sarabun/latin-400.css';
+import '@fontsource/sarabun/latin-500.css';
+// Sarabun has no dotted circle (◌), which vowel labels like "◌ิ" use, so those clusters fall back to IBM Plex Sans Thai
+// Looped, which has it and draws marks in a similar style. Browsers fetch it only on pages that show a dotted circle.
+import '@fontsource/ibm-plex-sans-thai-looped/thai-400.css';
+import '@fontsource/ibm-plex-sans-thai-looped/thai-500.css';
 import '@fontsource/noto-sans-myanmar/myanmar-400.css';
 import '@fontsource/noto-sans-myanmar/myanmar-700.css';
 import './index.css';
@@ -23,11 +32,18 @@ if (!rootElement) {
   throw new Error('Root element #root not found');
 }
 
+// Burmese pages live under /my, English (the default) has no prefix; the header switch reloads the page in the other
+// language.
+const lang = getLanguageFromPath(window.location.pathname, import.meta.env.BASE_URL);
+document.documentElement.lang = lang;
+
 createRoot(rootElement).render(
   <StrictMode>
-    <BrowserRouter basename={import.meta.env.BASE_URL}>
-      <App />
-    </BrowserRouter>
+    <LanguageContext value={lang}>
+      <BrowserRouter basename={getRouterBasename(lang, import.meta.env.BASE_URL)}>
+        <App />
+      </BrowserRouter>
+    </LanguageContext>
   </StrictMode>
 );
 

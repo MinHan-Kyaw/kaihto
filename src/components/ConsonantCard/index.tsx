@@ -1,5 +1,7 @@
 import { assetUrl } from '../../helpers/assetUrl';
 import { classNames } from '../../helpers/classNames';
+import { getContentText, getMeaning, getPronunciation } from '../../helpers/language';
+import { useTranslation } from '../../i18n';
 import type { Consonant, Word } from '../../types/learning';
 import AudioButton from '../AudioButton';
 
@@ -26,7 +28,7 @@ const SIZE_CLASS_NAMES: Record<
     word: string;
     meaning: string;
     pronunciation: string;
-    burmese: string;
+    content: string;
     audio: string;
   }
 > = {
@@ -38,7 +40,7 @@ const SIZE_CLASS_NAMES: Record<
     word: 'text-2xl',
     meaning: 'text-[1.0625rem]',
     pronunciation: 'text-[0.9375rem] whitespace-nowrap',
-    burmese: 'leading-[1.8]',
+    content: 'leading-[1.8]',
     audio: 'mt-2',
   },
   compact: {
@@ -49,7 +51,7 @@ const SIZE_CLASS_NAMES: Record<
     word: 'text-lg',
     meaning: 'text-sm',
     pronunciation: 'block text-xs',
-    burmese: 'leading-[1.5]',
+    content: 'leading-[1.5]',
     audio: 'mt-1',
   },
 };
@@ -64,6 +66,8 @@ const ConsonantCard = ({
   showMeaning = true,
   showPronunciation = true,
 }: ConsonantCardProps) => {
+  const { lang, t } = useTranslation();
+  const content = getContentText(lang);
   const headingId = `consonant-${consonant.id}`;
   const sizeClassNames = SIZE_CLASS_NAMES[size];
 
@@ -91,8 +95,8 @@ const ConsonantCard = ({
                 <img
                   className={classNames('aspect-square object-contain', sizeClassNames.picture)}
                   src={assetUrl(word.image)}
-                  alt={word.meaning}
-                  lang="my"
+                  alt={getMeaning(word, lang)}
+                  lang={content.lang}
                 />
               ) : (
                 <div
@@ -102,7 +106,7 @@ const ConsonantCard = ({
                     sizeClassNames.placeholder
                   )}
                 >
-                  Picture coming soon
+                  {t('cards.pictureSoon')}
                 </div>
               ))}
             {showWord && (
@@ -111,19 +115,21 @@ const ConsonantCard = ({
               </p>
             )}
             {(showMeaning || showPronunciation) && (
-              <p className={classNames('font-burmese', sizeClassNames.burmese)} lang="my">
+              <p className={classNames(content.font, sizeClassNames.content)} lang={content.lang}>
                 {showMeaning && (
-                  <span className={classNames('font-bold text-brand', sizeClassNames.meaning)}>{word.meaning}</span>
+                  <span className={classNames('font-bold text-brand', sizeClassNames.meaning)}>{getMeaning(word, lang)}</span>
                 )}
                 {showMeaning && showPronunciation && ' '}
                 {showPronunciation && (
-                  <span className={classNames('text-ink-muted', sizeClassNames.pronunciation)}>({word.pronunciation})</span>
+                  <span className={classNames('text-ink-muted', sizeClassNames.pronunciation)}>
+                    ({getPronunciation(word, lang)})
+                  </span>
                 )}
               </p>
             )}
             {word.audio && onPlayAudio && (
               <div className={sizeClassNames.audio}>
-                <AudioButton label={`Play Thai audio for ${word.thai}`} onPlay={() => onPlayAudio(word)} />
+                <AudioButton label={t('audio.play', { word: word.thai })} onPlay={() => onPlayAudio(word)} />
               </div>
             )}
           </li>

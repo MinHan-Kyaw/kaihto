@@ -2,6 +2,7 @@ import { useId, type FormEvent } from 'react';
 
 import { classNames } from '../../helpers/classNames';
 import { getLetterWithWord } from '../../helpers/vocabulary';
+import { useTranslation } from '../../i18n';
 import type { VocabularyItem } from '../../types/learning';
 import ResultIcon, { type AnswerResult } from '../ResultIcon';
 
@@ -21,6 +22,7 @@ const STATUS_CLASS_NAMES: Record<AnswerResult | 'default', string> = {
 };
 
 const TypedAnswer = ({ value, answered, result, correctAnswer, onChange, onSubmit }: TypedAnswerProps) => {
+  const { t } = useTranslation();
   const inputId = useId();
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
@@ -31,7 +33,7 @@ const TypedAnswer = ({ value, answered, result, correctAnswer, onChange, onSubmi
   return (
     <form className="flex w-full flex-col gap-3" onSubmit={handleSubmit}>
       <label className="sr-only" htmlFor={inputId}>
-        Your answer in Thai
+        {t('practice.yourAnswer')}
       </label>
       <div className="relative">
         <input
@@ -56,7 +58,7 @@ const TypedAnswer = ({ value, answered, result, correctAnswer, onChange, onSubmi
       </div>
       {result === 'incorrect' && (
         <p className="text-center text-ink-muted">
-          Correct answer:{' '}
+          {t('common.correctAnswer')}{' '}
           <span className="font-thai text-xl font-medium text-ink" lang="th">
             {getLetterWithWord(correctAnswer)}
           </span>
