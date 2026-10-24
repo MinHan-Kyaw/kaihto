@@ -20,7 +20,7 @@ flowchart LR
   I18n --> Components
   Helpers["src/helpers<br/>(pure functions)"] --> Screens
   Services["src/services<br/>audio.ts · sound.ts · speech.ts · voice.ts"] --> Screens
-  Screens["src/screens<br/>Home · Consonants · Vowels · Tones · PracticeCategories · Practice · VowelPractice"] --> Components["src/components<br/>(presentational)"]
+  Screens["src/screens<br/>Home · Consonants · Vowels · Tones · Meanings · PracticeCategories · Practice · VowelPractice"] --> Components["src/components<br/>(presentational)"]
 ```
 
 | Layer         | Responsibility                                       | May import                                      |
@@ -46,6 +46,8 @@ language they start in. The paths below are relative to that basename.
 | `/consonants?class=middle\|high\|low`          | Consonant browser (class kept in the URL so it can be linked)                                                                                                                                                                                                                                                                                                         |
 | `/vowels?group=short\|long\|extra\|standalone` | The 32 vowels in group tabs (group kept in the URL), with the short and long vowel tone rules and a middle / high / low class example per vowel                                                                                                                                                                                                                       |
 | `/tones`                                       | The five tones, then two tables with a Group 1 / 2 / 3 column per consonant class: short and long vowels (the tone each group takes, e.g. short + group 3 = high) and the four tone marks                                                                                                                                                                             |
+| `/meanings`                                    | The 60 words of the source's chapter 3 (Pictures tab): picture, Thai word, meaning and a button that plays the word, in the source's order                                                                                                                                                                                                                            |
+| `/meanings/text`                               | The Text tab: the same words as compact cards with only the Thai word and meaning; a three-dot Card options menu hides either, at least one stays ticked                                                                                                                                                                                                              |
 | `/practice`                                    | Practice categories: Consonants or Vowels                                                                                                                                                                                                                                                                                                                             |
 | `/practice/consonants`                         | Picture quiz                                                                                                                                                                                                                                                                                                                                                          |
 | `/practice/vowels`                             | Consonant + vowel quiz over the ticked vowel groups (short / long / extra), asking the sound of a vowel or the tone of a syllable                                                                                                                                                                                                                                     |
@@ -198,6 +200,14 @@ mid), with each row's live/dead syllable term underneath, and a "Tone marks" tab
   Only open syllables (no final consonant) are modelled.
 - `src/helpers/vowels.ts`: short vowels make dead syllables, long and extra vowels live ones (`getSyllable`,
   `getSyllableTone`). `src/data/vowels.test.ts` checks each vowel group's written tone rule against these.
+
+## Meanings
+
+Data: `meanings.json`, the 60 words of the source's chapter 3 in the source's order (`MeaningWord`: `id`, `thai`, Burmese
+`meaning`, `meaningEn`, `image`, `audio`). The id is the Thai word; the two pairs spelt alike (กา kettle / crow, ตา eye /
+grandfather) add the English meaning (`กา-kettle`). The screen draws each word with `WordCard`: the default size has the
+picture, Thai word, meaning and audio button; the Text tab uses the compact size without picture or audio. The words are
+not part of any practice yet.
 
 ## Vowel practice
 

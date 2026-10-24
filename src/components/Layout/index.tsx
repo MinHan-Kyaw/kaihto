@@ -8,6 +8,7 @@ const NAV_ITEMS = [
   { to: '/consonants', label: 'nav.consonants' },
   { to: '/vowels', label: 'nav.vowels' },
   { to: '/tones', label: 'nav.tones' },
+  { to: '/meanings', label: 'nav.meanings' },
   { to: '/practice', label: 'nav.practice' },
 ];
 
@@ -21,23 +22,24 @@ const Layout = () => {
   return (
     <div className="flex min-h-dvh flex-col">
       <header className="sticky top-0 z-10 h-header border-b-2 border-line bg-surface">
-        <div className="mx-auto flex max-w-content items-center justify-between gap-2 px-4 py-3">
+        <div className="mx-auto flex max-w-content items-center justify-between gap-1 px-4 py-3 xs:gap-2">
           <Link
             to="/"
             className="inline-flex shrink-0 items-center gap-2 rounded-xl text-xl font-extrabold text-brand no-underline"
           >
             <img className="size-9" src={assetUrl('favicon.svg')} alt="" />
-            <span className="max-xs:sr-only">{t('app.name')}</span>
+            <span className="max-md:sr-only">{t('app.name')}</span>
           </Link>
-          <nav className="flex items-center" aria-label={t('nav.label')}>
-            <ul className="flex sm:gap-1" role="list">
+          <nav className="flex min-w-0 items-center" aria-label={t('nav.label')}>
+            {/* On the narrowest phones the links scroll sideways rather than the page; the padding keeps focus outlines visible. */}
+            <ul className="-m-1.5 flex min-w-0 [scrollbar-width:none] overflow-x-auto p-1.5 sm:gap-1" role="list">
               {NAV_ITEMS.map(({ to, label }) => (
                 <li key={to}>
                   <NavLink
                     to={to}
                     className={({ isActive }) =>
                       classNames(
-                        'inline-flex min-h-11 items-center rounded-xl px-1 py-2 text-xs font-bold no-underline hover:bg-brand-light hover:text-brand xs:px-2 xs:text-[0.9375rem] sm:px-3 sm:text-base',
+                        'inline-flex min-h-11 items-center rounded-xl px-0.5 py-2 text-[0.6875rem] font-bold no-underline hover:bg-brand-light hover:text-brand xs:px-1.5 xs:text-[0.9375rem] sm:px-3 sm:text-base',
                         isActive ? 'bg-brand-light text-brand' : 'text-ink-muted'
                       )
                     }

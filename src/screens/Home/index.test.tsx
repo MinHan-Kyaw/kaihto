@@ -18,6 +18,7 @@ describe('Home', () => {
     expect(screen.getByRole('link', { name: 'Explore Consonants' })).toHaveAttribute('href', '/consonants');
     expect(screen.getByRole('link', { name: 'Explore Vowels' })).toHaveAttribute('href', '/vowels');
     expect(screen.getByRole('link', { name: 'Learn Tones' })).toHaveAttribute('href', '/tones');
+    expect(screen.getByRole('link', { name: 'Learn Meanings' })).toHaveAttribute('href', '/meanings');
     expect(screen.getByRole('link', { name: 'Practice Consonants' })).toHaveAttribute('href', '/practice/consonants');
     expect(screen.getByRole('link', { name: 'Practice Vowels' })).toHaveAttribute('href', '/practice/vowels');
   });

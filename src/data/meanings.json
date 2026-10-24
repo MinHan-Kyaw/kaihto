@@ -1,0 +1,482 @@
+[
+  {
+    "id": "กา-kettle",
+    "thai": "กา",
+    "meaning": "ရေနွေးအိုး",
+    "meaningEn": "kettle",
+    "image": "/images/meanings/ka-kettle.svg",
+    "audio": "/audio/meanings/ka.m4a"
+  },
+  {
+    "id": "กา-crow",
+    "thai": "กา",
+    "meaning": "ကျီးကန်း",
+    "meaningEn": "crow",
+    "image": "/images/meanings/ka-crow.svg",
+    "audio": "/audio/meanings/ka.m4a"
+  },
+  {
+    "id": "หู",
+    "thai": "หู",
+    "meaning": "နားရွက်",
+    "meaningEn": "ear",
+    "image": "/images/meanings/hu.svg",
+    "audio": "/audio/meanings/hu.m4a"
+  },
+  {
+    "id": "นา",
+    "thai": "นา",
+    "meaning": "လယ်",
+    "meaningEn": "rice field",
+    "image": "/images/meanings/na.svg",
+    "audio": "/audio/meanings/na.m4a"
+  },
+  {
+    "id": "ตา-eye",
+    "thai": "ตา",
+    "meaning": "မျက်စိ",
+    "meaningEn": "eye",
+    "image": "/images/meanings/ta-eye.svg",
+    "audio": "/audio/meanings/ta.m4a"
+  },
+  {
+    "id": "ตา-grandfather",
+    "thai": "ตา",
+    "meaning": "အဘိုး",
+    "meaningEn": "grandfather",
+    "image": "/images/meanings/ta-grandfather.svg",
+    "audio": "/audio/meanings/ta.m4a"
+  },
+  {
+    "id": "สี",
+    "thai": "สี",
+    "meaning": "အရောင်",
+    "meaningEn": "colour",
+    "image": "/images/meanings/si.svg",
+    "audio": "/audio/meanings/si.m4a"
+  },
+  {
+    "id": "มือ",
+    "thai": "มือ",
+    "meaning": "လက်",
+    "meaningEn": "hand",
+    "image": "/images/meanings/mue.svg",
+    "audio": "/audio/meanings/mue.m4a"
+  },
+  {
+    "id": "ไป",
+    "thai": "ไป",
+    "meaning": "သွားသည်",
+    "meaningEn": "go",
+    "image": "/images/meanings/pai.svg",
+    "audio": "/audio/meanings/pai.m4a"
+  },
+  {
+    "id": "แห",
+    "thai": "แห",
+    "meaning": "ပိုက်ကွန်",
+    "meaningEn": "cast net",
+    "image": "/images/meanings/hae.svg",
+    "audio": "/audio/meanings/hae.m4a"
+  },
+  {
+    "id": "มา",
+    "thai": "มา",
+    "meaning": "လာသည်",
+    "meaningEn": "come",
+    "image": "/images/meanings/ma.svg",
+    "audio": "/audio/meanings/ma.m4a"
+  },
+  {
+    "id": "ภูเขา",
+    "thai": "ภูเขา",
+    "meaning": "တောင်တန်း",
+    "meaningEn": "mountain",
+    "image": "/images/meanings/phukhao.svg",
+    "audio": "/audio/meanings/phukhao.m4a"
+  },
+  {
+    "id": "แกะ",
+    "thai": "แกะ",
+    "meaning": "သိုး",
+    "meaningEn": "sheep",
+    "image": "/images/meanings/kae.svg",
+    "audio": "/audio/meanings/kae.m4a"
+  },
+  {
+    "id": "ขา",
+    "thai": "ขา",
+    "meaning": "ခြေထောက်",
+    "meaningEn": "leg",
+    "image": "/images/meanings/kha.svg",
+    "audio": "/audio/meanings/kha.m4a"
+  },
+  {
+    "id": "แพะ",
+    "thai": "แพะ",
+    "meaning": "ဆိတ်",
+    "meaningEn": "goat",
+    "image": "/images/meanings/phae.svg",
+    "audio": "/audio/meanings/phae.m4a"
+  },
+  {
+    "id": "กะทิ",
+    "thai": "กะทิ",
+    "meaning": "အုန်းနို့",
+    "meaningEn": "coconut milk",
+    "image": "/images/meanings/kathi.svg",
+    "audio": "/audio/meanings/kathi.m4a"
+  },
+  {
+    "id": "เตะ",
+    "thai": "เตะ",
+    "meaning": "ကန်သည်",
+    "meaningEn": "kick",
+    "image": "/images/meanings/te.svg",
+    "audio": "/audio/meanings/te.m4a"
+  },
+  {
+    "id": "ฝา",
+    "thai": "ฝา",
+    "meaning": "အဖုံး",
+    "meaningEn": "lid",
+    "image": "/images/words/fa.svg",
+    "audio": "/audio/meanings/fa.m4a"
+  },
+  {
+    "id": "และ",
+    "thai": "และ",
+    "meaning": "နှင့်",
+    "meaningEn": "and",
+    "image": "/images/meanings/lae.svg",
+    "audio": "/audio/meanings/lae.m4a"
+  },
+  {
+    "id": "เยอะแยะ",
+    "thai": "เยอะแยะ",
+    "meaning": "ပေါများသည်",
+    "meaningEn": "a lot",
+    "image": "/images/meanings/yoeyae.svg",
+    "audio": "/audio/meanings/yoeyae.m4a"
+  },
+  {
+    "id": "โต",
+    "thai": "โต",
+    "meaning": "ကြီးသည်",
+    "meaningEn": "grow up",
+    "image": "/images/meanings/to.svg",
+    "audio": "/audio/meanings/to.m4a"
+  },
+  {
+    "id": "เสือ",
+    "thai": "เสือ",
+    "meaning": "ကျား",
+    "meaningEn": "tiger",
+    "image": "/images/words/suea.svg",
+    "audio": "/audio/meanings/suea.m4a"
+  },
+  {
+    "id": "ทำ",
+    "thai": "ทำ",
+    "meaning": "လုပ်သည်",
+    "meaningEn": "do",
+    "image": "/images/meanings/tham.svg",
+    "audio": "/audio/meanings/tham.m4a"
+  },
+  {
+    "id": "อะไร",
+    "thai": "อะไร",
+    "meaning": "ဘာလဲ",
+    "meaningEn": "what",
+    "image": "/images/meanings/arai.svg",
+    "audio": "/audio/meanings/arai.m4a"
+  },
+  {
+    "id": "ดู",
+    "thai": "ดู",
+    "meaning": "ကြည့်သည်",
+    "meaningEn": "look",
+    "image": "/images/meanings/du.svg",
+    "audio": "/audio/meanings/du.m4a"
+  },
+  {
+    "id": "หัว",
+    "thai": "หัว",
+    "meaning": "ခေါင်း",
+    "meaningEn": "head",
+    "image": "/images/meanings/hua.svg",
+    "audio": "/audio/meanings/hua.m4a"
+  },
+  {
+    "id": "รอ",
+    "thai": "รอ",
+    "meaning": "စောင့်သည်",
+    "meaningEn": "wait",
+    "image": "/images/meanings/ro.svg",
+    "audio": "/audio/meanings/ro.m4a"
+  },
+  {
+    "id": "หัวเราะ",
+    "thai": "หัวเราะ",
+    "meaning": "ရယ်သည်",
+    "meaningEn": "laugh",
+    "image": "/images/meanings/huaro.svg",
+    "audio": "/audio/meanings/huaro.m4a"
+  },
+  {
+    "id": "ดี",
+    "thai": "ดี",
+    "meaning": "ကောင်းသည်",
+    "meaningEn": "good",
+    "image": "/images/meanings/di.svg",
+    "audio": "/audio/meanings/di.m4a"
+  },
+  {
+    "id": "ผุ",
+    "thai": "ผุ",
+    "meaning": "ဆွေးမြေ့သည်",
+    "meaningEn": "rotten",
+    "image": "/images/meanings/phu.svg",
+    "audio": "/audio/meanings/phu.m4a"
+  },
+  {
+    "id": "ยา",
+    "thai": "ยา",
+    "meaning": "ဆေး",
+    "meaningEn": "medicine",
+    "image": "/images/meanings/ya.svg",
+    "audio": "/audio/meanings/ya.m4a"
+  },
+  {
+    "id": "มือถือ",
+    "thai": "มือถือ",
+    "meaning": "လက်ကိုင်ဖုန်း",
+    "meaningEn": "mobile phone",
+    "image": "/images/meanings/muethue.svg",
+    "audio": "/audio/meanings/muethue.m4a"
+  },
+  {
+    "id": "ใจ",
+    "thai": "ใจ",
+    "meaning": "စိတ်",
+    "meaningEn": "heart",
+    "image": "/images/meanings/chai.svg",
+    "audio": "/audio/meanings/chai.m4a"
+  },
+  {
+    "id": "หา",
+    "thai": "หา",
+    "meaning": "ရှာသည်",
+    "meaningEn": "look for",
+    "image": "/images/meanings/ha.svg",
+    "audio": "/audio/meanings/ha.m4a"
+  },
+  {
+    "id": "นะ",
+    "thai": "นะ",
+    "meaning": "နော်",
+    "meaningEn": "softening particle",
+    "image": "/images/meanings/na-particle.svg",
+    "audio": "/audio/meanings/na-particle.m4a"
+  },
+  {
+    "id": "ดีใจ",
+    "thai": "ดีใจ",
+    "meaning": "ဝမ်းသာသည်",
+    "meaningEn": "glad",
+    "image": "/images/meanings/dichai.svg",
+    "audio": "/audio/meanings/dichai.m4a"
+  },
+  {
+    "id": "ไอ",
+    "thai": "ไอ",
+    "meaning": "ချောင်းဆိုးသည်",
+    "meaningEn": "cough",
+    "image": "/images/meanings/ai.svg",
+    "audio": "/audio/meanings/ai.m4a"
+  },
+  {
+    "id": "ผี",
+    "thai": "ผี",
+    "meaning": "သရဲ",
+    "meaningEn": "ghost",
+    "image": "/images/meanings/phi.svg",
+    "audio": "/audio/meanings/phi.m4a"
+  },
+  {
+    "id": "มี",
+    "thai": "มี",
+    "meaning": "ရှိသည်",
+    "meaningEn": "have",
+    "image": "/images/meanings/mi.svg",
+    "audio": "/audio/meanings/mi.m4a"
+  },
+  {
+    "id": "ยาไอ",
+    "thai": "ยาไอ",
+    "meaning": "ချောင်းဆိုးပျောက်ဆေး",
+    "meaningEn": "cough medicine",
+    "image": "/images/meanings/yaai.svg",
+    "audio": "/audio/meanings/yaai.m4a"
+  },
+  {
+    "id": "ปู",
+    "thai": "ปู",
+    "meaning": "ဂဏန်း",
+    "meaningEn": "crab",
+    "image": "/images/meanings/pu.svg",
+    "audio": "/audio/meanings/pu.m4a"
+  },
+  {
+    "id": "ถู",
+    "thai": "ถู",
+    "meaning": "ပွတ်တိုက်သည်",
+    "meaningEn": "rub",
+    "image": "/images/meanings/thu.svg",
+    "audio": "/audio/meanings/thu.m4a"
+  },
+  {
+    "id": "รู",
+    "thai": "รู",
+    "meaning": "တွင်း/အပေါက်",
+    "meaningEn": "hole",
+    "image": "/images/meanings/ru.svg",
+    "audio": "/audio/meanings/ru.m4a"
+  },
+  {
+    "id": "มะลิ",
+    "thai": "มะลิ",
+    "meaning": "စံပယ်ပန်း",
+    "meaningEn": "jasmine",
+    "image": "/images/meanings/mali.svg",
+    "audio": "/audio/meanings/mali.m4a"
+  },
+  {
+    "id": "ปี",
+    "thai": "ปี",
+    "meaning": "နှစ်",
+    "meaningEn": "year",
+    "image": "/images/meanings/pi.svg",
+    "audio": "/audio/meanings/pi.m4a"
+  },
+  {
+    "id": "ไถ",
+    "thai": "ไถ",
+    "meaning": "ထွန်သည်",
+    "meaningEn": "plough",
+    "image": "/images/meanings/thai.svg",
+    "audio": "/audio/meanings/thai.m4a"
+  },
+  {
+    "id": "พา",
+    "thai": "พา",
+    "meaning": "ခေါ်သည်",
+    "meaningEn": "take along",
+    "image": "/images/meanings/pha-take.svg",
+    "audio": "/audio/meanings/pha-take.m4a"
+  },
+  {
+    "id": "ไถนา",
+    "thai": "ไถนา",
+    "meaning": "လယ်ထွန်သည်",
+    "meaningEn": "plough the field",
+    "image": "/images/meanings/thaina.svg",
+    "audio": "/audio/meanings/thaina.m4a"
+  },
+  {
+    "id": "จะ",
+    "thai": "จะ",
+    "meaning": "မယ်/လိမ့်မည်",
+    "meaningEn": "will",
+    "image": "/images/meanings/cha.svg",
+    "audio": "/audio/meanings/cha.m4a"
+  },
+  {
+    "id": "ขอ",
+    "thai": "ขอ",
+    "meaning": "တောင်းသည်",
+    "meaningEn": "ask for",
+    "image": "/images/meanings/kho.svg",
+    "audio": "/audio/meanings/kho.m4a"
+  },
+  {
+    "id": "ใน",
+    "thai": "ใน",
+    "meaning": "အထဲမှာ",
+    "meaningEn": "in",
+    "image": "/images/meanings/nai.svg",
+    "audio": "/audio/meanings/nai.m4a"
+  },
+  {
+    "id": "โมโห",
+    "thai": "โมโห",
+    "meaning": "စိတ်ဆိုးသည်",
+    "meaningEn": "angry",
+    "image": "/images/meanings/moho.svg",
+    "audio": "/audio/meanings/moho.m4a"
+  },
+  {
+    "id": "เอา",
+    "thai": "เอา",
+    "meaning": "ယူသည်",
+    "meaningEn": "take",
+    "image": "/images/meanings/ao.svg",
+    "audio": "/audio/meanings/ao.m4a"
+  },
+  {
+    "id": "ผา",
+    "thai": "ผา",
+    "meaning": "ကမ်းပါး/နံရံ",
+    "meaningEn": "cliff",
+    "image": "/images/meanings/pha-cliff.svg",
+    "audio": "/audio/meanings/pha-cliff.m4a"
+  },
+  {
+    "id": "ไว",
+    "thai": "ไว",
+    "meaning": "မြန်သည်",
+    "meaningEn": "fast",
+    "image": "/images/meanings/wai.svg",
+    "audio": "/audio/meanings/wai.m4a"
+  },
+  {
+    "id": "พอใจ",
+    "thai": "พอใจ",
+    "meaning": "ကျေနပ်သည်",
+    "meaningEn": "satisfied",
+    "image": "/images/meanings/phochai.svg",
+    "audio": "/audio/meanings/phochai.m4a"
+  },
+  {
+    "id": "อา",
+    "thai": "อา",
+    "meaning": "ဦးလေး/ဒေါ်လေး",
+    "meaningEn": "uncle or aunt",
+    "image": "/images/meanings/a.svg",
+    "audio": "/audio/meanings/a.m4a"
+  },
+  {
+    "id": "หอ",
+    "thai": "หอ",
+    "meaning": "စင်/အဆောင်",
+    "meaningEn": "tower",
+    "image": "/images/meanings/ho.svg",
+    "audio": "/audio/meanings/ho.m4a"
+  },
+  {
+    "id": "พอ",
+    "thai": "พอ",
+    "meaning": "လုံလောက်သည်",
+    "meaningEn": "enough",
+    "image": "/images/meanings/pho.svg",
+    "audio": "/audio/meanings/pho.m4a"
+  },
+  {
+    "id": "เลอะเทอะ",
+    "thai": "เลอะเทอะ",
+    "meaning": "ညစ်ပတ်သည်",
+    "meaningEn": "messy",
+    "image": "/images/meanings/loethoe.svg",
+    "audio": "/audio/meanings/loethoe.m4a"
+  }
+]

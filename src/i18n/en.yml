@@ -10,6 +10,7 @@ nav:
   consonants: Consonants
   vowels: Vowels
   tones: Tones
+  meanings: Meanings
   practice: Practice
 
 language:
@@ -31,6 +32,7 @@ home:
   exploreConsonants: Explore Consonants
   exploreVowels: Explore Vowels
   learnTones: Learn Tones
+  learnMeanings: Learn Meanings
   practiceConsonants: Practice Consonants
   practiceVowels: Practice Vowels
   classes: Consonant classes
@@ -95,6 +97,13 @@ vowels:
   title: Thai Vowels
   tabs: Vowel group
   count: vowels
+
+meanings:
+  title: Thai Words and Meanings
+  tabs: View
+  count: words
+  pictures: Pictures
+  text: Text
 
 cards:
   options: Card options
