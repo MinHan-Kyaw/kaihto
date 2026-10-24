@@ -108,7 +108,10 @@ const Meanings = ({ showText = false }: MeaningsProps) => {
           </ul>
         </div>
       ) : (
-        <ul className="mt-4 grid grid-cols-[repeat(auto-fill,minmax(min(100%,8.5rem),1fr))] gap-3 xs:gap-4" role="list">
+        <ul
+          className="mt-4 grid grid-cols-[repeat(auto-fill,minmax(min(100%,8.5rem),1fr))] gap-3 xs:gap-4 md:grid-cols-5"
+          role="list"
+        >
           {meanings.map((word) => (
             <li key={word.id}>
               <WordCard word={word} onPlayAudio={handlePlayAudio} />
