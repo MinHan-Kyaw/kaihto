@@ -6,6 +6,7 @@ import ClassTabs from '../../components/ClassTabs';
 import WordCard from '../../components/WordCard';
 import { consonants, meanings, toneById, vowels } from '../../data';
 import { assetUrl } from '../../helpers/assetUrl';
+import { getPronunciation } from '../../helpers/language';
 import { findSyllable, getSyllableTone } from '../../helpers/vowels';
 import { useTranslation } from '../../i18n';
 import { playAudio, stopAudio } from '../../services/audio';
@@ -51,9 +52,11 @@ interface MeaningsProps {
 }
 
 const Meanings = ({ showText = false }: MeaningsProps) => {
-  const { t } = useTranslation();
+  const { lang, t } = useTranslation();
   const navigate = useNavigate();
   const selectedTabId: MeaningsTabId = showText ? 'text' : 'pictures';
+  // The option appears only when some word has a pronunciation in the page's language.
+  const hasPronunciation = meanings.some((word) => getPronunciation(word, lang));
   const [shownParts, setShownParts] = useState<Record<CardPart, boolean>>({
     thai: true,
     tone: true,
@@ -94,7 +97,11 @@ const Meanings = ({ showText = false }: MeaningsProps) => {
         <div className="mt-4">
           <div className="mb-2 flex justify-end">
             <CardPartsMenu
-              options={CARD_PARTS.map(({ id, label }) => ({ id, label: t(label), checked: shownParts[id] }))}
+              options={CARD_PARTS.filter(({ id }) => id !== 'pronunciation' || hasPronunciation).map(({ id, label }) => ({
+                id,
+                label: t(label),
+                checked: shownParts[id],
+              }))}
               onChange={handleShownPartChange}
             />
           </div>

@@ -35,7 +35,8 @@ export interface MeaningWord {
   syllables: string[]; // the word split into open syllables, e.g. ["ภู", "เขา"]; each one's tone follows from its spelling
   meaning: string; // Burmese, from the source
   meaningEn: string;
-  romanization: string; // the Thai word in Latin letters, one part per syllable, e.g. "phuu-khao"
+  pronunciationEn: string; // romanized, one part per syllable, e.g. "phuu-khao"
+  pronunciation?: string; // Burmese, in the book's style; a word without one shows its meaning alone in Burmese
   image: string;
   audio: string; // the Thai word said aloud
 }

@@ -12,7 +12,7 @@ const word: MeaningWord = {
   syllables: ['หู'],
   meaning: 'နားရွက်',
   meaningEn: 'ear',
-  romanization: 'huu',
+  pronunciationEn: 'huu',
   image: '/images/meanings/hu.svg',
   audio: '/audio/meanings/hu.m4a',
 };
@@ -53,10 +53,25 @@ describe('WordCard', () => {
     });
 
     describe('given the page is in Burmese', () => {
-      it('shows the same romanized pronunciation after the Burmese meaning', () => {
-        render(inBurmese(<WordCard word={word} showPronunciation />));
+      // A placeholder, not the word's pronunciation.
+      const BURMESE_PRONUNCIATION = 'ဗမာအသံထွက်';
 
-        expect(screen.getByText('နားရွက်').closest('p')).toHaveTextContent('နားရွက် (huu)');
+      it('shows the Burmese pronunciation after the Burmese meaning', () => {
+        render(inBurmese(<WordCard word={{ ...word, pronunciation: BURMESE_PRONUNCIATION }} showPronunciation />));
+
+        const pronunciation = screen.getByText(`(${BURMESE_PRONUNCIATION})`);
+
+        expect(screen.getByText('နားရွက်').closest('p')).toHaveTextContent(`နားရွက် (${BURMESE_PRONUNCIATION})`);
+        expect(pronunciation).toHaveAttribute('lang', 'my');
+        expect(pronunciation).toHaveClass('font-burmese');
+      });
+
+      describe('given the word has no Burmese pronunciation yet', () => {
+        it('shows the meaning alone, without the romanization', () => {
+          render(inBurmese(<WordCard word={word} showPronunciation />));
+
+          expect(screen.getByText('နားရွက်').closest('p')).toHaveTextContent(/^နားရွက်$/);
+        });
       });
     });
   });

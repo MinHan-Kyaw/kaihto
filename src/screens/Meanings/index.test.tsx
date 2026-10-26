@@ -125,7 +125,21 @@ describe('Meanings', () => {
 
       expect(screen.getByRole('button', { name: /^စာသား/ })).toHaveAttribute('aria-pressed', 'true');
       expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('အသံ အလယ်');
-      expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('လက် (mue)');
+      expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('လက် (မူး)');
+      expect(screen.getByRole('article', { name: 'ภูเขา' })).toHaveTextContent('တောင်တန်း (ဖူးခေါင်)');
+    });
+
+    it('offers every part in the card options', async () => {
+      render(inBurmese(meaningsAt('/meanings/text')));
+
+      await userEvent.click(screen.getByRole('button', { name: 'ကတ် ရွေးချယ်စရာ' }));
+
+      expect(screen.getAllByRole('checkbox').map((checkbox) => checkbox.closest('label')?.textContent)).toEqual([
+        'ထိုင်း',
+        'အသံ',
+        'အဓိပ္ပာယ်',
+        'အသံထွက်',
+      ]);
     });
   });
 });

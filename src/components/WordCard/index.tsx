@@ -2,7 +2,7 @@ import type { CSSProperties } from 'react';
 
 import { assetUrl } from '../../helpers/assetUrl';
 import { classNames } from '../../helpers/classNames';
-import { getContentText, getMeaning } from '../../helpers/language';
+import { getContentText, getMeaning, getPronunciation } from '../../helpers/language';
 import { getThaiInkHeight } from '../../helpers/thaiInk';
 import { useTranslation } from '../../i18n';
 import type { MeaningWord, Tone } from '../../types/learning';
@@ -65,6 +65,7 @@ const WordCard = ({
   const content = getContentText(lang);
   const headingId = `word-${word.id}`;
   const sizeClassNames = SIZE_CLASS_NAMES[size];
+  const pronunciation = showPronunciation ? getPronunciation(word, lang) : undefined;
 
   return (
     <article
@@ -105,18 +106,21 @@ const WordCard = ({
           ))}
         </p>
       )}
-      {(showMeaning || showPronunciation) && (
+      {(showMeaning || pronunciation) && (
         <p className={classNames('leading-[1.6]', sizeClassNames.meaning)}>
           {showMeaning && (
             <span className={classNames('font-bold text-brand', content.font)} lang={content.lang}>
               {getMeaning(word, lang)}
             </span>
           )}
-          {showMeaning && showPronunciation && ' '}
-          {/* Romanized Thai, the same in both languages. */}
-          {showPronunciation && (
-            <span className="whitespace-nowrap text-ink-muted" lang="th-Latn">
-              ({word.romanization})
+          {showMeaning && pronunciation && ' '}
+          {/* Romanized Thai in English, Burmese script in Burmese. */}
+          {pronunciation && (
+            <span
+              className={classNames('whitespace-nowrap text-ink-muted', content.font)}
+              lang={lang === 'en' ? 'th-Latn' : 'my'}
+            >
+              ({pronunciation})
             </span>
           )}
         </p>

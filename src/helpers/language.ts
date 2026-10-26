@@ -4,7 +4,8 @@ import type { Word } from '../types/learning';
 export const getMeaning = (word: Pick<Word, 'meaning' | 'meaningEn'>, lang: Language) =>
   lang === 'en' ? word.meaningEn : word.meaning;
 
-export const getPronunciation = (word: Pick<Word, 'pronunciation' | 'pronunciationEn'>, lang: Language) =>
+// A Meanings word may not have its Burmese pronunciation yet.
+export const getPronunciation = (word: { pronunciation?: string; pronunciationEn: string }, lang: Language) =>
   lang === 'en' ? word.pronunciationEn : word.pronunciation;
 
 // Learning content in the reader's language: Burmese takes the Myanmar font, English the page font.
