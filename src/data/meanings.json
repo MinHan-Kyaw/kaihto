@@ -5,6 +5,7 @@
     "syllables": ["กา"],
     "meaning": "ရေနွေးအိုး",
     "meaningEn": "kettle",
+    "romanization": "gaa",
     "image": "/images/meanings/ka-kettle.svg",
     "audio": "/audio/meanings/ka.m4a"
   },
@@ -14,6 +15,7 @@
     "syllables": ["กา"],
     "meaning": "ကျီးကန်း",
     "meaningEn": "crow",
+    "romanization": "gaa",
     "image": "/images/meanings/ka-crow.svg",
     "audio": "/audio/meanings/ka.m4a"
   },
@@ -23,6 +25,7 @@
     "syllables": ["หู"],
     "meaning": "နားရွက်",
     "meaningEn": "ear",
+    "romanization": "huu",
     "image": "/images/meanings/hu.svg",
     "audio": "/audio/meanings/hu.m4a"
   },
@@ -32,6 +35,7 @@
     "syllables": ["นา"],
     "meaning": "လယ်",
     "meaningEn": "rice field",
+    "romanization": "naa",
     "image": "/images/meanings/na.svg",
     "audio": "/audio/meanings/na.m4a"
   },
@@ -41,6 +45,7 @@
     "syllables": ["ตา"],
     "meaning": "မျက်စိ",
     "meaningEn": "eye",
+    "romanization": "dtaa",
     "image": "/images/meanings/ta-eye.svg",
     "audio": "/audio/meanings/ta.m4a"
   },
@@ -50,6 +55,7 @@
     "syllables": ["ตา"],
     "meaning": "အဘိုး",
     "meaningEn": "grandfather",
+    "romanization": "dtaa",
     "image": "/images/meanings/ta-grandfather.svg",
     "audio": "/audio/meanings/ta.m4a"
   },
@@ -59,6 +65,7 @@
     "syllables": ["สี"],
     "meaning": "အရောင်",
     "meaningEn": "colour",
+    "romanization": "sii",
     "image": "/images/meanings/si.svg",
     "audio": "/audio/meanings/si.m4a"
   },
@@ -68,6 +75,7 @@
     "syllables": ["มือ"],
     "meaning": "လက်",
     "meaningEn": "hand",
+    "romanization": "mue",
     "image": "/images/meanings/mue.svg",
     "audio": "/audio/meanings/mue.m4a"
   },
@@ -77,6 +85,7 @@
     "syllables": ["ไป"],
     "meaning": "သွားသည်",
     "meaningEn": "go",
+    "romanization": "bpai",
     "image": "/images/meanings/pai.svg",
     "audio": "/audio/meanings/pai.m4a"
   },
@@ -86,6 +95,7 @@
     "syllables": ["แห"],
     "meaning": "ပိုက်ကွန်",
     "meaningEn": "cast net",
+    "romanization": "hae",
     "image": "/images/meanings/hae.svg",
     "audio": "/audio/meanings/hae.m4a"
   },
@@ -95,6 +105,7 @@
     "syllables": ["มา"],
     "meaning": "လာသည်",
     "meaningEn": "come",
+    "romanization": "maa",
     "image": "/images/meanings/ma.svg",
     "audio": "/audio/meanings/ma.m4a"
   },
@@ -104,6 +115,7 @@
     "syllables": ["ภู", "เขา"],
     "meaning": "တောင်တန်း",
     "meaningEn": "mountain",
+    "romanization": "phuu-khao",
     "image": "/images/meanings/phukhao.svg",
     "audio": "/audio/meanings/phukhao.m4a"
   },
@@ -113,6 +125,7 @@
     "syllables": ["แกะ"],
     "meaning": "သိုး",
     "meaningEn": "sheep",
+    "romanization": "gae",
     "image": "/images/meanings/kae.svg",
     "audio": "/audio/meanings/kae.m4a"
   },
@@ -122,6 +135,7 @@
     "syllables": ["ขา"],
     "meaning": "ခြေထောက်",
     "meaningEn": "leg",
+    "romanization": "khaa",
     "image": "/images/meanings/kha.svg",
     "audio": "/audio/meanings/kha.m4a"
   },
@@ -131,6 +145,7 @@
     "syllables": ["แพะ"],
     "meaning": "ဆိတ်",
     "meaningEn": "goat",
+    "romanization": "phae",
     "image": "/images/meanings/phae.svg",
     "audio": "/audio/meanings/phae.m4a"
   },
@@ -140,6 +155,7 @@
     "syllables": ["กะ", "ทิ"],
     "meaning": "အုန်းနို့",
     "meaningEn": "coconut milk",
+    "romanization": "ga-thi",
     "image": "/images/meanings/kathi.svg",
     "audio": "/audio/meanings/kathi.m4a"
   },
@@ -149,6 +165,7 @@
     "syllables": ["เตะ"],
     "meaning": "ကန်သည်",
     "meaningEn": "kick",
+    "romanization": "dte",
     "image": "/images/meanings/te.svg",
     "audio": "/audio/meanings/te.m4a"
   },
@@ -158,6 +175,7 @@
     "syllables": ["ฝา"],
     "meaning": "အဖုံး",
     "meaningEn": "lid",
+    "romanization": "faa",
     "image": "/images/words/fa.svg",
     "audio": "/audio/meanings/fa.m4a"
   },
@@ -167,6 +185,7 @@
     "syllables": ["และ"],
     "meaning": "နှင့်",
     "meaningEn": "and",
+    "romanization": "lae",
     "image": "/images/meanings/lae.svg",
     "audio": "/audio/meanings/lae.m4a"
   },
@@ -176,6 +195,7 @@
     "syllables": ["เยอะ", "แยะ"],
     "meaning": "ပေါများသည်",
     "meaningEn": "a lot",
+    "romanization": "yer-yae",
     "image": "/images/meanings/yoeyae.svg",
     "audio": "/audio/meanings/yoeyae.m4a"
   },
@@ -185,6 +205,7 @@
     "syllables": ["โต"],
     "meaning": "ကြီးသည်",
     "meaningEn": "grow up",
+    "romanization": "dtoo",
     "image": "/images/meanings/to.svg",
     "audio": "/audio/meanings/to.m4a"
   },
@@ -194,6 +215,7 @@
     "syllables": ["เสือ"],
     "meaning": "ကျား",
     "meaningEn": "tiger",
+    "romanization": "suea",
     "image": "/images/words/suea.svg",
     "audio": "/audio/meanings/suea.m4a"
   },
@@ -203,6 +225,7 @@
     "syllables": ["ทำ"],
     "meaning": "လုပ်သည်",
     "meaningEn": "do",
+    "romanization": "tham",
     "image": "/images/meanings/tham.svg",
     "audio": "/audio/meanings/tham.m4a"
   },
@@ -212,6 +235,7 @@
     "syllables": ["อะ", "ไร"],
     "meaning": "ဘာလဲ",
     "meaningEn": "what",
+    "romanization": "a-rai",
     "image": "/images/meanings/arai.svg",
     "audio": "/audio/meanings/arai.m4a"
   },
@@ -221,6 +245,7 @@
     "syllables": ["ดู"],
     "meaning": "ကြည့်သည်",
     "meaningEn": "look",
+    "romanization": "duu",
     "image": "/images/meanings/du.svg",
     "audio": "/audio/meanings/du.m4a"
   },
@@ -230,6 +255,7 @@
     "syllables": ["หัว"],
     "meaning": "ခေါင်း",
     "meaningEn": "head",
+    "romanization": "hua",
     "image": "/images/meanings/hua.svg",
     "audio": "/audio/meanings/hua.m4a"
   },
@@ -239,6 +265,7 @@
     "syllables": ["รอ"],
     "meaning": "စောင့်သည်",
     "meaningEn": "wait",
+    "romanization": "ror",
     "image": "/images/meanings/ro.svg",
     "audio": "/audio/meanings/ro.m4a"
   },
@@ -248,6 +275,7 @@
     "syllables": ["หัว", "เราะ"],
     "meaning": "ရယ်သည်",
     "meaningEn": "laugh",
+    "romanization": "hua-ro",
     "image": "/images/meanings/huaro.svg",
     "audio": "/audio/meanings/huaro.m4a"
   },
@@ -257,6 +285,7 @@
     "syllables": ["ดี"],
     "meaning": "ကောင်းသည်",
     "meaningEn": "good",
+    "romanization": "dii",
     "image": "/images/meanings/di.svg",
     "audio": "/audio/meanings/di.m4a"
   },
@@ -266,6 +295,7 @@
     "syllables": ["ผุ"],
     "meaning": "ဆွေးမြေ့သည်",
     "meaningEn": "rotten",
+    "romanization": "phu",
     "image": "/images/meanings/phu.svg",
     "audio": "/audio/meanings/phu.m4a"
   },
@@ -275,6 +305,7 @@
     "syllables": ["ยา"],
     "meaning": "ဆေး",
     "meaningEn": "medicine",
+    "romanization": "yaa",
     "image": "/images/meanings/ya.svg",
     "audio": "/audio/meanings/ya.m4a"
   },
@@ -284,6 +315,7 @@
     "syllables": ["มือ", "ถือ"],
     "meaning": "လက်ကိုင်ဖုန်း",
     "meaningEn": "mobile phone",
+    "romanization": "mue-thue",
     "image": "/images/meanings/muethue.svg",
     "audio": "/audio/meanings/muethue.m4a"
   },
@@ -293,6 +325,7 @@
     "syllables": ["ใจ"],
     "meaning": "စိတ်",
     "meaningEn": "heart",
+    "romanization": "jai",
     "image": "/images/meanings/chai.svg",
     "audio": "/audio/meanings/chai.m4a"
   },
@@ -302,6 +335,7 @@
     "syllables": ["หา"],
     "meaning": "ရှာသည်",
     "meaningEn": "look for",
+    "romanization": "haa",
     "image": "/images/meanings/ha.svg",
     "audio": "/audio/meanings/ha.m4a"
   },
@@ -311,6 +345,7 @@
     "syllables": ["นะ"],
     "meaning": "နော်",
     "meaningEn": "softening particle",
+    "romanization": "na",
     "image": "/images/meanings/na-particle.svg",
     "audio": "/audio/meanings/na-particle.m4a"
   },
@@ -320,6 +355,7 @@
     "syllables": ["ดี", "ใจ"],
     "meaning": "ဝမ်းသာသည်",
     "meaningEn": "glad",
+    "romanization": "dii-jai",
     "image": "/images/meanings/dichai.svg",
     "audio": "/audio/meanings/dichai.m4a"
   },
@@ -329,6 +365,7 @@
     "syllables": ["ไอ"],
     "meaning": "ချောင်းဆိုးသည်",
     "meaningEn": "cough",
+    "romanization": "ai",
     "image": "/images/meanings/ai.svg",
     "audio": "/audio/meanings/ai.m4a"
   },
@@ -338,6 +375,7 @@
     "syllables": ["ผี"],
     "meaning": "သရဲ",
     "meaningEn": "ghost",
+    "romanization": "phii",
     "image": "/images/meanings/phi.svg",
     "audio": "/audio/meanings/phi.m4a"
   },
@@ -347,6 +385,7 @@
     "syllables": ["มี"],
     "meaning": "ရှိသည်",
     "meaningEn": "have",
+    "romanization": "mii",
     "image": "/images/meanings/mi.svg",
     "audio": "/audio/meanings/mi.m4a"
   },
@@ -356,6 +395,7 @@
     "syllables": ["ยา", "ไอ"],
     "meaning": "ချောင်းဆိုးပျောက်ဆေး",
     "meaningEn": "cough medicine",
+    "romanization": "yaa-ai",
     "image": "/images/meanings/yaai.svg",
     "audio": "/audio/meanings/yaai.m4a"
   },
@@ -365,6 +405,7 @@
     "syllables": ["ปู"],
     "meaning": "ဂဏန်း",
     "meaningEn": "crab",
+    "romanization": "bpuu",
     "image": "/images/meanings/pu.svg",
     "audio": "/audio/meanings/pu.m4a"
   },
@@ -374,6 +415,7 @@
     "syllables": ["ถู"],
     "meaning": "ပွတ်တိုက်သည်",
     "meaningEn": "rub",
+    "romanization": "thuu",
     "image": "/images/meanings/thu.svg",
     "audio": "/audio/meanings/thu.m4a"
   },
@@ -383,6 +425,7 @@
     "syllables": ["รู"],
     "meaning": "တွင်း/အပေါက်",
     "meaningEn": "hole",
+    "romanization": "ruu",
     "image": "/images/meanings/ru.svg",
     "audio": "/audio/meanings/ru.m4a"
   },
@@ -392,6 +435,7 @@
     "syllables": ["มะ", "ลิ"],
     "meaning": "စံပယ်ပန်း",
     "meaningEn": "jasmine",
+    "romanization": "ma-li",
     "image": "/images/meanings/mali.svg",
     "audio": "/audio/meanings/mali.m4a"
   },
@@ -401,6 +445,7 @@
     "syllables": ["ปี"],
     "meaning": "နှစ်",
     "meaningEn": "year",
+    "romanization": "bpii",
     "image": "/images/meanings/pi.svg",
     "audio": "/audio/meanings/pi.m4a"
   },
@@ -410,6 +455,7 @@
     "syllables": ["ไถ"],
     "meaning": "ထွန်သည်",
     "meaningEn": "plough",
+    "romanization": "thai",
     "image": "/images/meanings/thai.svg",
     "audio": "/audio/meanings/thai.m4a"
   },
@@ -419,6 +465,7 @@
     "syllables": ["พา"],
     "meaning": "ခေါ်သည်",
     "meaningEn": "take along",
+    "romanization": "phaa",
     "image": "/images/meanings/pha-take.svg",
     "audio": "/audio/meanings/pha-take.m4a"
   },
@@ -428,6 +475,7 @@
     "syllables": ["ไถ", "นา"],
     "meaning": "လယ်ထွန်သည်",
     "meaningEn": "plough the field",
+    "romanization": "thai-naa",
     "image": "/images/meanings/thaina.svg",
     "audio": "/audio/meanings/thaina.m4a"
   },
@@ -437,6 +485,7 @@
     "syllables": ["จะ"],
     "meaning": "မယ်/လိမ့်မည်",
     "meaningEn": "will",
+    "romanization": "ja",
     "image": "/images/meanings/cha.svg",
     "audio": "/audio/meanings/cha.m4a"
   },
@@ -446,6 +495,7 @@
     "syllables": ["ขอ"],
     "meaning": "တောင်းသည်",
     "meaningEn": "ask for",
+    "romanization": "khor",
     "image": "/images/meanings/kho.svg",
     "audio": "/audio/meanings/kho.m4a"
   },
@@ -455,6 +505,7 @@
     "syllables": ["ใน"],
     "meaning": "အထဲမှာ",
     "meaningEn": "in",
+    "romanization": "nai",
     "image": "/images/meanings/nai.svg",
     "audio": "/audio/meanings/nai.m4a"
   },
@@ -464,6 +515,7 @@
     "syllables": ["โม", "โห"],
     "meaning": "စိတ်ဆိုးသည်",
     "meaningEn": "angry",
+    "romanization": "moo-hoo",
     "image": "/images/meanings/moho.svg",
     "audio": "/audio/meanings/moho.m4a"
   },
@@ -473,6 +525,7 @@
     "syllables": ["เอา"],
     "meaning": "ယူသည်",
     "meaningEn": "take",
+    "romanization": "ao",
     "image": "/images/meanings/ao.svg",
     "audio": "/audio/meanings/ao.m4a"
   },
@@ -482,6 +535,7 @@
     "syllables": ["ผา"],
     "meaning": "ကမ်းပါး/နံရံ",
     "meaningEn": "cliff",
+    "romanization": "phaa",
     "image": "/images/meanings/pha-cliff.svg",
     "audio": "/audio/meanings/pha-cliff.m4a"
   },
@@ -491,6 +545,7 @@
     "syllables": ["ไว"],
     "meaning": "မြန်သည်",
     "meaningEn": "fast",
+    "romanization": "wai",
     "image": "/images/meanings/wai.svg",
     "audio": "/audio/meanings/wai.m4a"
   },
@@ -500,6 +555,7 @@
     "syllables": ["พอ", "ใจ"],
     "meaning": "ကျေနပ်သည်",
     "meaningEn": "satisfied",
+    "romanization": "phor-jai",
     "image": "/images/meanings/phochai.svg",
     "audio": "/audio/meanings/phochai.m4a"
   },
@@ -509,6 +565,7 @@
     "syllables": ["อา"],
     "meaning": "ဦးလေး/ဒေါ်လေး",
     "meaningEn": "uncle or aunt",
+    "romanization": "aa",
     "image": "/images/meanings/a.svg",
     "audio": "/audio/meanings/a.m4a"
   },
@@ -518,6 +575,7 @@
     "syllables": ["หอ"],
     "meaning": "စင်/အဆောင်",
     "meaningEn": "tower",
+    "romanization": "hor",
     "image": "/images/meanings/ho.svg",
     "audio": "/audio/meanings/ho.m4a"
   },
@@ -527,6 +585,7 @@
     "syllables": ["พอ"],
     "meaning": "လုံလောက်သည်",
     "meaningEn": "enough",
+    "romanization": "phor",
     "image": "/images/meanings/pho.svg",
     "audio": "/audio/meanings/pho.m4a"
   },
@@ -536,6 +595,7 @@
     "syllables": ["เลอะ", "เทอะ"],
     "meaning": "ညစ်ပတ်သည်",
     "meaningEn": "messy",
+    "romanization": "ler-ther",
     "image": "/images/meanings/loethoe.svg",
     "audio": "/audio/meanings/loethoe.m4a"
   }

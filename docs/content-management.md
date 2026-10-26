@@ -74,6 +74,7 @@ A word without Burmese pronunciation is incomplete; do not merge it with a place
   "syllables": ["กา"],
   "meaning": "ကျီးကန်း",
   "meaningEn": "crow",
+  "romanization": "gaa",
   "image": "/images/meanings/ka-crow.svg",
   "audio": "/audio/meanings/ka.m4a"
 }
@@ -83,9 +84,22 @@ A word without Burmese pronunciation is incomplete; do not merge it with a place
 - `syllables` splits the word into open syllables (`["ภู", "เขา"]`). Each must be one consonant + one vowel from
   `vowels.json`, with no tone mark or final consonant, so its tone follows from the rules; the Text tab shows it.
 - `meaning` is the Burmese meaning exactly as the source gives it; a `/` separates the source's alternatives (`တွင်း/အပေါက်`).
+- `romanization` is the word in Latin letters, one part per syllable joined with `-` (`phuu-khao`), following
+  [Romanization](#romanization). The Text tab shows it in brackets after the meaning in both languages, since the
+  source has no Burmese pronunciation for these words. It is never converted into Burmese script.
 - `image` and `audio` are required. The picture is `public/images/meanings/<romanized-slug>.svg` (or an existing
   `public/images/words/` picture of the same thing, as ฝา and เสือ use); the audio says only the word, so words spelt
   alike share it. `src/data/meanings.test.ts` checks the fields, syllables, Unicode and files.
+
+## Romanization
+
+Romanized pronunciations (`pronunciationEn`, `romanization`) share one scheme:
+
+- Consonants: `g` ก, `kh` ข ค, `ng` ง, `j` จ, `ch` ฉ ช, `s` ซ ศ ส, `d` ด, `dt` ต, `th` ถ ท, `n` น, `b` บ, `bp` ป,
+  `ph` ผ พ ภ, `f` ฝ ฟ, `m` ม, `y` ย, `r` ร, `l` ล, `w` ว, `h` ห; อ before a vowel is silent.
+- Long vowels are doubled where a single letter would be ambiguous: `aa ii uu oo ee`; otherwise `a i u o e ae ue er
+ua uea ai ao am or`. Tones are not marked; the Text tab shows them as curves.
+- Syllables are joined with `-`; a letter name is `<consonant>or <word>` (`gor gai`).
 
 ## Images
 
@@ -204,6 +218,7 @@ Items for the project owner to confirm.
 | Approximate pictures              | จาน, ฤาษี, มณโฑ, ทหาร and ยักษ์ use the closest Fluent emoji (see [Current picture sources](#current-picture-sources)). Confirm or replace.                                                                                                                                                                                                                  |
 | Burmese UI text                   | All of `src/i18n/mm.yml` (navigation, prompts, buttons, Card options, the names of tones, vowel groups and live/dead syllables, and the tones explanations) was written by Claude at the owner's request (2026-10-20); not in the source. The class names are the owner's existing `burmeseName` values, moved there unchanged. To be reviewed by the owner. |
 | English meanings and letter names | `meaningEn` and `pronunciationEn` for all 44 words were written by Claude at the owner's request (2026-10-20). To be reviewed by the owner.                                                                                                                                                                                                                  |
+| Meanings romanization             | The 60 `romanization` values were written by Claude at the owner's request (2026-10-26) and are shown in both languages; the source has none. To be reviewed by the owner.                                                                                                                                                                                   |
 | Meanings English and pictures     | The 60 `meaningEn` values and the picture choices were made by Claude (2026-10-25); the source gives Burmese meanings only. Abstract words have approximate pictures (see [Current picture sources](#current-picture-sources)). To be reviewed by the owner.                                                                                                 |
 | `นะ` English meaning              | The source gives `နော်`, a sentence particle; stored in English as `softening particle`. Confirm or reword.                                                                                                                                                                                                                                                  |
 | Audio                             | Placeholder text-to-speech; see [Sources and licensing](#sources-and-licensing).                                                                                                                                                                                                                                                                             |

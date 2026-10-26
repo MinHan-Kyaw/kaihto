@@ -32,6 +32,7 @@ interface WordCardProps {
   showPicture?: boolean;
   showThai?: boolean;
   showMeaning?: boolean;
+  showPronunciation?: boolean;
   tones?: { syllable: string; tone: Tone }[]; // one per syllable, shown as pitch curves in the top right corner
 }
 
@@ -57,6 +58,7 @@ const WordCard = ({
   showPicture = true,
   showThai = true,
   showMeaning = true,
+  showPronunciation = false,
   tones,
 }: WordCardProps) => {
   const { lang, t } = useTranslation();
@@ -103,9 +105,20 @@ const WordCard = ({
           ))}
         </p>
       )}
-      {showMeaning && (
-        <p className={classNames('leading-[1.6] font-bold text-brand', content.font, sizeClassNames.meaning)} lang={content.lang}>
-          {getMeaning(word, lang)}
+      {(showMeaning || showPronunciation) && (
+        <p className={classNames('leading-[1.6]', sizeClassNames.meaning)}>
+          {showMeaning && (
+            <span className={classNames('font-bold text-brand', content.font)} lang={content.lang}>
+              {getMeaning(word, lang)}
+            </span>
+          )}
+          {showMeaning && showPronunciation && ' '}
+          {/* Romanized Thai, the same in both languages. */}
+          {showPronunciation && (
+            <span className="whitespace-nowrap text-ink-muted" lang="th-Latn">
+              ({word.romanization})
+            </span>
+          )}
         </p>
       )}
       {onPlayAudio && (

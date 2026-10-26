@@ -27,6 +27,7 @@ const CARD_PARTS = [
   { id: 'thai', label: 'cards.thai' },
   { id: 'tone', label: 'cards.tone' },
   { id: 'meaning', label: 'cards.meaning' },
+  { id: 'pronunciation', label: 'cards.pronunciation' },
 ] as const;
 
 type CardPart = (typeof CARD_PARTS)[number]['id'];
@@ -53,7 +54,12 @@ const Meanings = ({ showText = false }: MeaningsProps) => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const selectedTabId: MeaningsTabId = showText ? 'text' : 'pictures';
-  const [shownParts, setShownParts] = useState<Record<CardPart, boolean>>({ thai: true, tone: true, meaning: true });
+  const [shownParts, setShownParts] = useState<Record<CardPart, boolean>>({
+    thai: true,
+    tone: true,
+    meaning: true,
+    pronunciation: true,
+  });
 
   useEffect(() => () => stopAudio(), []);
 
@@ -101,6 +107,7 @@ const Meanings = ({ showText = false }: MeaningsProps) => {
                   showPicture={false}
                   showThai={shownParts.thai}
                   showMeaning={shownParts.meaning}
+                  showPronunciation={shownParts.pronunciation}
                   tones={shownParts.tone ? wordTones.get(word.id) : undefined}
                 />
               </li>

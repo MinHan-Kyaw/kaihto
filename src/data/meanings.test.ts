@@ -54,6 +54,13 @@ describe('meanings', () => {
     meanings.forEach((word) => expect(word.meaningEn, word.id).toMatch(ENGLISH_MEANING));
   });
 
+  it('gives every word a romanized pronunciation with one part per syllable', () => {
+    meanings.forEach((word) => {
+      expect(word.romanization, word.id).toMatch(/^[a-z]+(-[a-z]+)*$/);
+      expect(word.romanization.split('-'), word.id).toHaveLength(word.syllables.length);
+    });
+  });
+
   it('references an SVG image that exists for every word, a different one per word', () => {
     expect(new Set(meanings.map((word) => word.image)).size).toBe(meanings.length);
     meanings.forEach((word) => {

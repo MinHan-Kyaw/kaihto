@@ -103,14 +103,15 @@ public/
 - Audio: `public/audio/words/<romanized-slug>.m4a` (AAC). Audio is the **Thai** recitation of the full letter name,
   `<consonant>อ <word>` ("กอ ไก่"), matching the Burmese pronunciation — even though the screen shows only `ไก่`.
 - Meanings words (`src/data/meanings.json`, the source's chapter 3) have the Thai word as id; words spelt alike add the
-  English meaning (`กา-kettle`, `กา-crow`). Their audio says just the word, `public/audio/meanings/<slug>.m4a`.
+  English meaning (`กา-kettle`, `กา-crow`). Their audio says just the word, `public/audio/meanings/<slug>.m4a`. The Text
+  tab shows `meaning (romanization)`, e.g. `mountain (phuu-khao)`, in both languages.
 - Vowel ids are the written form with `-` for the consonant (`-ะ`, `เ-ือ`); tone rules live in `src/helpers/tones.ts`.
   Vowel audio, `public/audio/vowels/<sound>.m4a`, says the vowel on `อ` (`-ะ` → "อะ").
 - Full procedure: [docs/content-management.md](docs/content-management.md).
 
 ## Burmese pronunciation — strict rule
 
-Pronunciation is written manually in Burmese script by the project owner and is curated learning content.
+Pronunciation in Burmese script is written manually by the project owner and is curated learning content.
 
 - **Do not generate, translate, transliterate or infer Burmese pronunciation** — not from Thai text, romanization,
   translation services, speech synthesis or any other automated system, and not from your own knowledge.
@@ -118,6 +119,11 @@ Pronunciation is written manually in Burmese script by the project owner and is 
 - Only mechanical Unicode fixes are allowed (logical character order, removing invisible characters, letter ဝ vs digit ၀);
   record them in the content review log.
 - Thai audio is separate from Burmese pronunciation. Never derive one from the other.
+- **Romanized pronunciation is different.** Latin-letter pronunciations of the Thai (`pronunciationEn` on consonant
+  words, `romanization` on Meanings words) may be written when the owner asks, following the scheme in
+  [docs/content-management.md](docs/content-management.md#romanization), and are listed in the content review log. The
+  owner chose to show the Meanings romanization in both languages, since the source has no Burmese pronunciation for
+  those words. Never convert a romanization into Burmese script, and never use it to fill a missing Burmese pronunciation.
 
 ## Testing conventions
 
