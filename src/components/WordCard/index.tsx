@@ -80,7 +80,7 @@ const WordCard = ({
     >
       {showPicture && (
         <img
-          className={classNames('aspect-square object-contain', sizeClassNames.picture)}
+          className={classNames('aspect-square object-contain drop-shadow-picture', sizeClassNames.picture)}
           src={assetUrl(word.image)}
           alt={getMeaning(word, lang)}
           lang={content.lang}

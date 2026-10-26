@@ -35,6 +35,9 @@
   --shadow-edge-selected: 0 4px 0 var(--color-selected);
   --shadow-edge-error: 0 4px 0 var(--color-error);
   --shadow-edge-error-dark: 0 4px 0 var(--color-error-dark);
+
+  /* Pictures: nothing in light mode; a faint light edge in dark mode, so dark pictures (the crow) stand out. */
+  --drop-shadow-picture: 0 0 0 transparent;
 }
 
 /* Dark mode: the same tokens with dark values, so components need no dark: classes. index.html sets data-theme on <html>
@@ -58,6 +61,7 @@
   --color-error: #ff7a6b;
   --color-error-dark: #c4473a;
   --color-error-light: #3a1a17;
+  --drop-shadow-picture: 0 0 1.5px rgb(228 236 230 / 80%);
 }
 
 @layer base {

@@ -57,7 +57,7 @@ const PracticeCategories = () => {
                         TILTS[position]
                       )}
                     >
-                      {word.image && <img className="size-12 xs:size-14" src={assetUrl(word.image)} alt="" />}
+                      {word.image && <img className="size-12 drop-shadow-picture xs:size-14" src={assetUrl(word.image)} alt="" />}
                       <span className="font-thai text-lg leading-tight font-medium text-brand" lang="th">
                         {showLetter ? word.consonant : word.thai}
                       </span>

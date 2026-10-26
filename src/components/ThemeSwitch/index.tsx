@@ -15,7 +15,7 @@ const ThemeSwitch = ({ theme, onChange }: ThemeSwitchProps) => {
   return (
     <button
       type="button"
-      className="relative ml-0.5 inline-grid size-8 shrink-0 cursor-pointer place-items-center rounded-xl border-2 border-line text-ink-muted after:absolute after:-inset-1.5 hover:bg-brand-light hover:text-brand sm:ml-1 sm:size-11"
+      className="relative inline-grid size-9 shrink-0 cursor-pointer place-items-center rounded-xl border-2 border-line text-ink-muted after:absolute after:-inset-1 hover:bg-brand-light hover:text-brand sm:size-11"
       aria-label={t('theme.dark')}
       aria-pressed={isDark}
       onClick={() => onChange(isDark ? 'light' : 'dark')}

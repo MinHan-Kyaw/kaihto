@@ -39,6 +39,53 @@ describe('Layout', () => {
     ).toEqual(['Consonants', 'Vowels', 'Tones', 'Meanings', 'Practice']);
   });
 
+  it('opens and closes the phone menu with the menu button', async () => {
+    renderLayout('/');
+
+    const menuButton = screen.getByRole('button', { name: 'Menu' });
+
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+    expect(menuButton).toHaveAttribute('aria-controls', screen.getByRole('navigation', { name: 'Main' }).id);
+
+    await userEvent.click(menuButton);
+
+    expect(menuButton).toHaveAttribute('aria-expanded', 'true');
+
+    await userEvent.click(menuButton);
+
+    expect(menuButton).toHaveAttribute('aria-expanded', 'false');
+  });
+
+  describe('given the phone menu is open', () => {
+    it('closes when a page is chosen', async () => {
+      renderLayout('/');
+      await userEvent.click(screen.getByRole('button', { name: 'Menu' }));
+
+      await userEvent.click(screen.getByRole('link', { name: 'Vowels' }));
+
+      expect(screen.getByRole('button', { name: 'Menu' })).toHaveAttribute('aria-expanded', 'false');
+    });
+
+    it('closes on Escape and returns focus to the menu button', async () => {
+      renderLayout('/');
+      await userEvent.click(screen.getByRole('button', { name: 'Menu' }));
+
+      await userEvent.keyboard('{Escape}');
+
+      expect(screen.getByRole('button', { name: 'Menu' })).toHaveAttribute('aria-expanded', 'false');
+      expect(screen.getByRole('button', { name: 'Menu' })).toHaveFocus();
+    });
+
+    it('closes on a tap outside the header', async () => {
+      renderLayout('/');
+      await userEvent.click(screen.getByRole('button', { name: 'Menu' }));
+
+      await userEvent.click(screen.getByRole('main'));
+
+      expect(screen.getByRole('button', { name: 'Menu' })).toHaveAttribute('aria-expanded', 'false');
+    });
+  });
+
   it('switches to dark mode from the header', async () => {
     renderLayout('/');
 

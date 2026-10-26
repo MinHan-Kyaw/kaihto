@@ -281,6 +281,13 @@ The app reads English or Burmese; English is the default, and the learner can sw
 - **Tests:** without a `LanguageContext` provider, components read English, so most tests need no wrapper; wrap with
   `inBurmese()` from `src/tests/fixtures.tsx` to test Burmese.
 
+## Header
+
+From `sm` (640px) the header is one bar: the logo, the five page links, the language switch and the light/dark switch.
+Below `sm` the links move into a menu: a ☰ button beside the language and light/dark switches opens them as a
+full-width panel under the header (`aria-expanded`, `aria-controls`). Choosing a page, a tap outside the header or
+Escape closes it; Escape returns focus to the button. The "Kai Hto" name shows beside the logo on phones and from `md`.
+
 ## Light and dark mode
 
 The colour tokens have a light and a dark set. `src/index.css` redefines them under `:root[data-theme='dark']`, so
@@ -291,6 +298,8 @@ text, and `on-fill` (text and knobs on those fills) turns near-black to match.
   else the device setting (`prefers-color-scheme`). The page never flashes the wrong theme.
 - **Switch:** `ThemeSwitch` in the header (a moon in light mode, a sun in dark; `aria-pressed` when dark). `App` holds the
   theme and passes it to `Layout`.
+- **Pictures:** `drop-shadow-picture` gives vocabulary pictures a faint light edge in dark mode (and nothing in light
+  mode), so dark pictures such as the crow stay visible on the dark cards.
 - **Remembering:** `src/services/theme.ts` sets the attribute and saves the choice in `localStorage` (`kaihto-theme`),
   the one thing the app stores, so it survives reloads and switching language. If storage is blocked the theme still
   applies for the visit.
