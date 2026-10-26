@@ -7,11 +7,15 @@ app:
 
 nav:
   label: Main
+  menu: Menu
   consonants: Consonants
   vowels: Vowels
   tones: Tones
   meanings: Meanings
   practice: Practice
+
+theme:
+  dark: Dark mode
 
 language:
   other: မြန်မာ

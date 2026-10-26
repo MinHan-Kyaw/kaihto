@@ -30,7 +30,7 @@ const Toggle = ({ label, description, checked, onChange }: ToggleProps) => {
           )}
         >
           <span
-            className={classNames('size-5 rounded-full bg-white transition-transform duration-150', checked && 'translate-x-4')}
+            className={classNames('size-5 rounded-full bg-on-fill transition-transform duration-150', checked && 'translate-x-4')}
           />
         </span>
         <span className={classNames('text-[0.6875rem] leading-none font-extrabold', checked ? 'text-brand' : 'text-ink-muted')}>

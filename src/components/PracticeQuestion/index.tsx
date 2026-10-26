@@ -32,7 +32,7 @@ const PracticeQuestion = ({ question, children }: PracticeQuestionProps) => {
       {answer.image && (
         <div className="grid aspect-square w-[min(100%,10.5rem)] place-items-center rounded-3xl border-2 border-line bg-surface p-3 shadow-edge md:w-68">
           <img
-            className="size-full object-contain"
+            className="size-full object-contain drop-shadow-picture"
             src={assetUrl(answer.image)}
             alt={getMeaning(answer, lang)}
             lang={content.lang}

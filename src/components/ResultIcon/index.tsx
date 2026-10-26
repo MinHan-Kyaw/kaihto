@@ -19,7 +19,7 @@ const ResultIcon = ({ result, className }: ResultIconProps) => {
   return (
     <span
       className={classNames(
-        'grid size-7 shrink-0 place-items-center rounded-full text-white',
+        'grid size-7 shrink-0 place-items-center rounded-full text-on-fill',
         result === 'correct' ? 'bg-brand' : 'bg-error',
         className
       )}
