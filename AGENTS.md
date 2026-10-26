@@ -103,20 +103,25 @@ public/
 - Audio: `public/audio/words/<romanized-slug>.m4a` (AAC). Audio is the **Thai** recitation of the full letter name,
   `<consonant>อ <word>` ("กอ ไก่"), matching the Burmese pronunciation — even though the screen shows only `ไก่`.
 - Meanings words (`src/data/meanings.json`, the source's chapter 3) have the Thai word as id; words spelt alike add the
-  English meaning (`กา-kettle`, `กา-crow`). Their audio says just the word, `public/audio/meanings/<slug>.m4a`.
+  English meaning (`กา-kettle`, `กา-crow`). Their audio says just the word, `public/audio/meanings/<slug>.m4a`. The Text
+  tab shows the meaning with its pronunciation in brackets, `mountain (phuu-khao)` in English and `တောင်တန်း (ဖူးခေါင်)`
+  in Burmese.
 - Vowel ids are the written form with `-` for the consonant (`-ะ`, `เ-ือ`); tone rules live in `src/helpers/tones.ts`.
   Vowel audio, `public/audio/vowels/<sound>.m4a`, says the vowel on `อ` (`-ะ` → "อะ").
 - Full procedure: [docs/content-management.md](docs/content-management.md).
 
-## Burmese pronunciation — strict rule
+## Burmese pronunciation
 
-Pronunciation is written manually in Burmese script by the project owner and is curated learning content.
+Burmese pronunciation is learning content, so it is consistent and reviewed.
 
-- **Do not generate, translate, transliterate or infer Burmese pronunciation** — not from Thai text, romanization,
-  translation services, speech synthesis or any other automated system, and not from your own knowledge.
-- Missing pronunciation means the content is incomplete. Leave it for the owner; never fill it with a guess.
-- Only mechanical Unicode fixes are allowed (logical character order, removing invisible characters, letter ဝ vs digit ၀);
-  record them in the content review log.
+- **The book's pronunciations are kept exactly as given** (`ကောကိုင်`). Only mechanical Unicode fixes are allowed
+  (logical character order, removing invisible characters, letter ဝ vs digit ၀); record them in the content review log.
+- **Where the book has none, write it** in the book's own style, as described in
+  [docs/content-management.md](docs/content-management.md#burmese-pronunciation): each syllable's initial consonant as
+  the book's letter names spell it and its vowel as the book's vowel chart spells it. List what you wrote in the content
+  review log for the owner to check.
+- Romanized pronunciations (`pronunciationEn`) follow the scheme in
+  [docs/content-management.md](docs/content-management.md#romanization) and are shown only in English.
 - Thai audio is separate from Burmese pronunciation. Never derive one from the other.
 
 ## Testing conventions
@@ -144,6 +149,8 @@ touch targets ≥ 44px, focus moved to the new prompt on question change.
 - `ci.yml`: install (`npm ci --ignore-scripts`) → lint → type check → tests → build, on PRs and pushes to `develop`/`main`.
 - Branches: work lands on `develop` via PR; releases go `develop` → `main` via PR. Never push directly to either (a
   GitHub ruleset blocks it; no approval is required).
+- Commit messages: a short summary line and a body explaining why. Never add a `Co-Authored-By:` trailer (or any other
+  attribution trailer) to a commit.
 - Deployment: Cloudflare Pages (Git integration, configured in the Cloudflare dashboard) deploys `main` to production and
   builds previews for other branches and PRs. There is no deploy workflow in this repo.
 - Pin every `uses:` to a full commit SHA with a `# vX.Y.Z` comment. Never `@v1`/`@main`, never `secrets: inherit`, never
