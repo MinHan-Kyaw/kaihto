@@ -28,7 +28,7 @@ flowchart LR
 | ------------- | ---------------------------------------------------- | ----------------------------------------------- |
 | `data/`       | Static content and its typed loader                  | `types/`                                        |
 | `helpers/`    | Pure, deterministic-when-seeded logic                | `types/`, `constants/`, other helpers           |
-| `services/`   | Browser side effects (audio, picture preloading)     | nothing app-specific                            |
+| `services/`   | Browser side effects (audio, pictures, theme)        | nothing app-specific                            |
 | `i18n/`       | UI text in English and Burmese, the language context | the `.yml` files                                |
 | `components/` | Rendering and user interaction via props             | `helpers/`, `types/`, `i18n/`, other components |
 | `screens/`    | Routing targets: state, data, services, composition  | everything                                      |
@@ -280,6 +280,20 @@ The app reads English or Burmese; English is the default, and the learner can sw
   switching reloads the app; that resets practice, as refreshing already does.
 - **Tests:** without a `LanguageContext` provider, components read English, so most tests need no wrapper; wrap with
   `inBurmese()` from `src/tests/fixtures.tsx` to test Burmese.
+
+## Light and dark mode
+
+The colour tokens have a light and a dark set. `src/index.css` redefines them under `:root[data-theme='dark']`, so
+components use the same classes in both; brand, selected and error are lighter in dark mode so they stay readable as
+text, and `on-fill` (text and knobs on those fills) turns near-black to match.
+
+- **First paint:** a small script in `index.html` sets `data-theme` on `<html>` before the app loads: the saved choice,
+  else the device setting (`prefers-color-scheme`). The page never flashes the wrong theme.
+- **Switch:** `ThemeSwitch` in the header (a moon in light mode, a sun in dark; `aria-pressed` when dark). `App` holds the
+  theme and passes it to `Layout`.
+- **Remembering:** `src/services/theme.ts` sets the attribute and saves the choice in `localStorage` (`kaihto-theme`),
+  the one thing the app stores, so it survives reloads and switching language. If storage is blocked the theme still
+  applies for the visit.
 
 ## Styling
 

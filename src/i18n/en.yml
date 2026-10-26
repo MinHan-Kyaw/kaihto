@@ -13,6 +13,9 @@ nav:
   meanings: Meanings
   practice: Practice
 
+theme:
+  dark: Dark mode
+
 language:
   other: မြန်မာ
   switch: Read in Burmese

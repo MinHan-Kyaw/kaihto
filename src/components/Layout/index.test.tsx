@@ -1,15 +1,18 @@
 import { MemoryRouter, Route, Routes } from 'react-router';
 
 import { render, screen, within } from '@testing-library/react';
+import userEvent from '@testing-library/user-event';
 
 import { inBurmese } from '../../tests/fixtures';
 
 import Layout from '.';
 
+const onThemeChange = vi.fn();
+
 const layoutAt = (route: string) => (
   <MemoryRouter initialEntries={[route]}>
     <Routes>
-      <Route element={<Layout />}>
+      <Route element={<Layout theme="light" onThemeChange={onThemeChange} />}>
         <Route path="*" element={<p>Screen content</p>} />
       </Route>
     </Routes>
@@ -34,6 +37,14 @@ describe('Layout', () => {
         .getAllByRole('link')
         .map((link) => link.textContent)
     ).toEqual(['Consonants', 'Vowels', 'Tones', 'Meanings', 'Practice']);
+  });
+
+  it('switches to dark mode from the header', async () => {
+    renderLayout('/');
+
+    await userEvent.click(screen.getByRole('button', { name: 'Dark mode' }));
+
+    expect(onThemeChange).toHaveBeenCalledWith('dark');
   });
 
   describe('given the page is in English', () => {

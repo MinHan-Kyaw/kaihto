@@ -3,6 +3,7 @@ import { Link, NavLink, Outlet, useLocation } from 'react-router';
 import { assetUrl } from '../../helpers/assetUrl';
 import { classNames } from '../../helpers/classNames';
 import { getPathInLanguage, useTranslation } from '../../i18n';
+import ThemeSwitch from '../ThemeSwitch';
 
 const NAV_ITEMS = [
   { to: '/consonants', label: 'nav.consonants' },
@@ -12,7 +13,14 @@ const NAV_ITEMS = [
   { to: '/practice', label: 'nav.practice' },
 ];
 
-const Layout = () => {
+type Theme = 'light' | 'dark';
+
+interface LayoutProps {
+  theme: Theme;
+  onThemeChange: (theme: Theme) => void;
+}
+
+const Layout = ({ theme, onThemeChange }: LayoutProps) => {
   const { lang, t } = useTranslation();
   const { pathname, search } = useLocation();
   const otherLang = lang === 'en' ? 'my' : 'en';
@@ -39,7 +47,7 @@ const Layout = () => {
                     to={to}
                     className={({ isActive }) =>
                       classNames(
-                        'inline-flex min-h-11 items-center rounded-xl px-0.5 py-2 text-[0.6875rem] font-bold no-underline hover:bg-brand-light hover:text-brand xs:px-1.5 xs:text-[0.9375rem] sm:px-3 sm:text-base',
+                        'inline-flex min-h-11 items-center rounded-xl px-px py-2 text-[0.6875rem] font-bold no-underline hover:bg-brand-light hover:text-brand xs:px-1 xs:text-sm sm:px-3 sm:text-base',
                         isActive ? 'bg-brand-light text-brand' : 'text-ink-muted'
                       )
                     }
@@ -52,7 +60,7 @@ const Layout = () => {
             {/* A globe on phones, where the nav leaves no room for a word; its invisible edge keeps a 44px touch target. */}
             <a
               href={otherLanguagePath}
-              className="relative ml-1 inline-grid size-9 shrink-0 place-items-center rounded-xl border-2 border-line text-sm font-bold text-ink-muted no-underline after:absolute after:-inset-1 hover:bg-brand-light hover:text-brand sm:size-auto sm:min-h-11 sm:min-w-11 sm:px-2"
+              className="relative ml-0.5 inline-grid size-8 shrink-0 place-items-center rounded-xl border-2 border-line text-sm font-bold text-ink-muted no-underline after:absolute after:-inset-1.5 hover:bg-brand-light hover:text-brand sm:ml-1 sm:size-auto sm:min-h-11 sm:min-w-11 sm:px-2"
               aria-label={t('language.switch')}
               hrefLang={otherLang}
             >
@@ -66,6 +74,7 @@ const Layout = () => {
                 {t('language.other')}
               </span>
             </a>
+            <ThemeSwitch theme={theme} onChange={onThemeChange} />
           </nav>
         </div>
       </header>

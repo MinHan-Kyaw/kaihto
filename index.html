@@ -20,6 +20,17 @@
     <meta name="twitter:description" content="Learn the 44 Thai consonants with pictures, sound and Burmese pronunciation." />
     <meta name="twitter:image" content="https://kaihto.pages.dev/og-image.png" />
     <title>Kai Hto</title>
+    <script>
+      // Sets the light or dark theme before the first paint, so a dark page never flashes white: the saved choice
+      // (src/services/theme.ts writes it), else the device setting.
+      try {
+        const saved = localStorage.getItem('kaihto-theme');
+        const dark = saved ? saved === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+        document.documentElement.dataset.theme = dark ? 'dark' : 'light';
+      } catch {
+        document.documentElement.dataset.theme = 'light';
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>

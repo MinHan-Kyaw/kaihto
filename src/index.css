@@ -2,7 +2,7 @@
 
 @theme {
   --color-*: initial;
-  --color-white: #fff;
+  --color-on-fill: #fff; /* text and knobs on brand, selected and error fills */
   --color-surface: #fff;
   --color-ink: #1d2b22;
   --color-ink-muted: #56655b;
@@ -37,8 +37,32 @@
   --shadow-edge-error-dark: 0 4px 0 var(--color-error-dark);
 }
 
+/* Dark mode: the same tokens with dark values, so components need no dark: classes. index.html sets data-theme on <html>
+   before the first paint, from the saved choice or the device setting. Brand, selected and error get lighter so they
+   stay readable as text on the dark surface; text on those fills (on-fill) turns dark to match. */
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --color-on-fill: #0d1711;
+  --color-surface: #111814;
+  --color-ink: #e4ece6;
+  --color-ink-muted: #9fb0a5;
+  --color-line: #27322b;
+  --color-line-strong: #39463e;
+  --color-brand: #4cbf66;
+  --color-brand-dark: #2f8f47;
+  --color-brand-bright: #5fd77a;
+  --color-brand-light: #17301f;
+  --color-brand-border: #2c5a39;
+  --color-selected: #6aa8f0;
+  --color-selected-light: #15263b;
+  --color-error: #ff7a6b;
+  --color-error-dark: #c4473a;
+  --color-error-light: #3a1a17;
+}
+
 @layer base {
   html {
+    color-scheme: light;
     color: var(--color-ink);
     background: var(--color-surface);
     line-height: 1.5;
