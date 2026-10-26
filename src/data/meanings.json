@@ -4,7 +4,9 @@
     "thai": "กา",
     "syllables": ["กา"],
     "meaning": "ရေနွေးအိုး",
+    "pronunciation": "ကား",
     "meaningEn": "kettle",
+    "pronunciationEn": "gaa",
     "image": "/images/meanings/ka-kettle.svg",
     "audio": "/audio/meanings/ka.m4a"
   },
@@ -13,7 +15,9 @@
     "thai": "กา",
     "syllables": ["กา"],
     "meaning": "ကျီးကန်း",
+    "pronunciation": "ကား",
     "meaningEn": "crow",
+    "pronunciationEn": "gaa",
     "image": "/images/meanings/ka-crow.svg",
     "audio": "/audio/meanings/ka.m4a"
   },
@@ -22,7 +26,9 @@
     "thai": "หู",
     "syllables": ["หู"],
     "meaning": "နားရွက်",
+    "pronunciation": "ဟူ",
     "meaningEn": "ear",
+    "pronunciationEn": "huu",
     "image": "/images/meanings/hu.svg",
     "audio": "/audio/meanings/hu.m4a"
   },
@@ -31,7 +37,9 @@
     "thai": "นา",
     "syllables": ["นา"],
     "meaning": "လယ်",
+    "pronunciation": "နား",
     "meaningEn": "rice field",
+    "pronunciationEn": "naa",
     "image": "/images/meanings/na.svg",
     "audio": "/audio/meanings/na.m4a"
   },
@@ -40,7 +48,9 @@
     "thai": "ตา",
     "syllables": ["ตา"],
     "meaning": "မျက်စိ",
+    "pronunciation": "သား",
     "meaningEn": "eye",
+    "pronunciationEn": "dtaa",
     "image": "/images/meanings/ta-eye.svg",
     "audio": "/audio/meanings/ta.m4a"
   },
@@ -49,7 +59,9 @@
     "thai": "ตา",
     "syllables": ["ตา"],
     "meaning": "အဘိုး",
+    "pronunciation": "သား",
     "meaningEn": "grandfather",
+    "pronunciationEn": "dtaa",
     "image": "/images/meanings/ta-grandfather.svg",
     "audio": "/audio/meanings/ta.m4a"
   },
@@ -58,7 +70,9 @@
     "thai": "สี",
     "syllables": ["สี"],
     "meaning": "အရောင်",
+    "pronunciation": "ဆီ",
     "meaningEn": "colour",
+    "pronunciationEn": "sii",
     "image": "/images/meanings/si.svg",
     "audio": "/audio/meanings/si.m4a"
   },
@@ -67,7 +81,9 @@
     "thai": "มือ",
     "syllables": ["มือ"],
     "meaning": "လက်",
+    "pronunciation": "မူး",
     "meaningEn": "hand",
+    "pronunciationEn": "mue",
     "image": "/images/meanings/mue.svg",
     "audio": "/audio/meanings/mue.m4a"
   },
@@ -76,7 +92,9 @@
     "thai": "ไป",
     "syllables": ["ไป"],
     "meaning": "သွားသည်",
+    "pronunciation": "ပိုင်း",
     "meaningEn": "go",
+    "pronunciationEn": "bpai",
     "image": "/images/meanings/pai.svg",
     "audio": "/audio/meanings/pai.m4a"
   },
@@ -85,7 +103,9 @@
     "thai": "แห",
     "syllables": ["แห"],
     "meaning": "ပိုက်ကွန်",
+    "pronunciation": "ဟဲ",
     "meaningEn": "cast net",
+    "pronunciationEn": "hae",
     "image": "/images/meanings/hae.svg",
     "audio": "/audio/meanings/hae.m4a"
   },
@@ -94,7 +114,9 @@
     "thai": "มา",
     "syllables": ["มา"],
     "meaning": "လာသည်",
+    "pronunciation": "မား",
     "meaningEn": "come",
+    "pronunciationEn": "maa",
     "image": "/images/meanings/ma.svg",
     "audio": "/audio/meanings/ma.m4a"
   },
@@ -103,7 +125,9 @@
     "thai": "ภูเขา",
     "syllables": ["ภู", "เขา"],
     "meaning": "တောင်တန်း",
+    "pronunciation": "ဖူးခေါင်",
     "meaningEn": "mountain",
+    "pronunciationEn": "phuu-khao",
     "image": "/images/meanings/phukhao.svg",
     "audio": "/audio/meanings/phukhao.m4a"
   },
@@ -112,7 +136,9 @@
     "thai": "แกะ",
     "syllables": ["แกะ"],
     "meaning": "သိုး",
+    "pronunciation": "ကဲ့",
     "meaningEn": "sheep",
+    "pronunciationEn": "gae",
     "image": "/images/meanings/kae.svg",
     "audio": "/audio/meanings/kae.m4a"
   },
@@ -121,7 +147,9 @@
     "thai": "ขา",
     "syllables": ["ขา"],
     "meaning": "ခြေထောက်",
+    "pronunciation": "ခါ",
     "meaningEn": "leg",
+    "pronunciationEn": "khaa",
     "image": "/images/meanings/kha.svg",
     "audio": "/audio/meanings/kha.m4a"
   },
@@ -130,7 +158,9 @@
     "thai": "แพะ",
     "syllables": ["แพะ"],
     "meaning": "ဆိတ်",
+    "pronunciation": "ဖဲ့",
     "meaningEn": "goat",
+    "pronunciationEn": "phae",
     "image": "/images/meanings/phae.svg",
     "audio": "/audio/meanings/phae.m4a"
   },
@@ -139,7 +169,9 @@
     "thai": "กะทิ",
     "syllables": ["กะ", "ทิ"],
     "meaning": "အုန်းနို့",
+    "pronunciation": "ကထိ",
     "meaningEn": "coconut milk",
+    "pronunciationEn": "ga-thi",
     "image": "/images/meanings/kathi.svg",
     "audio": "/audio/meanings/kathi.m4a"
   },
@@ -148,7 +180,9 @@
     "thai": "เตะ",
     "syllables": ["เตะ"],
     "meaning": "ကန်သည်",
+    "pronunciation": "သေ့",
     "meaningEn": "kick",
+    "pronunciationEn": "dte",
     "image": "/images/meanings/te.svg",
     "audio": "/audio/meanings/te.m4a"
   },
@@ -157,7 +191,9 @@
     "thai": "ฝา",
     "syllables": ["ฝา"],
     "meaning": "အဖုံး",
+    "pronunciation": "ဖာ",
     "meaningEn": "lid",
+    "pronunciationEn": "faa",
     "image": "/images/words/fa.svg",
     "audio": "/audio/meanings/fa.m4a"
   },
@@ -166,7 +202,9 @@
     "thai": "และ",
     "syllables": ["และ"],
     "meaning": "နှင့်",
+    "pronunciation": "လဲ့",
     "meaningEn": "and",
+    "pronunciationEn": "lae",
     "image": "/images/meanings/lae.svg",
     "audio": "/audio/meanings/lae.m4a"
   },
@@ -175,7 +213,9 @@
     "thai": "เยอะแยะ",
     "syllables": ["เยอะ", "แยะ"],
     "meaning": "ပေါများသည်",
+    "pronunciation": "ယွတ်ယဲ့",
     "meaningEn": "a lot",
+    "pronunciationEn": "yer-yae",
     "image": "/images/meanings/yoeyae.svg",
     "audio": "/audio/meanings/yoeyae.m4a"
   },
@@ -184,7 +224,9 @@
     "thai": "โต",
     "syllables": ["โต"],
     "meaning": "ကြီးသည်",
+    "pronunciation": "သိုး",
     "meaningEn": "grow up",
+    "pronunciationEn": "dtoo",
     "image": "/images/meanings/to.svg",
     "audio": "/audio/meanings/to.m4a"
   },
@@ -193,7 +235,9 @@
     "thai": "เสือ",
     "syllables": ["เสือ"],
     "meaning": "ကျား",
+    "pronunciation": "ဆူးရ",
     "meaningEn": "tiger",
+    "pronunciationEn": "suea",
     "image": "/images/words/suea.svg",
     "audio": "/audio/meanings/suea.m4a"
   },
@@ -202,7 +246,9 @@
     "thai": "ทำ",
     "syllables": ["ทำ"],
     "meaning": "လုပ်သည်",
+    "pronunciation": "ထမ်း",
     "meaningEn": "do",
+    "pronunciationEn": "tham",
     "image": "/images/meanings/tham.svg",
     "audio": "/audio/meanings/tham.m4a"
   },
@@ -211,7 +257,9 @@
     "thai": "อะไร",
     "syllables": ["อะ", "ไร"],
     "meaning": "ဘာလဲ",
+    "pronunciation": "အရိုင်း",
     "meaningEn": "what",
+    "pronunciationEn": "a-rai",
     "image": "/images/meanings/arai.svg",
     "audio": "/audio/meanings/arai.m4a"
   },
@@ -220,7 +268,9 @@
     "thai": "ดู",
     "syllables": ["ดู"],
     "meaning": "ကြည့်သည်",
+    "pronunciation": "ဒူး",
     "meaningEn": "look",
+    "pronunciationEn": "duu",
     "image": "/images/meanings/du.svg",
     "audio": "/audio/meanings/du.m4a"
   },
@@ -229,7 +279,9 @@
     "thai": "หัว",
     "syllables": ["หัว"],
     "meaning": "ခေါင်း",
+    "pronunciation": "ဟူဝါ",
     "meaningEn": "head",
+    "pronunciationEn": "hua",
     "image": "/images/meanings/hua.svg",
     "audio": "/audio/meanings/hua.m4a"
   },
@@ -238,7 +290,9 @@
     "thai": "รอ",
     "syllables": ["รอ"],
     "meaning": "စောင့်သည်",
+    "pronunciation": "ရော",
     "meaningEn": "wait",
+    "pronunciationEn": "ror",
     "image": "/images/meanings/ro.svg",
     "audio": "/audio/meanings/ro.m4a"
   },
@@ -247,7 +301,9 @@
     "thai": "หัวเราะ",
     "syllables": ["หัว", "เราะ"],
     "meaning": "ရယ်သည်",
+    "pronunciation": "ဟူဝါရော့",
     "meaningEn": "laugh",
+    "pronunciationEn": "hua-ro",
     "image": "/images/meanings/huaro.svg",
     "audio": "/audio/meanings/huaro.m4a"
   },
@@ -256,7 +312,9 @@
     "thai": "ดี",
     "syllables": ["ดี"],
     "meaning": "ကောင်းသည်",
+    "pronunciation": "ဒီး",
     "meaningEn": "good",
+    "pronunciationEn": "dii",
     "image": "/images/meanings/di.svg",
     "audio": "/audio/meanings/di.m4a"
   },
@@ -265,7 +323,9 @@
     "thai": "ผุ",
     "syllables": ["ผุ"],
     "meaning": "ဆွေးမြေ့သည်",
+    "pronunciation": "ဖု",
     "meaningEn": "rotten",
+    "pronunciationEn": "phu",
     "image": "/images/meanings/phu.svg",
     "audio": "/audio/meanings/phu.m4a"
   },
@@ -274,7 +334,9 @@
     "thai": "ยา",
     "syllables": ["ยา"],
     "meaning": "ဆေး",
+    "pronunciation": "ယား",
     "meaningEn": "medicine",
+    "pronunciationEn": "yaa",
     "image": "/images/meanings/ya.svg",
     "audio": "/audio/meanings/ya.m4a"
   },
@@ -283,7 +345,9 @@
     "thai": "มือถือ",
     "syllables": ["มือ", "ถือ"],
     "meaning": "လက်ကိုင်ဖုန်း",
+    "pronunciation": "မူးထူ",
     "meaningEn": "mobile phone",
+    "pronunciationEn": "mue-thue",
     "image": "/images/meanings/muethue.svg",
     "audio": "/audio/meanings/muethue.m4a"
   },
@@ -292,7 +356,9 @@
     "thai": "ใจ",
     "syllables": ["ใจ"],
     "meaning": "စိတ်",
+    "pronunciation": "ကျိုင်း",
     "meaningEn": "heart",
+    "pronunciationEn": "jai",
     "image": "/images/meanings/chai.svg",
     "audio": "/audio/meanings/chai.m4a"
   },
@@ -301,7 +367,9 @@
     "thai": "หา",
     "syllables": ["หา"],
     "meaning": "ရှာသည်",
+    "pronunciation": "ဟာ",
     "meaningEn": "look for",
+    "pronunciationEn": "haa",
     "image": "/images/meanings/ha.svg",
     "audio": "/audio/meanings/ha.m4a"
   },
@@ -310,7 +378,9 @@
     "thai": "นะ",
     "syllables": ["นะ"],
     "meaning": "နော်",
+    "pronunciation": "န",
     "meaningEn": "softening particle",
+    "pronunciationEn": "na",
     "image": "/images/meanings/na-particle.svg",
     "audio": "/audio/meanings/na-particle.m4a"
   },
@@ -319,7 +389,9 @@
     "thai": "ดีใจ",
     "syllables": ["ดี", "ใจ"],
     "meaning": "ဝမ်းသာသည်",
+    "pronunciation": "ဒီးကျိုင်း",
     "meaningEn": "glad",
+    "pronunciationEn": "dii-jai",
     "image": "/images/meanings/dichai.svg",
     "audio": "/audio/meanings/dichai.m4a"
   },
@@ -328,7 +400,9 @@
     "thai": "ไอ",
     "syllables": ["ไอ"],
     "meaning": "ချောင်းဆိုးသည်",
+    "pronunciation": "အိုင်း",
     "meaningEn": "cough",
+    "pronunciationEn": "ai",
     "image": "/images/meanings/ai.svg",
     "audio": "/audio/meanings/ai.m4a"
   },
@@ -337,7 +411,9 @@
     "thai": "ผี",
     "syllables": ["ผี"],
     "meaning": "သရဲ",
+    "pronunciation": "ဖီ",
     "meaningEn": "ghost",
+    "pronunciationEn": "phii",
     "image": "/images/meanings/phi.svg",
     "audio": "/audio/meanings/phi.m4a"
   },
@@ -346,7 +422,9 @@
     "thai": "มี",
     "syllables": ["มี"],
     "meaning": "ရှိသည်",
+    "pronunciation": "မီး",
     "meaningEn": "have",
+    "pronunciationEn": "mii",
     "image": "/images/meanings/mi.svg",
     "audio": "/audio/meanings/mi.m4a"
   },
@@ -355,7 +433,9 @@
     "thai": "ยาไอ",
     "syllables": ["ยา", "ไอ"],
     "meaning": "ချောင်းဆိုးပျောက်ဆေး",
+    "pronunciation": "ယားအိုင်း",
     "meaningEn": "cough medicine",
+    "pronunciationEn": "yaa-ai",
     "image": "/images/meanings/yaai.svg",
     "audio": "/audio/meanings/yaai.m4a"
   },
@@ -364,7 +444,9 @@
     "thai": "ปู",
     "syllables": ["ปู"],
     "meaning": "ဂဏန်း",
+    "pronunciation": "ပူး",
     "meaningEn": "crab",
+    "pronunciationEn": "bpuu",
     "image": "/images/meanings/pu.svg",
     "audio": "/audio/meanings/pu.m4a"
   },
@@ -373,7 +455,9 @@
     "thai": "ถู",
     "syllables": ["ถู"],
     "meaning": "ပွတ်တိုက်သည်",
+    "pronunciation": "ထူ",
     "meaningEn": "rub",
+    "pronunciationEn": "thuu",
     "image": "/images/meanings/thu.svg",
     "audio": "/audio/meanings/thu.m4a"
   },
@@ -382,7 +466,9 @@
     "thai": "รู",
     "syllables": ["รู"],
     "meaning": "တွင်း/အပေါက်",
+    "pronunciation": "ရူး",
     "meaningEn": "hole",
+    "pronunciationEn": "ruu",
     "image": "/images/meanings/ru.svg",
     "audio": "/audio/meanings/ru.m4a"
   },
@@ -391,7 +477,9 @@
     "thai": "มะลิ",
     "syllables": ["มะ", "ลิ"],
     "meaning": "စံပယ်ပန်း",
+    "pronunciation": "မလိ",
     "meaningEn": "jasmine",
+    "pronunciationEn": "ma-li",
     "image": "/images/meanings/mali.svg",
     "audio": "/audio/meanings/mali.m4a"
   },
@@ -400,7 +488,9 @@
     "thai": "ปี",
     "syllables": ["ปี"],
     "meaning": "နှစ်",
+    "pronunciation": "ပီး",
     "meaningEn": "year",
+    "pronunciationEn": "bpii",
     "image": "/images/meanings/pi.svg",
     "audio": "/audio/meanings/pi.m4a"
   },
@@ -409,7 +499,9 @@
     "thai": "ไถ",
     "syllables": ["ไถ"],
     "meaning": "ထွန်သည်",
+    "pronunciation": "ထိုင်",
     "meaningEn": "plough",
+    "pronunciationEn": "thai",
     "image": "/images/meanings/thai.svg",
     "audio": "/audio/meanings/thai.m4a"
   },
@@ -418,7 +510,9 @@
     "thai": "พา",
     "syllables": ["พา"],
     "meaning": "ခေါ်သည်",
+    "pronunciation": "ဖား",
     "meaningEn": "take along",
+    "pronunciationEn": "phaa",
     "image": "/images/meanings/pha-take.svg",
     "audio": "/audio/meanings/pha-take.m4a"
   },
@@ -427,7 +521,9 @@
     "thai": "ไถนา",
     "syllables": ["ไถ", "นา"],
     "meaning": "လယ်ထွန်သည်",
+    "pronunciation": "ထိုင်နား",
     "meaningEn": "plough the field",
+    "pronunciationEn": "thai-naa",
     "image": "/images/meanings/thaina.svg",
     "audio": "/audio/meanings/thaina.m4a"
   },
@@ -436,7 +532,9 @@
     "thai": "จะ",
     "syllables": ["จะ"],
     "meaning": "မယ်/လိမ့်မည်",
+    "pronunciation": "ကျ",
     "meaningEn": "will",
+    "pronunciationEn": "ja",
     "image": "/images/meanings/cha.svg",
     "audio": "/audio/meanings/cha.m4a"
   },
@@ -445,7 +543,9 @@
     "thai": "ขอ",
     "syllables": ["ขอ"],
     "meaning": "တောင်းသည်",
+    "pronunciation": "ခေါ",
     "meaningEn": "ask for",
+    "pronunciationEn": "khor",
     "image": "/images/meanings/kho.svg",
     "audio": "/audio/meanings/kho.m4a"
   },
@@ -454,7 +554,9 @@
     "thai": "ใน",
     "syllables": ["ใน"],
     "meaning": "အထဲမှာ",
+    "pronunciation": "နိုင်း",
     "meaningEn": "in",
+    "pronunciationEn": "nai",
     "image": "/images/meanings/nai.svg",
     "audio": "/audio/meanings/nai.m4a"
   },
@@ -463,7 +565,9 @@
     "thai": "โมโห",
     "syllables": ["โม", "โห"],
     "meaning": "စိတ်ဆိုးသည်",
+    "pronunciation": "မိုးဟို",
     "meaningEn": "angry",
+    "pronunciationEn": "moo-hoo",
     "image": "/images/meanings/moho.svg",
     "audio": "/audio/meanings/moho.m4a"
   },
@@ -472,7 +576,9 @@
     "thai": "เอา",
     "syllables": ["เอา"],
     "meaning": "ယူသည်",
+    "pronunciation": "အောင်း",
     "meaningEn": "take",
+    "pronunciationEn": "ao",
     "image": "/images/meanings/ao.svg",
     "audio": "/audio/meanings/ao.m4a"
   },
@@ -481,7 +587,9 @@
     "thai": "ผา",
     "syllables": ["ผา"],
     "meaning": "ကမ်းပါး/နံရံ",
+    "pronunciation": "ဖာ",
     "meaningEn": "cliff",
+    "pronunciationEn": "phaa",
     "image": "/images/meanings/pha-cliff.svg",
     "audio": "/audio/meanings/pha-cliff.m4a"
   },
@@ -490,7 +598,9 @@
     "thai": "ไว",
     "syllables": ["ไว"],
     "meaning": "မြန်သည်",
+    "pronunciation": "ဝိုင်း",
     "meaningEn": "fast",
+    "pronunciationEn": "wai",
     "image": "/images/meanings/wai.svg",
     "audio": "/audio/meanings/wai.m4a"
   },
@@ -499,7 +609,9 @@
     "thai": "พอใจ",
     "syllables": ["พอ", "ใจ"],
     "meaning": "ကျေနပ်သည်",
+    "pronunciation": "ဖောကျိုင်း",
     "meaningEn": "satisfied",
+    "pronunciationEn": "phor-jai",
     "image": "/images/meanings/phochai.svg",
     "audio": "/audio/meanings/phochai.m4a"
   },
@@ -508,7 +620,9 @@
     "thai": "อา",
     "syllables": ["อา"],
     "meaning": "ဦးလေး/ဒေါ်လေး",
+    "pronunciation": "အား",
     "meaningEn": "uncle or aunt",
+    "pronunciationEn": "aa",
     "image": "/images/meanings/a.svg",
     "audio": "/audio/meanings/a.m4a"
   },
@@ -517,7 +631,9 @@
     "thai": "หอ",
     "syllables": ["หอ"],
     "meaning": "စင်/အဆောင်",
+    "pronunciation": "ဟော",
     "meaningEn": "tower",
+    "pronunciationEn": "hor",
     "image": "/images/meanings/ho.svg",
     "audio": "/audio/meanings/ho.m4a"
   },
@@ -526,7 +642,9 @@
     "thai": "พอ",
     "syllables": ["พอ"],
     "meaning": "လုံလောက်သည်",
+    "pronunciation": "ဖော",
     "meaningEn": "enough",
+    "pronunciationEn": "phor",
     "image": "/images/meanings/pho.svg",
     "audio": "/audio/meanings/pho.m4a"
   },
@@ -535,7 +653,9 @@
     "thai": "เลอะเทอะ",
     "syllables": ["เลอะ", "เทอะ"],
     "meaning": "ညစ်ပတ်သည်",
+    "pronunciation": "လွတ်ထွတ်",
     "meaningEn": "messy",
+    "pronunciationEn": "ler-ther",
     "image": "/images/meanings/loethoe.svg",
     "audio": "/audio/meanings/loethoe.m4a"
   }

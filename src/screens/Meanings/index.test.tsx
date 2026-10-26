@@ -33,6 +33,7 @@ describe('Meanings', () => {
     expect(screen.getAllByRole('img')).toHaveLength(60);
     expect(screen.getAllByRole('button', { name: /^Play Thai audio/ })).toHaveLength(60);
     expect(cards[0]).toHaveTextContent('kettle');
+    expect(cards[0]).not.toHaveTextContent('(gaa)');
     expect(within(cards[0] as HTMLElement).getByRole('img', { name: 'kettle' })).toBeInTheDocument();
   });
 
@@ -64,7 +65,8 @@ describe('Meanings', () => {
       const cards = screen.getAllByRole('article');
 
       cards.forEach((card) => expect(card).toHaveAttribute('data-size', 'compact'));
-      expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('hand');
+      expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('hand (mue)');
+      expect(screen.getByRole('article', { name: 'ภูเขา' })).toHaveTextContent('mountain (phuu-khao)');
       expect(screen.queryByRole('img')).not.toBeInTheDocument();
       expect(screen.queryByRole('button', { name: /Play Thai audio/ })).not.toBeInTheDocument();
     });
@@ -75,6 +77,15 @@ describe('Meanings', () => {
       expect(screen.getByRole('article', { name: 'ภูเขา' })).toHaveTextContent('Tone Mid Rising');
       expect(screen.getByRole('article', { name: 'มะลิ' })).toHaveTextContent('Tone High High');
       expect(screen.getByRole('article', { name: 'ใจ' })).toHaveTextContent('Tone Mid');
+    });
+
+    it('hides the pronunciation when Pronunciation is unticked', async () => {
+      renderMeanings('/meanings/text');
+
+      await userEvent.click(screen.getByRole('button', { name: 'Card options' }));
+      await userEvent.click(screen.getByRole('checkbox', { name: 'Pronunciation' }));
+
+      expect(screen.getByRole('article', { name: 'มือ' })).not.toHaveTextContent('(mue)');
     });
 
     it('hides the tones when Tone is unticked', async () => {
@@ -92,6 +103,7 @@ describe('Meanings', () => {
       await userEvent.click(screen.getByRole('button', { name: 'Card options' }));
       await userEvent.click(screen.getByRole('checkbox', { name: 'Meaning' }));
       await userEvent.click(screen.getByRole('checkbox', { name: 'Tone' }));
+      await userEvent.click(screen.getByRole('checkbox', { name: 'Pronunciation' }));
 
       expect(screen.getByRole('article', { name: 'มือ' })).not.toHaveTextContent('hand');
       expect(screen.getByRole('checkbox', { name: 'Thai' })).toBeDisabled();
@@ -113,7 +125,21 @@ describe('Meanings', () => {
 
       expect(screen.getByRole('button', { name: /^စာသား/ })).toHaveAttribute('aria-pressed', 'true');
       expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('အသံ အလယ်');
-      expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('လက်');
+      expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('လက် (မူး)');
+      expect(screen.getByRole('article', { name: 'ภูเขา' })).toHaveTextContent('တောင်တန်း (ဖူးခေါင်)');
+    });
+
+    it('offers every part in the card options', async () => {
+      render(inBurmese(meaningsAt('/meanings/text')));
+
+      await userEvent.click(screen.getByRole('button', { name: 'ကတ် ရွေးချယ်စရာ' }));
+
+      expect(screen.getAllByRole('checkbox').map((checkbox) => checkbox.closest('label')?.textContent)).toEqual([
+        'ထိုင်း',
+        'အသံ',
+        'အဓိပ္ပာယ်',
+        'အသံထွက်',
+      ]);
     });
   });
 });

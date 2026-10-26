@@ -54,6 +54,22 @@ describe('meanings', () => {
     meanings.forEach((word) => expect(word.meaningEn, word.id).toMatch(ENGLISH_MEANING));
   });
 
+  it('gives every word a romanized pronunciation with one part per syllable', () => {
+    meanings.forEach((word) => {
+      expect(word.pronunciationEn, word.id).toMatch(/^[a-z]+(-[a-z]+)*$/);
+      expect(word.pronunciationEn.split('-'), word.id).toHaveLength(word.syllables.length);
+    });
+  });
+
+  it('gives every word a Burmese pronunciation in Burmese script, in Unicode logical order', () => {
+    meanings.forEach((word) => {
+      expect(word.pronunciation, word.id).toMatch(MYANMAR_SCRIPT);
+      expect(word.pronunciation, word.id).not.toMatch(INVISIBLE_CHARACTERS);
+      expect(word.pronunciation, word.id).not.toMatch(VISUAL_ORDER_VOWEL_SIGN_E);
+      expect(word.pronunciation, word.id).not.toContain('\u1040');
+    });
+  });
+
   it('references an SVG image that exists for every word, a different one per word', () => {
     expect(new Set(meanings.map((word) => word.image)).size).toBe(meanings.length);
     meanings.forEach((word) => {

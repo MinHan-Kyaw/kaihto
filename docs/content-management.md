@@ -54,8 +54,9 @@
 
 ## Adding or changing content
 
-1. Get the Thai word, Burmese pronunciation and Burmese meaning **from the project owner**. Do not write Burmese yourself.
-   Add the English meaning and romanized letter name (`meaningEn`, `pronunciationEn`) for English readers.
+1. Take the Thai word, Burmese pronunciation and Burmese meaning from the source or the project owner. Where the source
+   has no Burmese pronunciation, write it as in [Burmese pronunciation](#burmese-pronunciation) and list it in the
+   review log. Add the English meaning and romanized letter name (`meaningEn`, `pronunciationEn`) for English readers.
 2. Add the word to the right consonant in `src/data/consonants.json`.
 3. Add the image and audio files (see below) and reference them. To replace an existing picture or recording, give the
    new file a new name: browsers keep the old one for up to a week (`public/_headers`).
@@ -63,7 +64,7 @@
    referenced files exist.
 5. Open a pull request and complete the content checklist in the template.
 
-A word without Burmese pronunciation is incomplete; do not merge it with a placeholder or generated text.
+A word without Burmese pronunciation is incomplete; do not merge it with a placeholder.
 
 ## Meanings words
 
@@ -73,7 +74,9 @@ A word without Burmese pronunciation is incomplete; do not merge it with a place
   "thai": "กา",
   "syllables": ["กา"],
   "meaning": "ကျီးကန်း",
+  "pronunciation": "ကား",
   "meaningEn": "crow",
+  "pronunciationEn": "gaa",
   "image": "/images/meanings/ka-crow.svg",
   "audio": "/audio/meanings/ka.m4a"
 }
@@ -83,9 +86,36 @@ A word without Burmese pronunciation is incomplete; do not merge it with a place
 - `syllables` splits the word into open syllables (`["ภู", "เขา"]`). Each must be one consonant + one vowel from
   `vowels.json`, with no tone mark or final consonant, so its tone follows from the rules; the Text tab shows it.
 - `meaning` is the Burmese meaning exactly as the source gives it; a `/` separates the source's alternatives (`တွင်း/အပေါက်`).
+- `pronunciation` is the Burmese pronunciation, shown in brackets after the meaning on the Burmese Text tab. The source
+  has none for these words, so it is written as in [Burmese pronunciation](#burmese-pronunciation).
+- `pronunciationEn` is the word in Latin letters, one part per syllable joined with `-` (`phuu-khao`), following
+  [Romanization](#romanization); the English Text tab shows it after the meaning.
 - `image` and `audio` are required. The picture is `public/images/meanings/<romanized-slug>.svg` (or an existing
   `public/images/words/` picture of the same thing, as ฝา and เสือ use); the audio says only the word, so words spelt
   alike share it. `src/data/meanings.test.ts` checks the fields, syllables, Unicode and files.
+
+## Burmese pronunciation
+
+The book's pronunciations are stored exactly as given. For a word the book has none for, write it in the book's style:
+
+- The initial consonant as the book's letter names spell it: ก `က`, ข ค `ခ`, ง `င`, จ `ကျ`, ฉ ช `ချ`, ซ ศ ส `ဆ`, ด `ဒ`,
+  ต `သ`, ถ ท `ထ`, น `န`, บ `ဘ`, ป `ပ`, ผ พ ภ `ဖ`, ฝ ฟ `ဖ` (Burmese has no /f/), ม `မ`, ย `ယ`, ร `ရ`, ล `လ`, ว `ဝ`,
+  ห `ဟ`, อ `အ`.
+- The vowel as the book's vowel chart spells it on `အ`, with the consonant in its place (`-า` `အား` → นา `နား`); ข ด ป
+  take `ါ` (ขา `ခါ`). A short `-ะ` is the bare consonant (กะ `က`).
+- A long syllable with a rising tone drops `း`, as the book writes หนู `နူ` and ศาลา `ဆာလား`: หู `ဟူ`, ขา `ခါ`.
+- Syllables are written together, as the book does (ชฎา `ချဒါး`): ภูเขา `ဖူးခေါင်`.
+- Where the book already spells the word (เสือ `ဆူးရ`), use its spelling.
+
+## Romanization
+
+Romanized pronunciations (`pronunciationEn`) share one scheme:
+
+- Consonants: `g` ก, `kh` ข ค, `ng` ง, `j` จ, `ch` ฉ ช, `s` ซ ศ ส, `d` ด, `dt` ต, `th` ถ ท, `n` น, `b` บ, `bp` ป,
+  `ph` ผ พ ภ, `f` ฝ ฟ, `m` ม, `y` ย, `r` ร, `l` ล, `w` ว, `h` ห; อ before a vowel is silent.
+- Long vowels are doubled where a single letter would be ambiguous: `aa ii uu oo ee`; otherwise `a i u o e ae ue er
+ua uea ai ao am or`. Tones are not marked; the Text tab shows them as curves.
+- Syllables are joined with `-`; a letter name is `<consonant>or <word>` (`gor gai`).
 
 ## Images
 
@@ -154,7 +184,7 @@ Converting a recording on macOS: `afconvert -f m4af -d aac -b 64000 recording.wa
 
 - [ ] Correct Thai character and consonant class
 - [ ] Correct Thai word spelling
-- [ ] Burmese pronunciation supplied by the owner, unchanged from the source
+- [ ] Burmese pronunciation unchanged from the source, or written in the book's style and listed in the review log
 - [ ] Burmese meaning correct
 - [ ] Image shows the word, contains no text, and is square
 - [ ] Audio is the Thai pronunciation of the same word
@@ -191,22 +221,23 @@ Items for the project owner to confirm.
 
 ### Open
 
-| Item                              | Detail                                                                                                                                                                                                                                                                                                                                                       |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ฝ-ฝา`, `ฟ-ฟัน` pronunciation     | The source writes these in Latin script (`Faw Far`, `Faw Fan`); Burmese script has no /f/. Stored as-is and listed in `PENDING_BURMESE_PRONUNCIATION`. Provide Burmese if desired.                                                                                                                                                                           |
-| `ษ-ฤาษี` meaning                  | Source text reads `ရသေ့င်္` (trailing kinzi with no following consonant, which renders as a broken glyph). Stored as `ရသေ့`.                                                                                                                                                                                                                                 |
-| `ฮ-นกฮูก` pronunciation           | Source splits it over two lines (`ဟော` / `နို(က်)ဟု(က်)`); stored joined as `ဟောနို(က်)ဟု(က်)`.                                                                                                                                                                                                                                                              |
-| `ญ-หญิง` pronunciation            | Source gives two variants `ယောယင်/ယောဖူးယင်`; stored as written.                                                                                                                                                                                                                                                                                             |
-| Vowel English sounds              | Drafted by Claude at the owner's request (2026-10-01); not in the source. To be reviewed by the owner.                                                                                                                                                                                                                                                       |
-| `ใ-`, `ไ-` pronunciation          | The source gives both as `အိုင်း` and tells them apart only by name (`ai mai muam` / `ai mai malai`). Stored as given.                                                                                                                                                                                                                                       |
-| `ฤๅ`, `ฦๅ` spelling               | The source writes `ฤา` and `ฦา` (with sara aa); stored with lakkhangyao `ๅ`, the standard form. Confirm.                                                                                                                                                                                                                                                     |
-| Extra vowel tone rules            | The source states tone rules for short and long vowels only, so `-ำ ใ- ไ- เ-า` have none. Provide them if wanted.                                                                                                                                                                                                                                            |
-| Approximate pictures              | จาน, ฤาษี, มณโฑ, ทหาร and ยักษ์ use the closest Fluent emoji (see [Current picture sources](#current-picture-sources)). Confirm or replace.                                                                                                                                                                                                                  |
-| Burmese UI text                   | All of `src/i18n/mm.yml` (navigation, prompts, buttons, Card options, the names of tones, vowel groups and live/dead syllables, and the tones explanations) was written by Claude at the owner's request (2026-10-20); not in the source. The class names are the owner's existing `burmeseName` values, moved there unchanged. To be reviewed by the owner. |
-| English meanings and letter names | `meaningEn` and `pronunciationEn` for all 44 words were written by Claude at the owner's request (2026-10-20). To be reviewed by the owner.                                                                                                                                                                                                                  |
-| Meanings English and pictures     | The 60 `meaningEn` values and the picture choices were made by Claude (2026-10-25); the source gives Burmese meanings only. Abstract words have approximate pictures (see [Current picture sources](#current-picture-sources)). To be reviewed by the owner.                                                                                                 |
-| `นะ` English meaning              | The source gives `နော်`, a sentence particle; stored in English as `softening particle`. Confirm or reword.                                                                                                                                                                                                                                                  |
-| Audio                             | Placeholder text-to-speech; see [Sources and licensing](#sources-and-licensing).                                                                                                                                                                                                                                                                             |
+| Item                              | Detail                                                                                                                                                                                                                                                                                                                                                                                                              |
+| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `ฝ-ฝา`, `ฟ-ฟัน` pronunciation     | The source writes these in Latin script (`Faw Far`, `Faw Fan`); Burmese script has no /f/. Stored as-is and listed in `PENDING_BURMESE_PRONUNCIATION`. Provide Burmese if desired.                                                                                                                                                                                                                                  |
+| `ษ-ฤาษี` meaning                  | Source text reads `ရသေ့င်္` (trailing kinzi with no following consonant, which renders as a broken glyph). Stored as `ရသေ့`.                                                                                                                                                                                                                                                                                        |
+| `ฮ-นกฮูก` pronunciation           | Source splits it over two lines (`ဟော` / `နို(က်)ဟု(က်)`); stored joined as `ဟောနို(က်)ဟု(က်)`.                                                                                                                                                                                                                                                                                                                     |
+| `ญ-หญิง` pronunciation            | Source gives two variants `ယောယင်/ယောဖူးယင်`; stored as written.                                                                                                                                                                                                                                                                                                                                                    |
+| Vowel English sounds              | Drafted by Claude at the owner's request (2026-10-01); not in the source. To be reviewed by the owner.                                                                                                                                                                                                                                                                                                              |
+| `ใ-`, `ไ-` pronunciation          | The source gives both as `အိုင်း` and tells them apart only by name (`ai mai muam` / `ai mai malai`). Stored as given.                                                                                                                                                                                                                                                                                              |
+| `ฤๅ`, `ฦๅ` spelling               | The source writes `ฤา` and `ฦา` (with sara aa); stored with lakkhangyao `ๅ`, the standard form. Confirm.                                                                                                                                                                                                                                                                                                            |
+| Extra vowel tone rules            | The source states tone rules for short and long vowels only, so `-ำ ใ- ไ- เ-า` have none. Provide them if wanted.                                                                                                                                                                                                                                                                                                   |
+| Approximate pictures              | จาน, ฤาษี, มณโฑ, ทหาร and ยักษ์ use the closest Fluent emoji (see [Current picture sources](#current-picture-sources)). Confirm or replace.                                                                                                                                                                                                                                                                         |
+| Burmese UI text                   | All of `src/i18n/mm.yml` (navigation, prompts, buttons, Card options, the names of tones, vowel groups and live/dead syllables, and the tones explanations) was written by Claude at the owner's request (2026-10-20); not in the source. The class names are the owner's existing `burmeseName` values, moved there unchanged. To be reviewed by the owner.                                                        |
+| English meanings and letter names | `meaningEn` and `pronunciationEn` for all 44 words were written by Claude at the owner's request (2026-10-20). To be reviewed by the owner.                                                                                                                                                                                                                                                                         |
+| Meanings pronunciation            | The source has no pronunciation for the 60 chapter 3 words. The Burmese `pronunciation` values were written by Claude at the owner's request (2026-10-26) in the book's style (see [Burmese pronunciation](#burmese-pronunciation)), except เสือ, which uses the book's `ဆူးရ`; ฝา is `ဖာ` since Burmese has no /f/. The romanized `pronunciationEn` values were written the same day. To be reviewed by the owner. |
+| Meanings English and pictures     | The 60 `meaningEn` values and the picture choices were made by Claude (2026-10-25); the source gives Burmese meanings only. Abstract words have approximate pictures (see [Current picture sources](#current-picture-sources)). To be reviewed by the owner.                                                                                                                                                        |
+| `นะ` English meaning              | The source gives `နော်`, a sentence particle; stored in English as `softening particle`. Confirm or reword.                                                                                                                                                                                                                                                                                                         |
+| Audio                             | Placeholder text-to-speech; see [Sources and licensing](#sources-and-licensing).                                                                                                                                                                                                                                                                                                                                    |
 
 ### Mechanical Unicode fixes applied (no change in rendering)
 

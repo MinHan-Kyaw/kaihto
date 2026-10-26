@@ -12,6 +12,7 @@ const word: MeaningWord = {
   syllables: ['หู'],
   meaning: 'နားရွက်',
   meaningEn: 'ear',
+  pronunciationEn: 'huu',
   image: '/images/meanings/hu.svg',
   audio: '/audio/meanings/hu.m4a',
 };
@@ -35,6 +36,44 @@ describe('WordCard', () => {
     await userEvent.click(screen.getByRole('button', { name: 'Play Thai audio for หู' }));
 
     expect(onPlayAudio).toHaveBeenCalledWith(word);
+  });
+
+  it('leaves out the pronunciation by default', () => {
+    render(<WordCard word={word} />);
+
+    expect(screen.queryByText('(huu)')).not.toBeInTheDocument();
+  });
+
+  describe('given the pronunciation is shown', () => {
+    it('shows the romanized pronunciation in brackets after the meaning', () => {
+      render(<WordCard word={word} showPronunciation />);
+
+      expect(screen.getByText('ear').closest('p')).toHaveTextContent('ear (huu)');
+      expect(screen.getByText('(huu)')).toHaveAttribute('lang', 'th-Latn');
+    });
+
+    describe('given the page is in Burmese', () => {
+      // A placeholder, not the word's pronunciation.
+      const BURMESE_PRONUNCIATION = 'ဗမာအသံထွက်';
+
+      it('shows the Burmese pronunciation after the Burmese meaning', () => {
+        render(inBurmese(<WordCard word={{ ...word, pronunciation: BURMESE_PRONUNCIATION }} showPronunciation />));
+
+        const pronunciation = screen.getByText(`(${BURMESE_PRONUNCIATION})`);
+
+        expect(screen.getByText('နားရွက်').closest('p')).toHaveTextContent(`နားရွက် (${BURMESE_PRONUNCIATION})`);
+        expect(pronunciation).toHaveAttribute('lang', 'my');
+        expect(pronunciation).toHaveClass('font-burmese');
+      });
+
+      describe('given the word has no Burmese pronunciation yet', () => {
+        it('shows the meaning alone, without the romanization', () => {
+          render(inBurmese(<WordCard word={word} showPronunciation />));
+
+          expect(screen.getByText('နားရွက်').closest('p')).toHaveTextContent(/^နားရွက်$/);
+        });
+      });
+    });
   });
 
   describe('given no audio handler', () => {
