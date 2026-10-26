@@ -149,6 +149,8 @@ touch targets ≥ 44px, focus moved to the new prompt on question change.
 - `ci.yml`: install (`npm ci --ignore-scripts`) → lint → type check → tests → build, on PRs and pushes to `develop`/`main`.
 - Branches: work lands on `develop` via PR; releases go `develop` → `main` via PR. Never push directly to either (a
   GitHub ruleset blocks it; no approval is required).
+- Commit messages: a short summary line and a body explaining why. Never add a `Co-Authored-By:` trailer (or any other
+  attribution trailer) to a commit.
 - Deployment: Cloudflare Pages (Git integration, configured in the Cloudflare dashboard) deploys `main` to production and
   builds previews for other branches and PRs. There is no deploy workflow in this repo.
 - Pin every `uses:` to a full commit SHA with a `# vX.Y.Z` comment. Never `@v1`/`@main`, never `secrets: inherit`, never
