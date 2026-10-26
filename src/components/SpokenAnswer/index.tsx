@@ -34,7 +34,7 @@ const SpokenAnswer = ({ transcript, status, answered, result, correctAnswer, onL
       <button
         type="button"
         className={classNames(
-          'grid size-20 cursor-pointer place-items-center rounded-full border-2 text-white transition-[transform,box-shadow,background-color] duration-100 enabled:active:translate-y-[3px] disabled:cursor-default disabled:border-transparent disabled:bg-line disabled:text-ink-muted disabled:shadow-edge-strong',
+          'grid size-20 cursor-pointer place-items-center rounded-full border-2 text-on-fill transition-[transform,box-shadow,background-color] duration-100 enabled:active:translate-y-[3px] disabled:cursor-default disabled:border-transparent disabled:bg-line disabled:text-ink-muted disabled:shadow-edge-strong',
           listening
             ? 'animate-pulse border-transparent bg-selected shadow-edge-selected'
             : 'border-transparent bg-brand shadow-edge-brand-dark hover:bg-brand-dark'

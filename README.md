@@ -22,9 +22,12 @@ A responsive, client-side web app for Burmese-speaking learners studying Thai co
   - The Audio / Type / Group checkboxes in the ⋮ menu turn each kind on or off. Where speech recognition is unavailable,
     or after "Can't speak now", Audio is off.
   - Changing Advanced or any setting starts a new practice.
+- **Light and dark mode:** follows the device setting; the sun/moon button in the header switches it, and the choice is
+  remembered.
 
 There is no backend, database or user account. All learning content is static JSON bundled with the app, and practice
-progress and settings live only in memory: reloading the page starts over with the defaults.
+progress and settings live only in memory: reloading the page starts over with the defaults. The only thing the browser
+keeps is the light/dark choice.
 
 ## Tech stack
 

@@ -33,7 +33,7 @@ const ClassTabs = <T extends string>({ items, counts, selectedId, label, countLa
             <span
               className={classNames(
                 'inline-grid h-6 min-w-6 place-items-center rounded-full px-1 text-[0.8125rem] leading-none font-extrabold xs:h-7 xs:min-w-7',
-                isSelected ? 'bg-brand text-white' : 'bg-surface text-ink-muted'
+                isSelected ? 'bg-brand text-on-fill' : 'bg-surface text-ink-muted'
               )}
             >
               {counts[item.id]} <span className="sr-only">{countLabel}</span>
