@@ -97,8 +97,6 @@ describe('Tones', () => {
     it('shows กา with no mark and with each of the four marks, in the five tones, as the source does', () => {
       renderToneMarks();
 
-      expect(screen.getByText('วรรณยุกต์ไทยมี ๔ รูป ๕ เสียง')).toHaveAttribute('lang', 'th');
-
       const items = within(screen.getByRole('list', { name: 'One syllable with each tone mark' })).getAllByRole('listitem');
 
       expect(items.map((item) => item.textContent)).toEqual([

@@ -13,6 +13,16 @@ describe('ToneContour', () => {
     expect(svg).toHaveAttribute('data-size', 'default');
   });
 
+  describe('given a turning point', () => {
+    it('dips to it before rising to the end', () => {
+      const { container } = render(<ToneContour pitch={[2, 1, 4]} />);
+      const svg = container.querySelector('svg');
+
+      expect(svg).toHaveAttribute('data-pitch', '214');
+      expect(svg?.querySelector('path')).toHaveAttribute('d', 'M4 22 C10 22 12 28 18 28 C30 28 36 10 44 10');
+    });
+  });
+
   describe('given the small size', () => {
     it('draws the same pitch', () => {
       const { container } = render(<ToneContour pitch={[1, 4]} size="small" />);

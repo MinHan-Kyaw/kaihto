@@ -64,7 +64,9 @@ export interface Tone {
   id: ToneId;
   thaiName: string;
   example: string; // a syllable said in this tone, from the kha set: คา ข่า ข้า ค้า ขา
-  pitch: [number, number]; // start and end pitch, 1 (lowest) to 5 (highest)
+  // Start and end pitch, 1 (lowest) to 5 (highest), with the turning point between them for a tone that changes
+  // direction: the rising tone dips before it rises, [2, 1, 4].
+  pitch: [number, number] | [number, number, number];
   audio: string; // the example said in Thai, e.g. "/audio/tones/mid.m4a"
 }
 
@@ -108,7 +110,6 @@ export type VowelQuestion = (VowelQuestionBase & { kind: 'sound'; options: Vowel
 export interface Guide {
   syllables: Record<SyllableType, { thaiName: string }>;
   toneMarks: {
-    summary: string; // the source's heading: "วรรณยุกต์ไทยมี ๔ รูป ๕ เสียง" (Thai has 4 tone marks and 5 tones)
     unmarked: { example: string; audio: string }; // the syllable every mark is shown on, กา, with no mark
   };
 }

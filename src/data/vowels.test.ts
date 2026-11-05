@@ -29,11 +29,16 @@ describe('tones', () => {
     });
   });
 
+  it('draws the rising tone dipping before it rises', () => {
+    expect(tones.find((tone) => tone.id === 'rising')?.pitch).toEqual([2, 1, 4]);
+  });
+
   it('gives every tone a name, Thai name and pitch from 1 to 5', () => {
     tones.forEach((tone) => {
       expect(messages.en[`tones.${tone.id}.name`]).toBeDefined();
       expect(messages.en[`tones.${tone.id}.shortName`]).toBeDefined();
       expect(tone.thaiName).toMatch(THAI_TEXT);
+      expect([2, 3]).toContain(tone.pitch.length);
       tone.pitch.forEach((level) => expect(level).toBeGreaterThanOrEqual(1));
       tone.pitch.forEach((level) => expect(level).toBeLessThanOrEqual(5));
     });
@@ -190,9 +195,5 @@ describe('guide', () => {
   it('gives the Thai terms for live and dead syllables', () => {
     expect(guide.syllables.live.thaiName).toBe('คำเป็น');
     expect(guide.syllables.dead.thaiName).toBe('คำตาย');
-  });
-
-  it('gives the Thai heading the source uses for the tone marks', () => {
-    expect(guide.toneMarks.summary).toBe('วรรณยุกต์ไทยมี ๔ รูป ๕ เสียง');
   });
 });

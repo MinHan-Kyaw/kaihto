@@ -10,7 +10,7 @@
 | `src/data/vowelGroups.json`          | Short, long, extra and standalone vowel groups: `id` and `tones` (tone ids) per consonant class                              |
 | `src/data/tones.json`                | The five tones: Thai name, an example syllable (คา ข่า ข้า ค้า ขา), pitch contour, `audio`                                   |
 | `src/data/toneMarks.json`            | The four tone marks (chapter 4): mark, Thai name, Burmese and romanized pronunciation, the mark on กา (`example`), `audio`   |
-| `src/data/guide.json`                | Thai names of live and dead syllables; chapter 4's heading (`วรรณยุกต์ไทยมี ๔ รูป ๕ เสียง`) and its unmarked syllable กา     |
+| `src/data/guide.json`                | Thai names of live and dead syllables; chapter 4's unmarked syllable กา                                                      |
 | `src/data/meanings.json`             | The 60 words of the source's chapter 3: `id`, Thai word, Burmese `meaning`, `meaningEn`, `image`, `audio`                    |
 | `src/i18n/en.yml`, `src/i18n/mm.yml` | UI text in English and Burmese, including the names of classes, tones, vowel groups and syllables and the tones explanations |
 | `public/images/words/*.svg`          | Vocabulary pictures (vector)                                                                                                 |

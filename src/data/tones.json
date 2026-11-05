@@ -31,7 +31,7 @@
     "id": "rising",
     "thaiName": "เสียงจัตวา",
     "example": "ขา",
-    "pitch": [1, 4],
+    "pitch": [2, 1, 4],
     "audio": "/audio/tones/rising.m4a"
   }
 ]

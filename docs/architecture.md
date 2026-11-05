@@ -188,9 +188,10 @@ standalone vowels with `VowelCard`.
 
 ## Tones
 
-Data: `tones.json` (5 tones with their Thai name and a 1–5 pitch contour), `toneMarks.json` (่ ้ ๊ ๋ with their Thai
+Data: `tones.json` (5 tones with their Thai name and a 1–5 pitch contour:
+start and end, plus a turning point for the rising tone, which dips before it rises, `[2, 1, 4]`), `toneMarks.json` (่ ้ ๊ ๋ with their Thai
 name, pronunciation, example and audio) and `guide.json` (the Thai names of live and dead syllables, and chapter 4's
-heading and unmarked syllable). The tone names and the explanations on the tones screen are UI
+unmarked syllable). The tone names and the explanations on the tones screen are UI
 text in `src/i18n` (`tones.*`, `syllables.*`, `tonesPage.*`).
 
 The tones screen has two tabs (`ClassTabs`, with a count label per tab). The Tones tab shows the five tones as compact
@@ -198,7 +199,7 @@ cards, each with a button that plays its `example` syllable (`public/audio/tones
 vowels" table built from `vowelGroups.json`'s `tones` (the same source rule the Vowels page shows: short vowels give
 low / low / high for groups 1–3, long vowels mid / rising / mid), with each row's live/dead syllable term underneath.
 
-The Tone marks tab follows the source's chapter 4 ("วรรณยุกต์ไทยมี ๔ รูป ๕ เสียง", 4 marks, 5 tones): five cards for กา with
+The Tone marks tab follows the source's chapter 4 (4 marks, 5 tones): five cards for กา with
 no mark and with each mark (ก่า ก้า ก๊า ก๋า), each with the mark on `◌`, its Thai name and pronunciation, the syllable, its
 tone as a curve and name, and a button that plays it (`public/audio/tone-marks/gaa-<tone>.m4a`). The tones are not
 stored: `findSyllable` finds กา's middle class consonant, and `getSyllableTone` / `getMarkedTone` give each card's tone.

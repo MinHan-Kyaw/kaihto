@@ -201,9 +201,6 @@ const FourMarks = () => {
         <h2 id="four-marks-title" className="text-[1.375rem] font-extrabold">
           {t('tonesPage.fourMarks')}
         </h2>
-        <p className="mt-1 font-thai text-lg font-medium" lang="th">
-          {guide.toneMarks.summary}
-        </p>
         <p className="mt-1 text-ink-muted">{t('tonesPage.fourMarksIntro')}</p>
         {/* A row per syllable on phones and tablets; the source's five columns, stacked, on wide screens. */}
         <ul className="mt-4 grid gap-2 lg:grid-cols-5" role="list" aria-label={t('tonesPage.markedSyllables')}>
