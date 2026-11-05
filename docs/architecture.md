@@ -46,7 +46,8 @@ language they start in. The paths below are relative to that basename.
 | `/`                                            | Home                                                                                                                                                                                                                                                                                                                                                                                          |
 | `/consonants?class=middle\|high\|low`          | Consonant browser (class kept in the URL so it can be linked)                                                                                                                                                                                                                                                                                                                                 |
 | `/vowels?group=short\|long\|extra\|standalone` | The 32 vowels in group tabs (group kept in the URL), with the short and long vowel tone rules and a middle / high / low class example per vowel                                                                                                                                                                                                                                               |
-| `/tones`                                       | The five tones, then two tables with a Group 1 / 2 / 3 column per consonant class: short and long vowels (the tone each group takes, e.g. short + group 3 = high) and the four tone marks                                                                                                                                                                                                     |
+| `/tones`                                       | The Tones tab: the five tones, then a table with a Group 1 / 2 / 3 column per consonant class for short and long vowels (the tone each group takes, e.g. short + group 3 = high)                                                                                                                                                                                                              |
+| `/tones/marks`                                 | The Tone marks tab (the source's chapter 4): the four marks on กา, which says it in all five tones, then a table of the tone each mark gives in each group                                                                                                                                                                                                                                    |
 | `/meanings`                                    | The 60 words of the source's chapter 3 (Pictures tab): picture, Thai word, meaning and a button that plays the word, in the source's order                                                                                                                                                                                                                                                    |
 | `/meanings/text`                               | The Text tab: the same words as compact cards with the Thai word, its meaning followed by its pronunciation in brackets (`mountain (phuu-khao)`, `တောင်တန်း (ဖူးခေါင်)`), and each syllable's tone as a small pitch curve in the top right corner (its name for screen readers only); a three-dot Card options menu hides the Thai, tone, meaning or pronunciation, at least one stays ticked |
 | `/practice`                                    | Practice categories: Consonants or Vowels                                                                                                                                                                                                                                                                                                                                                     |
@@ -187,15 +188,23 @@ standalone vowels with `VowelCard`.
 
 ## Tones
 
-Data: `tones.json` (5 tones with their Thai name and a 1–5 pitch contour), `toneMarks.json` (่ ้ ๊ ๋) and
-`guide.json` (the Thai names of live and dead syllables). The tone names and the explanations on the tones screen are UI
+Data: `tones.json` (5 tones with their Thai name and a 1–5 pitch contour:
+start and end, plus a turning point for the rising tone, which dips before it rises, `[2, 1, 4]`), `toneMarks.json` (่ ้ ๊ ๋ with their Thai
+name, pronunciation, example and audio) and `guide.json` (the Thai names of live and dead syllables, and chapter 4's
+unmarked syllable). The tone names and the explanations on the tones screen are UI
 text in `src/i18n` (`tones.*`, `syllables.*`, `tonesPage.*`).
 
-The tones screen shows the five tones as compact cards, each with a button that plays its `example` syllable
-(`public/audio/tones/<id>.m4a`), then a "Short and long vowels" table built from `vowelGroups.json`'s `tones` (the
-same source rule the Vowels page shows: short vowels give low / low / high for groups 1–3, long vowels mid / rising /
-mid), with each row's live/dead syllable term underneath, and a "Tone marks" table from `getMarkedTone`. Both use
-`ClassTable` with `showGroups`, which labels each class column with its group number.
+The tones screen has two tabs (`ClassTabs`, with a count label per tab). The Tones tab shows the five tones as compact
+cards, each with a button that plays its `example` syllable (`public/audio/tones/<id>.m4a`), then a "Short and long
+vowels" table built from `vowelGroups.json`'s `tones` (the same source rule the Vowels page shows: short vowels give
+low / low / high for groups 1–3, long vowels mid / rising / mid), with each row's live/dead syllable term underneath.
+
+The Tone marks tab follows the source's chapter 4 (4 marks, 5 tones): five cards for กา with
+no mark and with each mark (ก่า ก้า ก๊า ก๋า), each with the mark on `◌`, its Thai name and pronunciation, the syllable, its
+tone as a curve and name, and a button that plays it (`public/audio/tone-marks/gaa-<tone>.m4a`). The tones are not
+stored: `findSyllable` finds กา's middle class consonant, and `getSyllableTone` / `getMarkedTone` give each card's tone.
+Under the cards, a "Tone marks on each group" table from `getMarkedTone`. Both tables use `ClassTable` with
+`showGroups`, which labels each class column with its group number.
 
 - `src/helpers/tones.ts`: `getUnmarkedTone(class, 'live' | 'dead')` and `getMarkedTone(class, mark)` hold the tone rules.
   Only open syllables (no final consonant) are modelled.

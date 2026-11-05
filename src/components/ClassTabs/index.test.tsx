@@ -47,6 +47,27 @@ describe('ClassTabs', () => {
     expect(within(button).getByText('letters')).toHaveClass('sr-only');
   });
 
+  describe('given a count label per tab', () => {
+    it('names each count with its own label', () => {
+      render(
+        <ClassTabs
+          items={[
+            { id: 'tones', label: 'Tones' },
+            { id: 'marks', label: 'Tone marks' },
+          ]}
+          counts={{ tones: 5, marks: 4 }}
+          selectedId="tones"
+          label="View"
+          countLabel={{ tones: 'tones', marks: 'tone marks' }}
+          onSelect={vi.fn()}
+        />
+      );
+
+      expect(screen.getByRole('button', { name: 'Tones 5 tones' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'Tone marks 4 tone marks' })).toBeInTheDocument();
+    });
+  });
+
   it('marks the selected class as pressed', () => {
     render(
       <ClassTabs
