@@ -1,8 +1,8 @@
 import { existsSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { getUnmarkedTone } from '../helpers/tones';
-import { getSyllable, isCombinable } from '../helpers/vowels';
+import { getMarkedTone, getUnmarkedTone } from '../helpers/tones';
+import { findSyllable, getSyllable, getSyllableTone, isCombinable } from '../helpers/vowels';
 import { messages } from '../i18n';
 import type { Vowel } from '../types/learning';
 
@@ -29,11 +29,16 @@ describe('tones', () => {
     });
   });
 
+  it('draws the rising tone dipping before it rises', () => {
+    expect(tones.find((tone) => tone.id === 'rising')?.pitch).toEqual([2, 1, 4]);
+  });
+
   it('gives every tone a name, Thai name and pitch from 1 to 5', () => {
     tones.forEach((tone) => {
       expect(messages.en[`tones.${tone.id}.name`]).toBeDefined();
       expect(messages.en[`tones.${tone.id}.shortName`]).toBeDefined();
       expect(tone.thaiName).toMatch(THAI_TEXT);
+      expect([2, 3]).toContain(tone.pitch.length);
       tone.pitch.forEach((level) => expect(level).toBeGreaterThanOrEqual(1));
       tone.pitch.forEach((level) => expect(level).toBeLessThanOrEqual(5));
     });
@@ -42,6 +47,47 @@ describe('tones', () => {
   it('defines the four tone marks', () => {
     expect(toneMarks.map((toneMark) => toneMark.mark)).toEqual(['่', '้', '๊', '๋']);
     toneMarks.forEach((toneMark) => expect(toneMark.thaiName).toMatch(THAI_TEXT));
+  });
+
+  it('gives every tone mark a Burmese pronunciation in Unicode logical order and a romanized one', () => {
+    toneMarks.forEach((toneMark) => {
+      expect(toneMark.pronunciation, toneMark.thaiName).toMatch(MYANMAR_SCRIPT);
+      expect(toneMark.pronunciation, toneMark.thaiName).not.toMatch(INVISIBLE_CHARACTERS);
+      expect(toneMark.pronunciation, toneMark.thaiName).not.toMatch(VISUAL_ORDER_VOWEL_SIGN_E);
+      expect(toneMark.pronunciation, toneMark.thaiName).not.toContain('\u1040');
+      expect(toneMark.pronunciationEn, toneMark.thaiName).toMatch(/^[a-z]+(-[a-z]+)*$/);
+    });
+  });
+
+  it('shows every mark on the source syllable กา, written after its consonant, with audio named by its tone', () => {
+    const { example } = guide.toneMarks.unmarked;
+    const spelling = findSyllable(example, consonants, vowels);
+
+    expect(example).toBe('กา');
+    expect(spelling?.consonant.class).toBe('middle');
+    toneMarks.forEach((toneMark) => {
+      const tone = spelling && getMarkedTone(spelling.consonant.class, toneMark.mark);
+
+      expect(toneMark.example).toBe(`${example[0]}${toneMark.mark}${example.slice(1)}`);
+      expect(toneMark.audio).toBe(`/audio/tone-marks/gaa-${tone}.m4a`);
+      expect(existsSync(join(process.cwd(), 'public', toneMark.audio)), toneMark.audio).toBe(true);
+    });
+  });
+
+  it('says กา in all five tones: one with no mark, one with each mark', () => {
+    const { example, audio } = guide.toneMarks.unmarked;
+    const spelling = findSyllable(example, consonants, vowels);
+
+    expect(spelling).toBeDefined();
+    if (!spelling) {
+      return;
+    }
+    const unmarkedTone = getSyllableTone(spelling.consonant, spelling.vowel);
+    const markedTones = toneMarks.map((toneMark) => getMarkedTone(spelling.consonant.class, toneMark.mark));
+
+    expect([unmarkedTone, ...markedTones]).toEqual(tones.map((tone) => tone.id));
+    expect(audio).toBe(`/audio/tone-marks/gaa-${unmarkedTone}.m4a`);
+    expect(existsSync(join(process.cwd(), 'public', audio)), audio).toBe(true);
   });
 
   it('matches each class tone to its live-syllable tone', () => {

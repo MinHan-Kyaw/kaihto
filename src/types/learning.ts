@@ -64,13 +64,19 @@ export interface Tone {
   id: ToneId;
   thaiName: string;
   example: string; // a syllable said in this tone, from the kha set: คา ข่า ข้า ค้า ขา
-  pitch: [number, number]; // start and end pitch, 1 (lowest) to 5 (highest)
+  // Start and end pitch, 1 (lowest) to 5 (highest), with the turning point between them for a tone that changes
+  // direction: the rising tone dips before it rises, [2, 1, 4].
+  pitch: [number, number] | [number, number, number];
   audio: string; // the example said in Thai, e.g. "/audio/tones/mid.m4a"
 }
 
 export interface ToneMark {
-  mark: string;
-  thaiName: string;
+  mark: string; // the combining mark alone, e.g. "่"
+  thaiName: string; // "ไม้เอก"
+  pronunciation: string; // Burmese pronunciation of the Thai name, written in the source's style
+  pronunciationEn: string; // romanized Thai name, e.g. "mai-ek"
+  example: string; // the mark on the source's syllable กา, e.g. "ก่า"
+  audio: string; // the example said in Thai, e.g. "/audio/tone-marks/gaa-low.m4a"
 }
 
 export type VowelGroupId = 'short' | 'long' | 'extra' | 'standalone';
@@ -103,4 +109,7 @@ export type VowelQuestion = (VowelQuestionBase & { kind: 'sound'; options: Vowel
 // The Thai names of live and dead syllables; their English and Burmese names and explanations are in src/i18n.
 export interface Guide {
   syllables: Record<SyllableType, { thaiName: string }>;
+  toneMarks: {
+    unmarked: { example: string; audio: string }; // the syllable every mark is shown on, กา, with no mark
+  };
 }

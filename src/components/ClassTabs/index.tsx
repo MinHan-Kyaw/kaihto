@@ -7,7 +7,7 @@ interface ClassTabsProps<T extends string> {
   counts: Record<T, number>;
   selectedId: T;
   label: string;
-  countLabel: string;
+  countLabel: string | Record<T, string>; // one for every tab, or one per tab when they count different things
   onSelect: (id: T) => void;
 }
 
@@ -36,7 +36,8 @@ const ClassTabs = <T extends string>({ items, counts, selectedId, label, countLa
                 isSelected ? 'bg-brand text-on-fill' : 'bg-surface text-ink-muted'
               )}
             >
-              {counts[item.id]} <span className="sr-only">{countLabel}</span>
+              {counts[item.id]}{' '}
+              <span className="sr-only">{typeof countLabel === 'string' ? countLabel : countLabel[item.id]}</span>
             </span>
           </button>
         </li>

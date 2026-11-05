@@ -6,5 +6,11 @@
     "dead": {
       "thaiName": "คำตาย"
     }
+  },
+  "toneMarks": {
+    "unmarked": {
+      "example": "กา",
+      "audio": "/audio/tone-marks/gaa-mid.m4a"
+    }
   }
 }
