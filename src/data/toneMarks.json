@@ -1,6 +1,34 @@
 [
-  { "mark": "่", "thaiName": "ไม้เอก" },
-  { "mark": "้", "thaiName": "ไม้โท" },
-  { "mark": "๊", "thaiName": "ไม้ตรี" },
-  { "mark": "๋", "thaiName": "ไม้จัตวา" }
+  {
+    "mark": "่",
+    "thaiName": "ไม้เอก",
+    "pronunciation": "မိုင်းအေ့",
+    "pronunciationEn": "mai-ek",
+    "example": "ก่า",
+    "audio": "/audio/tone-marks/gaa-low.m4a"
+  },
+  {
+    "mark": "้",
+    "thaiName": "ไม้โท",
+    "pronunciation": "မိုင်းထိုး",
+    "pronunciationEn": "mai-tho",
+    "example": "ก้า",
+    "audio": "/audio/tone-marks/gaa-falling.m4a"
+  },
+  {
+    "mark": "๊",
+    "thaiName": "ไม้ตรี",
+    "pronunciation": "မိုင်းသရီး",
+    "pronunciationEn": "mai-dtrii",
+    "example": "ก๊า",
+    "audio": "/audio/tone-marks/gaa-high.m4a"
+  },
+  {
+    "mark": "๋",
+    "thaiName": "ไม้จัตวา",
+    "pronunciation": "မိုင်းကျတ်သဝါး",
+    "pronunciationEn": "mai-jat-dta-waa",
+    "example": "ก๋า",
+    "audio": "/audio/tone-marks/gaa-rising.m4a"
+  }
 ]

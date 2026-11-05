@@ -9,8 +9,8 @@
 | `src/data/vowels.json`               | 32 vowels: `id` (written with `-` for the consonant), `group`, English `sound`, Burmese `pronunciation`, `audio`             |
 | `src/data/vowelGroups.json`          | Short, long, extra and standalone vowel groups: `id` and `tones` (tone ids) per consonant class                              |
 | `src/data/tones.json`                | The five tones: Thai name, an example syllable (คา ข่า ข้า ค้า ขา), pitch contour, `audio`                                   |
-| `src/data/toneMarks.json`            | The four tone marks and their Thai names                                                                                     |
-| `src/data/guide.json`                | Thai names of live and dead syllables                                                                                        |
+| `src/data/toneMarks.json`            | The four tone marks (chapter 4): mark, Thai name, Burmese and romanized pronunciation, the mark on กา (`example`), `audio`   |
+| `src/data/guide.json`                | Thai names of live and dead syllables; chapter 4's heading (`วรรณยุกต์ไทยมี ๔ รูป ๕ เสียง`) and its unmarked syllable กา     |
 | `src/data/meanings.json`             | The 60 words of the source's chapter 3: `id`, Thai word, Burmese `meaning`, `meaningEn`, `image`, `audio`                    |
 | `src/i18n/en.yml`, `src/i18n/mm.yml` | UI text in English and Burmese, including the names of classes, tones, vowel groups and syllables and the tones explanations |
 | `public/images/words/*.svg`          | Vocabulary pictures (vector)                                                                                                 |
@@ -18,6 +18,7 @@
 | `public/audio/vowels/*.m4a`          | Thai vowel audio                                                                                                             |
 | `public/images/meanings/*.svg`       | Meanings pictures (vector)                                                                                                   |
 | `public/audio/meanings/*.m4a`        | Thai audio of the Meanings words                                                                                             |
+| `public/audio/tone-marks/*.m4a`      | Thai audio of กา with no mark and with each tone mark                                                                        |
 
 ## Word schema
 
@@ -173,6 +174,12 @@ Tones:
   ข้า (falling), ค้า (high), ขา (rising), played from the tone cards on the tones screen. Placeholder text-to-speech made
   the same way: `say -v Kanya "คา"`.
 
+Tone marks:
+
+- `public/audio/tone-marks/gaa-<tone id>.m4a`, e.g. `gaa-low.m4a`: the source's chapter 4 syllable กา with no mark (`mid`)
+  or with a mark (ก่า `low`, ก้า `falling`, ก๊า `high`, ก๋า `rising`), played from the Tone marks tab. Placeholder
+  text-to-speech: `say -v Kanya "ก่า"`.
+
 Meanings:
 
 - `public/audio/meanings/<romanized-slug>.m4a`, e.g. `hu.m4a`: just the word, "หู", with no letter name. Words spelt alike
@@ -237,6 +244,8 @@ Items for the project owner to confirm.
 | Meanings pronunciation            | The source has no pronunciation for the 60 chapter 3 words. The Burmese `pronunciation` values were written by Claude at the owner's request (2026-10-26) in the book's style (see [Burmese pronunciation](#burmese-pronunciation)), except เสือ, which uses the book's `ဆူးရ`; ฝา is `ဖာ` since Burmese has no /f/. The romanized `pronunciationEn` values were written the same day. To be reviewed by the owner. |
 | Meanings English and pictures     | The 60 `meaningEn` values and the picture choices were made by Claude (2026-10-25); the source gives Burmese meanings only. Abstract words have approximate pictures (see [Current picture sources](#current-picture-sources)). To be reviewed by the owner.                                                                                                                                                        |
 | `นะ` English meaning              | The source gives `နော်`, a sentence particle; stored in English as `softening particle`. Confirm or reword.                                                                                                                                                                                                                                                                                                         |
+| Tone mark pronunciation           | The source names the four marks in Thai only (chapter 4). Their Burmese `pronunciation` was written by Claude (2026-11-05) in the book's style, with ไม้ as in ใบไม้ `ဘိုင်မိုင်း`: ไม้เอก `မိုင်းအေ့`, ไม้โท `မိုင်းထိုး`, ไม้ตรี `မိုင်းသရီး`, ไม้จัตวา `မိုင်းကျတ်သဝါး`; and the romanized `pronunciationEn` (`mai-ek`, `mai-tho`, `mai-dtrii`, `mai-jat-dta-waa`). To be reviewed by the owner.                 |
+| Tone marks UI text                | The Tone marks tab's English and Burmese explanations (`tonesPage.*` in `src/i18n`) were written by Claude (2026-11-05). To be reviewed by the owner.                                                                                                                                                                                                                                                               |
 | Audio                             | Placeholder text-to-speech; see [Sources and licensing](#sources-and-licensing).                                                                                                                                                                                                                                                                                                                                    |
 
 ### Mechanical Unicode fixes applied (no change in rendering)

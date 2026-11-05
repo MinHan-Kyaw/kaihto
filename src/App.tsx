@@ -30,6 +30,7 @@ const App = () => {
         <Route path="vowels" element={<Vowels />} />
         <Route path="vowels/all" element={<Vowels showAll />} />
         <Route path="tones" element={<Tones />} />
+        <Route path="tones/marks" element={<Tones showMarks />} />
         <Route path="meanings" element={<Meanings />} />
         <Route path="meanings/text" element={<Meanings showText />} />
         <Route path="practice" element={<PracticeCategories />} />

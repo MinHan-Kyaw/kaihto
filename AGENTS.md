@@ -110,7 +110,8 @@ public/
   tab shows the meaning with its pronunciation in brackets, `mountain (phuu-khao)` in English and `တောင်တန်း (ဖူးခေါင်)`
   in Burmese.
 - Vowel ids are the written form with `-` for the consonant (`-ะ`, `เ-ือ`); tone rules live in `src/helpers/tones.ts`.
-  Vowel audio, `public/audio/vowels/<sound>.m4a`, says the vowel on `อ` (`-ะ` → "อะ").
+  Vowel audio, `public/audio/vowels/<sound>.m4a`, says the vowel on `อ` (`-ะ` → "อะ"). Tone marks (`toneMarks.json`, the
+  source's chapter 4) are shown on กา; their audio, `public/audio/tone-marks/gaa-<tone id>.m4a`, says that syllable.
 - Full procedure: [docs/content-management.md](docs/content-management.md).
 
 ## Burmese pronunciation

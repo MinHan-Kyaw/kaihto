@@ -69,8 +69,12 @@ export interface Tone {
 }
 
 export interface ToneMark {
-  mark: string;
-  thaiName: string;
+  mark: string; // the combining mark alone, e.g. "่"
+  thaiName: string; // "ไม้เอก"
+  pronunciation: string; // Burmese pronunciation of the Thai name, written in the source's style
+  pronunciationEn: string; // romanized Thai name, e.g. "mai-ek"
+  example: string; // the mark on the source's syllable กา, e.g. "ก่า"
+  audio: string; // the example said in Thai, e.g. "/audio/tone-marks/gaa-low.m4a"
 }
 
 export type VowelGroupId = 'short' | 'long' | 'extra' | 'standalone';
@@ -103,4 +107,8 @@ export type VowelQuestion = (VowelQuestionBase & { kind: 'sound'; options: Vowel
 // The Thai names of live and dead syllables; their English and Burmese names and explanations are in src/i18n.
 export interface Guide {
   syllables: Record<SyllableType, { thaiName: string }>;
+  toneMarks: {
+    summary: string; // the source's heading: "วรรณยุกต์ไทยมี ๔ รูป ๕ เสียง" (Thai has 4 tone marks and 5 tones)
+    unmarked: { example: string; audio: string }; // the syllable every mark is shown on, กา, with no mark
+  };
 }

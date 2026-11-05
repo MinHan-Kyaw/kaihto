@@ -6,5 +6,12 @@
     "dead": {
       "thaiName": "คำตาย"
     }
+  },
+  "toneMarks": {
+    "summary": "วรรณยุกต์ไทยมี ๔ รูป ๕ เสียง",
+    "unmarked": {
+      "example": "กา",
+      "audio": "/audio/tone-marks/gaa-mid.m4a"
+    }
   }
 }

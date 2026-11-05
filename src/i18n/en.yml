@@ -132,11 +132,20 @@ vowelTable:
 
 tonesPage:
   title: Thai Tones
+  tabs: View
+  tonesTab: Tones
+  tonesCount: tones
+  marksTab: Tone marks
+  marksCount: tone marks
   intro: Thai has five tones. A syllable's tone comes from its consonant class, whether it is live or dead, and its tone mark.
   five: The five tones
+  fourMarks: The four tone marks
+  fourMarksIntro: Thai has four tone marks and five tones. On a middle class consonant each mark gives its own tone, so one syllable can be said in all five.
+  markedSyllables: One syllable with each tone mark
+  noMark: No mark
   vowelTones: Short and long vowels
   vowelTonesNote: With no tone mark and no final consonant, the tone comes from the vowel's length and the consonant's group. A short vowel makes a dead syllable, a long vowel a live one.
-  marks: Tone marks
+  marks: Tone marks on each group
   marksNote: A tone mark sets the tone of a syllable; the tone it gives depends on the consonant's group.
   markDetail: Tone mark
   notUsed: Not used

@@ -1,16 +1,31 @@
 import { useEffect, type ReactNode } from 'react';
+import { useNavigate } from 'react-router';
 
 import AudioButton from '../../components/AudioButton';
 import ButtonLink from '../../components/Button/ButtonLink';
 import ClassTable from '../../components/ClassTable';
+import ClassTabs from '../../components/ClassTabs';
 import ToneContour from '../../components/ToneContour';
-import { consonantClasses, guide, toneMarks, tones, vowelGroups, vowels } from '../../data';
+import { consonantClasses, consonants, guide, toneById, toneMarks, tones, vowelGroups, vowels } from '../../data';
 import { assetUrl } from '../../helpers/assetUrl';
+import { getContentText, getPronunciation } from '../../helpers/language';
 import { getMarkedTone } from '../../helpers/tones';
-import { getSyllable } from '../../helpers/vowels';
+import { findSyllable, getSyllable, getSyllableTone } from '../../helpers/vowels';
 import { useTranslation } from '../../i18n';
 import { playAudio, stopAudio } from '../../services/audio';
-import type { ConsonantClassId, ToneId, Vowel, VowelGroupId } from '../../types/learning';
+import type { Consonant, ConsonantClassId, Tone, ToneId, ToneMark, Vowel, VowelGroupId } from '../../types/learning';
+
+type TonesTabId = 'tones' | 'marks';
+
+const TAB_PATHS: Record<TonesTabId, string> = { tones: '/tones', marks: '/tones/marks' };
+
+// Labels are translation keys.
+const tabs: { id: TonesTabId; label: string }[] = [
+  { id: 'tones', label: 'tonesPage.tonesTab' },
+  { id: 'marks', label: 'tonesPage.marksTab' },
+];
+
+const tabCounts: Record<TonesTabId, number> = { tones: tones.length, marks: toneMarks.length };
 
 interface ToneRow {
   id: string;
@@ -21,6 +36,40 @@ interface ToneRow {
 
 // Short and long vowels, with the tone each consonant group takes as the source states it (the Vowels page shows the same).
 const VOWEL_LENGTHS: VowelGroupId[] = ['short', 'long'];
+
+interface MarkedSyllable {
+  id: string;
+  mark?: ToneMark; // none for the syllable with no mark
+  example: string;
+  audio: string;
+  tone: Tone;
+}
+
+// The source's chart: กา with no mark and with each of the four marks. Its consonant is middle class, which takes all
+// four marks, so the five syllables have the five tones.
+const { consonant: exampleConsonant, vowel: exampleVowel } = findSyllable(
+  guide.toneMarks.unmarked.example,
+  consonants,
+  vowels
+) as {
+  consonant: Consonant;
+  vowel: Vowel;
+};
+
+const markedSyllables: MarkedSyllable[] = [
+  {
+    id: 'none',
+    ...guide.toneMarks.unmarked,
+    tone: toneById[getSyllableTone(exampleConsonant, exampleVowel)],
+  },
+  ...toneMarks.map((mark) => ({
+    id: mark.mark,
+    mark,
+    example: mark.example,
+    audio: mark.audio,
+    tone: toneById[getMarkedTone(exampleConsonant.class, mark.mark) as ToneId],
+  })),
+];
 
 const ToneTable = ({ rows, firstColumnLabel, labelledBy }: { rows: ToneRow[]; firstColumnLabel: string; labelledBy: string }) => {
   const { t } = useTranslation();
@@ -66,10 +115,8 @@ const ToneTable = ({ rows, firstColumnLabel, labelledBy }: { rows: ToneRow[]; fi
   );
 };
 
-const Tones = () => {
+const FiveTones = () => {
   const { t } = useTranslation();
-
-  useEffect(() => () => stopAudio(), []);
 
   const vowelRows = VOWEL_LENGTHS.map((groupId): ToneRow => {
     const group = vowelGroups.find((item) => item.id === groupId);
@@ -91,22 +138,12 @@ const Tones = () => {
     };
   });
 
-  const markRows = toneMarks.map(({ mark, thaiName }): ToneRow => ({
-    id: mark,
-    label: (
-      <span className="font-thai font-medium" lang="th">
-        อ{mark} {thaiName}
-      </span>
-    ),
-    getTone: (consonantClass) => getMarkedTone(consonantClass, mark),
-  }));
-
   return (
-    <div className="flex flex-col gap-8">
-      <section aria-labelledby="tones-title">
-        <h1 id="tones-title" className="text-[1.75rem] font-extrabold">
-          {t('tonesPage.title')}
-        </h1>
+    <>
+      <section aria-labelledby="five-tones-title">
+        <h2 id="five-tones-title" className="text-[1.375rem] font-extrabold">
+          {t('tonesPage.five')}
+        </h2>
         <p className="mt-1 text-ink-muted">{t('tonesPage.intro')}</p>
         {/* A compact row per tone on phones and tablets; all five side by side, stacked, on wide screens. */}
         <ul className="mt-4 grid gap-2 xs:grid-cols-2 lg:grid-cols-5" role="list" aria-label={t('tonesPage.five')}>
@@ -140,6 +177,79 @@ const Tones = () => {
           <ToneTable rows={vowelRows} firstColumnLabel={t('vowelTable.vowel')} labelledBy="vowel-tones-title" />
         </div>
       </section>
+    </>
+  );
+};
+
+const FourMarks = () => {
+  const { lang, t } = useTranslation();
+  const contentText = getContentText(lang);
+
+  const markRows = toneMarks.map(({ mark, thaiName }): ToneRow => ({
+    id: mark,
+    label: (
+      <span className="font-thai font-medium" lang="th">
+        อ{mark} {thaiName}
+      </span>
+    ),
+    getTone: (consonantClass) => getMarkedTone(consonantClass, mark),
+  }));
+
+  return (
+    <>
+      <section aria-labelledby="four-marks-title">
+        <h2 id="four-marks-title" className="text-[1.375rem] font-extrabold">
+          {t('tonesPage.fourMarks')}
+        </h2>
+        <p className="mt-1 font-thai text-lg font-medium" lang="th">
+          {guide.toneMarks.summary}
+        </p>
+        <p className="mt-1 text-ink-muted">{t('tonesPage.fourMarksIntro')}</p>
+        {/* A row per syllable on phones and tablets; the source's five columns, stacked, on wide screens. */}
+        <ul className="mt-4 grid gap-2 lg:grid-cols-5" role="list" aria-label={t('tonesPage.markedSyllables')}>
+          {markedSyllables.map(({ id, mark, example, audio, tone }) => (
+            <li
+              key={id}
+              className="flex items-center gap-3 rounded-2xl border-2 border-line px-3 py-2 shadow-edge lg:flex-col lg:gap-2 lg:py-4 lg:text-center"
+              data-tone={tone.id}
+            >
+              <span
+                className="grid size-14 shrink-0 place-items-center rounded-xl bg-brand-light pt-2 font-thai text-[2.75rem] leading-none text-brand lg:size-18 lg:pt-3 lg:text-[3.5rem]"
+                lang="th"
+                aria-hidden="true"
+              >
+                {mark ? `◌${mark.mark}` : ''}
+              </span>
+              {/* As tall as a Thai name over its pronunciation, so the syllables line up on wide screens. */}
+              <span className="flex min-w-0 flex-1 flex-col lg:min-h-11 lg:flex-none lg:justify-center">
+                {mark ? (
+                  <>
+                    <span className="font-thai font-medium" lang="th">
+                      {mark.thaiName}
+                    </span>{' '}
+                    <span className={`text-sm text-ink-muted ${contentText.font}`} lang={contentText.lang}>
+                      {getPronunciation(mark, lang)}
+                    </span>
+                  </>
+                ) : (
+                  <span className="font-bold">{t('tonesPage.noMark')}</span>
+                )}
+              </span>{' '}
+              <span className="flex min-w-24 shrink-0 flex-col items-center lg:border-t-2 lg:border-line lg:pt-2">
+                <span className="font-thai text-[2rem] leading-[1.4] font-medium" lang="th">
+                  {example}
+                </span>{' '}
+                {/* The curve sits above the tone name on phones, so a long name never wraps. */}
+                <span className="flex flex-col items-center text-sm font-bold whitespace-nowrap lg:flex-row lg:gap-1">
+                  <ToneContour pitch={tone.pitch} size="small" />
+                  {t(`tones.${tone.id}.name`)}
+                </span>
+              </span>
+              <AudioButton label={t('audio.hear', { text: example })} onPlay={() => void playAudio(assetUrl(audio))} />
+            </li>
+          ))}
+        </ul>
+      </section>
 
       <section aria-labelledby="tone-marks-title">
         <h2 id="tone-marks-title" className="text-[1.375rem] font-extrabold">
@@ -150,11 +260,52 @@ const Tones = () => {
           <ToneTable rows={markRows} firstColumnLabel={t('tonesPage.markDetail')} labelledBy="tone-marks-title" />
         </div>
       </section>
+    </>
+  );
+};
 
-      <ButtonLink to="/vowels" variant="secondary" fullWidth>
-        {t('tonesPage.exploreVowels')}
-      </ButtonLink>
-    </div>
+interface TonesProps {
+  showMarks?: boolean;
+}
+
+const Tones = ({ showMarks = false }: TonesProps) => {
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+  const selectedTabId: TonesTabId = showMarks ? 'marks' : 'tones';
+
+  useEffect(() => () => stopAudio(), []);
+
+  const handleSelectTab = (tabId: TonesTabId) => {
+    if (tabId === selectedTabId) {
+      return;
+    }
+    void navigate(TAB_PATHS[tabId], { replace: true });
+    window.scrollTo({ top: 0 });
+  };
+
+  return (
+    <>
+      <h1 className="sr-only">{t('tonesPage.title')}</h1>
+
+      <div className="sticky top-header z-5 -mx-4 -mt-2 bg-surface px-4 py-2">
+        <ClassTabs
+          items={tabs.map(({ id, label }) => ({ id, label: t(label) }))}
+          counts={tabCounts}
+          selectedId={selectedTabId}
+          label={t('tonesPage.tabs')}
+          countLabel={{ tones: t('tonesPage.tonesCount'), marks: t('tonesPage.marksCount') }}
+          onSelect={handleSelectTab}
+        />
+      </div>
+
+      <div className="mt-4 flex flex-col gap-8">
+        {showMarks ? <FourMarks /> : <FiveTones />}
+
+        <ButtonLink to="/vowels" variant="secondary" fullWidth>
+          {t('tonesPage.exploreVowels')}
+        </ButtonLink>
+      </div>
+    </>
   );
 };
 
