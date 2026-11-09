@@ -216,7 +216,10 @@ Under the cards, a "Tone marks on each group" table from `getMarkedTone`. Both t
 Data: `meanings.json`, the words grouped by source chapter (`MeaningChapter`: `chapter`, `words`), so far the 60 words of
 chapter 3 and the 20 of chapter 5 (group 1 with tone marks), each in the source's order (`MeaningWord`: `id`, `thai`, `syllables`, Burmese `meaning`, `meaningEn`, `image`, `audio`).
 `src/data` exports the chapters as `meaningChapters` and all their words, in chapter order, as `meanings`. Both tabs show
-each chapter as a section under an `h2` heading (`meanings.chapter`: "Chapter 3", `အခန်း 3`). The id is the Thai word; the two pairs spelt alike (กา kettle / crow, ตา eye /
+each chapter as a `CollapsibleSection`: its `h2` heading (`meanings.chapter`: "Chapter 3", `အခန်း 3`, with the word count) is a
+button that shows or hides the chapter's words (`aria-expanded`). Only the first chapter starts open; the screen keeps
+which chapters are open, so they stay open or closed when switching tabs, and a refresh resets them. The Text tab's Card
+options sit beside the tabs, as they apply to every chapter. The id is the Thai word; the two pairs spelt alike (กา kettle / crow, ตา eye /
 grandfather) add the English meaning (`กา-kettle`). The screen draws each word with `WordCard`: the default size has the
 picture, Thai word, meaning and audio button; the Text tab uses the compact size without picture or audio, with the Thai shrinking
 to fit long words (a word can't wrap). The Text tab shows each syllable's tone in the card's top right corner: the words are open syllables

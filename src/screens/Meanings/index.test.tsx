@@ -3,7 +3,7 @@ import { MemoryRouter, Route, Routes } from 'react-router';
 import { render, screen, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 
-import { meanings } from '../../data';
+import { meaningChapters, meanings } from '../../data';
 import { playAudio } from '../../services/audio';
 import { inBurmese } from '../../tests/fixtures';
 
@@ -22,10 +22,15 @@ const meaningsAt = (route: string) => (
 
 const renderMeanings = (route = '/meanings') => render(meaningsAt(route));
 
+const firstChapterWords = meaningChapters[0]?.words ?? [];
+
+const toggleChapter = (name: RegExp) => userEvent.click(screen.getByRole('button', { name }));
+
 describe('Meanings', () => {
-  it('shows every word with its picture, meaning and audio in the source order', () => {
+  it('shows every word with its picture, meaning and audio in the source order once all chapters are open', async () => {
     renderMeanings();
 
+    await toggleChapter(/^Chapter 5/);
     const cards = screen.getAllByRole('article');
 
     expect(cards.map((card) => card.getAttribute('aria-labelledby'))).toEqual(meanings.map((word) => `word-${word.id}`));
@@ -41,12 +46,48 @@ describe('Meanings', () => {
     renderMeanings();
 
     expect(screen.getAllByRole('region').map((region) => region.getAttribute('aria-labelledby'))).toEqual([
-      'meanings-chapter-3',
-      'meanings-chapter-5',
+      'meanings-chapter-3-title',
+      'meanings-chapter-5-title',
     ]);
-    expect(screen.getByRole('heading', { level: 2, name: 'Chapter 5' })).toBeInTheDocument();
-    expect(within(screen.getByRole('region', { name: 'Chapter 3' })).getAllByRole('article')).toHaveLength(60);
-    expect(within(screen.getByRole('region', { name: 'Chapter 5' })).getAllByRole('article')).toHaveLength(20);
+    expect(screen.getByRole('button', { name: 'Chapter 3 60 words' })).toBeInTheDocument();
+    expect(screen.getByRole('button', { name: 'Chapter 5 20 words' })).toBeInTheDocument();
+  });
+
+  describe('given the chapters', () => {
+    it('opens only the first chapter', () => {
+      renderMeanings();
+
+      expect(screen.getByRole('button', { name: /^Chapter 3/ })).toHaveAttribute('aria-expanded', 'true');
+      expect(screen.getByRole('button', { name: /^Chapter 5/ })).toHaveAttribute('aria-expanded', 'false');
+      expect(within(screen.getByRole('region', { name: 'Chapter 3' })).getAllByRole('article')).toHaveLength(60);
+      expect(within(screen.getByRole('region', { name: 'Chapter 5' })).queryAllByRole('article')).toHaveLength(0);
+    });
+
+    it('opens and closes a chapter with its heading', async () => {
+      renderMeanings();
+
+      await toggleChapter(/^Chapter 5/);
+
+      expect(screen.getByRole('button', { name: /^Chapter 5/ })).toHaveAttribute('aria-expanded', 'true');
+      expect(within(screen.getByRole('region', { name: 'Chapter 5' })).getAllByRole('article')).toHaveLength(20);
+
+      await toggleChapter(/^Chapter 3/);
+
+      expect(within(screen.getByRole('region', { name: 'Chapter 3' })).queryAllByRole('article')).toHaveLength(0);
+      expect(screen.getAllByRole('article')).toHaveLength(20);
+    });
+
+    it('keeps each chapter open or closed when switching tabs', async () => {
+      vi.stubGlobal('scrollTo', vi.fn());
+      renderMeanings();
+
+      await toggleChapter(/^Chapter 5/);
+      await toggleChapter(/^Chapter 3/);
+      await userEvent.click(screen.getByRole('button', { name: /^Text/ }));
+
+      expect(screen.getByRole('button', { name: /^Chapter 3/ })).toHaveAttribute('aria-expanded', 'false');
+      expect(screen.getAllByRole('article')).toHaveLength(20);
+    });
   });
 
   it('plays the Thai audio for a word', async () => {
@@ -65,7 +106,7 @@ describe('Meanings', () => {
     await userEvent.click(screen.getByRole('button', { name: /^Text/ }));
 
     expect(screen.getByRole('button', { name: /^Text/ })).toHaveAttribute('aria-pressed', 'true');
-    expect(screen.getAllByRole('article')).toHaveLength(meanings.length);
+    expect(screen.getAllByRole('article')).toHaveLength(firstChapterWords.length);
     expect(screen.queryByRole('img')).not.toBeInTheDocument();
     expect(scrollTo).toHaveBeenCalledWith({ top: 0 });
   });
@@ -83,8 +124,9 @@ describe('Meanings', () => {
       expect(screen.queryByRole('button', { name: /Play Thai audio/ })).not.toBeInTheDocument();
     });
 
-    it('shows the words under their chapter headings', () => {
+    it('shows the words under their chapter headings', async () => {
       renderMeanings('/meanings/text');
+      await toggleChapter(/^Chapter 5/);
 
       expect(within(screen.getByRole('region', { name: 'Chapter 3' })).getAllByRole('article')).toHaveLength(60);
       expect(within(screen.getByRole('region', { name: 'Chapter 5' })).getAllByRole('article')).toHaveLength(20);
@@ -99,8 +141,9 @@ describe('Meanings', () => {
     });
 
     describe('given words with tone marks', () => {
-      it('shows the tone each mark gives', () => {
+      it('shows the tone each mark gives', async () => {
         renderMeanings('/meanings/text');
+        await toggleChapter(/^Chapter 5/);
 
         expect(screen.getByRole('article', { name: 'เก้าอี้' })).toHaveTextContent('Tone Falling Falling');
         expect(screen.getByRole('article', { name: 'ไก่' })).toHaveTextContent('Tone Low');
@@ -146,20 +189,21 @@ describe('Meanings', () => {
 
       await userEvent.click(screen.getByRole('button', { name: /^Pictures/ }));
 
-      expect(screen.getAllByRole('img')).toHaveLength(meanings.length);
+      expect(screen.getAllByRole('img')).toHaveLength(firstChapterWords.length);
     });
   });
 
   describe('given the page is in Burmese', () => {
-    it('shows the tabs and meanings in Burmese', () => {
+    it('shows the tabs and meanings in Burmese', async () => {
       render(inBurmese(meaningsAt('/meanings/text')));
+      await toggleChapter(/^အခန်း 5/);
 
       expect(screen.getByRole('button', { name: /^စာသား/ })).toHaveAttribute('aria-pressed', 'true');
-      expect(screen.getByRole('heading', { level: 2, name: 'အခန်း 3' })).toBeInTheDocument();
+      expect(screen.getByRole('region', { name: 'အခန်း 3' })).toBeInTheDocument();
       expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('အသံ အလယ်');
       expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('လက် (မူး)');
       expect(screen.getByRole('article', { name: 'ภูเขา' })).toHaveTextContent('တောင်တန်း (ဖူးခေါင်)');
-      expect(screen.getByRole('heading', { level: 2, name: 'အခန်း 5' })).toBeInTheDocument();
+      expect(screen.getByRole('button', { name: 'အခန်း 5 20 လုံး' })).toHaveAttribute('aria-expanded', 'true');
       expect(screen.getByRole('article', { name: 'เก้าอี้' })).toHaveTextContent('ကုလားထိုင် (ကောင့်အီ့)');
     });
 

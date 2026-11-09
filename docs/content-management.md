@@ -70,7 +70,8 @@ A word without Burmese pronunciation is incomplete; do not merge it with a place
 ## Meanings words
 
 `meanings.json` is a list of source chapters in chapter order, each with its words in the source's order. The Meanings
-page shows each chapter under its own heading ("Chapter 3", `အခန်း 3`) on both tabs. To add another chapter's words, add
+page shows each chapter under its own heading ("Chapter 3", `အခန်း 3`) on both tabs; the heading opens and closes the chapter,
+and only the first chapter starts open. To add another chapter's words, add
 `{ "chapter": <number>, "words": [...] }` in chapter order; never mix words from different chapters in one entry.
 
 Each word:

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router';
 
 import CardPartsMenu from '../../components/CardPartsMenu';
 import ClassTabs from '../../components/ClassTabs';
+import CollapsibleSection from '../../components/CollapsibleSection';
 import WordCard from '../../components/WordCard';
 import { consonants, meaningChapters, meanings, toneById, vowels } from '../../data';
 import { assetUrl } from '../../helpers/assetUrl';
@@ -64,7 +65,23 @@ const Meanings = ({ showText = false }: MeaningsProps) => {
     pronunciation: true,
   });
 
+  // Only the first chapter starts open; the others are a tap away. Shared by both tabs, reset on refresh.
+  const [openChapters, setOpenChapters] = useState<ReadonlySet<number>>(
+    () => new Set(meaningChapters.slice(0, 1).map(({ chapter }) => chapter))
+  );
+
   useEffect(() => () => stopAudio(), []);
+
+  const handleToggleChapter = (chapter: number) => {
+    setOpenChapters((current) => {
+      const next = new Set(current);
+
+      if (!next.delete(chapter)) {
+        next.add(chapter);
+      }
+      return next;
+    });
+  };
 
   const handleShownPartChange = (part: CardPart, checked: boolean) => {
     setShownParts((current) => ({ ...current, [part]: checked }));
@@ -82,37 +99,41 @@ const Meanings = ({ showText = false }: MeaningsProps) => {
     <>
       <h1 className="sr-only">{t('meanings.title')}</h1>
 
-      <div className="sticky top-header z-5 -mx-4 -mt-2 bg-surface px-4 py-2">
-        <ClassTabs
-          items={tabs.map(({ id, label }) => ({ id, label: t(label) }))}
-          counts={tabCounts}
-          selectedId={selectedTabId}
-          label={t('meanings.tabs')}
-          countLabel={t('meanings.count')}
-          onSelect={handleSelectTab}
-        />
+      <div className="sticky top-header z-5 -mx-4 -mt-2 flex items-center gap-1 bg-surface px-4 py-2">
+        <div className="min-w-0 flex-1">
+          <ClassTabs
+            items={tabs.map(({ id, label }) => ({ id, label: t(label) }))}
+            counts={tabCounts}
+            selectedId={selectedTabId}
+            label={t('meanings.tabs')}
+            countLabel={t('meanings.count')}
+            onSelect={handleSelectTab}
+          />
+        </div>
+        {showText && (
+          <CardPartsMenu
+            options={CARD_PARTS.filter(({ id }) => id !== 'pronunciation' || hasPronunciation).map(({ id, label }) => ({
+              id,
+              label: t(label),
+              checked: shownParts[id],
+            }))}
+            onChange={handleShownPartChange}
+          />
+        )}
       </div>
 
-      {showText ? (
-        <div className="mt-4 space-y-8">
-          {meaningChapters.map(({ chapter, words }, index) => (
-            <section key={chapter} aria-labelledby={`meanings-chapter-${chapter}`}>
-              {/* The card options apply to every chapter, so they sit beside the first heading. */}
-              <div className="mb-2 flex min-h-11 items-center justify-between gap-2">
-                <h2 id={`meanings-chapter-${chapter}`} className="text-lg font-bold">
-                  {t('meanings.chapter', { number: chapter })}
-                </h2>
-                {index === 0 && (
-                  <CardPartsMenu
-                    options={CARD_PARTS.filter(({ id }) => id !== 'pronunciation' || hasPronunciation).map(({ id, label }) => ({
-                      id,
-                      label: t(label),
-                      checked: shownParts[id],
-                    }))}
-                    onChange={handleShownPartChange}
-                  />
-                )}
-              </div>
+      <div className="mt-4 space-y-4">
+        {meaningChapters.map(({ chapter, words }) => (
+          <CollapsibleSection
+            key={chapter}
+            id={`meanings-chapter-${chapter}`}
+            title={t('meanings.chapter', { number: chapter })}
+            count={words.length}
+            countLabel={t('meanings.count')}
+            open={openChapters.has(chapter)}
+            onToggle={() => handleToggleChapter(chapter)}
+          >
+            {showText ? (
               <ul className="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-2" role="list">
                 {words.map((word) => (
                   <li key={word.id}>
@@ -128,16 +149,7 @@ const Meanings = ({ showText = false }: MeaningsProps) => {
                   </li>
                 ))}
               </ul>
-            </section>
-          ))}
-        </div>
-      ) : (
-        <div className="mt-4 space-y-8">
-          {meaningChapters.map(({ chapter, words }) => (
-            <section key={chapter} aria-labelledby={`meanings-chapter-${chapter}`}>
-              <h2 id={`meanings-chapter-${chapter}`} className="mb-2 flex min-h-11 items-center text-lg font-bold">
-                {t('meanings.chapter', { number: chapter })}
-              </h2>
+            ) : (
               <ul
                 className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,8.5rem),1fr))] gap-3 xs:gap-4 md:grid-cols-5"
                 role="list"
@@ -148,10 +160,10 @@ const Meanings = ({ showText = false }: MeaningsProps) => {
                   </li>
                 ))}
               </ul>
-            </section>
-          ))}
-        </div>
-      )}
+            )}
+          </CollapsibleSection>
+        ))}
+      </div>
     </>
   );
 };
