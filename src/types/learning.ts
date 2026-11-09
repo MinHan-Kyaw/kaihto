@@ -7,6 +7,13 @@ export interface ConsonantClass {
   tone: ToneId; // the tone the class takes on a live syllable with no tone mark
   exampleConsonant: string;
   exampleSound: string; // English initial sound of exampleConsonant, e.g. "kh"
+  toneRules: ToneRule[]; // the source's chapter 5 rules for the group, in its order
+}
+
+// One of the source's tone rules, e.g. "Gp 1 + Short Vowel - Low Tone"; some end in Burmese ("Tone Mark အသံ").
+export interface ToneRule {
+  rule: string; // English, as the source writes it
+  burmese?: string; // the Burmese words after it, as the source writes them
 }
 
 export interface Word {
@@ -39,6 +46,12 @@ export interface MeaningWord {
   pronunciation?: string; // Burmese, in the book's style; a word without one shows its meaning alone in Burmese
   image: string;
   audio: string; // the Thai word said aloud
+}
+
+// The meanings words of one source chapter, shown under its own heading on the meanings screen.
+export interface MeaningChapter {
+  chapter: number; // the source's chapter number, e.g. 3
+  words: MeaningWord[];
 }
 
 export interface VocabularyItem extends Word {

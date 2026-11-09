@@ -48,7 +48,7 @@ language they start in. The paths below are relative to that basename.
 | `/vowels?group=short\|long\|extra\|standalone` | The 32 vowels in group tabs (group kept in the URL), with the short and long vowel tone rules and a middle / high / low class example per vowel                                                                                                                                                                                                                                               |
 | `/tones`                                       | The Tones tab: the five tones, then a table with a Group 1 / 2 / 3 column per consonant class for short and long vowels (the tone each group takes, e.g. short + group 3 = high)                                                                                                                                                                                                              |
 | `/tones/marks`                                 | The Tone marks tab (the source's chapter 4): the four marks on กา, which says it in all five tones, then a table of the tone each mark gives in each group                                                                                                                                                                                                                                    |
-| `/meanings`                                    | The 60 words of the source's chapter 3 (Pictures tab): picture, Thai word, meaning and a button that plays the word, in the source's order                                                                                                                                                                                                                                                    |
+| `/meanings`                                    | The Meanings words under a heading per source chapter (Chapter 3: 60 words) (Pictures tab): picture, Thai word, meaning and a button that plays the word, in the source's order                                                                                                                                                                                                               |
 | `/meanings/text`                               | The Text tab: the same words as compact cards with the Thai word, its meaning followed by its pronunciation in brackets (`mountain (phuu-khao)`, `တောင်တန်း (ဖူးခေါင်)`), and each syllable's tone as a small pitch curve in the top right corner (its name for screen readers only); a three-dot Card options menu hides the Thai, tone, meaning or pronunciation, at least one stays ticked |
 | `/practice`                                    | Practice categories: Consonants or Vowels                                                                                                                                                                                                                                                                                                                                                     |
 | `/practice/consonants`                         | Picture quiz                                                                                                                                                                                                                                                                                                                                                                                  |
@@ -203,7 +203,9 @@ The Tone marks tab follows the source's chapter 4 (4 marks, 5 tones): five cards
 no mark and with each mark (ก่า ก้า ก๊า ก๋า), each with the mark on `◌`, its Thai name and pronunciation, the syllable, its
 tone as a curve and name, and a button that plays it (`public/audio/tone-marks/gaa-<tone>.m4a`). The tones are not
 stored: `findSyllable` finds กา's middle class consonant, and `getSyllableTone` / `getMarkedTone` give each card's tone.
-Under the cards, a "Tone marks on each group" table from `getMarkedTone`. Both tables use `ClassTable` with
+Under the cards, the source's chapter 5 tone rules for each group (`toneRules` in `consonantClasses.json`, e.g.
+`Gp 1 + Long/Short Vowels + Tone Mark - Tone Mark အသံ`), a box per group, in place of a visible title, then the "Tone marks
+on each group" table from `getMarkedTone` (its heading is for screen readers only). Both tables use `ClassTable` with
 `showGroups`, which labels each class column with its group number.
 
 - `src/helpers/tones.ts`: `getUnmarkedTone(class, 'live' | 'dead')` and `getMarkedTone(class, mark)` hold the tone rules.
@@ -213,13 +215,18 @@ Under the cards, a "Tone marks on each group" table from `getMarkedTone`. Both t
 
 ## Meanings
 
-Data: `meanings.json`, the 60 words of the source's chapter 3 in the source's order (`MeaningWord`: `id`, `thai`, `syllables`,
-Burmese `meaning`, `meaningEn`, `image`, `audio`). The id is the Thai word; the two pairs spelt alike (กา kettle / crow, ตา eye /
+Data: `meanings.json`, the words grouped by source chapter (`MeaningChapter`: `chapter`, `words`), so far the 60 words of
+chapter 3 and the 20 of chapter 5 (group 1 with tone marks), each in the source's order (`MeaningWord`: `id`, `thai`, `syllables`, Burmese `meaning`, `meaningEn`, `image`, `audio`).
+`src/data` exports the chapters as `meaningChapters` and all their words, in chapter order, as `meanings`. Both tabs show
+each chapter as a `CollapsibleSection`: its `h2` heading (`meanings.chapter`: "Chapter 3", `အခန်း 3`, with the word count) is a
+button that shows or hides the chapter's words (`aria-expanded`). Only the first chapter starts open; the screen keeps
+which chapters are open, so they stay open or closed when switching tabs, and a refresh resets them. The Text tab's Card
+options sit beside the tabs, as they apply to every chapter. The id is the Thai word; the two pairs spelt alike (กา kettle / crow, ตา eye /
 grandfather) add the English meaning (`กา-kettle`). The screen draws each word with `WordCard`: the default size has the
 picture, Thai word, meaning and audio button; the Text tab uses the compact size without picture or audio, with the Thai shrinking
 to fit long words (a word can't wrap). The Text tab shows each syllable's tone in the card's top right corner: the words are open syllables
-with no tone marks, so `findSyllable` (`src/helpers/vowels.ts`) finds each syllable's consonant and vowel and
-`getSyllableTone` gives its tone, drawn with a small `ToneContour`. Thai keeps empty space above letters for marks, so the word is lifted by what its
+with at most one tone mark, so `findSyllableTone` (`src/helpers/vowels.ts`) takes off the mark, finds the syllable's
+consonant and vowel with `findSyllable`, and gives its tone with `getMarkedTone` or, unmarked, `getSyllableTone`, drawn with a small `ToneContour`. Thai keeps empty space above letters for marks, so the word is lifted by what its
 tallest character leaves empty (`getThaiInkHeight` in `src/helpers/thaiInk.ts`, measured for Sarabun): its top sits 4px
 below the curves, the same as the curves below the card's edge. `syllables` is stored because some words split more
 than one way (`เลอะเทอะ` is `เลอะ|เทอะ`, not `เล|อะ|เทอะ`). The words are not part of any practice yet.

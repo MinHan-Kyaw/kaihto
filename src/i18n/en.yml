@@ -108,6 +108,7 @@ meanings:
   count: words
   pictures: Pictures
   text: Text
+  chapter: Chapter {number}
 
 cards:
   options: Card options
@@ -146,7 +147,6 @@ tonesPage:
   vowelTones: Short and long vowels
   vowelTonesNote: With no tone mark and no final consonant, the tone comes from the vowel's length and the consonant's group. A short vowel makes a dead syllable, a long vowel a live one.
   marks: Tone marks on each group
-  marksNote: A tone mark sets the tone of a syllable; the tone it gives depends on the consonant's group.
   markDetail: Tone mark
   notUsed: Not used
   exploreVowels: Explore Vowels
