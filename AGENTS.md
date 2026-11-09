@@ -105,7 +105,8 @@ public/
   from practice.
 - Audio: `public/audio/words/<romanized-slug>.m4a` (AAC). Audio is the **Thai** recitation of the full letter name,
   `<consonant>อ <word>` ("กอ ไก่"), matching the Burmese pronunciation — even though the screen shows only `ไก่`.
-- Meanings words (`src/data/meanings.json`, the source's chapter 3) have the Thai word as id; words spelt alike add the
+- Meanings words (`src/data/meanings.json`) are grouped by source chapter (`{ "chapter": 3, "words": [...] }`), each shown
+  under its own heading; keep each chapter's words in its own entry. They have the Thai word as id; words spelt alike add the
   English meaning (`กา-kettle`, `กา-crow`). Their audio says just the word, `public/audio/meanings/<slug>.m4a`. The Text
   tab shows the meaning with its pronunciation in brackets, `mountain (phuu-khao)` in English and `တောင်တန်း (ဖူးခေါင်)`
   in Burmese.

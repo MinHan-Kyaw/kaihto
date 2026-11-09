@@ -1,9 +1,9 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
-import { findSyllable } from '../helpers/vowels';
+import { findSyllableTone } from '../helpers/vowels';
 
-import { consonants, meanings, vowels } from '.';
+import { consonants, meaningChapters, meanings, vowels } from '.';
 
 const THAI_TEXT = /^[\u0E00-\u0E7F]+$/;
 const MYANMAR_SCRIPT = /^[\u1000-\u109F/]+$/;
@@ -14,8 +14,20 @@ const ENGLISH_MEANING = /^[a-z][a-z ]*$/;
 const publicFileExists = (path: string) => existsSync(join(process.cwd(), 'public', path));
 
 describe('meanings', () => {
-  it('contains the 60 words of the source chapter', () => {
-    expect(meanings).toHaveLength(60);
+  it('contains the 60 words of the source chapter 3', () => {
+    expect(meaningChapters.find(({ chapter }) => chapter === 3)?.words).toHaveLength(60);
+  });
+
+  it('contains the 20 words of the source chapter 5, group 1 with tone marks', () => {
+    expect(meaningChapters.find(({ chapter }) => chapter === 5)?.words).toHaveLength(20);
+  });
+
+  it('groups the words by source chapter, each chapter once, in chapter order, with at least one word', () => {
+    const chapterNumbers = meaningChapters.map(({ chapter }) => chapter);
+
+    chapterNumbers.forEach((chapter) => expect(Number.isInteger(chapter) && chapter > 0, String(chapter)).toBe(true));
+    expect(chapterNumbers).toEqual([...new Set(chapterNumbers)].sort((a, b) => a - b));
+    meaningChapters.forEach(({ chapter, words }) => expect(words.length, `chapter ${chapter}`).toBeGreaterThan(0));
   });
 
   it('uses unique ids: the Thai word, with the English meaning added for words spelt alike', () => {
@@ -34,10 +46,10 @@ describe('meanings', () => {
     });
   });
 
-  it('splits every word into open syllables, each spelt by one consonant and vowel, so its tone follows from the rules', () => {
+  it('splits every word into open syllables, each one consonant, vowel and at most one tone mark, so its tone follows from the rules', () => {
     meanings.forEach((word) => {
       expect(word.syllables.join(''), word.id).toBe(word.thai);
-      word.syllables.forEach((syllable) => expect(findSyllable(syllable, consonants, vowels), syllable).toBeDefined());
+      word.syllables.forEach((syllable) => expect(findSyllableTone(syllable, consonants, vowels), syllable).toBeDefined());
     });
   });
 

@@ -108,6 +108,7 @@ meanings:
   count: words
   pictures: Pictures
   text: Text
+  chapter: Chapter {number}
 
 cards:
   options: Card options

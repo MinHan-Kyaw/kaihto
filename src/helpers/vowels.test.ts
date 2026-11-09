@@ -4,6 +4,7 @@ import type { Vowel } from '../types/learning';
 import {
   combineVowel,
   findSyllable,
+  findSyllableTone,
   generateVowelQuestions,
   getSyllableTone,
   getVowelAnswer,
@@ -80,6 +81,35 @@ describe('findSyllable', () => {
     it('finds nothing', () => {
       expect(findSyllable('ไก่', consonants, vowels)).toBeUndefined();
       expect(findSyllable('ภูเขา', consonants, vowels)).toBeUndefined();
+    });
+  });
+});
+
+describe('findSyllableTone', () => {
+  it('gives an unmarked syllable the tone of its class and vowel length', () => {
+    expect(findSyllableTone('เขา', consonants, vowels)).toBe('rising');
+    expect(findSyllableTone('มะ', consonants, vowels)).toBe('high');
+  });
+
+  it('gives a marked syllable the tone of its class and mark', () => {
+    expect(findSyllableTone('ไก่', consonants, vowels)).toBe('low');
+    expect(findSyllableTone('เก้า', consonants, vowels)).toBe('falling');
+    expect(findSyllableTone('โต๊ะ', consonants, vowels)).toBe('high');
+    expect(findSyllableTone('ตั๋ว', consonants, vowels)).toBe('rising');
+    expect(findSyllableTone('ม้า', consonants, vowels)).toBe('high');
+    expect(findSyllableTone('เบื่อ', consonants, vowels)).toBe('low');
+  });
+
+  describe('given text that is not one open syllable with at most one tone mark', () => {
+    it('finds no tone', () => {
+      expect(findSyllableTone('ภูเขา', consonants, vowels)).toBeUndefined();
+      expect(findSyllableTone('ก่้า', consonants, vowels)).toBeUndefined();
+    });
+  });
+
+  describe('given a mark the consonant class does not take', () => {
+    it('finds no tone', () => {
+      expect(findSyllableTone('ค๊า', consonants, vowels)).toBeUndefined();
     });
   });
 });

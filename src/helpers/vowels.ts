@@ -2,9 +2,12 @@ import { ANSWER_OPTION_COUNT, QUESTION_COUNT } from '../constants/practice';
 import type { Consonant, SyllableType, ToneId, Vowel, VowelQuestion } from '../types/learning';
 
 import { randomizeArray } from './randomizeArray';
-import { getUnmarkedTone } from './tones';
+import { getMarkedTone, getUnmarkedTone } from './tones';
 
 const PLACEHOLDER = '-';
+
+// ่ ้ ๊ ๋
+const TONE_MARKS = /[\u0E48-\u0E4B]/g;
 
 // Fonts can't stack a Thai mark on a dash, so a mark that sits on the consonant is shown on a dotted circle.
 const MARK_ON_PLACEHOLDER = /-(?=[\u0E31\u0E33-\u0E3A\u0E47-\u0E4E])/;
@@ -34,6 +37,23 @@ export const findSyllable = (
         .map((consonant) => ({ consonant, vowel }))
     )
     .at(0);
+
+// The tone of an open syllable with at most one tone mark, from its consonant's class and its vowel's length or its mark,
+// e.g. "เขา" → rising, "เก้า" → falling; undefined for any other text or a mark the consonant's class doesn't take.
+export const findSyllableTone = (
+  syllable: string,
+  consonants: readonly Consonant[],
+  vowels: readonly Vowel[]
+): ToneId | undefined => {
+  const marks = syllable.match(TONE_MARKS) ?? [];
+  const spelling = findSyllable(syllable.replace(TONE_MARKS, ''), consonants, vowels);
+
+  if (!spelling || marks.length > 1) {
+    return undefined;
+  }
+
+  return marks[0] ? getMarkedTone(spelling.consonant.class, marks[0]) : getSyllableTone(spelling.consonant, spelling.vowel);
+};
 
 export const generateVowelQuestions = (
   consonants: readonly Consonant[],
