@@ -11,6 +11,7 @@ const consonantClasses: ConsonantClass[] = [
     tone: 'mid',
     exampleConsonant: 'ก',
     exampleSound: 'k',
+    toneRules: [],
   },
   {
     id: 'high',
@@ -18,6 +19,7 @@ const consonantClasses: ConsonantClass[] = [
     tone: 'rising',
     exampleConsonant: 'ข',
     exampleSound: 'kh',
+    toneRules: [],
   },
 ];
 

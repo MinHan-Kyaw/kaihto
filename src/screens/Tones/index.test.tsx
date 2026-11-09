@@ -137,6 +137,25 @@ describe('Tones', () => {
     expect(getCell(/ไม้ตรี/, 1)).toHaveTextContent('Not used');
   });
 
+  it("states the source's tone rules for each group instead of a title above the tone mark table", () => {
+    renderToneMarks();
+
+    expect(
+      within(screen.getByRole('list', { name: 'Middle Class' }))
+        .getAllByRole('listitem')
+        .map((item) => item.textContent)
+    ).toEqual([
+      'Gp 1 + Short Vowel - Low Tone',
+      'Gp 1 + Long Vowels - Mid Tone',
+      'Gp 1 + Long/Short Vowels + Tone Mark - Tone Mark အသံ',
+    ]);
+    expect(within(screen.getByRole('list', { name: 'Low Class' })).getAllByRole('listitem')[2]).toHaveTextContent(
+      'Gp 3 + Long/Short Vowel + Tone Mark - Tone Mark အသံတစ်ခုကျော်'
+    );
+    expect(screen.getByText('အသံတစ်ခုကျော်')).toHaveAttribute('lang', 'my');
+    expect(screen.queryByText(/A tone mark sets the tone/)).not.toBeInTheDocument();
+  });
+
   describe('given the page is in Burmese', () => {
     it('names the tones and explains the rules in Burmese, keeping the Thai terms', () => {
       render(inBurmese(<Tones />), { wrapper: MemoryRouter });
