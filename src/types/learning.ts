@@ -41,6 +41,12 @@ export interface MeaningWord {
   audio: string; // the Thai word said aloud
 }
 
+// The meanings words of one source chapter, shown under its own heading on the meanings screen.
+export interface MeaningChapter {
+  chapter: number; // the source's chapter number, e.g. 3
+  words: MeaningWord[];
+}
+
 export interface VocabularyItem extends Word {
   consonant: string;
   consonantClass: ConsonantClassId;

@@ -37,6 +37,15 @@ describe('Meanings', () => {
     expect(within(cards[0] as HTMLElement).getByRole('img', { name: 'kettle' })).toBeInTheDocument();
   });
 
+  it('shows the words under their chapter heading', () => {
+    renderMeanings();
+
+    const chapter = screen.getByRole('region', { name: 'Chapter 3' });
+
+    expect(screen.getByRole('heading', { level: 2, name: 'Chapter 3' })).toBeInTheDocument();
+    expect(within(chapter).getAllByRole('article')).toHaveLength(60);
+  });
+
   it('plays the Thai audio for a word', async () => {
     renderMeanings();
 
@@ -69,6 +78,12 @@ describe('Meanings', () => {
       expect(screen.getByRole('article', { name: 'ภูเขา' })).toHaveTextContent('mountain (phuu-khao)');
       expect(screen.queryByRole('img')).not.toBeInTheDocument();
       expect(screen.queryByRole('button', { name: /Play Thai audio/ })).not.toBeInTheDocument();
+    });
+
+    it('shows the words under their chapter heading', () => {
+      renderMeanings('/meanings/text');
+
+      expect(within(screen.getByRole('region', { name: 'Chapter 3' })).getAllByRole('article')).toHaveLength(60);
     });
 
     it('shows the tone of each syllable', () => {
@@ -124,6 +139,7 @@ describe('Meanings', () => {
       render(inBurmese(meaningsAt('/meanings/text')));
 
       expect(screen.getByRole('button', { name: /^စာသား/ })).toHaveAttribute('aria-pressed', 'true');
+      expect(screen.getByRole('heading', { level: 2, name: 'အခန်း 3' })).toBeInTheDocument();
       expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('အသံ အလယ်');
       expect(screen.getByRole('article', { name: 'มือ' })).toHaveTextContent('လက် (မူး)');
       expect(screen.getByRole('article', { name: 'ภูเขา' })).toHaveTextContent('တောင်တန်း (ဖူးခေါင်)');

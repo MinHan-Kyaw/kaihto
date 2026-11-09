@@ -1,4 +1,14 @@
-import type { Consonant, ConsonantClass, Guide, MeaningWord, Tone, ToneId, ToneMark, Vowel, VowelGroup } from '../types/learning';
+import type {
+  Consonant,
+  ConsonantClass,
+  Guide,
+  MeaningChapter,
+  Tone,
+  ToneId,
+  ToneMark,
+  Vowel,
+  VowelGroup,
+} from '../types/learning';
 
 import consonantClassesData from './consonantClasses.json';
 import consonantsData from './consonants.json';
@@ -12,7 +22,9 @@ import vowelsData from './vowels.json';
 export const consonantClasses = consonantClassesData as ConsonantClass[];
 export const consonants = consonantsData as Consonant[];
 export const guide = guideData as Guide;
-export const meanings = meaningsData as MeaningWord[];
+export const meaningChapters = meaningsData as MeaningChapter[];
+// Every chapter's words, in chapter order.
+export const meanings = meaningChapters.flatMap((chapter) => chapter.words);
 export const tones = tonesData as Tone[];
 export const toneMarks = toneMarksData as ToneMark[];
 export const vowelGroups = vowelGroupsData as VowelGroup[];

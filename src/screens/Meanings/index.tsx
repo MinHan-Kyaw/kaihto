@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router';
 import CardPartsMenu from '../../components/CardPartsMenu';
 import ClassTabs from '../../components/ClassTabs';
 import WordCard from '../../components/WordCard';
-import { consonants, meanings, toneById, vowels } from '../../data';
+import { consonants, meaningChapters, meanings, toneById, vowels } from '../../data';
 import { assetUrl } from '../../helpers/assetUrl';
 import { getPronunciation } from '../../helpers/language';
 import { findSyllable, getSyllableTone } from '../../helpers/vowels';
@@ -94,44 +94,63 @@ const Meanings = ({ showText = false }: MeaningsProps) => {
       </div>
 
       {showText ? (
-        <div className="mt-4">
-          <div className="mb-2 flex justify-end">
-            <CardPartsMenu
-              options={CARD_PARTS.filter(({ id }) => id !== 'pronunciation' || hasPronunciation).map(({ id, label }) => ({
-                id,
-                label: t(label),
-                checked: shownParts[id],
-              }))}
-              onChange={handleShownPartChange}
-            />
-          </div>
-          <ul className="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-2" role="list">
-            {meanings.map((word) => (
-              <li key={word.id}>
-                <WordCard
-                  word={word}
-                  size="compact"
-                  showPicture={false}
-                  showThai={shownParts.thai}
-                  showMeaning={shownParts.meaning}
-                  showPronunciation={shownParts.pronunciation}
-                  tones={shownParts.tone ? wordTones.get(word.id) : undefined}
-                />
-              </li>
-            ))}
-          </ul>
+        <div className="mt-4 space-y-8">
+          {meaningChapters.map(({ chapter, words }, index) => (
+            <section key={chapter} aria-labelledby={`meanings-chapter-${chapter}`}>
+              {/* The card options apply to every chapter, so they sit beside the first heading. */}
+              <div className="mb-2 flex min-h-11 items-center justify-between gap-2">
+                <h2 id={`meanings-chapter-${chapter}`} className="text-lg font-bold">
+                  {t('meanings.chapter', { number: chapter })}
+                </h2>
+                {index === 0 && (
+                  <CardPartsMenu
+                    options={CARD_PARTS.filter(({ id }) => id !== 'pronunciation' || hasPronunciation).map(({ id, label }) => ({
+                      id,
+                      label: t(label),
+                      checked: shownParts[id],
+                    }))}
+                    onChange={handleShownPartChange}
+                  />
+                )}
+              </div>
+              <ul className="grid grid-cols-[repeat(auto-fill,minmax(8rem,1fr))] gap-2" role="list">
+                {words.map((word) => (
+                  <li key={word.id}>
+                    <WordCard
+                      word={word}
+                      size="compact"
+                      showPicture={false}
+                      showThai={shownParts.thai}
+                      showMeaning={shownParts.meaning}
+                      showPronunciation={shownParts.pronunciation}
+                      tones={shownParts.tone ? wordTones.get(word.id) : undefined}
+                    />
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
         </div>
       ) : (
-        <ul
-          className="mt-4 grid grid-cols-[repeat(auto-fill,minmax(min(100%,8.5rem),1fr))] gap-3 xs:gap-4 md:grid-cols-5"
-          role="list"
-        >
-          {meanings.map((word) => (
-            <li key={word.id}>
-              <WordCard word={word} onPlayAudio={handlePlayAudio} />
-            </li>
+        <div className="mt-4 space-y-8">
+          {meaningChapters.map(({ chapter, words }) => (
+            <section key={chapter} aria-labelledby={`meanings-chapter-${chapter}`}>
+              <h2 id={`meanings-chapter-${chapter}`} className="mb-2 flex min-h-11 items-center text-lg font-bold">
+                {t('meanings.chapter', { number: chapter })}
+              </h2>
+              <ul
+                className="grid grid-cols-[repeat(auto-fill,minmax(min(100%,8.5rem),1fr))] gap-3 xs:gap-4 md:grid-cols-5"
+                role="list"
+              >
+                {words.map((word) => (
+                  <li key={word.id}>
+                    <WordCard word={word} onPlayAudio={handlePlayAudio} />
+                  </li>
+                ))}
+              </ul>
+            </section>
           ))}
-        </ul>
+        </div>
       )}
     </>
   );

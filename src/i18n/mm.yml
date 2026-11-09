@@ -110,6 +110,7 @@ meanings:
   count: လုံး
   pictures: ပုံများ
   text: စာသား
+  chapter: အခန်း {number}
 
 cards:
   options: ကတ် ရွေးချယ်စရာ

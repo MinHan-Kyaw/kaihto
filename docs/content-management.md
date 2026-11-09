@@ -11,7 +11,7 @@
 | `src/data/tones.json`                | The five tones: Thai name, an example syllable (คา ข่า ข้า ค้า ขา), pitch contour, `audio`                                   |
 | `src/data/toneMarks.json`            | The four tone marks (chapter 4): mark, Thai name, Burmese and romanized pronunciation, the mark on กา (`example`), `audio`   |
 | `src/data/guide.json`                | Thai names of live and dead syllables; chapter 4's unmarked syllable กา                                                      |
-| `src/data/meanings.json`             | The 60 words of the source's chapter 3: `id`, Thai word, Burmese `meaning`, `meaningEn`, `image`, `audio`                    |
+| `src/data/meanings.json`             | Meanings words grouped by source chapter (60 words of chapter 3 so far): `chapter`, `words` with `id`, Thai, `meaning`…      |
 | `src/i18n/en.yml`, `src/i18n/mm.yml` | UI text in English and Burmese, including the names of classes, tones, vowel groups and syllables and the tones explanations |
 | `public/images/words/*.svg`          | Vocabulary pictures (vector)                                                                                                 |
 | `public/audio/words/*.m4a`           | Thai audio                                                                                                                   |
@@ -69,6 +69,12 @@ A word without Burmese pronunciation is incomplete; do not merge it with a place
 
 ## Meanings words
 
+`meanings.json` is a list of source chapters in chapter order, each with its words in the source's order. The Meanings
+page shows each chapter under its own heading ("Chapter 3", `အခန်း 3`) on both tabs. To add another chapter's words, add
+`{ "chapter": <number>, "words": [...] }` in chapter order; never mix words from different chapters in one entry.
+
+Each word:
+
 ```json
 {
   "id": "กา-crow",
@@ -83,7 +89,8 @@ A word without Burmese pronunciation is incomplete; do not merge it with a place
 }
 ```
 
-- `id` is the Thai word; words spelt alike add the English meaning (`กา-kettle`, `กา-crow`). Never change it once published.
+- `id` is the Thai word; words spelt alike add the English meaning (`กา-kettle`, `กา-crow`). Ids are unique across all
+  chapters. Never change it once published.
 - `syllables` splits the word into open syllables (`["ภู", "เขา"]`). Each must be one consonant + one vowel from
   `vowels.json`, with no tone mark or final consonant, so its tone follows from the rules; the Text tab shows it.
 - `meaning` is the Burmese meaning exactly as the source gives it; a `/` separates the source's alternatives (`တွင်း/အပေါက်`).
