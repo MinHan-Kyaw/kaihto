@@ -214,14 +214,14 @@ Under the cards, a "Tone marks on each group" table from `getMarkedTone`. Both t
 ## Meanings
 
 Data: `meanings.json`, the words grouped by source chapter (`MeaningChapter`: `chapter`, `words`), so far the 60 words of
-chapter 3 in the source's order (`MeaningWord`: `id`, `thai`, `syllables`, Burmese `meaning`, `meaningEn`, `image`, `audio`).
+chapter 3 and the 20 of chapter 5 (group 1 with tone marks), each in the source's order (`MeaningWord`: `id`, `thai`, `syllables`, Burmese `meaning`, `meaningEn`, `image`, `audio`).
 `src/data` exports the chapters as `meaningChapters` and all their words, in chapter order, as `meanings`. Both tabs show
 each chapter as a section under an `h2` heading (`meanings.chapter`: "Chapter 3", `အခန်း 3`). The id is the Thai word; the two pairs spelt alike (กา kettle / crow, ตา eye /
 grandfather) add the English meaning (`กา-kettle`). The screen draws each word with `WordCard`: the default size has the
 picture, Thai word, meaning and audio button; the Text tab uses the compact size without picture or audio, with the Thai shrinking
 to fit long words (a word can't wrap). The Text tab shows each syllable's tone in the card's top right corner: the words are open syllables
-with no tone marks, so `findSyllable` (`src/helpers/vowels.ts`) finds each syllable's consonant and vowel and
-`getSyllableTone` gives its tone, drawn with a small `ToneContour`. Thai keeps empty space above letters for marks, so the word is lifted by what its
+with at most one tone mark, so `findSyllableTone` (`src/helpers/vowels.ts`) takes off the mark, finds the syllable's
+consonant and vowel with `findSyllable`, and gives its tone with `getMarkedTone` or, unmarked, `getSyllableTone`, drawn with a small `ToneContour`. Thai keeps empty space above letters for marks, so the word is lifted by what its
 tallest character leaves empty (`getThaiInkHeight` in `src/helpers/thaiInk.ts`, measured for Sarabun): its top sits 4px
 below the curves, the same as the curves below the card's edge. `syllables` is stored because some words split more
 than one way (`เลอะเทอะ` is `เลอะ|เทอะ`, not `เล|อะ|เทอะ`). The words are not part of any practice yet.

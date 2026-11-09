@@ -7,7 +7,7 @@ import WordCard from '../../components/WordCard';
 import { consonants, meaningChapters, meanings, toneById, vowels } from '../../data';
 import { assetUrl } from '../../helpers/assetUrl';
 import { getPronunciation } from '../../helpers/language';
-import { findSyllable, getSyllableTone } from '../../helpers/vowels';
+import { findSyllableTone } from '../../helpers/vowels';
 import { useTranslation } from '../../i18n';
 import { playAudio, stopAudio } from '../../services/audio';
 import type { MeaningWord } from '../../types/learning';
@@ -33,12 +33,12 @@ const CARD_PARTS = [
 
 type CardPart = (typeof CARD_PARTS)[number]['id'];
 
-// Each syllable's tone, from its consonant's class and its vowel's length (the words have no tone marks).
+// Each syllable's tone, from its consonant's class and its vowel's length or tone mark.
 const getWordTones = (word: MeaningWord) =>
   word.syllables.flatMap((syllable) => {
-    const spelling = findSyllable(syllable, consonants, vowels);
+    const tone = findSyllableTone(syllable, consonants, vowels);
 
-    return spelling ? [{ syllable, tone: toneById[getSyllableTone(spelling.consonant, spelling.vowel)] }] : [];
+    return tone ? [{ syllable, tone: toneById[tone] }] : [];
   });
 
 const wordTones = new Map(meanings.map((word) => [word.id, getWordTones(word)]));

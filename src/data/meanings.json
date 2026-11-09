@@ -663,5 +663,230 @@
         "audio": "/audio/meanings/loethoe.m4a"
       }
     ]
+  },
+  {
+    "chapter": 5,
+    "words": [
+      {
+        "id": "เก้าอี้",
+        "thai": "เก้าอี้",
+        "syllables": ["เก้า", "อี้"],
+        "meaning": "ကုလားထိုင်",
+        "pronunciation": "ကောင့်အီ့",
+        "meaningEn": "chair",
+        "pronunciationEn": "gao-ii",
+        "image": "/images/meanings/kaoi.svg",
+        "audio": "/audio/meanings/kaoi.m4a"
+      },
+      {
+        "id": "ตู้",
+        "thai": "ตู้",
+        "syllables": ["ตู้"],
+        "meaning": "ဗီရို",
+        "pronunciation": "သူ့",
+        "meaningEn": "wardrobe",
+        "pronunciationEn": "dtuu",
+        "image": "/images/meanings/tu.svg",
+        "audio": "/audio/meanings/tu.m4a"
+      },
+      {
+        "id": "โต๊ะ",
+        "thai": "โต๊ะ",
+        "syllables": ["โต๊ะ"],
+        "meaning": "စားပွဲ",
+        "pronunciation": "သို့",
+        "meaningEn": "table",
+        "pronunciationEn": "dto",
+        "image": "/images/meanings/to-table.svg",
+        "audio": "/audio/meanings/to-table.m4a"
+      },
+      {
+        "id": "เต่า",
+        "thai": "เต่า",
+        "syllables": ["เต่า"],
+        "meaning": "လိပ်",
+        "pronunciation": "သောင်",
+        "meaningEn": "turtle",
+        "pronunciationEn": "dtao",
+        "image": "/images/words/tao.svg",
+        "audio": "/audio/meanings/tao.m4a"
+      },
+      {
+        "id": "เก่า",
+        "thai": "เก่า",
+        "syllables": ["เก่า"],
+        "meaning": "အဟောင်း",
+        "pronunciation": "ကောင်",
+        "meaningEn": "old",
+        "pronunciationEn": "gao",
+        "image": "/images/meanings/kao-old.svg",
+        "audio": "/audio/meanings/kao-old.m4a"
+      },
+      {
+        "id": "ไก่",
+        "thai": "ไก่",
+        "syllables": ["ไก่"],
+        "meaning": "ကြက်",
+        "pronunciation": "ကိုင်",
+        "meaningEn": "chicken",
+        "pronunciationEn": "gai",
+        "image": "/images/words/kai.svg",
+        "audio": "/audio/meanings/kai.m4a"
+      },
+      {
+        "id": "แก่",
+        "thai": "แก่",
+        "syllables": ["แก่"],
+        "meaning": "အား၊အိုသည်",
+        "pronunciation": "ကဲ",
+        "meaningEn": "elderly",
+        "pronunciationEn": "gae",
+        "image": "/images/meanings/kae-old.svg",
+        "audio": "/audio/meanings/kae-old.m4a"
+      },
+      {
+        "id": "แต่",
+        "thai": "แต่",
+        "syllables": ["แต่"],
+        "meaning": "ဒါပေမဲ့",
+        "pronunciation": "သဲ",
+        "meaningEn": "but",
+        "pronunciationEn": "dtae",
+        "image": "/images/meanings/tae.svg",
+        "audio": "/audio/meanings/tae.m4a"
+      },
+      {
+        "id": "กี่",
+        "thai": "กี่",
+        "syllables": ["กี่"],
+        "meaning": "ဘယ်လောက်လဲ",
+        "pronunciation": "ကီ",
+        "meaningEn": "how many",
+        "pronunciationEn": "gii",
+        "image": "/images/meanings/ki.svg",
+        "audio": "/audio/meanings/ki.m4a"
+      },
+      {
+        "id": "บ้า",
+        "thai": "บ้า",
+        "syllables": ["บ้า"],
+        "meaning": "အရူး",
+        "pronunciation": "ဘာ့",
+        "meaningEn": "crazy",
+        "pronunciationEn": "baa",
+        "image": "/images/meanings/ba.svg",
+        "audio": "/audio/meanings/ba.m4a"
+      },
+      {
+        "id": "ป่า",
+        "thai": "ป่า",
+        "syllables": ["ป่า"],
+        "meaning": "တော",
+        "pronunciation": "ပါ",
+        "meaningEn": "forest",
+        "pronunciationEn": "bpaa",
+        "image": "/images/meanings/pa-forest.svg",
+        "audio": "/audio/meanings/pa-forest.m4a"
+      },
+      {
+        "id": "ป้า",
+        "thai": "ป้า",
+        "syllables": ["ป้า"],
+        "meaning": "ကြီးတော်",
+        "pronunciation": "ပါ့",
+        "meaningEn": "aunt",
+        "pronunciationEn": "bpaa",
+        "image": "/images/meanings/pa-aunt.svg",
+        "audio": "/audio/meanings/pa-aunt.m4a"
+      },
+      {
+        "id": "ใต้",
+        "thai": "ใต้",
+        "syllables": ["ใต้"],
+        "meaning": "အောက်ဘက်",
+        "pronunciation": "သိုင့်",
+        "meaningEn": "under",
+        "pronunciationEn": "dtai",
+        "image": "/images/meanings/tai.svg",
+        "audio": "/audio/meanings/tai.m4a"
+      },
+      {
+        "id": "ได้",
+        "thai": "ได้",
+        "syllables": ["ได้"],
+        "meaning": "ရသည်",
+        "pronunciation": "ဒိုင့်",
+        "meaningEn": "can",
+        "pronunciationEn": "dai",
+        "image": "/images/meanings/dai.svg",
+        "audio": "/audio/meanings/dai.m4a"
+      },
+      {
+        "id": "ตั๋ว",
+        "thai": "ตั๋ว",
+        "syllables": ["ตั๋ว"],
+        "meaning": "လက်မှတ်",
+        "pronunciation": "သူဝါ",
+        "meaningEn": "ticket",
+        "pronunciationEn": "dtua",
+        "image": "/images/meanings/tua.svg",
+        "audio": "/audio/meanings/tua.m4a"
+      },
+      {
+        "id": "บ่อ",
+        "thai": "บ่อ",
+        "syllables": ["บ่อ"],
+        "meaning": "တွင်း၊ကန်",
+        "pronunciation": "ဘော",
+        "meaningEn": "well",
+        "pronunciationEn": "bor",
+        "image": "/images/meanings/bo.svg",
+        "audio": "/audio/meanings/bo.m4a"
+      },
+      {
+        "id": "ดื้อ",
+        "thai": "ดื้อ",
+        "syllables": ["ดื้อ"],
+        "meaning": "ခေါင်းမာသည်",
+        "pronunciation": "ဒူ့",
+        "meaningEn": "stubborn",
+        "pronunciationEn": "due",
+        "image": "/images/meanings/due.svg",
+        "audio": "/audio/meanings/due.m4a"
+      },
+      {
+        "id": "เบื่อ",
+        "thai": "เบื่อ",
+        "syllables": ["เบื่อ"],
+        "meaning": "ပျင်းသည်",
+        "pronunciation": "ဘူရ",
+        "meaningEn": "bored",
+        "pronunciationEn": "buea",
+        "image": "/images/meanings/buea.svg",
+        "audio": "/audio/meanings/buea.m4a"
+      },
+      {
+        "id": "ปู่",
+        "thai": "ปู่",
+        "syllables": ["ปู่"],
+        "meaning": "အဘိုး",
+        "pronunciation": "ပူ",
+        "meaningEn": "paternal grandfather",
+        "pronunciationEn": "bpuu",
+        "image": "/images/meanings/pu-grandfather.svg",
+        "audio": "/audio/meanings/pu-grandfather.m4a"
+      },
+      {
+        "id": "เก้า",
+        "thai": "เก้า",
+        "syllables": ["เก้า"],
+        "meaning": "၉",
+        "pronunciation": "ကောင့်",
+        "meaningEn": "nine",
+        "pronunciationEn": "gao",
+        "image": "/images/meanings/kao-nine.svg",
+        "audio": "/audio/meanings/kao-nine.m4a"
+      }
+    ]
   }
 ]
