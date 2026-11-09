@@ -4,7 +4,7 @@
 
 | File                                 | Contents                                                                                                                     |
 | ------------------------------------ | ---------------------------------------------------------------------------------------------------------------------------- |
-| `src/data/consonantClasses.json`     | The three classes: `id`, `group`, live-syllable `tone` (a tone id), example consonant and sound                              |
+| `src/data/consonantClasses.json`     | The three classes: `id`, `group`, live-syllable `tone` (a tone id), example consonant and sound, the book's `toneRules`      |
 | `src/data/consonants.json`           | 44 consonants, each with its vocabulary `words`                                                                              |
 | `src/data/vowels.json`               | 32 vowels: `id` (written with `-` for the consonant), `group`, English `sound`, Burmese `pronunciation`, `audio`             |
 | `src/data/vowelGroups.json`          | Short, long, extra and standalone vowel groups: `id` and `tones` (tone ids) per consonant class                              |
@@ -207,6 +207,9 @@ Converting a recording on macOS: `afconvert -f m4af -d aac -b 64000 recording.wa
 - **Vowel Burmese pronunciations** were transcribed from the same PDF's text layer, chapter 2 "32 Thai Vowels"
   (PDF pages 53–55), and checked against the rendered pages. **Vowel tone rules** are the book's English rules from
   chapter 5 (PDF pages 67, 69, 71), with spacing normalised (`Gp1 + Long Vowels -Mid Tone` → `Gp 1 + Long Vowel - Mid Tone`).
+  The **group tone rules** on the Tone marks tab (`toneRules` in `consonantClasses.json`) are the same pages' three lines per
+  group with the book's words, Burmese included (`Tone Mark အသံ`, group 3 `Tone Mark အသံတစ်ခုကျော်`); only the spacing is
+  normalised (`Gp1` → `Gp 1`, `-Mid Tone` → `- Mid Tone`, `Long /Short` → `Long/Short`).
   English vowel `sound`s and group names are not from the book.
 - **Images** are vector SVGs: Microsoft Fluent Emoji (MIT licence, copyright Microsoft Corporation — see
   `public/images/words/LICENSE-fluentui-emoji.txt`) plus custom drawings made for this project in the same style.

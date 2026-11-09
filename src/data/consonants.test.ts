@@ -1,6 +1,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 
+import { getUnmarkedTone } from '../helpers/tones';
 import { getVocabulary } from '../helpers/vocabulary';
 import { messages } from '../i18n';
 
@@ -26,6 +27,32 @@ describe('consonant classes', () => {
 
   it('numbers the classes as groups 1 (middle), 2 (high) and 3 (low)', () => {
     expect(consonantClasses.map((consonantClass) => consonantClass.group)).toEqual([1, 2, 3]);
+  });
+
+  it("states the source's three tone rules per group, matching the tone rules for short and long vowels", () => {
+    consonantClasses.forEach(({ id, group, toneRules }) => {
+      const [short, long, marked] = toneRules.map(({ rule }) => rule);
+
+      expect(toneRules, id).toHaveLength(3);
+      toneRules.forEach(({ rule }) => expect(rule, id).toMatch(new RegExp(`^Gp ${group} \\+ [A-Za-z/ +-]+$`)));
+      expect(short, id).toMatch(/Short Vowel - /);
+      expect(short?.endsWith(messages.en[`tones.${getUnmarkedTone(id, 'dead')}.name`] ?? '-'), id).toBe(true);
+      expect(long, id).toMatch(/Long Vowels? - /);
+      expect(long?.endsWith(messages.en[`tones.${getUnmarkedTone(id, 'live')}.name`] ?? '-'), id).toBe(true);
+      expect(marked, id).toMatch(/\+ Tone Mark - Tone Mark$/);
+    });
+  });
+
+  it('writes the Burmese words of the tone rules in Burmese script, in Unicode logical order', () => {
+    const burmeseWords = consonantClasses.flatMap(({ toneRules }) =>
+      toneRules.flatMap(({ burmese }) => (burmese ? [burmese] : []))
+    );
+
+    expect(burmeseWords).toHaveLength(3);
+    burmeseWords.forEach((burmese) => {
+      expect(burmese).toMatch(/^[\u1000-\u109F]+$/);
+      expect(burmese).not.toMatch(VISUAL_ORDER_VOWEL_SIGN_E);
+    });
   });
 
   it('names every class in the translations, the Burmese name in Burmese script', () => {

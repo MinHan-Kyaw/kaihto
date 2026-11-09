@@ -249,10 +249,34 @@ const FourMarks = () => {
       </section>
 
       <section aria-labelledby="tone-marks-title">
-        <h2 id="tone-marks-title" className="text-[1.375rem] font-extrabold">
+        {/* The source states the rules instead of a title; the heading stays for screen readers and names the table. */}
+        <h2 id="tone-marks-title" className="sr-only">
           {t('tonesPage.marks')}
         </h2>
-        <p className="mt-1 text-ink-muted">{t('tonesPage.marksNote')}</p>
+        <div className="grid gap-2 lg:grid-cols-3">
+          {consonantClasses.map(({ id, toneRules }) => (
+            <ul
+              key={id}
+              className="rounded-2xl border-2 border-line px-3 py-2 shadow-edge"
+              role="list"
+              aria-label={t(`classes.${id}.name`)}
+            >
+              {toneRules.map(({ rule, burmese }) => (
+                <li key={rule} className="py-0.5 text-sm font-bold">
+                  <span lang="en">{rule}</span>
+                  {burmese && (
+                    <>
+                      {' '}
+                      <span className="font-burmese" lang="my">
+                        {burmese}
+                      </span>
+                    </>
+                  )}
+                </li>
+              ))}
+            </ul>
+          ))}
+        </div>
         <div className="mt-4">
           <ToneTable rows={markRows} firstColumnLabel={t('tonesPage.markDetail')} labelledBy="tone-marks-title" />
         </div>

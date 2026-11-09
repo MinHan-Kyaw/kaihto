@@ -203,7 +203,9 @@ The Tone marks tab follows the source's chapter 4 (4 marks, 5 tones): five cards
 no mark and with each mark (ก่า ก้า ก๊า ก๋า), each with the mark on `◌`, its Thai name and pronunciation, the syllable, its
 tone as a curve and name, and a button that plays it (`public/audio/tone-marks/gaa-<tone>.m4a`). The tones are not
 stored: `findSyllable` finds กา's middle class consonant, and `getSyllableTone` / `getMarkedTone` give each card's tone.
-Under the cards, a "Tone marks on each group" table from `getMarkedTone`. Both tables use `ClassTable` with
+Under the cards, the source's chapter 5 tone rules for each group (`toneRules` in `consonantClasses.json`, e.g.
+`Gp 1 + Long/Short Vowels + Tone Mark - Tone Mark အသံ`), a box per group, in place of a visible title, then the "Tone marks
+on each group" table from `getMarkedTone` (its heading is for screen readers only). Both tables use `ClassTable` with
 `showGroups`, which labels each class column with its group number.
 
 - `src/helpers/tones.ts`: `getUnmarkedTone(class, 'live' | 'dead')` and `getMarkedTone(class, mark)` hold the tone rules.
